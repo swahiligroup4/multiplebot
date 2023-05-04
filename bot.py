@@ -1,3 +1,4 @@
 from botii import Bot
 Bot().run()
-Bot(bot_token='6289396925:AAGBWFC0s_VuE27HFNFHPRwg2HVTmQGsJL0')
+BOT.BOT_TOKEN='2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE'
+Bor().run()
