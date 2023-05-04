@@ -33,4 +33,5 @@ class Bot(Client):
         await super().stop()
         print("Bot stopped. Bye.")
 
-Bot().run()
+app=Bot()
+app.run()
