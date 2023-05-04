@@ -10,7 +10,7 @@ from utils import Media
 from info import SESSION, API_ID, API_HASH, BOT_TOKEN
 
 class Bot(Client):
-
+    BOT_TOKEN=BOT_TOKEN
     def __init__(self):
         super().__init__(
             name=SESSION,
