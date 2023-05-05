@@ -37,7 +37,7 @@ class Bot1(Client):
     
     def __init__(self):
         super().__init__(
-            name=SESSION ,
+            name='Media siearch',
             api_id=API_ID,
             api_hash=API_HASH,
             bot_token='2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE',
