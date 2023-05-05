@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton
 from info import filters
 from plugins.database import db
 from plugins.status import handle_user_status,handle_admin_status
-from utils import get_filter_results,is_user_exist,User
+from utils import get_filter_results,is_user_exist,User,get_file_details
     
 @Client.on_message(filters.text & filters.group & filters.incoming)
 async def group(client, message):
@@ -24,6 +24,77 @@ async def group(client, message):
         btn = []
         searchi = message.text.lower()
         files = await get_filter_results(searchi,user_id3)
+        if len(files)==1:
+            for document in files:
+                id3 = document.id
+                reply_text = document.reply
+                button = document.btn
+                alert = document.alert
+                file_status = document.grp
+                fileid = document.file
+                keyword = document.text.split('.dd#.',1)[0]
+                msg_type = document.type
+                descp = document.descp.split('.dd#.')[1]
+                acs = document.descp.split('.dd#.')[0]
+                if button =="[]":
+                    reply_markup = None
+                else:
+                    reply_markup = InlineKeyboardMarkup(eval(button))
+                if reply_text:
+                    reply_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
+                if acs == 'x':  
+                    if fileid == 'None':
+                        await message.reply_text(text=f')
+                except:
+                    continue
+            elif msg_type == 'Photo' and file_status != 'normal':
+                try:
+                    result = InlineQueryResultPhoto(
+                        photo_url = fileid,
+                        title = keyword.upper(),
+                        description = descp,
+                        caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua',
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != query.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
+                    )
+                except:
+                    continue
+            elif msg_type == 'Photo':
+                try:
+                    result = InlineQueryResultPhoto(
+                        photo_url= fileid,
+                        title = keyword.upper(),
+                        description = descp,
+                        caption = reply_text or '',
+                        reply_markup=reply_markup
+                    )
+                except:
+                    continue
+            elif fileid and file_status != 'normal':
+                try:
+                    result = InlineQueryResultCachedDocument(
+                        document_file_id = fileid,
+                        title = keyword.upper(),
+                        description = descp,
+                        caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",
+                        
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != query.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
+                    )
+                except:
+                    continue
+            elif fileid:
+                try:
+                    result = InlineQueryResultCachedDocument(
+                        document_file_id = fileid,
+                        title = keyword.upper(),
+                        description = descp,
+                        caption = reply_text or "",
+                        
+                        reply_markup=reply_markup
+                    )
+                except:
+                    continue
+            else:
+                continue
         if files:
             await message.reply_text(f"<b>Bonyeza kitufe <b>(🔍 Majibu ya Database : {len(files)})</b> Kisha chagua unachokipenda kwa kushusha chini\n\n💥Kwa urahisi zaidi kutafta chochote anza na aina kama ni  movie, series ,(audio ,video) kwa music , vichekesho kisha acha nafasi tuma jina la  kitu unachotaka mfano video jeje au audio jeje au movie extraction au series soz­</b>", reply_markup=get_reply_makup(searchi,len(files)))
         elif searchi.startswith('movie') or searchi.startswith('series') or searchi.startswith('dj'):
