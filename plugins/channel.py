@@ -1,5 +1,5 @@
 from info import filters
-from pyrogram import MessageHandler
+from pyrogram.handlers import MessageHandler
 from botii import Bot,Bot1
 @Bot1.on_message(filters.command('start') & filters.private)
 @Bot.on_message(filters.command('start') & filters.private)
