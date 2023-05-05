@@ -2,7 +2,7 @@ from info import filters
 from pyrogram.handlers import MessageHandler
 from botii import Bot,Bot1
 
-async def start_msg_admins(client, message):
-    await message.reply_text('hi')
+def start_msg_admins(client, message):
+    print('hi')
 Bot1.add_handler(MessageHandler(start_msg_admins),filters.command("test"))
 Bot.add_handler(MessageHandler(start_msg_admins),filters.command("test"))
