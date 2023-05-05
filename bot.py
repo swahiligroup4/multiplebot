@@ -1,2 +1,3 @@
-from botii import Bot
-Bot('2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE').run()
+from botii import Bot,Bot1
+Bot.run()
+Bot1.run()
