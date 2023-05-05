@@ -32,3 +32,27 @@ class Bot(Client):
     async def stop(self, *args):
         await super().stop()
         print("Bot stopped. Bye.")
+
+class Bot1(Client):
+    
+    def __init__(self,bot_token):
+        super().__init__(
+            name=SESSION ,
+            api_id=API_ID,
+            api_hash=API_HASH,
+            bot_token='2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE',
+            workers=50,
+            plugins={"root": "plugins"},
+            sleep_threshold=5,
+        )
+
+    async def start(self):
+        await super().start()
+        await Media.ensure_indexes()
+        me = await self.get_me()
+        self.username = '@' + me.username
+        print(f"{me.first_name} with for Pyrogram v{__version__} (Layer {layer}) started on {me.username}.")
+
+    async def stop(self, *args):
+        await super().stop()
+        print("Bot stopped. Bye.")
