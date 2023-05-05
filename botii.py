@@ -1,4 +1,5 @@
 import logging
+import asyncio
 import logging.config
 # Get logging configurations
 logging.config.fileConfig('logging.conf')
@@ -56,3 +57,7 @@ class Bot1(Client):
     async def stop(self, *args):
         await super().stop()
         print("Bot stopped. Bye.")
+async def main():
+    apps=[Bot,Bot1]
+    await compose(apps)
+asyncio.run(main())
