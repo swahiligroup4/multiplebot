@@ -49,7 +49,6 @@ class Bot1(Client):
         
     async def stop(self, *args):
         await super().stop()
-        
+app=[Bot(),Bot1()]       
 async def main():
-    apps=[Bot(),Bot1()]
-    await compose(apps)
+    await compose(app)
