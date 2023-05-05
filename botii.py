@@ -11,12 +11,12 @@ from info import SESSION, API_ID, API_HASH, BOT_TOKEN
 
 class Bot(Client):
     
-    def __init__(self,,session,bot_token):
+    def __init__(self):
         super().__init__(
-            name=session,
+            name=SESSION ,
             api_id=API_ID,
             api_hash=API_HASH,
-            bot_token=bot_token,
+            bot_token=BOT_TOKEN ,
             workers=50,
             plugins={"root": "plugins"},
             sleep_threshold=5,
