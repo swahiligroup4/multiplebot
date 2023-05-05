@@ -58,6 +58,6 @@ class Bot1(Client):
         await super().stop()
         print("Bot stopped. Bye.")
 async def main():
-    apps=[Bot,Bot1]
+    apps=[Bot(),Bot1()]
     await compose(apps)
 asyncio.run(main())
