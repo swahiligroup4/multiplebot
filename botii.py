@@ -13,7 +13,7 @@ class Bot(Client):
     
     def __init__(self,bot_token):
         super().__init__(
-            name=SESSION,
+            name=session,
             api_id=API_ID,
             api_hash=API_HASH,
             bot_token=bot_token,
