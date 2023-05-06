@@ -94,9 +94,9 @@ async def groupprv(client, message):
                 for user in group_status:
                     user_id3 = user.email
                     grp=user.group_id
-                group_status = await is_user_exist(grp)
-                for user in group_status:
-                    grp=user.group_id
+                
+                async for dtls in await db.get_acc(message.from_user.id ):
+                    if dtls.db_name ==
                 if user_id3 == text.lower():
                     await message.reply_text('Hii email tayar Tulishaihifadhi kama unataka kuibadisha ntumie nyingene')
                 else:
