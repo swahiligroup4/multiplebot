@@ -132,7 +132,7 @@ async def new_filtervip(client: Client, message):
             x+=1
             p.append(usr[gs].split('#@')[0])
             usrr=f'{usrr}\n{x}:{usr[gs].split("#@")[0]}'
-    mkv1= await client.send_message(text=f'CHAGUA KIFURUSHI WAKILISHI YA KITU UNACHOTAKA KUHIFADHI \n (kwa kutuma namba ya kifurush husika kama itamilikiwa na zaid ya kifurushi kimoja tuna namba kifurushi kisha acha nafasi namba ya kifurushi kingine mfano 1 3 NOTE Media ina weza kumilikiwa na kifurushi 1 au viwili Tu sio zaidi)\n\n{usrr} \n\n Movie au video au picha za wakubwa haziruhusiwi kutumwa kwenye bot yetu ukijulikana utakuwa banned',chat_id = message.from_user.id)
+    mkv1= await client.send_message(text=f'CHAGUA KIFURUSHI WAKILISHI YA KITU UNACHOTAKA KUHIFADHI \n (kwa kutuma namba ya kifurush husika kama imemilikiwa na zaid ya kifurushi kimoja tuma namba kifurushi kisha acha nafasi namba ya kifurushi kingine mfano 1 3 NOTE Media ina weza kumilikiwa na kifurushi 1 au viwili Tu sio zaidi)\n\n{usrr} ',chat_id = message.from_user.id)
     a,b = funask()
     id1=mkv1.id + 1
     while a==False:
@@ -169,7 +169,7 @@ async def new_filtervip(client: Client, message):
         except:
             await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa anza upya')
             return
-    mkv1 = await client.send_message(text=f'tafadhal naomba utume bei(namba tu) ya {ab}kama ni bure tuma neno free mfano 500. (Kumbuka Hamna bei 0)',chat_id = message.from_user.id)
+    mkv1 = await client.send_message(text=f'tafadhal naomba utume bei(namba tu) ya **{ab}** kama ni bure tuma namba 0 mfano 500. **(Kumbuka Hamna bei 0 ukiweka movie/Series hii itakuea free kwa wateja wako)**',chat_id = message.from_user.id)
     a,b = funask()
     id1=mkv1.id+1
     while a==False:
@@ -193,7 +193,7 @@ async def new_filtervip(client: Client, message):
     except:
         await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi')
         return
-    mkv1= await client.send_message(text=f'naomba utume neno l kama utatuma {ab} kwa link au neno h kama n vipande vya {ab} ',chat_id = message.from_user.id)
+    mkv1= await client.send_message(text=f'naomba utume neno l kama utatuma {ab} kwa link au neno h kama ni vipande vya {ab} ',chat_id = message.from_user.id)
     a,b = funask()
     id1=mkv1.id+1
     while a==False:
@@ -265,11 +265,11 @@ async def new_filtervip(client: Client, message):
         if mkv1.text:
             dta='start'
             icount = 0
+            mkv22=await client.send_message(text = " Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo hili", chat_id = message.from_user.id)
+            id1 = mkv22.id+1
             while dta!='stop':
                 stridm = str(uuid.uuid4())
-                mkv22=await client.send_message(text = " Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo hili", chat_id = message.from_user.id)
                 a,b = funask()
-                id1 = mkv22.id+1
                 while a==False:
                     try:
                         mk= await client.get_messages("me",id1)
@@ -280,7 +280,7 @@ async def new_filtervip(client: Client, message):
                             return
                         if mk.from_user.id != message.from_user.id :
                             a=False
-                            id1=id1+1
+                            
                     except:
                         a=False
                 if mk.media and not (mk.photo):
@@ -294,11 +294,9 @@ async def new_filtervip(client: Client, message):
                         chat_id = CHANNELS,
                         file_id = media.file_id,
                         caption = media.caption,
-                        
                     )
                     media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
-                    media.file_name = f'p.dd#.h5'
-                    await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, None, media.file_type, stridm,user_id,media.file_name,500,'normal')
+                    await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, None, media.file_type, stridm,user_id,batch_name,500,'normal')
                 elif mk.text.lower()=='stop':
                     dta = 'stop'
                     await mk.reply(f'all file sent to database with id  {fileid}')
@@ -306,6 +304,9 @@ async def new_filtervip(client: Client, message):
                 else:
                     await mk.reply('tafadhali tuma ulichoambiwa')
                 icount+=1
+                mkv22.delete()
+                mkv22=await client.send_message(text = " Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo hili au badilisha kwa kutuma name.jina la batch", chat_id = message.from_user.id)
+                id1=mkv22.id+1
         descp = f'x.dd#.{mkv1.text}.dd#.data.dd#.m'
     try:
         if fileid:
