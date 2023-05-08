@@ -1,3 +1,4 @@
-from botii import main
+from botii import main,Bot1
 import asyncio
-asyncio.run(main())
+#asyncio.run(main())
+Bot().run()
