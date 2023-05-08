@@ -265,7 +265,8 @@ async def new_filtervip(client: Client, message):
         if mkv1.text:
             dta='start'
             icount = 0
-            mkv22=await client.send_message(text = " Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo hili", chat_id = message.from_user.id)
+            text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo hili au badilisha kwa kutuma name.jina la batch"
+            mkv22=await client.send_message(text = " Tuma batch", chat_id = message.from_user.id)
             id1 = mkv22.id+1
             while dta!='stop':
                 stridm = str(uuid.uuid4())
@@ -278,9 +279,10 @@ async def new_filtervip(client: Client, message):
                         if (time.time()-b)>(10*60):
                             await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
                             return
-                        if mk.from_user.id != message.from_user.id :
+                        if mk.from_user.id != message.from_user.id and mk.text!=text1:
                             a=False
-                            
+                        elif  mk.text==text1:
+                            id1=id1+1
                     except:
                         a=False
                 if mk.media and not (mk.photo):
