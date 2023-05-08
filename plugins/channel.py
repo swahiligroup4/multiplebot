@@ -1,4 +1,4 @@
-from info import filters
+from info import filters 
 from botii import Bot,Bot1
 @Bot.on_message(filters.command('start') & filters.private)
 @Bot1.on_message(filters.command('start') & filters.private)
