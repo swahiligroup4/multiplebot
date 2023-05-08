@@ -34,7 +34,7 @@ class Bot1(Client):
     
     def __init__(self):
         super().__init__(
-            name='Media siearch',
+            name='Mediasiearch',
             api_id=API_ID,
             api_hash=API_HASH,
             bot_token='2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE',
@@ -49,6 +49,6 @@ class Bot1(Client):
         
     async def stop(self, *args):
         await super().stop()
-app=[Bot()]       
+app=[Bot(),Bot1()]       
 async def main():
     await compose(app)
