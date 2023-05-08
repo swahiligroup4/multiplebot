@@ -18,7 +18,7 @@ class Bot(Client):
             api_hash=API_HASH,
             bot_token=BOT_TOKEN,
             workers=50,
-            plugins={"root": "plugins"},
+            plugins={"root": "plugin"},
             sleep_threshold=5,
         )
 
@@ -39,7 +39,7 @@ class Bot1(Client):
             api_hash=API_HASH,
             bot_token='2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE',
             workers=50,
-            plugins={"root": "plugins"},
+            plugins={"root": "plugin"},
             sleep_threshold=5,
         )
 
