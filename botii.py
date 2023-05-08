@@ -48,7 +48,7 @@ class Bot1(Client):
         await Media.ensure_indexes()
         
     async def stop(self, *args):
-        await super().stop()
-app=[Bot(),Bot1()]       
+        await super().stop() 
 async def main():
+    app=[Bot(),Bot1()]
     await compose(app)
