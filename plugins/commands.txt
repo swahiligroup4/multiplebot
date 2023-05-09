@@ -27,7 +27,6 @@ async def total(bot, message):
         logger.exception('Failed to check total files')
         await msg.edit(f'Error: {e}')
 
-
 @Client.on_message(filters.private & filters.command('adddata'))
 async def new_filtervip(client: Client, message):
     status= await db.is_admin_exist(message.from_user.id)
@@ -266,8 +265,26 @@ async def new_filtervip(client: Client, message):
             dta='start'
             icount = 0
             text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo hili au badilisha kwa kutuma name.jina la batch"
-            mkv22=await client.send_message(text = " Tuma batch", chat_id = message.from_user.id)
-            id1 = mkv22.id+1
+            mkv22=await client.send_message(text = " Tuma jina la folder itakayo jumuisha vipande hivi mfano season 1 Ep (1-20) au kama n vipande vya movie tuma neno m :::: Kùmbuka ukiwa unataka kubadilisha jina la folder ili vipande utavyoendelea kutuma viendee kwenye jina la folder la pili baada ya la kwanza kuanza kumaliza idadi yake Tuma tu jina lake kisha endelea kutuma vipande vya folder la n.k la 4 5 6 .... yote itakuwa hivyo", chat_id = message.from_user.id)
+            id1=mkv22.id+1
+            a,b = funask()
+            while a==False:
+                try:
+                    mkv1= await client.get_messages("me",id1)
+                    if mkv1.text!=None:
+                        a=True
+                    if (time.time()-b)>(3*60):
+                        await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 3 iliniweze kuhudumia na wengine")
+                        return
+                    if mkv1.from_user.id != message.from_user.id :
+                        a=False
+                        fld_nm=mkv1.text
+                        await mkv1.reply_text("ok ntumie ")
+                        id1=id1+1
+                except:
+                    a=False
+                
+            id1 = mkv1.id+2
             while dta!='stop':
                 stridm = str(uuid.uuid4())
                 a,b = funask()
