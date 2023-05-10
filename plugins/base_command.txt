@@ -114,7 +114,10 @@ async def start_msg_admins(client, message):
             [
                 InlineKeyboardButton(
                     "🤖 Join Updates Channel", url=invite_link.invite_link
-                )
+                ),
+                InlineKeyboardButton(
+                    "🤖 Movie group", url=invite_link.invite_link
+                ),
             ]
         ]
         await client.send_message(
@@ -134,27 +137,14 @@ async def start_msg_admins(client, message):
                 group_id = files.group_id
                 msg_type =files.type
                 grp = files.grp
-            grp1,grp2=grp.split(" ") 
-            ban_status = await db.get_ban_status(group_id)   
-            if await is_user_exist(message.from_user.id):
-                for jk in await is_user_exist(message.from_user.id):
-                    for jk1 in await is_user_exist(jk.group_id):
-                        jk2=jk1.group_id
-            else:
-                ghi=await is_group_exist(group_id)
-                ii =0
-                group_d='\nGroups bonyez group kuchagua unalopenda\n'
-                for i in ghi:
-                    try:
-                        g = await client.create_chat_invite_link(int(i.id))
-                        ii+=1
-                        group_d=group_d+f'{ii}:**[GROUP {ii}]({g.invite_link})**\n\n'
-                    except:
-                        print('x')
-                        #await client.send_message(chat_id=int(group_id),f'hakikisha group zako zote kama umenruhusu kutengeneza invite link{ii}')        
-                await client.send_message(chat_id=cmd.from_user.id,text=f'Tafadhali Haupo kwenye database join kikundi kimoja wapo ili kupata huduma hii kisha tuma neno **hi** tujue kuwa wewe sio robot\n{group_d}')
+            if not filedetails:
+                await client.send_message(
+                    chat_id=cmd.from_user.id,
+                    text=f"Samahani **{cmd.from_user.first_name}** hii movie uliochagua imefutwa kwenye database yangu tafadhali rudi kwenye kikundi kisha iombe tena"
+                )   
                 return 
-              
+            grp1,grp2=grp.split(" ") 
+            ban_status = await db.get_ban_status(group_id)
             if ban_status["is_banned"] == False and group_id != cmd.from_user.id :
                 await client.send_message(
                         chat_id=cmd.from_user.id,
@@ -209,21 +199,7 @@ async def start_msg_admins(client, message):
                             )
                                 
                         return
-                     
-                else:
-                    await client.send_message(
-                        chat_id=cmd.from_user.id,
-                        text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n Tafadhal chagua nchi uliopo kuweza kulipia kifurushi",
-                        reply_markup=InlineKeyboardMarkup(
-                            [
-                                [
-                                    InlineKeyboardButton("🇹🇿 TANZANIA", callback_data = "tanzania"),
-                                    InlineKeyboardButton("🇰🇪 KENYA",callback_data ="kenya" )
-                                ]
-                            ]
-                        )
-                    )
-                    return
+                    
         except Exception as err:
             await cmd.reply_text(f"Something went wrong!\n\n**Error:** `{err}`")
     elif usr_cmdall1.startswith("/start xsubinps"):
