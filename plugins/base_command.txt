@@ -152,33 +152,44 @@ async def start_msg_admins(client, message):
                         text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu Kifurushi cha admin alicho lipia kumtumia robot huyu kimeisha mtaarifu alipie ***\n\n[BONYEZA HAPA KUMTAARIFU](tg://user?id={group_id})\n\n***Ili muweze kuendelea kumutumia robot huyu")
                 return
             if not (await db.is_acc_exist(cmd.from_user.id,grp1,group_id) or await db.is_acc_exist(cmd.from_user.id,id2,group_id) or await db.is_acc_exist(cmd.from_user.id,grp2,group_id)) and group_id != cmd.from_user.id :
-                strg=files.descp.split('.dd#.')[3]
-                if strg.lower() == 'm':
+                    faund=False
                     filez=await get_filter_results(file_id,group_id)
                     for file in reversed(filez):
                         filedetails = await get_file_details(file.id)
                         for files in filedetails:
                             try:
-                                ab=files.text.split('##')[1]
+                                files.text.split('##')[1]
                             except:
-                                ab=[[InlineKeyboardButton("size"),[[InlineKeyboardButton("🔗
+                                faund=True
+                                break
                             f_caption=files.reply
                             await client.send_cached_media(
                                 chat_id=cmd.from_user.id,
                                 file_id=files.file,
                                 caption=f_caption
                             )
-                        return
-                elif strg.lower() == 's':
-                    link = files.descp.split('.dd#.')[2]
-                    f_caption =f'{f_caption}\n💥Kama huwezi kufungua link zetu \ntuma **email yako**\nMfano**mohamed@gmail.com **\nkumbuka tuma kwa herufi ndogo \n\n**[BONYEZA HAPA](tg://user?id={int(group_id)})**\nNikupe maelekezo\n🌟 @Bandolako2bot'
+                    if not filez:
+                        reply_markup=
+                    elif faund:
+                        reply_markup=
                     if msg_type =="Photo":
                         await client.send_photo(
-                            chat_id=cmd.from_user.id,
-                            photo=files.file,
-                            caption=f_caption,
-                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔗 DOWNLOAD",url= link)]])
-                        )
+                                chat_id=cmd.from_user.id,
+                                photo=files.file,
+                                caption=f_caption,
+                                reply_markup=reply_markup
+                            )
+                        
+                    else:
+                        await client.send_cached_media(
+                                    chat_id=cmd.from_user.id,
+                                    file_id=files.file,
+                                    caption=f_caption,
+                                    reply_markup=reply_markup 
+                            )
+                                
+                    return
+                             
                 await client.send_message(
                         chat_id=cmd.from_user.id,
                         text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n Tafadhal chagua nchi uliopo kuweza kulipia uweze kuitazama",
