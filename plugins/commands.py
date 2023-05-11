@@ -16,7 +16,7 @@ import os
 import logging
 logger = logging.getLogger(__name__)
 BOT ={}
-@Client.on_message(filters.command('total') & filters.owner)
+@Bot1.on_message(filters.command('total') & filters.owner)
 async def total(bot, message):
     """Show total files in database"""
     msg = await message.reply("Processing...⏳", quote=True)
