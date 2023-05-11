@@ -353,7 +353,7 @@ async def md_helper(client, query):
         
     )
 @Bot1.on_callback_query()
-async def cb_handler(client: Client, query: CallbackQuery):
+async def cb_handler(client, query):
     clicked = query.from_user.id
     try:
         typed = query.message.reply_to_message.from_user.id
