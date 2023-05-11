@@ -157,7 +157,8 @@ async def new_filtervip(client, message):
         ab7='y'
         ab2 = f'g_{ab5} g_{ab6}'
     except:
-        pass
+        await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa idadi ya kutuma mwisho ni 6 anza upya')
+        return
     if ab7!='y':
         try:
             ab00 = int(mkv.text)
