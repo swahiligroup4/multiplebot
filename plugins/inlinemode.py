@@ -17,7 +17,7 @@ from utils import is_user_exist,get_search_results,Media,is_group_exist,add_user
 from info import filters,OWNER_ID,CHANNELS,AUTH_CHANNEL
 BOT = {}
 @Bot1.on_inline_query(filters.inline)
-async def give_filter(client: Client, query):
+async def give_filter(client, query):
     userdetails = await is_user_exist(query.from_user.id)
     if not await is_subscribed(client, query,AUTH_CHANNEL):
         await query.answer(results=[],
@@ -183,7 +183,7 @@ async def give_filter(client: Client, query):
         
         
 @Bot1.on_callback_query(filters.regex(r"^(alertmessage):(\d):(.*)"))
-async def alert_msg(client: Client, callback):
+async def alert_msg(client, callback):
     regex = r"^(alertmessage):(\d):(.*)"
     matches = re.match(regex, callback.data)
     i = matches.group(2)
