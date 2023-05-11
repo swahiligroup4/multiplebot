@@ -1,4 +1,4 @@
-from info import filters,AUTH_CHANNEL
+from info import filters,CHANNELS
 import uuid
 import time
 from pyrogram.errors import ChatAdminRequired
