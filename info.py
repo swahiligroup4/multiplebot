@@ -19,7 +19,7 @@ AUTH_CHANNEL = -1001726632341
 # MongoDB information
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Telegram_file')
 client = AsyncIOMotorClient('mongodb+srv://swahilihit:swahilihit@cluster0.3nfk1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-DB2 = client['swahilihit']
+DB2 = client['swahilihits']
 
 TG_BOT_WORKERS = int(os.environ.get("BOT_WORKERS", '4'))
 thumb = os.environ.get('THUMBNAIL_URL', 'https://telegra.ph/file/516ca261de9ebe7f4ffe1.jpg')
