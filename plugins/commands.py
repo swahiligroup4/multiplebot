@@ -28,7 +28,7 @@ async def total(bot, message):
         await msg.edit(f'Error: {e}')
 
 @Bot1.on_message(filters.private & filters.command('adddata'))
-async def new_filtervip(client: Client, message):
+async def new_filtervip(client, message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
         await message.reply_text("Samahani hauruhusiw kutumia command hii Tafadhali  mchek @hrm45 akupe maelekezo")
@@ -410,7 +410,7 @@ async def log_file(bot, message):
         await message.reply(str(e))
 
 @Bot1.on_message(filters.private & filters.command('add'))
-async def new_filter(client: Client, message):
+async def new_filter(client, message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
         await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
@@ -641,7 +641,7 @@ async def new_filter(client: Client, message):
     await message.reply_text(f"<code>{text}</code> Added", quote = True, reply_markup = reply_markup)
 
 @Bot1.on_message(filters.private & filters.command('delete'))
-async def del_filter(client: Client, message):
+async def del_filter(client, message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
         await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
@@ -674,7 +674,7 @@ async def del_filter(client: Client, message):
     else:
         await message.reply_text("Couldn't find that filter!", quote=True)
 @Bot1.on_message(filters.private & filters.command('filters'))
-async def get_all(client: Client, message):
+async def get_all(client, message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
         await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
@@ -998,11 +998,11 @@ Salio lako:Litaisha tarehe {salio} ::Kumbuka kufanya malipo mapema wateja wako w
         await message.reply_text(salio)
 
 @Bot1.on_callback_query(filters.regex("^delall$") & filters.owner)
-async def delall(client: Client, query):
+async def delall(client, query):
     await del_all(query.message)
 
 @Bot1.on_callback_query(filters.regex("^delallclose$") & filters.owner)
-async def delcancel(client: Client, query):
+async def delcancel(client, query):
     await query.edit_message_text(
         text = 'Process Cancelled',
         reply_markup = None
