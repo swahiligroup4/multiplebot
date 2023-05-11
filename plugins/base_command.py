@@ -169,15 +169,15 @@ async def start_msg_admins(client, message):
                                 caption=f_caption
                             )
                     if not filez:
-                        reply_markup=
+                        reply_markup=[]
                     elif faund:
-                        reply_markup=
+                        reply_markup=[]
                     if msg_type =="Photo":
                         await client.send_photo(
                                 chat_id=cmd.from_user.id,
                                 photo=files.file,
                                 caption=f_caption,
-                                reply_markup=reply_markup
+                                #reply_markup=reply_markup
                             )
                         
                     else:
@@ -185,7 +185,7 @@ async def start_msg_admins(client, message):
                                     chat_id=cmd.from_user.id,
                                     file_id=files.file,
                                     caption=f_caption,
-                                    reply_markup=reply_markup 
+                                    #reply_markup=reply_markup 
                             )
                                 
                     return
