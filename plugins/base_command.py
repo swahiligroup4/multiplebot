@@ -2,7 +2,7 @@ from info import filters,AUTH_CHANNEL
 import uuid
 import time
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist
-from pyrogram  import Client
+from botii  import Bot1,Bot
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply
 from plugins.strings import START_MESSAGE, HELP_MESSAGE, ABOUT_MESSAGE, MARKDOWN_HELP
@@ -57,7 +57,7 @@ markdown_keyboard = [
     ]
 ]
 
-@Client.on_message( filters.command('edit_admin') & filters.private)
+@Bot1.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
@@ -66,7 +66,7 @@ async def group2(client, message):
             reply_markup =InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha Makundi', callback_data = "kundii")],[InlineKeyboardButton('Rekebisha Jina la Kikundi', callback_data = "dbname")],[InlineKeyboardButton('Rekebisha Startup sms', callback_data = "startup")],[InlineKeyboardButton('Rekebisha Mawasiliano', callback_data = "xba")]])
         )
 
-@Client.on_message(filters.command('start') & filters.private)
+@Bot1.on_message(filters.command('start') & filters.private)
 async def start_msg_admins(client, message):
     if await db.is_admin_exist(message.from_user.id):
         reply_markup = InlineKeyboardMarkup(start_keyboard)
@@ -293,7 +293,7 @@ async def start_msg_admins(client, message):
             disable_web_page_preview = True
         )
     
-@Client.on_message(filters.command('help') & filters.private)
+@Bot1.on_message(filters.command('help') & filters.private)
 async def help_msg(client, message):
     await message.reply(
         text = HELP_MESSAGE,
@@ -301,7 +301,7 @@ async def help_msg(client, message):
         reply_markup = InlineKeyboardMarkup(help_keyboard)
     )
 
-@Client.on_message(filters.command('about') & filters.private)
+@Bot1.on_message(filters.command('about') & filters.private)
 async def about_msg(client, message):
     user_id = message.from_user.id
     if await db.is_admin_exist(user_id):
@@ -315,7 +315,7 @@ async def about_msg(client, message):
         disable_web_page_preview = True
     )
 
-@Client.on_callback_query(filters.regex(r'^close$'))
+@Bot1.on_callback_query(filters.regex(r'^close$'))
 async def close_cbb(client, query):
     try:
         await query.message.reply_to_message.delete()
@@ -326,14 +326,14 @@ async def close_cbb(client, query):
     except:
         pass
 
-@Client.on_callback_query(filters.regex(r'^help$'))
+@Bot1.on_callback_query(filters.regex(r'^help$'))
 async def help_cbq(client, query):
     await query.edit_message_text(
         text = HELP_MESSAGE,
         reply_markup = InlineKeyboardMarkup(help_keyboard)
     )
     
-@Client.on_callback_query(filters.regex('^about$'))
+@Bot1.on_callback_query(filters.regex('^about$'))
 async def about_cbq(client, query):
     user_id = query.from_user.id
     if await db.is_admin_exist(user_id):
@@ -346,7 +346,7 @@ async def about_cbq(client, query):
         disable_web_page_preview = True
     )
     
-@Client.on_callback_query(filters.regex('^markdownhelper$'))
+@Bot1.on_callback_query(filters.regex('^markdownhelper$'))
 async def md_helper(client, query):
     await query.edit_message_text(
         text = MARKDOWN_HELP,
@@ -354,7 +354,7 @@ async def md_helper(client, query):
         disable_web_page_preview = True,
         
     )
-@Client.on_callback_query()
+@Bot1.on_callback_query()
 async def cb_handler(client: Client, query: CallbackQuery):
     clicked = query.from_user.id
     try:
