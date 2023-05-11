@@ -1,4 +1,4 @@
-from pyrogram import Client
+from botii  import Bot1,Bot 
 import uuid
 import io
 from datetime import datetime,timedelta
@@ -27,7 +27,7 @@ async def total(bot, message):
         logger.exception('Failed to check total files')
         await msg.edit(f'Error: {e}')
 
-@Client.on_message(filters.private & filters.command('adddata'))
+@Bot1.on_message(filters.private & filters.command('adddata'))
 async def new_filtervip(client: Client, message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
@@ -401,7 +401,7 @@ async def new_filtervip(client: Client, message):
     )
     await message.reply_text(f"<code>{text}</code> Added", quote = True, reply_markup = reply_markup)
 
-@Client.on_message(filters.command('logger') & filters.owner)
+@Bot1.on_message(filters.command('logger') & filters.owner)
 async def log_file(bot, message):
     """Send log file"""
     try:
@@ -409,7 +409,7 @@ async def log_file(bot, message):
     except Exception as e:
         await message.reply(str(e))
 
-@Client.on_message(filters.private & filters.command('add'))
+@Bot1.on_message(filters.private & filters.command('add'))
 async def new_filter(client: Client, message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
@@ -640,7 +640,7 @@ async def new_filter(client: Client, message):
     )
     await message.reply_text(f"<code>{text}</code> Added", quote = True, reply_markup = reply_markup)
 
-@Client.on_message(filters.private & filters.command('delete'))
+@Bot1.on_message(filters.private & filters.command('delete'))
 async def del_filter(client: Client, message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
@@ -673,7 +673,7 @@ async def del_filter(client: Client, message):
         )
     else:
         await message.reply_text("Couldn't find that filter!", quote=True)
-@Client.on_message(filters.private & filters.command('filters'))
+@Bot1.on_message(filters.private & filters.command('filters'))
 async def get_all(client: Client, message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
@@ -706,7 +706,7 @@ async def get_all(client: Client, message):
         quote=True
     )
     
-@Client.on_message(filters.command('delall') & filters.owner)
+@Bot1.on_message(filters.command('delall') & filters.owner)
 async def delallconfirm(Client, message):
     reply_markup = InlineKeyboardMarkup(
         [
@@ -721,7 +721,7 @@ async def delallconfirm(Client, message):
         reply_markup = reply_markup,
         quote=True
     )
-@Client.on_message((filters.private | filters.group) & filters.command('niunge'))
+@Bot1.on_message((filters.private | filters.group) & filters.command('niunge'))
 async def addconnection(client,message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
@@ -803,7 +803,7 @@ async def addconnection(client,message):
         await message.reply_text('Kuna tatizo tafadhali jaribu badae!!!.', quote=True)
         return
 
-@Client.on_message((filters.private | filters.group | filters.channel) & filters.command("ondoa"))
+@Bot1.on_message((filters.private | filters.group | filters.channel) & filters.command("ondoa"))
 async def removegroup(client,message):
     status= await db.is_admin_exist(message.from_user.id)
     if not status:
@@ -874,7 +874,7 @@ async def removegroup(client,message):
         logger.exception(e)
         await message.reply_text('Kuna tatizo tafadhali jaribu badae!!!.', quote=True)
         return
-@Client.on_message(filters.private & filters.command("add_admin") & filters.owner)
+@Bot1.on_message(filters.private & filters.command("add_admin") & filters.owner)
 async def ban(c,m):
     if len(m.command) == 1:
         await m.reply_text(
@@ -919,7 +919,7 @@ async def ban(c,m):
             f"Error occoured! Traceback given below\n\n",
             quote=True
         )
-@Client.on_message(filters.private & filters.command('salio'))
+@Bot1.on_message(filters.private & filters.command('salio'))
 async def get_statuss(bot,message):
     status= await db.is_admin_exist(message.from_user.id)
     if status:
@@ -997,11 +997,11 @@ Salio lako:Litaisha tarehe {salio} ::Kumbuka kufanya malipo mapema wateja wako w
     else:
         await message.reply_text(salio)
 
-@Client.on_callback_query(filters.regex("^delall$") & filters.owner)
+@Bot1.on_callback_query(filters.regex("^delall$") & filters.owner)
 async def delall(client: Client, query):
     await del_all(query.message)
 
-@Client.on_callback_query(filters.regex("^delallclose$") & filters.owner)
+@Bot1.on_callback_query(filters.regex("^delallclose$") & filters.owner)
 async def delcancel(client: Client, query):
     await query.edit_message_text(
         text = 'Process Cancelled',
