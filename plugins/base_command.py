@@ -105,7 +105,7 @@ async def start_msg_admins(client, message):
         )
     usr_cmdall1 = message.text
     cmd=message
-    if not await is_subscribed(client, message,AUTH_CHANNEL ):
+    if not await is_subscribed(client, message,CHANNELS ):
         try:
             invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
         except ChatAdminRequired:
