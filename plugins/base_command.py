@@ -1,6 +1,7 @@
 from info import filters,AUTH_CHANNEL
 import uuid
 import time
+from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist
 from botii  import Bot1,Bot
 from plugins.database import db
