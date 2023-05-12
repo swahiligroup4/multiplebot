@@ -26,7 +26,6 @@ async def total(bot, message):
     except Exception as e:
         logger.exception('Failed to check total files')
         await msg.edit(f'Error: {e}')
-
 @Bot1.on_message(filters.private & filters.command('adddata'))
 async def new_filtervip(client, message):
     status= await db.is_admin_exist(message.from_user.id)
