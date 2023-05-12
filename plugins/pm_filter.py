@@ -98,9 +98,9 @@ async def groupprv(client, message):
             async for dtls in await db.get_acc(message.from_user.id ):
                 if dtls.db_name == nyva:
                     if dtls.fileid.startswith("g_"):
-                        text1=text1+=''
+                        text1+='gh'
                     else:
-                            
+                        text1+='gh'
             if user_id3 == text.lower():
                 await message.reply_text('Hii email tayar Tulishaihifadhi kama unataka kuibadisha ntumie nyingene')
             elif text1!='TAFADHALI MPE ACCESS YA MOVIE HIZI':
