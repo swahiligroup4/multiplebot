@@ -1,4 +1,4 @@
-from pyrogram import Client
+from botii import Bot1,Bot
 import re
 from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton
 from info import filters
@@ -6,7 +6,7 @@ from plugins.database import db
 from plugins.status import handle_user_status,handle_admin_status
 from utils import get_filter_results,is_user_exist,User,get_file_details
     
-@Client.on_message(filters.text & filters.group & filters.incoming)
+@Bot1.on_message(filters.text & filters.group & filters.incoming)
 async def group(client, message):
     await handle_user_status(client,message)
     await handle_admin_status(client,message)
@@ -83,7 +83,7 @@ async def group(client, message):
             return
         if not btn:
             return
-@Client.on_message(filters.regex('@gmail.com') & filters.incoming)
+@Bot1.on_message(filters.regex('@gmail.com') & filters.incoming)
 async def groupprv(client, message): 
     text=message.text
     if " " not in text.strip() and "@gmail.com" in text.lower():
