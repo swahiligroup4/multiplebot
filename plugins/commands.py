@@ -288,15 +288,15 @@ async def new_filtervip(client, message):
                         id1=id1+1
                 except:
                     a=False
-                
-            id1 = mkv1.id+2
+            mkv22=await client.send_message(text = " Tuma jina la folder itakayo jumuisha vipande hivi mfano season 1 Ep (1-20) au kama n vipande vya movie tuma neno m :::: Kùmbuka ukiwa unataka kubadilisha jina la folder ili vipande utavyoendelea kutuma viendee kwenye jina la folder la pili baada ya la kwanza kuanza kumaliza idadi yake Tuma tu jina lake kisha endelea kutuma vipande vya folder la n.k la 4 5 6 .... yote itakuwa hivyo", chat_id = message.from_user.id)
+            id1=mkv22.id+1
             while dta!='stop':
                 stridm = str(uuid.uuid4())
                 a,b = funask()
                 while a==False:
                     try:
                         mk= await client.get_messages("me",id1)
-                        if mk.media!=None or mk.text!=None:
+                        if (mk.media!=None or mk.text!=None) and not mk.photo:
                             a=True
                         if (time.time()-b)>(10*60):
                             await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
