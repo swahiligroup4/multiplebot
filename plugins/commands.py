@@ -326,7 +326,7 @@ async def new_filtervip(client, message):
                     dta = 'stop'
                     await mk.reply(f'all file sent to database with id  {fileid}')
                     break
-                elif mk.text.lower()!='stop:
+                elif mk.text.lower()!='stop':
                     
                     await mk.reply(f'folder name limebadilishwa kutoka {fld_nm} kwenda {mk.text}')
                     fld_nm =mk.text
