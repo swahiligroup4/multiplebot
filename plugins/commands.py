@@ -123,7 +123,7 @@ async def new_filtervip(client, message):
     x = 0
     p=[]
     usrr=' '
-    ab7=' '
+    ab7=' ' 
     for i in range(0,6):
         i+=1
         gs=f'g_{i}'
