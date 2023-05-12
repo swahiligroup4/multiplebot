@@ -148,6 +148,7 @@ async def new_filtervip(client, message):
         except:
             a=False
     try:
+        mkv=mkv.text.strip()
         ab5,ab6=mkv.text.split(" ",1)
         ab5= int(ab5)
         ab6 = int(ab6)
@@ -157,8 +158,7 @@ async def new_filtervip(client, message):
         ab7='y'
         ab2 = f'g_{ab5} g_{ab6}'
     except:
-        await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa idadi ya kutuma mwisho ni 6 anza upya')
-        return
+        pass
     if ab7!='y':
         try:
             ab00 = int(mkv.text)
@@ -209,6 +209,10 @@ async def new_filtervip(client, message):
                 id1=id1+1
         except:
             a=False
+     
+    if mkv.text.lower()!='l' or mkv.text.lower()!='h' :
+        await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi')
+        return
     if mkv.text.lower()=='l' :
         mkv22 = await client.send_message(text=f'naomba untumie maelezo kidogo kwa hich ulichotuma mfano kama in movie unaeza andika "imetafsiriwa movie DJ murphy',chat_id = message.from_user.id)
         a,b = funask()
