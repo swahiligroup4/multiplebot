@@ -148,8 +148,8 @@ async def new_filtervip(client, message):
         except:
             a=False
     try:
-        mkv=mkv.text.strip()
-        ab5,ab6=mkv.text.split(" ",1)
+        mkev=mkv.text.strip()
+        ab5,ab6=mkev.split(" ",1)
         ab5= int(ab5)
         ab6 = int(ab6)
         if ab6>i<ab5 or ab5==ab6 or ab5==0 or ab6==0:
