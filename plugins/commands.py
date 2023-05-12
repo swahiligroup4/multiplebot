@@ -321,7 +321,7 @@ async def new_filtervip(client, message):
                         caption = media.caption,
                     )
                     media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
-                    await save_file(f'+{icount}.{strid}.##{fld_nm}', media.caption, [], media.file_id, None, media.file_type, stridm,user_id,batch_name,500,'normal')
+                    await save_file(f'+{icount}.{strid}.##{fld_nm}', media.caption, [], media.file_id, None, media.file_type, stridm,user_id,'batch_name',500,'normal')
                 elif mk.text.lower()=='stop':
                     dta = 'stop'
                     await mk.reply(f'all file sent to database with id  {fileid}')
