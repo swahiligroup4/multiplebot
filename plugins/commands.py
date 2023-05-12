@@ -274,24 +274,26 @@ async def new_filtervip(client, message):
             a,b = funask()
             while a==False:
                 try:
-                    mkv1= await client.get_messages("me",id1)
-                    if mkv1.text!=None:
+                    mkv2= await client.get_messages("me",id1)
+                    if mkv2.text!=None:
                         a=True
                     if (time.time()-b)>(3*60):
                         await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 3 iliniweze kuhudumia na wengine")
                         return
-                    if mkv1.from_user.id != message.from_user.id :
+                    if mkv2.from_user.id != message.from_user.id :
                         a=False
                         fld_nm=mkv1.text
                         await mkv1.reply_text("ok ntumie vipande vya movie au seris yako ntaviweka kwenye folder husika")
                         id1=id1+1
                 except:
                     a=False
-            mkv22=await client.send_message(text = " Tuma jina la folder itakayo jumuisha vipande hivi mfano season 1 Ep (1-20) au kama n vipande vya movie tuma neno m :::: Kùmbuka ukiwa unataka kubadilisha jina la folder ili vipande utavyoendelea kutuma viendee kwenye jina la folder la pili baada ya la kwanza kuanza kumaliza idadi yake Tuma tu jina lake kisha endelea kutuma vipande vya folder la n.k la 4 5 6 .... yote itakuwa hivyo", chat_id = message.from_user.id)
+            mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
             id1=mkv22.id+1
+            fld_nm =mkv2.text
             while dta!='stop':
                 stridm = str(uuid.uuid4())
                 a,b = funask()
+                
                 while a==False:
                     try:
                         mk= await client.get_messages("me",id1)
@@ -324,8 +326,10 @@ async def new_filtervip(client, message):
                     dta = 'stop'
                     await mk.reply(f'all file sent to database with id  {fileid}')
                     break
-                else:
-                    await mk.reply('tafadhali tuma ulichoambiwa')
+                elif mk.text.lower()!='stop:
+                    
+                    await mk.reply(f'folder name limebadilishwa kutoka {fld_nm} kwenda {mk.text}')
+                    fld_nm =mk.text
                 icount+=1
                 mkv22.delete()
                 mkv22=await client.send_message(text = " Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo hili au badilisha kwa kutuma name.jina la batch", chat_id = message.from_user.id)
