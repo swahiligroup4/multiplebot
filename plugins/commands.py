@@ -210,11 +210,11 @@ async def new_filtervip(client, message):
         except:
             a=False
      
-    if mkv.text.lower()!='l' or mkv.text.lower()!='h' :
+    if mkv.text.lower()!='l' and mkv.text.lower()!='h' :
         await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi')
         return
     if mkv.text.lower()=='l' :
-        mkv22 = await client.send_message(text=f'naomba untumie maelezo kidogo kwa hich ulichotuma mfano kama in movie unaeza andika "imetafsiriwa movie DJ murphy',chat_id = message.from_user.id)
+        mkv22 = await client.send_message(text=f'naomba untumie maelezo kidogo kwa hich ulichotuma mfano kama hii ni movie unaeza andika "imetafsiriwa DJ murphy Movie"',chat_id = message.from_user.id)
         a,b = funask()
         id1=mkv22.id+1
         while a==False:
