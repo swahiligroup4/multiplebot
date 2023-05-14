@@ -70,7 +70,7 @@ async def new_filtervip(client, message):
         ab1=mkv.text.lower()
     if ab1=="y":
         ab= await save_file(text, 'reply_text', [], 'fileid', 'alert', 'msg_type', 'strid',message.from_user.id,'descp',"hrm46",'normal')
-    elif ab1 !='n' and ab1 !='y':
+    elif ab1 !='n' and ab1 !='y' and ab1 != 'fggh':
         await client.send_message(text=f'tafadhali anza upya tuma kama ulivyoelekezwa',chat_id = message.from_user.id)
         return
     if not message.reply_to_message and len(extracted) < 2:
