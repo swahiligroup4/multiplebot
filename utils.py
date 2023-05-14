@@ -80,7 +80,7 @@ async def save_file(text,reply,btn,file,alert,type,id,user_id,descp,prc,grp):
         if int(found) >=1:
             for dt in details:
                 for ad in await get_file_details(dt.id):
-                await Media.collection.delete_one({'text':ad.text})
+                    await Media.collection.delete_one({'text':ad.text})
             await Media.collection.delete_one(filter)
             await message.reply_text(
                 f"<code>{text.split('.dd#.')[0]}</code>  deleted successful.",
