@@ -67,7 +67,7 @@ async def new_filtervip(client, message):
                     id1=id1+1
             except:
                 a=False
-        ab1=mkv.text
+        ab1=mkv.text.lower()
     if ab1=="y":
         ab= await save_file(text, 'reply_text', [], 'fileid', 'alert', 'msg_type', 'strid',message.from_user.id,'descp',"hrm46",'normal')
     elif ab1 !='n' and ab1 !='y':
