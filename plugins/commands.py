@@ -299,15 +299,17 @@ async def new_filtervip(client, message):
                         mk= await client.get_messages("me",id1)
                         if (mk.media!=None or mk.text!=None) and not mk.photo:
                             a=True
+                        if mk.media != None or mk.text!=None:
+                            id1=id1+1
                         if (time.time()-b)>(10*60):
                             await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
                             return
-                        if mk.from_user.id != message.from_user.id and mk.text!=text1:
+                        if mk.from_user.id != message.from_user.id:
                             a=False
-                        elif  mk.text==text1:
-                            id1=id1+1
+                        
                     except:
                         a=False
+                
                 if mk.media and not (mk.photo):
                     for file_type in ("document", "video", "audio"):
                         media = getattr(mk, file_type, None)
@@ -332,8 +334,7 @@ async def new_filtervip(client, message):
                     fld_nm =mk.text
                 icount+=1
                 mkv22.delete()
-                mkv22=await client.send_message(text = " Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo hili au badilisha kwa kutuma name.jina la batch", chat_id = message.from_user.id)
-                id1=mkv22.id+1
+                mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
         descp = f'x.dd#.{mkv1.text}.dd#.data.dd#.m'
     try:
         if fileid:
