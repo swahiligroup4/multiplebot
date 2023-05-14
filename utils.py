@@ -72,6 +72,8 @@ async def save_file(text,reply,btn,file,alert,type,id,user_id,descp,prc,grp):
     found = await Media.find_one(fdata)
     if found and prc=='chec':
         return "hrm46"
+    elif prc =='chec':
+        return
     if found and prc=='hrm46':
         await Media.collection.delete_one(fdata)
         details = await  get_filter_results('text1',text)
