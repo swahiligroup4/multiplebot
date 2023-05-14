@@ -48,7 +48,31 @@ async def new_filtervip(client, message):
     text = text.strip()
     ab = f'{args[1].lower()}'
     msg_type = 'Text'
-   
+    ab1="fggh"
+    abb =await save_file(text, 'reply_text', [], 'fileid', 'alert', 'msg_type', 'strid',message.from_user.id,'descp',"chec",'normal')
+    if abb == "hrm46":
+        abbawait client.send_message(text=f'Kuna movie au series yenye jina kama hili kama unataka hili lichukue mbadala wa movie au series iliyopita tuma neno y au n kama unataka ziwepo zote zenye majina sawa',chat_id = message.from_user.id)
+        a,b = funask()
+        id1=mkv1.id + 1
+        while a==False:
+            try:
+                mkv = await client.get_messages("me",id1)
+                if mkv.text!=None:
+                    a=True
+                if (time.time()-b)>(60):
+                    await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 1 iliniweze kuhudumia na wengine")
+                    return
+                if mkv.from_user.id != message.from_user.id :
+                    a=False
+                    id1=id1+1
+            except:
+                a=False
+        ab1=mkv.text
+    if ab1=="y":
+        ab= await save_file(text, 'reply_text', [], 'fileid', 'alert', 'msg_type', 'strid',message.from_user.id,'descp',"hrm46",'normal')
+    elif ab1 !='n' and ab1 !='y':
+        await client.send_message(text=f'tafadhali anza upya tuma kama ulivyoelekezwa',chat_id = message.from_user.id)
+        return
     if not message.reply_to_message and len(extracted) < 2:
         await message.reply_text("Add some content to save your filter!", quote=True)
         return
