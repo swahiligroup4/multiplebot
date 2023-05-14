@@ -49,7 +49,7 @@ async def new_filtervip(client, message):
     ab = f'{args[1].lower()}'
     msg_type = 'Text'
     ab1="fggh"
-    abb =await save_file(text, 'reply_text', [], 'fileid', 'alert', 'msg_type', 'strid',message.from_user.id,'descp',"chec",'normal')
+    abb = await save_file(text, 'reply_text', [], 'fileid', 'alert', 'msg_type', 'strid',message.from_user.id,'descp',"chec",'normal')
     if abb == "hrm46":
         abbawait client.send_message(text=f'Kuna movie au series yenye jina kama hili kama unataka hili lichukue mbadala wa movie au series iliyopita tuma neno y au n kama unataka ziwepo zote zenye majina sawa',chat_id = message.from_user.id)
         a,b = funask()
