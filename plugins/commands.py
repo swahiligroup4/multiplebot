@@ -317,13 +317,20 @@ async def new_filtervip(client, message):
                             media.file_type = file_type
                             media.caption = mk.caption
                             break
-                    await client .send_cached_media(
-                        chat_id = CHANNELS,
-                        file_id = media.file_id,
-                        caption = media.caption,
-                    )
-                    media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
-                    await save_file(f'+{icount}.{strid}.##{fld_nm}', media.caption, [], media.file_id, None, media.file_type, stridm,user_id,'batch_name',500,'normal')
+                    try:
+                        await client .send_cached_media(
+                            chat_id = CHANNELS,
+                            file_id = media.file_id,
+                            caption = media.caption,
+                        )
+                        media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
+                        await save_file(f'+{icount}.{strid}.##{fld_nm}', media.caption, [], media.file_id, None, media.file_type, stridm,user_id,'batch_name',500,'normal')
+                    except:
+                        await client .send_cached_media(
+                            chat_id = message.from_user.id,
+                            file_id = media.file_id,
+                            caption = 'Samahani hii media kusave nmeshindwa huenda caption n kubwa tafadhal punguza kisha itume tena',
+                        )
                 elif mk.text.lower()=='stop':
                     dta = 'stop'
                     await mk.reply(f'all file sent to database with id  {fileid}')
