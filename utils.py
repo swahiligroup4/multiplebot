@@ -43,6 +43,14 @@ class User(Document):
     email = fields.StrField(required=True)
     class Meta:
         collection_name = COLLECTION_NAME_2
+@instance2.register
+class Data(Document):
+    id = fields.IntField(attribute='_id')
+    group_id= fields.IntField(required=True)
+    status = fields.StrField(required=True)
+    email = fields.StrField(required=True)
+    class Meta:
+        collection_name = COLLECTION_NAME_2
 
 async def add_user(id, usr,sts):
     try:
