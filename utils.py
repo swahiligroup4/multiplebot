@@ -18,6 +18,7 @@ logger.setLevel(logging.INFO)
 
 instance = Instance.from_db(DB2)
 imdb=Instance.from_db(DB2)
+instance2 = Instance.from_db(DB2)
 
 @instance.register
 class Media(Document):
