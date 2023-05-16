@@ -17,7 +17,12 @@ class Database:
                 db_name = "SWAHILI GROUP MEDIA",
                 descp = "Tunahusika na uuzaji wa muvi na sizon kal zilizotafsiriwa kwa bei ",
                 phone_no = "0 halopesa https://t.me/swahiliupdates hrm45",
-                ms_link= "link",
+                phone_nh = "0 halopesa https://t.me/swahiliupdates hrm45"
+                phone_na = "0 halopesa https://t.me/swahiliupdates hrm45"
+                phone_nv = "0 halopesa https://t.me/swahiliupdates hrm45"
+                phone_nt = "0 halopesa https://t.me/swahiliupdates hrm45"
+                phone_ntt = "0 halopesa https://t.me/swahiliupdates hrm45"
+                bot_link= "link",
                 muda = "kuipakua mda wowote bila kikomo...",
                 g_1=  "hrm45",
                 g_2 = "hrm45",
