@@ -1072,13 +1072,35 @@ async def delcancel(client, query):
         reply_markup = None
     )
     return
-dej btn2():
-    InlineKeyboardMarkup([
-        [
-            InlineKeyboardButton
-            InlineKeyboardButton
-        ]
-        
+def btn2():
+    ab5=[]
+    ab7="n"
+    try:
+        ab6=int(ab6)
+        ab7="y"
+    except:
+        pass
+    ab9=0
+    for i in range(0,5):
+        ab9=ab9+1
+        if ab7=="n":
+            ab8=f"season {ab9}"
+            ab11=ab9+1
+            ab10=f"season {ab9}"
+            ab.append[
+                InlineKeyboardButton(f"{ab8}",callbackquery=f"sss s{}")
+                InlineKeyboardButton(f"{ab10}",callbackquery =f"sss s{}")
+            ]
+        elif ab6==10:
+            ab8 = f"{ab6×(ab9-1)}1 hadi {ab6×(ab9)}0"
+            ab11 = ab9+1
+            if ab9=="":
+                
+            ab10 = f"{ab6×(ab9)}1 hadi {ab6×(ab9+1)}0"
+            ab.append[
+                InlineKeyboardButton(f"{ab8}",callbackquery=f"sss s{}")
+                InlineKeyboardButton(f"{ab10}",callbackquery =f"sss s{}")
+            ]
 def funask():
     a=False
     b=time.time()
