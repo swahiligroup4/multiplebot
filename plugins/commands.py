@@ -1044,6 +1044,27 @@ Salio lako:Litaisha tarehe {salio} ::Kumbuka kufanya malipo mapema wateja wako w
 async def delall(client, query):
     await del_all(query.message)
 
+@Bot1.on_callback_query()
+async def cb_handler2(client, query):
+    clicked = query.from_user.id
+    try:
+        typed = query.message.reply_to_message.from_user.id
+    except:
+        typed = query.from_user.id
+        pass
+    if (clicked == typed):
+        if query.data.startswith("sss"):
+            ab=query.data.split(' ',1)[1]
+            try:
+                ab1,ab2,ab3=ab.split('.') 
+            except:
+                try:
+                    ab1,ab2=ab.split('.')
+                except:
+                    try:
+                        
+                    except:
+                        
 @Bot1.on_callback_query(filters.regex("^delallclose$") & filters.owner)
 async def delcancel(client, query):
     await query.edit_message_text(
@@ -1051,6 +1072,13 @@ async def delcancel(client, query):
         reply_markup = None
     )
     return
+dej btn2():
+    InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton
+            InlineKeyboardButton
+        ]
+        
 def funask():
     a=False
     b=time.time()
