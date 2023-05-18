@@ -1098,8 +1098,8 @@ def btn2(ab6,ab22):
             ab11 = ab9+1  
             ab10 = f"{ab6*(ab9-1)}1 hadi {ab6*(ab9)}0"
             ab.append[
-                InlineKeyboardButton(f"{ab8}", callback_data =f"sss {ab22}.{ab6×(ab9)}0"),
-                InlineKeyboardButton(f"{ab10}", callback_data =f"sss {ab22}.{ab6×(ab11)}0")
+                InlineKeyboardButton(f"{ab8}", callback_data =f"sss {ab22}.{ab6*(ab9)}0"),
+                InlineKeyboardButton(f"{ab10}", callback_data =f"sss {ab22}.{ab6*(ab11)}0")
             ]
         ab9=ab9+1
     return InlineKeyboardMarkup(btn)
