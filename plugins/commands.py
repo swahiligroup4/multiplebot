@@ -275,6 +275,7 @@ async def new_filtervip(client, message):
         if not mkvl.text:
             mkvl.text=msg_type
         descp = f'x.dd#.{mkv2.text}.dd#.{mkvl.text}.dd#.s'
+        await save_file(text, reply_text, [], fileid, alert, msg_type, strid,user_id,descp,ab1,ab2)
     elif mkv.text.lower()=='h':
         mkv22 = await client.send_message(text='naomba untumie maelezo kidogo mfano imetafsiriwa singo',chat_id = message.from_user.id)
         a,b = funask()
@@ -293,34 +294,16 @@ async def new_filtervip(client, message):
             except:
                 a=False
         if mkv1.text:
+            descp = f'x.dd#.{mkv1.text}.dd#.data.dd#.m'
+            await save_file(text, reply_text, [], fileid, alert, msg_type, strid,user_id,descp,ab1,ab2)
             dta='start'
             icount = 0
             text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo hili au badilisha kwa kutuma name.jina la batch"
-            mkv22=await client.send_message(text = " Tuma jina la folder itakayo jumuisha vipande hivi mfano season 1 Ep (1-20) au kama n vipande vya movie tuma neno m :::: Kùmbuka ukiwa unataka kubadilisha jina la folder ili vipande utavyoendelea kutuma viendee kwenye jina la folder la pili baada ya la kwanza kuanza kumaliza idadi yake Tuma tu jina lake kisha endelea kutuma vipande vya folder la n.k la 4 5 6 .... yote itakuwa hivyo", chat_id = message.from_user.id)
-            id1=mkv22.id+1
-            a,b = funask()
-            while a==False:
-                try:
-                    mkv2= await client.get_messages("me",id1)
-                    if mkv2.text!=None:
-                        a=True
-                    if (time.time()-b)>(3*60):
-                        await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 3 iliniweze kuhudumia na wengine")
-                        return
-                    if mkv2.from_user.id != message.from_user.id :
-                        a=False
-                        fld_nm=mkv1.text
-                        await mkv1.reply_text("ok ntumie vipande vya movie au seris yako ntaviweka kwenye folder husika")
-                        id1=id1+1
-                except:
-                    a=False
             mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
             id1=mkv22.id+1
-            fld_nm =mkv2.text
             while dta!='stop':
                 stridm = str(uuid.uuid4())
                 a,b = funask()
-                
                 while a==False:
                     try:
                         mk= await client.get_messages("me",id1)
@@ -332,8 +315,7 @@ async def new_filtervip(client, message):
                             await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
                             return
                         if mk.from_user.id != message.from_user.id:
-                            a=False
-                        
+                            a=False 
                     except:
                         a=False
                 
@@ -369,7 +351,6 @@ async def new_filtervip(client, message):
                 icount+=1
                 mkv22.delete()
                 mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
-        descp = f'x.dd#.{mkv1.text}.dd#.data.dd#.m'
     try:
         if fileid:
             data1=await is_group_exist(message.from_user.id)
@@ -432,7 +413,6 @@ async def new_filtervip(client, message):
             pass
         return
 
-    await save_file(text, reply_text, [], fileid, alert, msg_type, strid,user_id,descp,ab1,ab2)
     text = text.split('.dd#.',1)[0]
     reply_markup = InlineKeyboardMarkup(
         [
@@ -1064,6 +1044,7 @@ async def cb_handler2(client, query):
                     try:
                         
                     except:
+        elif query.data.startswith("muvi"):
                         
 @Bot1.on_callback_query(filters.regex("^delallclose$") & filters.owner)
 async def delcancel(client, query):
