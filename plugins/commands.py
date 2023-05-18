@@ -235,7 +235,6 @@ async def new_filtervip(client, message):
                 id1=id1+1
         except:
             a=False
-     
     if mkv.text.lower()!='l' and mkv.text.lower()!='h' :
         await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi')
         return
@@ -373,7 +372,7 @@ async def new_filtervip(client, message):
                     mkv22.delete()
                     mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
             elif ab33=="ms":
-                await mkvl1.reply_text("hi")
+                await mkvl1.reply_text("hi",reply_markup=btn2(season,series)
     try:
         if fileid:
             data1=await is_group_exist(message.from_user.id)
@@ -1076,7 +1075,7 @@ async def delcancel(client, query):
         reply_markup = None
     )
     return
-def btn2(ab22):
+def btn2(ab6,ab22):
     ab=[]
     ab7="n"
     try:
@@ -1104,7 +1103,7 @@ def btn2(ab22):
                 InlineKeyboardButton(f"{ab10}",callbackquery =f"sss {ab22}.{ab6×(ab11)}0")
             ]
         ab9=ab9+1
-     return ab
+     return InlineKeyboardMarkup(btn)
 def funask():
     a=False
     b=time.time()
