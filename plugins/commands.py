@@ -1064,8 +1064,9 @@ async def cb_handler2(client, query):
                     ab1,ab2=ab.split('.')
                 except:
                     try:
-                        
+                        ab1=0
                     except:
+                        pass
         elif query.data.startswith("muvi"):
                         
 @Bot1.on_callback_query(filters.regex("^delallclose$") & filters.owner)
