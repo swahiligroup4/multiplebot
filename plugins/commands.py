@@ -293,64 +293,87 @@ async def new_filtervip(client, message):
                     id1=id1+1
             except:
                 a=False
+        mkv22 = await client.send_message(text=f'Samahani kidogo naomba utume neno m kama hii n singo movie au s kama n series ',chat_id = message.from_user.id)
+        a,b = funask()
+        id1 = mkv22.id+1
+        while a==False:
+            try:
+                mkvl1 = await client.get_messages("me",id1)
+                if mkvl1.text!=None:
+                    a=True
+                if (time.time()-b)>(3*60):
+                    await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 3 iliniweze kuhudumia na wengine")
+                    return
+                if mkvl1.from_user.id != message.from_user.id :
+                    a=False
+                    id1=id1+1
+            except:
+                a=False
+        if mkvl1.text.lower()!='m' and mkvl1.text.lower()!='s' :
+            await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi kama umeambia tuma s kwa series au m kwa movie ugumu hapo upo wap jamani')
+            return
         if mkv1.text:
-            descp = f'x.dd#.{mkv1.text}.dd#.data.dd#.m'
+            if mkvl1.text.lower()=='m':
+                ab33='m'
+            elif mkvl1.text.lower()=='s':
+                ab33='ms'
+            descp = f'x.dd#.{mkv1.text}.dd#.data.dd#.{ab33}'
             await save_file(text, reply_text, [], fileid, alert, msg_type, strid,user_id,descp,ab1,ab2)
-            dta='start'
-            icount = 0
-            text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo hili au badilisha kwa kutuma name.jina la batch"
-            mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
-            id1=mkv22.id+1
-            while dta!='stop':
-                stridm = str(uuid.uuid4())
-                a,b = funask()
-                while a==False:
-                    try:
-                        mk= await client.get_messages("me",id1)
-                        if (mk.media!=None or mk.text!=None) and not mk.photo:
-                            a=True
-                        if mk.media != None or mk.text!=None:
-                            id1=id1+1
-                        if (time.time()-b)>(10*60):
-                            await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
-                            return
-                        if mk.from_user.id != message.from_user.id:
-                            a=False 
-                    except:
-                        a=False
+            if ab33=='m':
+                dta='start'
+                icount = 0
+                text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
+                mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
+                id1=mkv22.id+1
+                while dta!='stop':
+                    stridm = str(uuid.uuid4())
+                    a,b = funask()
+                    while a==False:
+                        try:
+                            mk= await client.get_messages("me",id1)
+                            if (mk.media!=None or mk.text!=None) and not mk.photo:
+                                a=True
+                            if mk.media != None or mk.text!=None:
+                                id1=id1+1
+                            if (time.time()-b)>(10*60):
+                                await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
+                                return
+                            if mk.from_user.id != message.from_user.id:
+                                a=False 
+                        except:
+                            a=False
                 
-                if mk.media and not (mk.photo):
-                    for file_type in ("document", "video", "audio"):
-                        media = getattr(mk, file_type, None)
-                        if media is not None:
-                            media.file_type = file_type
-                            media.caption = mk.caption
-                            break
-                    try:
-                        await client .send_cached_media(
-                            chat_id = CHANNELS,
-                            file_id = media.file_id,
-                            caption = media.caption,
-                        )
-                        media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
-                        await save_file(f'+{icount}.{strid}.##{fld_nm}', media.caption, [], media.file_id, None, media.file_type, stridm,user_id,'batch_name',500,'normal')
-                    except:
-                        await client .send_cached_media(
-                            chat_id = message.from_user.id,
-                            file_id = media.file_id,
-                            caption = 'Samahani hii media kusave nmeshindwa huenda caption n kubwa tafadhal punguza kisha itume tena',
-                        )
-                elif mk.text.lower()=='stop':
-                    dta = 'stop'
-                    await mk.reply(f'all file sent to database with id  {fileid}')
-                    break
-                elif mk.text.lower()!='stop':
+                    if mk.media and not (mk.photo):
+                        for file_type in ("document", "video", "audio"):
+                            media = getattr(mk, file_type, None)
+                            if media is not None:
+                                media.file_type = file_type
+                                media.caption = mk.caption
+                                break
+                        try:
+                            await client .send_cached_media(
+                                chat_id = CHANNELS,
+                                file_id = media.file_id,
+                                caption = media.caption,
+                            )
+                            media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
+                            await save_file(f'+{icount}.{strid}.##{fld_nm}', media.caption, [], media.file_id, None, media.file_type, stridm,user_id,'batch_name',500,'normal')
+                        except:
+                            await client .send_cached_media(
+                                chat_id = message.from_user.id,
+                                file_id = media.file_id,
+                                caption = 'Samahani hii media kusave nmeshindwa huenda caption n kubwa tafadhal punguza kisha itume tena',
+                            )
+                    elif mk.text.lower()=='stop':
+                        dta = 'stop'
+                        await mk.reply(f'all file sent to database with id  {fileid}')
+                        break
                     
-                    await mk.reply(f'folder name limebadilishwa kutoka {fld_nm} kwenda {mk.text}')
-                    fld_nm =mk.text
-                icount+=1
-                mkv22.delete()
-                mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
+                    icount+=1
+                    mkv22.delete()
+                    mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
+            elif ab33=="ms":
+                await mkvl1.reply_text("hi")
     try:
         if fileid:
             data1=await is_group_exist(message.from_user.id)
