@@ -7,6 +7,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 async def start_msg_admins(client, message):
     mk=await message.reply_text('hi')
     mk2=await message.reply_text(f'{mk.id}hi',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('yes', callback_data ='ccc')]]))
+    mk=await message.reply_text(f'{mk2}')
 @Bot1.on_callback_query()
 async def about_ucbq(client, query):
     if query.data=='ccc':
