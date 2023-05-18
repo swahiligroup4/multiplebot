@@ -79,7 +79,6 @@ async def new_filtervip(client, message):
     if not message.reply_to_message and len(extracted) < 2:
         await message.reply_text("Add some content to save your filter!", quote=True)
         return
-
     if (len(extracted) >= 2) and not message.reply_to_message:
         reply_text, btn, alert = generate_button(extracted[1], strid)
         fileid = None
@@ -119,7 +118,6 @@ async def new_filtervip(client, message):
         except:
             pass
             
-
     elif message.reply_to_message and message.reply_to_message.photo:
         try:
             fileid = await upload_photo(message.reply_to_message)
