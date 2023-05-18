@@ -1088,7 +1088,7 @@ def btn2(ab6,ab22):
         if ab7=="n":
             ab8=f"season {ab9}"
             ab11=ab9+1
-            ab10=f"season {ab9}"
+            ab10=f"season {ab11}"
             ab.append([
                 InlineKeyboardButton(f"{ab8}", callback_data =f"sss s{ab8}"),
                 InlineKeyboardButton(f"{ab10}", callback_data =f"sss s{ab11}")
