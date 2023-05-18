@@ -1068,7 +1068,7 @@ async def cb_handler2(client, query):
                     except:
                         pass
         elif query.data.startswith("muvi"):
-                        
+            ab=0        
 @Bot1.on_callback_query(filters.regex("^delallclose$") & filters.owner)
 async def delcancel(client, query):
     await query.edit_message_text(
