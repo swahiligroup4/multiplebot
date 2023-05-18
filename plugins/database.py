@@ -21,7 +21,7 @@ class Database:
                 phone_na = "0 halopesa https://t.me/swahiliupdates hrm45",
                 phone_nv = "0 halopesa https://t.me/swahiliupdates hrm45",
                 phone_nt = "0 halopesa https://t.me/swahiliupdates hrm45",
-                phone_ntt = "0 halopesa https://t.me/swahiliupdates hrm45"
+                phone_ntt = "0 halopesa https://t.me/swahiliupdates hrm45",
                 bot_link= "link",
                 user_link = "link2",
                 srs_dsply = "list",
