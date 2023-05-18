@@ -1072,8 +1072,8 @@ async def delcancel(client, query):
         reply_markup = None
     )
     return
-def btn2():
-    ab5=[]
+def btn2(ab22):
+    ab=[]
     ab7="n"
     try:
         ab6=int(ab6)
@@ -1088,19 +1088,19 @@ def btn2():
             ab11=ab9+1
             ab10=f"season {ab9}"
             ab.append[
-                InlineKeyboardButton(f"{ab8}",callbackquery=f"sss s{}")
-                InlineKeyboardButton(f"{ab10}",callbackquery =f"sss s{}")
+                InlineKeyboardButton(f"{ab8}",callbackquery=f"sss s{ab8}")
+                InlineKeyboardButton(f"{ab10}",callbackquery =f"sss s{ab11}")
             ]
-        elif ab6==10:
+        elif ab6==10 or ab6==1:
             ab8 = f"{ab6×(ab9-1)}1 hadi {ab6×(ab9)}0"
-            ab11 = ab9+1
-            if ab9=="":
-                
-            ab10 = f"{ab6×(ab9)}1 hadi {ab6×(ab9+1)}0"
+            ab11 = ab9+1  
+            ab10 = f"{ab6×(ab9-1)}1 hadi {ab6×(ab9)}0"
             ab.append[
-                InlineKeyboardButton(f"{ab8}",callbackquery=f"sss s{}")
-                InlineKeyboardButton(f"{ab10}",callbackquery =f"sss s{}")
+                InlineKeyboardButton(f"{ab8}",callbackquery=f"sss {ab22}.{ab6×(ab9)}0")
+                InlineKeyboardButton(f"{ab10}",callbackquery =f"sss {ab22}.{ab6×(ab11)}0")
             ]
+        ab9=ab9+1
+     return ab
 def funask():
     a=False
     b=time.time()
