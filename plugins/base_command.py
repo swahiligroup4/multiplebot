@@ -1017,7 +1017,37 @@ async def cb_handler(client, query):
                     except:
                         pass
         elif query.data.startswith("muvi"):
-            ab=0        
+            ab=0   
+def btn2(ab6,ab22):
+    ab=[]
+    ab7="n"
+    try:
+        ab6=int(ab6)
+        ab7="y"
+    except:
+        pass
+    ab9=0
+    for i in range(0,5):
+        ab9=ab9+1
+        if ab7=="n":
+            ab8=f"season {ab9}"
+            ab11=ab9+1
+            ab10=f"season {ab11}"
+            ab.append([
+                InlineKeyboardButton(f"{ab8}", callback_data =f"sss s{ab8}"),
+                InlineKeyboardButton(f"{ab10}", callback_data =f"sss s{ab11}")
+            ])
+        elif ab6==10 or ab6==1:
+            ab8 = f"{ab6*(ab9-1)}1 hadi {ab6*(ab9)}0"
+            ab11 = ab9+1  
+            ab10 = f"{ab6*(ab9-1)}1 hadi {ab6*(ab9)}0"
+            ab.append([
+                InlineKeyboardButton(f"{ab8}", callback_data =f"sss {ab22}.#{ab6*(ab9)}0"),
+                InlineKeyboardButton(f"{ab10}", callback_data =f"sss {ab22}.#{ab6*(ab11)}0")
+            ])
+        ab9=ab9+1
+    return InlineKeyboardMarkup(ab)
+
 def replymkup2(msg2,msg4):
     msg1 = msg2.split('tsh ')[1]
     msg1 =int(msg1)
