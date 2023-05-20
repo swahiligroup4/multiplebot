@@ -1044,7 +1044,7 @@ Salio lako:Litaisha tarehe {salio} ::Kumbuka kufanya malipo mapema wateja wako w
 async def delall(client, query):
     await del_all(query.message)
 
-@Bot1.on_callback_query()
+@Bot1.on_callback_query(filters.private)
 async def cb_handler22(client, query):
     clicked = query.from_user.id
     try:
