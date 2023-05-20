@@ -998,6 +998,26 @@ async def cb_handler(client, query):
             await query.edit_message_text(text="chagua huduma unayotaka kufanya marekebisho",
                 reply_markup =InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha Makundi', callback_data = "kundii")],[InlineKeyboardButton('Rekebisha Jina la Kikundi', callback_data = "dbname")],[InlineKeyboardButton('Rekebisha Startup sms', callback_data = "startup")],[InlineKeyboardButton('Rekebisha Mawasiliano', callback_data = "xba")]])
             )
+        elif query.data.startswith("sss"):
+            ab=query.data.split(' ',1)[1]
+            await client.send_message(query.from_user.id,text='101')
+                      
+            try:
+                ab1,ab2,ab3=ab.split('.#') 
+            except:
+                try:
+                    ab1,ab2=ab.split('.#')
+                    await client.send_message(query.from_user.id,text='10')
+                      
+                    await query.edit_message_text(text=f"huklli",reply_markup=btn2(1,ab))    
+                except:
+                    try:
+                        await client.send_message(query.from_user.id,text='100')
+                        await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab))
+                    except:
+                        pass
+        elif query.data.startswith("muvi"):
+            ab=0        
 def replymkup2(msg2,msg4):
     msg1 = msg2.split('tsh ')[1]
     msg1 =int(msg1)
