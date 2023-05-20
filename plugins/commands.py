@@ -1056,10 +1056,10 @@ async def cb_handler2(client, query):
         if query.data.startswith("sss"):
             ab=query.data.split(' ',1)[1]
             try:
-                ab1,ab2,ab3=ab.split('.') 
+                ab1,ab2,ab3=ab.split('.#') 
             except:
                 try:
-                    ab1,ab2=ab.split('.')
+                    ab1,ab2=ab.split('.#')
                     await query.edit_message_text(text=f"huklli",reply_markup=btn2(1,ab))    
                 except:
                     try:
@@ -1099,8 +1099,8 @@ def btn2(ab6,ab22):
             ab11 = ab9+1  
             ab10 = f"{ab6*(ab9-1)}1 hadi {ab6*(ab9)}0"
             ab.append([
-                InlineKeyboardButton(f"{ab8}", callback_data =f"sss {ab22}.{ab6*(ab9)}0"),
-                InlineKeyboardButton(f"{ab10}", callback_data =f"sss {ab22}.{ab6*(ab11)}0")
+                InlineKeyboardButton(f"{ab8}", callback_data =f"sss {ab22}.#{ab6*(ab9)}0"),
+                InlineKeyboardButton(f"{ab10}", callback_data =f"sss {ab22}.#{ab6*(ab11)}0")
             ])
         ab9=ab9+1
     return InlineKeyboardMarkup(ab)
