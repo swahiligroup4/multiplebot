@@ -1060,9 +1060,10 @@ async def cb_handler2(client, query):
             except:
                 try:
                     ab1,ab2=ab.split('.')
+                    await query.edit_message_text(text=f"huklli",reply_markup=btn2(1,ab))    
                 except:
                     try:
-                        ab1=0
+                        await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab))
                     except:
                         pass
         elif query.data.startswith("muvi"):
