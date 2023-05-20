@@ -1044,35 +1044,6 @@ Salio lako:Litaisha tarehe {salio} ::Kumbuka kufanya malipo mapema wateja wako w
 async def delall(client, query):
     await del_all(query.message)
 
-@Bot1.on_callback_query(filters.private & filters.owner)
-async def cb_handler22(client, query):
-    clicked = query.from_user.id
-    try:
-        typed = query.message.reply_to_message.from_user.id
-    except:
-        typed = query.from_user.id
-        pass
-    if (clicked == typed):
-        if query.data.startswith("sss"):
-            ab=query.data.split(' ',1)[1]
-            await client.send_message(query.from_user.id,text='101')
-                      
-            try:
-                ab1,ab2,ab3=ab.split('.#') 
-            except:
-                try:
-                    ab1,ab2=ab.split('.#')
-                    await client.send_message(query.from_user.id,text='10')
-                      
-                    await query.edit_message_text(text=f"huklli",reply_markup=btn2(1,ab))    
-                except:
-                    try:
-                        await client.send_message(query.from_user.id,text='100')
-                        await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab))
-                    except:
-                        pass
-        elif query.data.startswith("muvi"):
-            ab=0        
 @Bot1.on_callback_query(filters.regex("^delallclose$") & filters.owner)
 async def delcancel(client, query):
     await query.edit_message_text(
