@@ -1045,7 +1045,7 @@ async def delall(client, query):
     await del_all(query.message)
 
 @Bot1.on_callback_query()
-async def cb_handler2(client, query):
+async def cb_handler22(client, query):
     clicked = query.from_user.id
     try:
         typed = query.message.reply_to_message.from_user.id
@@ -1055,6 +1055,8 @@ async def cb_handler2(client, query):
     if (clicked == typed):
         if query.data.startswith("sss"):
             ab=query.data.split(' ',1)[1]
+            await client.send_message(query.from_user.id,text='101')
+                      
             try:
                 ab1,ab2,ab3=ab.split('.#') 
             except:
