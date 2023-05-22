@@ -18,7 +18,6 @@ logger.setLevel(logging.INFO)
 
 instance = Instance.from_db(DB2)
 imdb=Instance.from_db(DB2)
-instance2 = Instance.from_db(DB2)
 
 @instance.register
 class Media(Document):
@@ -27,9 +26,7 @@ class Media(Document):
     reply = fields.StrField(required=True)
     btn = fields.StrField(required=True)
     file = fields.StrField(required=True)
-    alert = fields.StrField(required=True)
     type = fields.StrField(required=True)
-    group_id = fields.IntField(required=True)
     descp = fields.StrField(required=True)
     price = fields.IntField(required=True)
     grp = fields.StrField(required=True)
@@ -39,27 +36,14 @@ class Media(Document):
 @imdb.register
 class User(Document):
     id = fields.IntField(attribute='_id')
-    group_id= fields.IntField(required=True)
-    status = fields.StrField(required=True)
     email = fields.StrField(required=True)
     class Meta:
         collection_name = COLLECTION_NAME_2
-@instance2.register
-class Data(Document):
-    id = fields.StrField(attribute='_id')
-    text = fields.StrField(required=True)
-    reply = fields.StrField(required=True)
-    file = fields.StrField(required=True)
-    type = fields.StrField(required=True)
-    class  Meta :
-        collection_name = COLLECTION_NAME_2
-
+        
 async def add_user(id, usr,sts):
     try:
         data = User(
             id = id,
-            group_id= usr,
-            status = sts,
             email = 'hrm45'
         )
     except ValidationError:
