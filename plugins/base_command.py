@@ -999,7 +999,7 @@ async def cb_handler(client, query):
                 reply_markup =InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha Makundi', callback_data = "kundii")],[InlineKeyboardButton('Rekebisha Jina la Kikundi', callback_data = "dbname")],[InlineKeyboardButton('Rekebisha Startup sms', callback_data = "startup")],[InlineKeyboardButton('Rekebisha Mawasiliano', callback_data = "xba")]])
             )
         elif query.data.startswith("sss"):
-            ab=query.data.split(' ',1)[1]
+            bb,ab=query.data.split(' ',1)
             await client.send_message(query.from_user.id,text='101')
                       
             try:
@@ -1016,6 +1016,14 @@ async def cb_handler(client, query):
                         ab1,ab2,ab3=ab.split('.#')
                         dta='start'
                         icount = ab3
+                        details4 =await get_filter_results(bb.split('##')[1],query.from_user.id)
+                        for document in details4:
+                            await client.send_cached_media(
+                                        chat_id = query.from_user.id,
+                                        file_id = document.id,
+                                        caption = document.reply,
+                                        reply_markup =InlineKeyboard
+                                    )
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
                         mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
                         id1=mkv22.id+1
@@ -1045,13 +1053,13 @@ async def cb_handler(client, query):
                                     media.caption = mk.caption
                                     break
                                 try:
-                                    await client .send_cached_media(
+                                    await client.send_cached_media(
                                         chat_id = CHANNELS,
                                         file_id = media.file_id,
                                         caption = media.caption,
                                     )
                                     media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
-                                    await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,user_id,'hrm45',0,f'{fld_nm}')
+                                    await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,query.from_user.id,'hrm45',0,f'{fld_nm}')
                                 except:
                                     await client .send_cached_media(
                                         chat_id = message.from_user.id,
