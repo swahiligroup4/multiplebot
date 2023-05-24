@@ -1003,17 +1003,17 @@ async def cb_handler(client, query):
             await client.send_message(query.from_user.id,text='101')
                       
             try:
-                ab1,ab2,ab3=ab.split('.#') 
+                ab1=ab.split('.#') 
+                await client.send_message(query.from_user.id,text='100')
+                await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab))    
             except:
                 try:
                     ab1,ab2=ab.split('.#')
-                    await client.send_message(query.from_user.id,text='10')
-                      
+                    await client.send_message(query.from_user.id,text='10')         
                     await query.edit_message_text(text=f"huklli",reply_markup=btn2(1,ab))    
                 except:
                     try:
-                        await client.send_message(query.from_user.id,text='100')
-                        await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab))
+                        ab1,ab2,ab3=ab.split('.#')
                         dta='start'
                         icount = 0
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
