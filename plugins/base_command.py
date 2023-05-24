@@ -1015,7 +1015,7 @@ async def cb_handler(client, query):
                     try:
                         ab1,ab2,ab3=ab.split('.#')
                         dta='start'
-                        icount = 0
+                        icount = ab3
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
                         mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
                         id1=mkv22.id+1
@@ -1051,7 +1051,7 @@ async def cb_handler(client, query):
                                         caption = media.caption,
                                     )
                                     media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
-                                    await save_file(f'+{icount}.{strid}.##{fld_nm}', media.caption, [], media.file_id, None, media.file_type, stridm,user_id,'batch_name',500,'normal')
+                                    await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,user_id,'hrm45',0,f'{fld_nm}')
                                 except:
                                     await client .send_cached_media(
                                         chat_id = message.from_user.id,
