@@ -1022,7 +1022,7 @@ async def cb_handler(client, query):
                                         chat_id = query.from_user.id,
                                         file_id = document.id,
                                         caption = document.reply,
-                                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='',callback_data='delte {document.id}']])
+                                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='delete',callback_data=f'delte {document.id}')]])
                                     )
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
                         mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
