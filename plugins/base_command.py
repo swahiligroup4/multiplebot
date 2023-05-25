@@ -1022,7 +1022,7 @@ async def cb_handler(client, query):
                                         chat_id = query.from_user.id,
                                         file_id = document.id,
                                         caption = document.reply,
-                                        reply_markup =InlineKeyboard
+                                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='',callback_data='delete {document.id}']])
                                     )
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
                         mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
@@ -1059,7 +1059,7 @@ async def cb_handler(client, query):
                                         caption = media.caption,
                                     )
                                     media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
-                                    await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,query.from_user.id,'hrm45',0,f'{fld_nm}')
+                                    await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,query.from_user.id,'hrm45',0,f'{ab}')
                                 except:
                                     await client .send_cached_media(
                                         chat_id = message.from_user.id,
