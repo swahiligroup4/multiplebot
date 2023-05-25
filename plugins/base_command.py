@@ -1077,13 +1077,15 @@ async def cb_handler(client, query):
             
                     except:
                         pass
+        elif query.data.startswith("ydelte"):
+            id1=query.data.split(" ")[1]                                                              
+            await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'delte {id1}' )                                                                        
         elif query.data.startswith("delte"):
             id1=query.data.split(" ")[1]                                                                 
             details = await  get_filter_results(id,user_id)
             for dt in details:
-                for ad in await get_file_details(dt.id):
-                    await Media.collection.delete_one({'text':ad.text})
-            await Media.collection.delete_one({"id":})
+                await Media.collection.delete_one({'id':dt.id})
+            await Media.collection.delete_one({"id":id1})
             await query.reply_text(
                 f"imefutika kikamilifu sasa nitumie tena upya ili niadd kwenye database.",
                 quote=True
