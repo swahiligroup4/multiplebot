@@ -1022,7 +1022,7 @@ async def cb_handler(client, query):
                                         chat_id = query.from_user.id,
                                         file_id = document.id,
                                         caption = document.reply,
-                                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='',callback_data='delete {document.id}']])
+                                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='',callback_data='delte {document.id}']])
                                     )
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
                         mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
@@ -1077,8 +1077,18 @@ async def cb_handler(client, query):
             
                     except:
                         pass
-        elif query.data.startswith("muvi"):
-            ab=0   
+        elif query.data.startswith("delte"):
+            id1=query.data.split(" ")[1]                                                                 
+            details = await  get_filter_results(id,user_id)
+            for dt in details:
+                for ad in await get_file_details(dt.id):
+                    await Media.collection.delete_one({'text':ad.text})
+            await Media.collection.delete_one({"id":})
+            await query.reply_text(
+                f"imefutika kikamilifu sasa nitumie tena upya ili niadd kwenye database.",
+                quote=True
+            )
+                                                                             
 def btn2(ab6,ab22):
     ab=[]
     ab7="n"
