@@ -1079,7 +1079,7 @@ async def cb_handler(client, query):
                         pass
         elif query.data.startswith("ydelte"):
             id1=query.data.split(" ")[1]                                                              
-            await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'delte {id1}' )                                                                        
+            await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'deelte'] ,[InlineKeyboardButton(text='yes',callback_data=f'delte {id1}' )                                                                        
         elif query.data.startswith("delte"):
             id1=query.data.split(" ")[1]                                                                 
             details = await  get_filter_results(id,user_id)
