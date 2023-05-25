@@ -315,7 +315,7 @@ async def new_filtervip(client, message):
             elif mkvl1.text.lower()=='s':
                 ab33='ms'
             descp = f'x.dd#.{mkv1.text}.dd#.data.dd#.{ab33}'
-            await save_file(text, reply_text, [], fileid, alert, msg_type, strid,user_id,descp,ab1,ab2)
+            await save_file(text, reply_text, [], fileid, msg_type, strid,user_id,descp,ab1,ab2)
             if ab33=='m':
                 dta='start'
                 icount = 0
@@ -354,7 +354,7 @@ async def new_filtervip(client, message):
                                 caption = media.caption,
                             )
                             media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
-                            await save_file(f'+{icount}.{strid}.##{fld_nm}', media.caption, [], media.file_id, None, media.file_type, stridm,user_id,'batch_name',500,'normal')
+                            await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,user_id,'batch_name',500,'normal')
                         except:
                             await client .send_cached_media(
                                 chat_id = message.from_user.id,
