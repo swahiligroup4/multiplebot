@@ -1012,7 +1012,7 @@ async def cb_handler(client, query):
                     await client.send_message(query.from_user.id,text='10')         
                     await query.edit_message_text(text=f"huklli",reply_markup=btn2(1,ab))    
                 except:
-                    try:
+                    try: 
                         ab1,ab2,ab3=ab.split('.#')
                         dta='start'
                         icount = ab3
