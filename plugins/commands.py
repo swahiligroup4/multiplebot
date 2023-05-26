@@ -272,7 +272,7 @@ async def new_filtervip(client, message):
         if not mkvl.text:
             mkvl.text=msg_type
         descp = f'x.dd#.{mkv2.text}.dd#.{mkvl.text}.dd#.s'
-        await save_file(text, reply_text, [], fileid, alert, msg_type, strid,user_id,descp,ab1,ab2)
+        await save_file(text, reply_text, [], fileid, msg_type, strid,user_id,descp,ab1,ab2)
     elif mkv.text.lower()=='h':
         mkv22 = await client.send_message(text='naomba untumie maelezo kidogo mfano imetafsiriwa singo',chat_id = message.from_user.id)
         a,b = funask()
@@ -671,7 +671,7 @@ async def new_filter(client, message):
             pass
         return
 
-    await save_file(text, reply_text, btn, fileid, alert, msg_type, strid,user_id,descp,599,'normal')
+    await save_file(text, reply_text, btn, fileid, msg_type, strid,user_id,descp,alert,'normal')
     text = text.split('.dd#.',1)[0]
     reply_markup = InlineKeyboardMarkup(
         [
