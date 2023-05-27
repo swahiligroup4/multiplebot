@@ -370,7 +370,7 @@ async def new_filtervip(client, message):
                     mkv22.delete()
                     mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
             elif ab33=="ms":
-                await mkvl1.reply_text("hi",reply_markup=btn2("season","series"))
+                await mkvl1.reply_text("hi",reply_markup=btn22("season","series"))
     try:
         if fileid:
             data1=await is_group_exist(message.from_user.id)
@@ -1051,7 +1051,7 @@ async def delcancel(client, query):
         reply_markup = None
     )
     return
-def btn2(ab6,ab22):
+def btn22(ab6,ab22):
     ab=[]
     ab7="n"
     try:
