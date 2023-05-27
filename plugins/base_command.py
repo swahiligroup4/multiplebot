@@ -999,6 +999,7 @@ async def cb_handler(client, query):
                 reply_markup =InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha Makundi', callback_data = "kundii")],[InlineKeyboardButton('Rekebisha Jina la Kikundi', callback_data = "dbname")],[InlineKeyboardButton('Rekebisha Startup sms', callback_data = "startup")],[InlineKeyboardButton('Rekebisha Mawasiliano', callback_data = "xba")]])
             )
         elif query.data.startswith("sss"):
+            ab='
             bb,ab=query.data.split(' ',1)
             await client.send_message(query.from_user.id,text='101')
             ab=str(ab) 
