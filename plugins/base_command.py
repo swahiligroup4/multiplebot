@@ -1001,7 +1001,7 @@ async def cb_handler(client, query):
         elif query.data.startswith("sss"):
             bb,ab=query.data.split(' ',1)
             await client.send_message(query.from_user.id,text='101')
-                      
+            ab=str(ab) 
             try:
                 ab1=ab.split('##')
                 await client.send_message(query.from_user.id,text=f'100{ab1}')
@@ -1092,7 +1092,7 @@ async def cb_handler(client, query):
             )
                                                                              
 def btn2(ab6,ab22):
-    ab=[]
+    ab77=[]
     ab7="n"
     try:
         ab6=int(ab6)
@@ -1105,12 +1105,12 @@ def btn2(ab6,ab22):
         if ab6==10 or ab6==1:
             ab8 = f"{ab6*(ab9-1)}1 hadi {ab6*(ab9)}0" 
             ab10 = f"{ab6*(ab9)}1 hadi {ab6*(ab9+1)}0"
-            ab.append([
+            ab77.append([
                 InlineKeyboardButton(f"{ab8}", callback_data =f"sss {ab22}##{ab6*(ab9)}0"),
                 InlineKeyboardButton(f"{ab10}", callback_data =f"sss {ab22}##{ab6*(ab9+1)}0")
             ])
         ab9=ab9+1
-    return InlineKeyboardMarkup(ab)
+    return InlineKeyboardMarkup(ab77)
 
 def replymkup2(msg2,msg4):
     msg1 = msg2.split('tsh ')[1]
