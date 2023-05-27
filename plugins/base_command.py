@@ -1003,8 +1003,8 @@ async def cb_handler(client, query):
             await client.send_message(query.from_user.id,text='101')
                       
             try:
-                ab1=ab.split('.#') 
-                await client.send_message(query.from_user.id,text='100')
+                ab1=ab.split('.#')
+                await client.send_message(query.from_user.id,text=f'100{ab1}')
                 await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab))    
             except:
                 try:
