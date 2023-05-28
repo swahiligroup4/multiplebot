@@ -1078,8 +1078,9 @@ async def cb_handler(client, query):
                             mkv22.delete()
                             mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
             
-                    except:
-                        pass
+                    except Exception as e :
+                        await client.send_message(query.from_user.id,text=f'error{e}')         
+                    
         elif query.data.startswith("ydelte"):
             id1=query.data.split(" ")[1]                                                              
             await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'deelte')] ,[InlineKeyboardButton(text='yes',callback_data=f'delte {id1}')]]))                                                                        
