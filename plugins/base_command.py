@@ -1005,7 +1005,7 @@ async def cb_handler(client, query):
             ab=str(ab) 
             try:
                 ab1=ab.split('##')
-                await client.send_message(query.from_user.id,text=f'100{ab1}')
+                await client.send_message(query.from_user.id,text=f'100{ab}{bb}')
                 if len(ab1) != 1:
                     ab1,ab2,ab3,ab4 = ab.split('##')
                 await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab,bb))    
@@ -1013,7 +1013,7 @@ async def cb_handler(client, query):
                 try:
                     ab1,ab2=ab.split('##')
                     await client.send_message(query.from_user.id,text='10')         
-                    await query.edit_message_text(text=f"hukllrrri",reply_markup=btn2(1,ab,bb))    
+                    await query.edit_message_text(text=f"hukllrrri{bb}",reply_markup=btn2(1,ab,bb))    
                 except:
                     try: 
                         ab1,ab2,ab3=ab.split('##')
