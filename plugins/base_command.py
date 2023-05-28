@@ -1006,7 +1006,7 @@ async def cb_handler(client, query):
             try:
                 ab1=ab.split('##')
                 await client.send_message(query.from_user.id,text=f'100{ab1}')
-                if ab !="s1":
+                if len(ab1) != 1:
                     ab1,ab2,ab3,ab4 = ab.split('##')
                 await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab))    
             except:
