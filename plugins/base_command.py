@@ -1028,7 +1028,7 @@ async def cb_handler(client, query):
                                         reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='delete',callback_data=f'delte {document.id}')]])
                                     )
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
-                        mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
+                        mkv22=await client.send_message(text = text1, chat_id = query.from_user.id)
                         id1=mkv22.id+1
                         while dta!='stop':
                             stridm = str(uuid.uuid4())
@@ -1041,9 +1041,9 @@ async def cb_handler(client, query):
                                     if mk.media != None or mk.text!=None:
                                         id1=id1+1
                                     if (time.time()-b)>(10*60):
-                                        await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
+                                        await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
                                         return
-                                    if mk.from_user.id != message.from_user.id:
+                                    if mk.from_user.id != query.from_user.id:
                                         a=False 
                                 except:
                                     a=False
@@ -1065,7 +1065,7 @@ async def cb_handler(client, query):
                                     await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,query.from_user.id,'hrm45',0,f'{ab}')
                                 except:
                                     await client .send_cached_media(
-                                        chat_id = message.from_user.id,
+                                        chat_id = query.from_user.id,
                                         file_id = media.file_id,
                                         caption = 'Samahani hii media kusave nmeshindwa huenda caption n kubwa tafadhal punguza kisha itume tena',
                                     )
@@ -1076,7 +1076,7 @@ async def cb_handler(client, query):
                     
                             icount+=1
                             mkv22.delete()
-                            mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
+                            mkv22=await client.send_message(text =text1, chat_id = query.from_user.id)  
             
                     except Exception as e :
                         await client.send_message(query.from_user.id,text=f'error{e}')         
