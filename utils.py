@@ -27,7 +27,7 @@ class Media(Document):
     btn = fields.StrField(required=True)
     file = fields.StrField(required=True)
     type = fields.StrField(required=True)
-    group_id = fields.StrField(required=True)
+    group_id = fields.IntField(required=True)
     descp = fields.StrField(required=True)
     price = fields.IntField(required=True)
     grp = fields.StrField(required=True)
