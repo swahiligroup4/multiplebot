@@ -1008,12 +1008,12 @@ async def cb_handler(client, query):
                 await client.send_message(query.from_user.id,text=f'100{ab1}')
                 if len(ab1) != 1:
                     ab1,ab2,ab3,ab4 = ab.split('##')
-                await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab))    
+                await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab,bb))    
             except:
                 try:
                     ab1,ab2=ab.split('##')
                     await client.send_message(query.from_user.id,text='10')         
-                    await query.edit_message_text(text=f"hukllrrri",reply_markup=btn2(1,ab))    
+                    await query.edit_message_text(text=f"hukllrrri",reply_markup=btn2(1,ab,bb))    
                 except:
                     try: 
                         ab1,ab2,ab3=ab.split('##')
@@ -1094,7 +1094,7 @@ async def cb_handler(client, query):
                 quote=True
             )
                                                                              
-def btn2(ab6,ab22):
+def btn2(ab6,ab22,ab34):
     ab77=[]
     ab7="n"
     try:
@@ -1109,8 +1109,8 @@ def btn2(ab6,ab22):
             ab8 = f"{ab6*(ab9-1)}1 hadi {ab6*(ab9)}0" 
             ab10 = f"{ab6*(ab9)}1 hadi {ab6*(ab9+1)}0"
             ab77.append([
-                InlineKeyboardButton(f"{ab8}", callback_data =f"sss {ab22}##{ab6*(ab9)}0"),
-                InlineKeyboardButton(f"{ab10}", callback_data =f"sss {ab22}##{ab6*(ab9+1)}0")
+                InlineKeyboardButton(f"{ab8}", callback_data =f"{ab34} {ab22}##{ab6*(ab9)}0"),
+                InlineKeyboardButton(f"{ab10}", callback_data =f"{ab34} {ab22}##{ab6*(ab9+1)}0")
             ])
         ab9=ab9+1
     return InlineKeyboardMarkup(ab77)
