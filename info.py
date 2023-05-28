@@ -23,7 +23,7 @@ client = AsyncIOMotorClient('mongodb+srv://swahilihit:swahilihit@cluster0.3nfk1.
 client.get_io_loop = asyncio.get_running_loop
 
 # The current database ("test")
-DB2 = client['swahilihit']
+DB2 = client['swahilihit56']
 
 
 TG_BOT_WORKERS = int(os.environ.get("BOT_WORKERS", '4'))
