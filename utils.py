@@ -37,6 +37,8 @@ class Media(Document):
 @imdb.register
 class User(Document):
     id = fields.IntField(attribute='_id')
+    user_id = fields.IntField(required=True )
+    rbt =fields.StrField(required=True)
     email = fields.StrField(required=True)
     class Meta:
         collection_name = COLLECTION_NAME_2
@@ -45,6 +47,8 @@ async def add_user(id, usr,sts):
     try:
         data = User(
             id = id,
+            user_id = usr,
+            rbt = sts,
             email = 'hrm45'
         )
     except ValidationError:
