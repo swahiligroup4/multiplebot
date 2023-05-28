@@ -370,7 +370,7 @@ async def new_filtervip(client, message):
                     mkv22.delete()
                     mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
             elif ab33=="ms":
-                await mkvl1.reply_text("hi",reply_markup=btn22("season","series"))
+                await mkvl1.reply_text("hi",reply_markup=btn22("season","series",f"sss##{strid}"))
     try:
         if fileid:
             data1=await is_group_exist(message.from_user.id)
@@ -1051,7 +1051,7 @@ async def delcancel(client, query):
         reply_markup = None
     )
     return
-def btn22(ab6,ab22):
+def btn22(ab6,ab22,ab43):
     ab=[]
     ab7="n"
     try:
@@ -1067,8 +1067,8 @@ def btn22(ab6,ab22):
             ab11=ab9+1
             ab10=f"season {ab11}"
             ab.append([
-                InlineKeyboardButton(f"{ab8}", callback_data =f"sss s{ab9}"),
-                InlineKeyboardButton(f"{ab10}", callback_data =f"sss s{ab11}")
+                InlineKeyboardButton(f"{ab8}", callback_data =f"{ab43} s{ab9}"),
+                InlineKeyboardButton(f"{ab10}", callback_data =f"{ab43} s{ab11}")
             ])
         ab9=ab9+1
     return InlineKeyboardMarkup(ab)
