@@ -1024,7 +1024,7 @@ async def cb_handler(client, query):
                         for document in details4:
                             await client.send_cached_media(
                                         chat_id = query.from_user.id,
-                                        file_id = document.id,
+                                        file_id = document.file,
                                         caption = document.reply,
                                         reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='delete',callback_data=f'delte {document.id}')]])
                                     )
