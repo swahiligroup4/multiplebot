@@ -1051,10 +1051,10 @@ async def cb_handler(client, query):
                             if mk.media and not (mk.photo):
                                 for file_type in ("document", "video", "audio"):
                                     media = getattr(mk, file_type, None)
-                                if media is not None:
-                                    media.file_type = file_type
-                                    media.caption = mk.caption
-                                    break
+                                    if media is not None:
+                                        media.file_type = file_type
+                                        media.caption = mk.caption
+                                        break
                                 try:
                                     await client.send_cached_media(
                                         chat_id = CHANNELS,
