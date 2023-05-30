@@ -1027,7 +1027,7 @@ async def cb_handler(client, query):
                                         chat_id = query.from_user.id,
                                         file_id = document.file,
                                         caption = document.reply,
-                                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='delete',callback_data=f'delte {document.id}')]])
+                                        reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton(text='delete',callback_data=f'delte {document.id}')],[InlineKeyboardButton(text='close',callback_data=f'close'])
                                     )
                             icount+=1
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
@@ -1070,7 +1070,7 @@ async def cb_handler(client, query):
                                     await client .send_cached_media(
                                         chat_id = query.from_user.id,
                                         file_id = media.file_id,
-                                        caption =f' ❌❌❌❌❌❌❌❌❌❌❌  **Samahani hii media nmeshindwa kusave** huenda caption n kubwa tafadhal punguza kisha itume tena \n Au kama hujui tatizo ntumie msimizi maneno haya ili atatue changamoto yako {e} @hrm46',
+                                        caption =f'❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌ **Samahani hii media nmeshindwa kusave** huenda caption n kubwa tafadhal punguza kisha itume tena \n Au kama hujui tatizo ntumie msimizi maneno haya ili atatue changamoto yako {e} @hrm46',
                                     )
                             elif mk.text.lower()=='stop':
                                 dta = 'stop'
