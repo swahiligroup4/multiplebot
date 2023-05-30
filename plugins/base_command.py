@@ -1073,7 +1073,7 @@ async def cb_handler(client, query):
                                     )
                             elif mk.text.lower()=='stop':
                                 dta = 'stop'
-                                await mk.reply(f'all file sent to database with id  {fileid}')
+                                await mk.reply(f'all file sent to database with id  {strid}')
                                 break
                     
                             icount+=1
