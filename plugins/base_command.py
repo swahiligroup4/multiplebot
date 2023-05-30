@@ -1091,13 +1091,15 @@ async def cb_handler(client, query):
             try:
                 id1=query.data.split(" ")[1]                                                                 
                 await Media.collection.delete_one({"id":id1})
-                await query.reply_text(
-                    f"imefutika kikamilifu",
+                await client.send_message(
+                    chat_id =query.from_user.id,
+                    text = f"imefutika kikamilifu",
                     quote=True
                 )
             except:
-                await query.reply_text(
-                    f"samahani huenda hii media imeshafutwa nmeikosa kwenye database yng  ",
+                await client.send_message(
+                      chat_id =query.from_user.id,
+                      text = f"samahani huenda hii media imeshafutwa nmeikosa kwenye database yng  ",
                     quote=True
                 )
                                                                              
