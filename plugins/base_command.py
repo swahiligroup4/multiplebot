@@ -1019,7 +1019,7 @@ async def cb_handler(client, query):
                     try: 
                         ab1,ab2,ab3=ab.split('##')
                         dta='start'
-                        icount = ab3
+                        icount = int(ab3)
                         details4 =await get_filter_results(bb.split('##')[1],query.from_user.id)
                         for document in details4:
                             await client.send_cached_media(
@@ -1028,6 +1028,7 @@ async def cb_handler(client, query):
                                         caption = document.reply,
                                         reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='delete',callback_data=f'delte {document.id}')]])
                                     )
+                            icount+=1
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
                         mkv22=await client.send_message(text = text1, chat_id = query.from_user.id)
                         id1=mkv22.id+1
