@@ -1065,11 +1065,11 @@ async def cb_handler(client, query):
                                     )
                                     media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
                                     await save_file(f'+{icount}.{strid}.{stridm.split("-")[1]}', media.caption, [], media.file_id, media.file_type, stridm,query.from_user.id,'hrm45',0,f'{ab}')
-                                except:
+                                except Exception as e :
                                     await client .send_cached_media(
                                         chat_id = query.from_user.id,
                                         file_id = media.file_id,
-                                        caption = ' ❌❌❌❌❌❌❌❌❌❌❌  **Samahani hii media nmeshindwa kusave** huenda caption n kubwa tafadhal punguza kisha itume tena \n Au kama hujui tatizo ntumie msimizi maneno haya ili atatue changamoto yako @hrm46',
+                                        caption =f ' ❌❌❌❌❌❌❌❌❌❌❌  **Samahani hii media nmeshindwa kusave** huenda caption n kubwa tafadhal punguza kisha itume tena \n Au kama hujui tatizo ntumie msimizi maneno haya ili atatue changamoto yako {e}@hrm46',
                                     )
                             elif mk.text.lower()=='stop':
                                 dta = 'stop'
