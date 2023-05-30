@@ -1068,7 +1068,7 @@ async def cb_handler(client, query):
                                     await client .send_cached_media(
                                         chat_id = query.from_user.id,
                                         file_id = media.file_id,
-                                        caption = 'Samahani hii media kusave nmeshindwa huenda caption n kubwa tafadhal punguza kisha itume tena',
+                                        caption = ' ❌❌❌❌❌❌❌❌❌❌❌  **Samahani hii media nmeshindwa kusave** huenda caption n kubwa tafadhal punguza kisha itume tena \n Au kama hujui tatizo ntumie msimizi maneno haya ili atatue changamoto yako @hrm46',
                                     )
                             elif mk.text.lower()=='stop':
                                 dta = 'stop'
