@@ -1027,7 +1027,7 @@ async def cb_handler(client, query):
                                         chat_id = query.from_user.id,
                                         file_id = document.file,
                                         caption = document.reply,
-                                        reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton(text='delete',callback_data=f'ydelte {document.id}')],[InlineKeyboardButton(text='close',callback_data=f'close')]])
+                                        reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton(text='delete',callback_data=f'3ydelte {document.id}'),InlineKeyboardButton(text='close',callback_data=f'close')]])
                                     )
                             icount+=1
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
@@ -1084,7 +1084,7 @@ async def cb_handler(client, query):
                     except Exception as e :
                         await client.send_message(query.from_user.id,text=f'error{e}')         
                     
-        elif query.data.startswith("ydelte"):
+        elif query.data.startswith("3ydelte"):
             id1=query.data.split(" ")[1]                                                              
             await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'delte {id1}')] ,[InlineKeyboardButton(text='Close',callback_data=f'close')]]))                                                                        
         elif query.data.startswith("delte"):
