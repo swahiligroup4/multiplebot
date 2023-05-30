@@ -1094,13 +1094,13 @@ async def cb_handler(client, query):
                 await client.send_message(
                     chat_id =query.from_user.id,
                     text = f"imefutika kikamilifu",
-                    quote=True
+                    
                 )
             except:
                 await client.send_message(
                       chat_id =query.from_user.id,
                       text = f"samahani huenda hii media imeshafutwa nmeikosa kwenye database yng  ",
-                    quote=True
+                      
                 )
                                                                              
 def btn2(ab6,ab22,ab34):
