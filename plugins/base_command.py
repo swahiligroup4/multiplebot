@@ -1003,6 +1003,7 @@ async def cb_handler(client, query):
             bb,ab=query.data.split(' ',1)
             await client.send_message(query.from_user.id,text='101')
             ab=str(ab) 
+            strid=bb.split('##')[1]
             try:
                 ab1=ab.split('##')
                 await client.send_message(query.from_user.id,text=f'100{ab}{bb}')
