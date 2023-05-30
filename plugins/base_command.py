@@ -1027,7 +1027,7 @@ async def cb_handler(client, query):
                                         chat_id = query.from_user.id,
                                         file_id = document.file,
                                         caption = document.reply,
-                                        reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton(text='delete',callback_data=f'delte {document.id}')],[InlineKeyboardButton(text='close',callback_data=f'close'])
+                                        reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton(text='delete',callback_data=f'ydelte {document.id}')],[InlineKeyboardButton(text='close',callback_data=f'close')]])
                                     )
                             icount+=1
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
@@ -1086,17 +1086,20 @@ async def cb_handler(client, query):
                     
         elif query.data.startswith("ydelte"):
             id1=query.data.split(" ")[1]                                                              
-            await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'deelte')] ,[InlineKeyboardButton(text='yes',callback_data=f'delte {id1}')]]))                                                                        
+            await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'delte {id1}')] ,[InlineKeyboardButton(text='Close',callback_data=f'close')]]))                                                                        
         elif query.data.startswith("delte"):
-            id1=query.data.split(" ")[1]                                                                 
-            details = await  get_filter_results(id,user_id)
-            for dt in details:
-                await Media.collection.delete_one({'id':dt.id})
-            await Media.collection.delete_one({"id":id1})
-            await query.reply_text(
-                f"imefutika kikamilifu sasa nitumie tena upya ili niadd kwenye database.",
-                quote=True
-            )
+            try:
+                id1=query.data.split(" ")[1]                                                                 
+                await Media.collection.delete_one({"id":id1})
+                await query.reply_text(
+                    f"imefutika kikamilifu",
+                    quote=True
+                )
+            except:
+                await query.reply_text(
+                    f"samahani huenda hii media imeshafutwa nmeikosa kwenye database yng  ",
+                    quote=True
+                )
                                                                              
 def btn2(ab6,ab22,ab34):
     ab77=[]
