@@ -24,7 +24,6 @@ class Database:
                 phone_ntt = "0 halopesa https://t.me/swahiliupdates hrm45",
                 bot_link= "link",
                 user_link = "link2",
-                srs_dsply = "list",
                 muda = "30 days",
                 g_1=  "hrm45",
                 g_2 = "hrm45",
