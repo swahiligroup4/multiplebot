@@ -79,10 +79,6 @@ async def save_file(text,reply,btn,file,type,id,user_id,descp,prc,grp):
             for ad in await get_file_details(dt.id):
                 await Media.collection.delete_one({'text':ad.text})
         await Media.collection.delete_one(fdata)
-        await message.reply_text(
-            f"<code>{text.split('.dd#.')[0]}</code>  imefutika kikamilifu sasa nitumie tena upya ili niadd kwenye database.",
-            quote=True
-        )
         return
     try:
         file = Media(
