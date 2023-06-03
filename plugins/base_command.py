@@ -69,6 +69,11 @@ async def group2(client, message):
 
 @Bot1.on_message(filters.command('start') & filters.private)
 async def start_msg_admins(client, message):
+    nyva=BOT.get("username")
+    if not nyva:
+        botusername=await client.get_me()
+        nyva=botusername.username
+        BOT["username"]=nyva
     if await db.is_admin_exist(message.from_user.id):
         reply_markup = InlineKeyboardMarkup(start_keyboard)
     else:
