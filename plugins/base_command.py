@@ -7,7 +7,7 @@ from botii  import Bot1,Bot
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply
 from plugins.strings import START_MESSAGE, HELP_MESSAGE, ABOUT_MESSAGE, MARKDOWN_HELP
-
+BOT = {}
 start_keyboard = [
     [
         InlineKeyboardButton(text = '🤔 Help', callback_data = "help"),
