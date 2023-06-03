@@ -79,19 +79,16 @@ async def start_msg_admins(client, message):
     else:
         reply_markup = InlineKeyboardMarkup(start_keyboard_c)
     try:
-       user_details = await is_user_exist(message.from_user.id)
+       user_details = await db.is_bot_exist(nyva)
        if user_details:
-           for flt in user_details:
-               gid=await is_user_exist(flt.group_id)
-           for flt in gid:
-               ban_status = await db.get_db_status(flt.group_id)
-               text = ban_status['descp'].format(
-                    mention = message.from_user.mention,
-                    first_name = message.from_user.first_name,
-                    last_name = message.from_user.last_name,
-                    user_id = message.from_user.id,
-                    username = '' if message.from_user.username == None else '@'+message.from_user.username
-                )
+           ban_status = await db.get_db_status(user_deatails)
+           text = ban_status['descp'].format(
+                mention = message.from_user.mention,
+                first_name = message.from_user.first_name,
+                last_name = message.from_user.last_name,
+                user_id = message.from_user.id,
+                username = '' if message.from_user.username == None else '@'+message.from_user.username
+            )
        else:
            text = START_MESSAGE.format(
                 mention = message.from_user.mention,
