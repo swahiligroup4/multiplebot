@@ -231,8 +231,9 @@ async def is_subscribed(bot, query,channel):
             return True
 
     return False
-async def is_user_exist(query):
+async def is_user_exist(query,rbt):
     filter = {'id': query}
+    filter['rbt'] = rbt
     cursor = User.find(filter)
     
     userdetails = await cursor.to_list(length=1)
