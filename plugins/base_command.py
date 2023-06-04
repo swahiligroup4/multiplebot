@@ -92,7 +92,7 @@ async def start_msg_admins(client, message):
                 username = '' if message.from_user.username == None else '@'+message.from_user.username
             )
        else:
-           invite_link = await client.create_chat_invite_link(int(ban_status['group'])
+           invite_link = await client.create_chat_invite_link(int(ban_status['group']))
            text = f'Samahani Mpendwa {message.from_user.mention} jiunge na kikundi {invite_link.invite_link} \n ili kuweza kupata huduma za robot huyu'
     except:
         text = 'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa'
