@@ -18,8 +18,7 @@ from info import filters,OWNER_ID,CHANNELS,AUTH_CHANNEL
 BOT = {}
 @Bot1.on_inline_query(filters.inline)
 async def give_filter(client, query):
-    userdetails = await is_user_exist(query.from_user.id)
-    if not await is_subscribed(client, query,CHANNELS):
+   if not await is_subscribed(client, query,CHANNELS):
         await query.answer(results=[],
                            cache_time=0,
                            switch_pm_text='👉 Bonyeza hapa kujoin channel kupata updates zake',
@@ -30,14 +29,10 @@ async def give_filter(client, query):
         botusername=await client.get_me()
         nyva=botusername.username
         BOT["username"]=nyva
+    group_id= await is_bot_exist(nyva)
+    userdetails1= await is_user_exist(query.from_user.id,nyva)
     text = query.query.strip()
-    if userdetails:
-        for user in userdetails:
-            group_details = await is_user_exist(user.group_id)
-            grp_id=user.group_id
-            for id2 in group_details:
-                group_id = id2.group_id
-    else:
+    if not userdetails1:
         await query.answer(results=[],
             cache_time=0,
             switch_pm_text='👉 Tafadhali bonyeza hapa kupata muongozo',
