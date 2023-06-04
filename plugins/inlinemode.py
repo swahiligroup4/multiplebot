@@ -18,7 +18,7 @@ from info import filters,OWNER_ID,CHANNELS,AUTH_CHANNEL
 BOT = {}
 @Bot1.on_inline_query(filters.inline)
 async def give_filter(client, query):
-   if not await is_subscribed(client, query,CHANNELS):
+    if not await is_subscribed(client, query,CHANNELS):
         await query.answer(results=[],
                            cache_time=0,
                            switch_pm_text='👉 Bonyeza hapa kujoin channel kupata updates zake',
