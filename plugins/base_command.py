@@ -80,8 +80,10 @@ async def start_msg_admins(client, message):
         reply_markup = InlineKeyboardMarkup(start_keyboard_c)
     try:
        user_details = await db.is_bot_exist(nyva)
-       if user_details:
-           ban_status = await db.get_db_status(user_deatails)
+       hjkl = f'{user_details}{message.from_user.id}'
+       user_details1 = await is_user_exist(int(hjkl),nyva)
+       ban_status = await db.get_db_status(user_details)
+       if user_details1:
            text = ban_status['descp'].format(
                 mention = message.from_user.mention,
                 first_name = message.from_user.first_name,
@@ -90,26 +92,17 @@ async def start_msg_admins(client, message):
                 username = '' if message.from_user.username == None else '@'+message.from_user.username
             )
        else:
-           text = START_MESSAGE.format(
-                mention = message.from_user.mention,
-                first_name = message.from_user.first_name,
-                last_name = message.from_user.last_name,
-                user_id = message.from_user.id,
-                username = '' if message.from_user.username == None else '@'+message.from_user.username
-            )
+           invite_link = await client.create_chat_invite_link(int(ban_status['group'])
+           text = f'Samahani Mpendwa {message.from_user.mention} jiunge na kikundi {invite_link.invite_link} \n ili kuweza kupata huduma za robot huyu'
     except:
-        text = START_MESSAGE.format(
-            mention = message.from_user.mention,
-            first_name = message.from_user.first_name,
-            last_name = message.from_user.last_name,
-            user_id = message.from_user.id,
-            username = '' if message.from_user.username == None else '@'+message.from_user.username
-        )
+        text = 'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa'
     usr_cmdall1 = message.text
     cmd=message
     if not await is_subscribed(client, message,CHANNELS ):
         try:
             invite_link = await client.create_chat_invite_link(int(CHANNELS))
+            invite_link1 = await client.create_chat_invite_link(int(CHANNELS))
+                 
         except ChatAdminRequired:
             logger.error("Make sure Bot is admin in Forcesub channel")
             return
@@ -119,13 +112,13 @@ async def start_msg_admins(client, message):
                     "🤖 Join Updates Channel", url=invite_link.invite_link
                 ),
                 InlineKeyboardButton(
-                    "🤖 Movie group", url=invite_link.invite_link
+                    "🤖 Movie group", url=invite_link1.invite_link
                 ),
             ]
         ]
         await client.send_message(
             chat_id=message.from_user.id,
-            text="**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha rudia tena kuboyeza btn ulibonyeza kabla au kusearch kabla**",
+            text="**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake,Pia join movie group ili kupata movie n.k !!!\n\nkisha rudia tena kuboyeza btn ulibonyeza kabla au kusearch kabla**",
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
