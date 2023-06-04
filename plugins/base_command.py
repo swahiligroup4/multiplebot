@@ -98,11 +98,9 @@ async def start_msg_admins(client, message):
         text = 'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa'
     usr_cmdall1 = message.text
     cmd=message
-    if not await is_subscribed(client, message,CHANNELS ):
+    if not  is_subscribed(client, message,CHANNELS):
         try:
-            invite_link = await client.create_chat_invite_link(int(CHANNELS))
-            invite_link1 = await client.create_chat_invite_link(int(CHANNELS))
-                 
+            invite_link = await client.create_chat_invite_link(int(CHANNELS))     
         except ChatAdminRequired:
             logger.error("Make sure Bot is admin in Forcesub channel")
             return
@@ -111,6 +109,24 @@ async def start_msg_admins(client, message):
                 InlineKeyboardButton(
                     "🤖 Join Updates Channel", url=invite_link.invite_link
                 ),
+                
+            ]
+        ]
+        await client.send_message(
+            chat_id=message.from_user.id,
+            text="**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha rudia tena kuboyeza btn ulibonyeza kabla au kusearch kabla**",
+            reply_markup=InlineKeyboardMarkup(btn),
+            )
+        return
+    if not  is_subscribed(client, message, ban_status['group'] ):                                                             
+        try:
+            invite_link = await client.create_chat_invite_link(ban_status['group'])   
+        except ChatAdminRequired:
+            logger.error("Make sure Bot is admin in Forcesub channel")
+            return
+        btn = [
+            [
+                
                 InlineKeyboardButton(
                     "🤖 Movie group", url=invite_link1.invite_link
                 ),
@@ -118,11 +134,10 @@ async def start_msg_admins(client, message):
         ]
         await client.send_message(
             chat_id=message.from_user.id,
-            text="**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake,Pia join movie group ili kupata movie n.k !!!\n\nkisha rudia tena kuboyeza btn ulibonyeza kabla au kusearch kabla**",
+            text="**Tafadhali Join movie group ili kupata movie n.k !!!\n\nkisha rudia tena kuboyeza btn ulibonyeza kabla au kusearch kabla**",
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
-    
     if usr_cmdall1.startswith("/start subinps"):
         try:
             ident, file_id = cmd.text.split("_-_-_-_")
