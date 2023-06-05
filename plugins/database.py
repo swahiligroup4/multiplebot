@@ -23,6 +23,7 @@ class Database:
                 phone_nt = "0 halopesa https://t.me/swahiliupdates hrm45",
                 phone_ntt = "0 halopesa https://t.me/swahiliupdates hrm45",
                 bot_link= "Bandolako2021bot",
+                group =-1001518344914,
                 user_link = "link2",
                 muda = "30 days",
                 g_1=  "hrm45",
