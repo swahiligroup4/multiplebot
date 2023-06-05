@@ -29,7 +29,7 @@ async def give_filter(client, query):
         botusername=await client.get_me()
         nyva=botusername.username
         BOT["username"]=nyva
-    group_id= await is_bot_exist(nyva)
+    group_id= await db.is_bot_exist(nyva)
     userdetails1= await is_user_exist(query.from_user.id,nyva)
     text = query.query.strip()
     if not userdetails1:
