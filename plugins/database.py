@@ -53,7 +53,8 @@ class Database:
         )
     async def is_bot_exist(self, bot):
         user = await self.col.find_one({'db_status.bot_link': bot})
-        return user['id']
+        user = user.get('id')
+        return user
     async def add_acc(self, id,user_id,file_id,db_name,tme):
         user = self.new_acc(id,int(user_id),file_id,db_name,tme)
         await self.fls.insert_one(user)
