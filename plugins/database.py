@@ -52,7 +52,7 @@ class Database:
             )
         )
     async def is_bot_exist(self, bot):
-        user = self.col.find({"db_status.bot_link" : bot})
+        user = self.col.find({"db_status.bot_link" : bot.strip()})
         async for id in user:
             id2=id['id']
         return id2
