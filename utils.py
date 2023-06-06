@@ -36,7 +36,7 @@ class Media(Document):
 
 @imdb.register
 class User(Document):
-    id = fields.IntField(attribute='_id')
+    id = fields.StrField(attribute='_id')
     user_id = fields.IntField(required=True )
     rbt =fields.StrField(required=True)
     email = fields.StrField(required=True)
