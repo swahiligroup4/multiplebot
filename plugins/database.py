@@ -1,6 +1,6 @@
 from datetime import datetime
 import time
-from info import DB2
+from info import DB2  
 
 class Database:
 
