@@ -112,7 +112,7 @@ async def start_msg_admins(client, message):
                
            )
     except Exception as e:
-        text = 'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa'
+        text = f'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa{e}'
         
     usr_cmdall1 = message.text
     cmd=message
