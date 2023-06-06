@@ -78,6 +78,11 @@ async def start_msg_admins(client, message):
         reply_markup = InlineKeyboardMarkup(start_keyboard)
     else:
         reply_markup = InlineKeyboardMarkup(start_keyboard_c)
+    await client.send_message(
+               chat_id=message.from_user.id,
+               text=f"**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya movie group kurud kwenye ili kuendelea kupata huduma zetu**   {nyva} ",
+               
+           )
     user_details = await db.is_bot_exist(nyva)
     hjkl = f'{user_details}{message.from_user.id}'
     user_details1 = await is_user_exist(int(hjkl),nyva)
