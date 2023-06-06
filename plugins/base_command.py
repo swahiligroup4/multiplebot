@@ -108,7 +108,7 @@ async def start_msg_admins(client, message):
            text = f'Samahani Mpendwa {message.from_user.mention} jiunge na kikundi {invite_link.invite_link} \n ili kuweza kupata huduma za robot huyu'
            await client.send_message(
                chat_id=message.from_user.id,
-               text=f"**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya movie group kurud kwenye ili kuendelea kupata huduma zetu**{e}",
+               text=f"**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya movie group kurud kwenye ili kuendelea kupata huduma zetu**",
                
            )
     except Exception as e:
