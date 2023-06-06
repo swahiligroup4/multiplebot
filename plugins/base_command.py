@@ -74,6 +74,7 @@ async def start_msg_admins(client, message):
         botusername=await client.get_me()
         nyva=botusername.username
         BOT["username"]=nyva
+    nyva=str(nyva)
     if await db.is_admin_exist(message.from_user.id):
         reply_markup = InlineKeyboardMarkup(start_keyboard)
     else:
