@@ -819,7 +819,7 @@ async def addconnection(client,message):
         st = await client.get_chat_member(group_id, "me")
         st.status=(f"{st.status}".split(".")[1])
         if st.status == "ADMINISTRATOR":
-            if chat_type in [ChatType.SUPERGROUP","ChatType.GROUP" ]:
+            if chat_type in ["ChatType.SUPERGROUP","ChatType.GROUP" ]:
                 await db.update_db(userid,'group',f"{group_id}##hrm45")
                 await client.send_message(
                     userid,
@@ -895,7 +895,9 @@ async def ban(c,m):
                 except:
                     a=False  
             strid = str(uuid.uuid4())
-            await db.add_admin(user_id,mk.text)
+             
+            await db.add_admin(user_id)
+            await db.update_db(user_id,'bot_link',mk.text)
             await db.add_acc(strid,user_id,"all",user_id,9999)
         await db.ban_user(user_id, ban_duration)
         print(ban_log_text)
