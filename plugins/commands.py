@@ -797,9 +797,8 @@ async def addconnection(client,message):
             )
         return
 
-    elif chat_type in ["ChatType.GROUP","ChatType.SUPERGROUP"]:
+    elif chat_type in ["ChatType.GROUP", "ChatType.SUPERGROUP","ChatType.CHANNELS"]:
         group_id = message.chat.id
-
     try:
         st = await client.get_chat_member(group_id, userid)
         st.status=(f"{st.status}".split(".")[1])
@@ -820,11 +819,26 @@ async def addconnection(client,message):
         st = await client.get_chat_member(group_id, "me")
         st.status=(f"{st.status}".split(".")[1])
         if st.status == "ADMINISTRATOR":
-            await db.update_db(userid,'group',f"{group_id}##hrm45")
-            await client.send_message(
-                userid,
-                f"Asante kwa kutuamini umefanikiwa kuunganisha group lako tuma /start kisha btn help kupata muongozo wa kutengeneza kikund chako zaid!",
-            )
+            if chat_type in [ChatType.SUPERGROUP","ChatType.GROUP" ]:
+                await db.update_db(userid,'group',f"{group_id}##hrm45")
+                await client.send_message(
+                    userid,
+                    f"Asante kwa kutuamini umefanikiwa kuunganisha group lako tuma /start kisha btn help kupata muongozo wa kutengeneza kikund chako zaid ukiea private",
+                )
+                await client.send_message(
+                    group_id,
+                    f"Group lako tumeiunga kikamlifu,Wateja wako watapa huduma za robot kupitia kikundi",
+                )           
+            if chat_type == "ChatType.CHANNELS":
+                await db.update_db(userid,'channel',f"{group_id}##hrm45")
+                await client.send_message(
+                    userid,
+                    f"Asante kwa kutuamini umefanikiwa kuunganisha update channel yako tuma /start kisha btn help kupata muongozo wa kutengeneza kikund chako zaid!",
+                )
+                await client.send_message(
+                    group_id,
+                    f"Channel yako tumeiunga kikamlifu,Wateja wako watapa updates za robot kupitia channel hii",
+                )        
             return   
         else:
             await message.reply_text("Ni add admin kwenye group lako kisha jaribu tena", quote=True)
@@ -839,7 +853,7 @@ async def ban(c,m):
         await m.reply_text(
             f"Use this command to add access to any user from the bot.\n\n"
             f"Usage:\n\n"
-            f"`/add_admin admin_id duration_in days link`\n\n"
+            f"`/add_admin admin_id duration_in days`\n\n"
             f"Eg: `/add_admin 1234567 28 Umepata ofa ya Siku 3 zaidi.`\n"
             f"This will add user with id `1234567` for `28` days for the reason `ofa siku 3 zaidi`.",
             quote=True
@@ -849,7 +863,6 @@ async def ban(c,m):
     try:
         user_id = int(m.command[1])
         ban_duration = int(m.command[2])
-        link = m.command[3]
         ban_reason = 'Kwa ajili ya kumtumia swahili robot kuuzia movie na series '
         ban_log_text = f"Adding user {user_id} for {ban_duration} days for the reason {ban_reason} ."
         try:
@@ -864,10 +877,27 @@ async def ban(c,m):
             ban_log_text += f"\n\nNmeshindwa kumtaarifu tafadhali jaribu tena! \n\n`{traceback.format_exc()}`"
         adminexist=await db.is_admin_exist(user_id)
         if not adminexist :
+            abc= await c.reply_text("Naomba untumie username ya bot ya mteja huyu")      
+            id1=abc.id+1                 
+            a,b = funask()
+            while a==False:
+                try:
+                    mk= await c.get_messages("me",id1)
+                    if mk.text!=None:
+                        a=True
+                    if mk.media != None mk.text!=None:
+                        id1=id1+1
+                    if (time.time()-b)>(10*60):
+                        await c.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
+                        return
+                    if mk.from_user.id != message.from_user.id:
+                        a=False 
+                except:
+                    a=False  
             strid = str(uuid.uuid4())
-            await db.add_admin(user_id)
+            await db.add_admin(user_id,mk.text)
             await db.add_acc(strid,user_id,"all",user_id,9999)
-        await db.ban_user(user_id, ban_duration, ban_reason,link)
+        await db.ban_user(user_id, ban_duration)
         print(ban_log_text)
         await m.reply_text(
             ban_log_text,
