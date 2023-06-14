@@ -81,7 +81,7 @@ async def start_msg_admins(client, message):
     ban_status = await db.get_db_status(message.from_user.id)
     if ban_status['group'].split('##')[1]=='hrm45':
         invite_link = await client.create_chat_invite_link(int(ban_status['group'].split('##')[1]))
-        await db.update_db(user_details,'group',f'{ban_status['group'].split('##')[0]}##{invite_link})
+        await db.update_db(user_details,'group',f"{ban_status['group'].split('##')[0]}##{invite_link}")
     try:
        if user_details1:
            text = ban_status['descp'].format(
