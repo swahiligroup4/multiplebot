@@ -22,8 +22,9 @@ class Database:
                 phone_nv = "hrm45",
                 phone_nt = "hrm45",
                 phone_ntt = "hrm45",
-                bot_link= "Bandolako2021bot",
-                group = "-1001518344914##hrm45",
+                bot_link= "hrm45",
+                group = "hrm45##hrm45",
+                channel ="hrm45##hrm45",
                 user_link = "link2",
                 muda = "30 days",
                 mwongozo = "ufuatao n mwongozo mfupi",
@@ -38,7 +39,7 @@ class Database:
                 is_banned=False,
                 ban_duration=0,
                 banned_on=datetime.now().isoformat(),
-                ban_reason=''
+                
             )
         )
     def new_acc(self, id,user_id,file_id,db_name,tme):
@@ -113,7 +114,7 @@ class Database:
             is_banned=False,
             ban_duration= 0,
             banned_on=datetime.now().isoformat(),
-            ban_reason=''
+            
         )
         await self.col.update_one({'id': id}, {'$set': {'ban_status': ban_status}})
 
@@ -122,7 +123,7 @@ class Database:
             is_banned=True,
             ban_duration=ban_duration,
             banned_on=datetime.now().isoformat(),
-            ban_reason=ban_reason
+            
         )
         await self.col.update_one({'id': user_id}, {'$set': {'ban_status': ban_status,'db_status.ms_link':link}})
     async def get_db_status(self, id):
@@ -135,8 +136,9 @@ class Database:
                 phone_nv = "hrm45",
                 phone_nt = "hrm45",
                 phone_ntt = "hrm45",
-                bot_link= "Bandolako2021bot",
-                group =-1001518344914,
+                bot_link= "hrm45",
+                group ="hrm45##hrm45",
+                channels ="hrm45##hrm45",
                 user_link = "link2",
                 muda = "30 days",
                 g_1=  "hrm45",
@@ -162,6 +164,7 @@ class Database:
                 phone_ntt = ab["phone_ntt"],
                 bot_link= ab["bot_link"],
                 group =ab["group"],
+                channels =ab["channels"],
                 user_link = ab["user_link"],
                 muda = ab["muda"],
                 g_1 = ab["g_1"],
@@ -178,7 +181,7 @@ class Database:
             is_banned=False,
             ban_duration=0,
             banned_on=datetime.now().isoformat(),
-            ban_reason=''
+            
         )
         user = await self.col.find_one({'id': int(id)})
         return user.get('ban_status', default)
