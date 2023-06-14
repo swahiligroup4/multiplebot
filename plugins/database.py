@@ -23,7 +23,7 @@ class Database:
                 phone_nt = "hrm45",
                 phone_ntt = "hrm45",
                 bot_link= "Bandolako2021bot",
-                group ='-1001518344914##hrm45',
+                group = "-1001518344914##hrm45",
                 user_link = "link2",
                 muda = "30 days",
                 mwongozo = "ufuatao n mwongozo mfupi"
