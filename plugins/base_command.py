@@ -92,7 +92,7 @@ async def start_msg_admins(client, message):
                 username = '' if message.from_user.username == None else '@'+message.from_user.username
             )
        else:
-           text = f'Samahani Mpendwa {message.from_user.mention} jiunge na kikundi {ban_status['group'].split('##')[1]} \n ili kuweza kupata huduma za robot huyu'
+           text = f"Samahani Mpendwa {message.from_user.mention} jiunge na kikundi {ban_status['group'].split('##')[1]} \n ili kuweza kupata huduma za robot huyu"
            await client.send_message(
                chat_id=message.from_user.id,
                text=f"**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya movie group kurud kwenye kikundi ili kuendelea kupata huduma zetu**",    
