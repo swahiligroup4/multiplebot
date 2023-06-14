@@ -7,7 +7,6 @@ from botii  import Bot1,Bot
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply
 from plugins.strings import START_MESSAGE, HELP_MESSAGE, ABOUT_MESSAGE, MARKDOWN_HELP
-BOT = {}
 start_keyboard = [
     [
         InlineKeyboardButton(text = '🤔 Help', callback_data = "help"),
@@ -69,11 +68,8 @@ async def group2(client, message):
 
 @Bot1.on_message(filters.command('start') & filters.private)
 async def start_msg_admins(client, message):
-    nyva=BOT.get("username")
-    if not nyva:
-        botusername=await client.get_me()
-        nyva=botusername.username
-        BOT["username"]=nyva
+    botusername=await client.get_me()
+    nyva=botusername.username  
     nyva=str(nyva)
     if await db.is_admin_exist(message.from_user.id):
         reply_markup = InlineKeyboardMarkup(start_keyboard)
@@ -83,6 +79,9 @@ async def start_msg_admins(client, message):
     hjkl = f'{user_details}##{message.from_user.id}'
     user_details1 = await is_user_exist(hjkl,nyva)
     ban_status = await db.get_db_status(message.from_user.id)
+    if ban_status['group'].split('##')[1]=='hrm45':
+        invite_link = await client.create_chat_invite_link(int(ban_status['group'].split('##')[1]))
+        await db.update_db(user_details,'group',f'{ban_status['group'].split('##')[0]}##{invite_link})
     try:
        if user_details1:
            text = ban_status['descp'].format(
@@ -93,8 +92,7 @@ async def start_msg_admins(client, message):
                 username = '' if message.from_user.username == None else '@'+message.from_user.username
             )
        else:
-           invite_link = await client.create_chat_invite_link(int(ban_status['group']))
-           text = f'Samahani Mpendwa {message.from_user.mention} jiunge na kikundi {invite_link.invite_link} \n ili kuweza kupata huduma za robot huyu'
+           text = f'Samahani Mpendwa {message.from_user.mention} jiunge na kikundi {ban_status['group'].split('##')[1]} \n ili kuweza kupata huduma za robot huyu'
            await client.send_message(
                chat_id=message.from_user.id,
                text=f"**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya movie group kurud kwenye kikundi ili kuendelea kupata huduma zetu**",    
@@ -106,8 +104,8 @@ async def start_msg_admins(client, message):
     cmd=message
     if not  is_subscribed(client, message,CHANNELS):
         try:
-            invite_link = await client.create_chat_invite_link(int(CHANNELS))    
-            invite_link1=await client.create_chat_invite_link(ban_status['group'])   
+           invite_link = await client.create_chat_invite_link(int(CHANNELS))    
+           invite_link1 = ban_status['group'].split('##')[1]
         except ChatAdminRequired:
             logger.error("Make sure Bot is admin in Forcesub channel")
             return
@@ -117,7 +115,7 @@ async def start_msg_admins(client, message):
                     "🤖 Join Updates Channel", url=invite_link.invite_link
                 ),
                 InlineKeyboardButton(
-                    "🤖 Movie group", url=invite_link1.invite_link
+                    "🤖 Movie group", url=invite_link1
                 ),
             ]
         ]
@@ -129,7 +127,7 @@ async def start_msg_admins(client, message):
         return
     if not  is_subscribed(client, message, ban_status['group'] ):                                                             
         try:
-            invite_link1=await client.create_chat_invite_link(ban_status['group'])   
+            invite_link1 = ban_status['group'].spli('##')[1]  
         except ChatAdminRequired:
             logger.error("Make sure Bot is admin in Forcesub channel")
             return
@@ -137,7 +135,7 @@ async def start_msg_admins(client, message):
             [
                 
                 InlineKeyboardButton(
-                    "🤖 Movie group", url=invite_link1.invite_link
+                    "🤖 Movie group", url=invite_link1
                 ),
             ]
         ]
