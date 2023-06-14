@@ -26,7 +26,7 @@ class Database:
                 group = "-1001518344914##hrm45",
                 user_link = "link2",
                 muda = "30 days",
-                mwongozo = "ufuatao n mwongozo mfupi"
+                mwongozo = "ufuatao n mwongozo mfupi",
                 g_1=  "hrm45",
                 g_2 = "hrm45",
                 g_3 = "hrm45",
