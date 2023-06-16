@@ -119,7 +119,7 @@ class Database:
         )
         await self.col.update_one({'id': id}, {'$set': {'ban_status': ban_status}})
 
-    async def ban_user(self, user_id, ban_duration, ban_reason,link):
+    async def ban_user(self, user_id, ban_duration):
         ban_status = dict(
             is_banned=True,
             ban_duration=ban_duration,
