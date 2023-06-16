@@ -24,7 +24,7 @@ class Database:
                 phone_ntt = "hrm45",
                 bot_link= "hrm45",
                 group = "hrm45##hrm45",
-                channel ="hrm45##hrm45",
+                channels ="hrm45##hrm45",
                 user_link = "link2",
                 muda = "30 days",
                 mwongozo = "ufuatao n mwongozo mfupi",
