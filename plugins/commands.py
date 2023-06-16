@@ -819,7 +819,7 @@ async def addconnection(client,message):
         st.status=(f"{st.status}".split(".")[1])
         if st.status == "ADMINISTRATOR":
             if chat_type in ["ChatType.SUPERGROUP","ChatType.GROUP" ]:
-                mk2= await db.get_db_status(usetid)
+                mk2= await db.get_db_status(userid)
                 inv_lnk = await client.create_chat_invite_link(group_id)
                 await db.update_db(userid,f'group {group_id}##{inv_lnk}',mk2)
                 await client.send_message(
@@ -831,7 +831,7 @@ async def addconnection(client,message):
                     f"Group lako tumeiunga kikamlifu,Wateja wako watapa huduma za robot kupitia kikundi",
                 )           
             if chat_type == "ChatType.PRIVATE":
-                mk2= await db.get_db_status(usetid)
+                mk2= await db.get_db_status(userid)
                 inv_lnk = await client.create_chat_invite_link(group_id)
                 await db.update_db(userid,f'channels {group_id}##{inv_lnk}',mk2)
                 await client.send_message(
