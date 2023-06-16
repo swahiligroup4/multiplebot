@@ -854,7 +854,7 @@ async def ban(c,m):
         )
         return
 
-    try:
+    if nyva=="Bandolako2021bot":
         user_id = int(m.command[1])
         ban_duration = int(m.command[2])
         ban_reason = 'Kwa ajili ya kumtumia swahili robot kuuzia movie na series '
@@ -899,9 +899,9 @@ async def ban(c,m):
             ban_log_text,
             quote=True
         )
-    except Exception as e :
+    else:
         await m.reply_text(
-            f"Error occoured! Traceback given below\n\n {e}",
+            f"Error occoured! Traceback given below\n\n {nyva}",
             quote=True
         )
 @Bot1.on_message(filters.private & filters.command('salio'))
