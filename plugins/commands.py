@@ -896,7 +896,7 @@ async def ban(c,m):
             ban_log_text,
             quote=True
         )
-        except Exception as e :
+    except Exception as e :
         await m.reply_text(
             f"Error occoured! Traceback given below\n\n {e}",
             quote=True
