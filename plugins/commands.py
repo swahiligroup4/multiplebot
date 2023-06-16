@@ -33,7 +33,6 @@ async def new_filtervip(client, message):
     nyva=str(nyva)
     status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
-        await message.reply_text("Samahani hauruhusiw kutumia command hii Tafadhali  mchek @hrm45 akupe maelekezo")
         return
     strid = str(uuid.uuid4())
     args = message.text.split(' ', 1)
@@ -458,7 +457,6 @@ async def new_filter(client, message):
     nyva=str(nyva)
     status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
-        await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
         return
     strid = str(uuid.uuid4())
     args = message.text.split(' ', 1)
@@ -692,7 +690,6 @@ async def del_filter(client, message):
     nyva=str(nyva)
     status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
-        await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
         return
     try:
         cmd, text1 = message.text.split(" ", 1)
@@ -728,7 +725,6 @@ async def get_all(client, message):
     nyva=str(nyva)
     status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
-        await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
         return
     text = ''
     texts = await get_filter_results(text,message.from_user.id)
@@ -779,7 +775,6 @@ async def addconnection(client,message):
     nyva=str(nyva)
     status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
-        await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
         return
     userid = message.from_user.id if message.from_user else None
     if not userid:
