@@ -80,8 +80,7 @@ async def start_msg_admins(client, message):
         return
     hjkl = f'{user_details}##{message.from_user.id}'
     user_details1 = await is_user_exist(hjkl,nyva)
-    ban_status = await db.get_db_status(user_details)
-    
+    ban_status = await db.get_db_status(user_details)   
     try:
        if user_details1:
            text = ban_status['descp'].format(
@@ -92,14 +91,9 @@ async def start_msg_admins(client, message):
                 username = '' if message.from_user.username == None else '@'+message.from_user.username
             )
        else:
-           text = f"Samahani Mpendwa {message.from_user.mention} jiunge na kikundi {ban_status['group'].split('##')[1]} \n ili kuweza kupata huduma za robot huyu"
-           await client.send_message(
-               chat_id=message.from_user.id,
-               text=f"**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya movie group kurud kwenye kikundi ili kuendelea kupata huduma zetu**",    
-           )
+           text = f"Samahani Mpendwa {message.from_user.mention} jiunge na kikundi {ban_status['group'].split('##')[1]} \n ili kuweza kupata huduma za robot huyu"       
     except Exception as e:
-        text = f'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa{e}'
-        
+        text = f'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa{e}'     
     usr_cmdall1 = message.text
     cmd=message
     if not  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
