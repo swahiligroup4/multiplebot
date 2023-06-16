@@ -76,6 +76,8 @@ async def start_msg_admins(client, message):
     else:
         reply_markup = InlineKeyboardMarkup(start_keyboard_c)
     user_details = await db.is_bot_exist(nyva)
+    if not user_details:
+        return
     hjkl = f'{user_details}##{message.from_user.id}'
     user_details1 = await is_user_exist(hjkl,nyva)
     ban_status = await db.get_db_status(message.from_user.id)
