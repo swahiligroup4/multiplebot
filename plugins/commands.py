@@ -871,7 +871,7 @@ async def ban(c,m):
             ban_log_text += f"\n\nNmeshindwa kumtaarifu tafadhali jaribu tena! \n\n`{traceback.format_exc()}`"
         adminexist=await db.is_admin_exist(user_id,nyva)
         if not adminexist :
-            abc= await c.reply_text("Naomba untumie username ya bot ya mteja huyu")      
+            abc= await m.reply_text("Naomba untumie username ya bot ya mteja huyu")      
             id1=abc.id+1                 
             a,b = funask()
             while a==False:
