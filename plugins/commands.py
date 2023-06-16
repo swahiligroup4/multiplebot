@@ -840,6 +840,9 @@ async def addconnection(client,message):
 
 @Bot1.on_message(filters.private & filters.command("add_admin") & filters.owner)
 async def ban(c,m):
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
     if len(m.command) == 1:
         await m.reply_text(
             f"Use this command to add access to any user from the bot.\n\n"
@@ -866,7 +869,7 @@ async def ban(c,m):
         except:
             
             ban_log_text += f"\n\nNmeshindwa kumtaarifu tafadhali jaribu tena! \n\n`{traceback.format_exc()}`"
-        adminexist=await db.is_admin_exist(user_id)
+        adminexist=await db.is_admin_exist(user_id,nyva)
         if not adminexist :
             abc= await c.reply_text("Naomba untumie username ya bot ya mteja huyu")      
             id1=abc.id+1                 
