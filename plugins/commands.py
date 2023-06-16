@@ -773,7 +773,6 @@ async def addconnection(client,message):
     botusername=await client.get_me()
     nyva=botusername.username  
     nyva=str(nyva)
-    status= await db.is_admin_exist(message.from_user.id,nyva)
     chat_type =f"{ message.chat.type}" 
     if chat_type == "ChatType.CHANNELS":
         await message.reply_text(
@@ -781,6 +780,7 @@ async def addconnection(client,message):
                 quote=True
             )
         return
+    status= await db.is_admin_exist(message.from_user.id,nyva) 
     if not status:
         return
     userid = message.from_user.id if message.from_user else None
