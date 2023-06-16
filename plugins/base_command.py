@@ -80,10 +80,8 @@ async def start_msg_admins(client, message):
         return
     hjkl = f'{user_details}##{message.from_user.id}'
     user_details1 = await is_user_exist(hjkl,nyva)
-    ban_status = await db.get_db_status(message.from_user.id)
-    if ban_status['group'].split('##')[1]=='hrm45':
-        invite_link = await client.create_chat_invite_link(int(ban_status['group'].split('##')[1]))
-        await db.update_db(user_details,'group',f"{ban_status['group'].split('##')[0]}##{invite_link}")
+    ban_status = await db.get_db_status(user_details)
+    
     try:
        if user_details1:
            text = ban_status['descp'].format(
@@ -104,9 +102,9 @@ async def start_msg_admins(client, message):
         
     usr_cmdall1 = message.text
     cmd=message
-    if not  is_subscribed(client, message,CHANNELS):
+    if not  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
         try:
-           invite_link = await client.create_chat_invite_link(int(CHANNELS))    
+           invite_link = ban_status['channels'].spli('##')[1]    
            invite_link1 = ban_status['group'].split('##')[1]
         except ChatAdminRequired:
             logger.error("Make sure Bot is admin in Forcesub channel")
@@ -114,7 +112,7 @@ async def start_msg_admins(client, message):
         btn = [
             [
                 InlineKeyboardButton(
-                    "🤖 Join Updates Channel", url=invite_link.invite_link
+                    "🤖 Join Updates Channel", url=invite_link
                 ),
                 InlineKeyboardButton(
                     "🤖 Movie group", url=invite_link1
@@ -127,9 +125,9 @@ async def start_msg_admins(client, message):
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
-    if not  is_subscribed(client, message, ban_status['group'] ):                                                             
+    if not  is_subscribed(client, message, int(ban_status['group'].split('##')[0] )):                                                             
         try:
-            invite_link1 = ban_status['group'].spli('##')[1]  
+            invite_link1 = ban_status['group'].split('##')[1]  
         except ChatAdminRequired:
             logger.error("Make sure Bot is admin in Forcesub channel")
             return
