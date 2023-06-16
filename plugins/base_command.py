@@ -349,7 +349,10 @@ async def help_cbq(client, query):
 @Bot1.on_callback_query(filters.regex('^about$'))
 async def about_cbq(client, query):
     user_id = query.from_user.id
-    if await db.is_admin_exist(user_id):
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    if await db.is_admin_exist(user_id,nyva):
         reply_markup = InlineKeyboardMarkup(about_keyboard)
     else:
         reply_markup = InlineKeyboardMarkup(about_keyboard_c)
