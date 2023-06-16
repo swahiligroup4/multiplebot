@@ -773,20 +773,29 @@ async def addconnection(client,message):
     botusername=await client.get_me()
     nyva=botusername.username  
     nyva=str(nyva)
+    forward_from
     status= await db.is_admin_exist(message.from_user.id,nyva)
+    chat_type =f"{ message.chat.type}" 
+    if chat_type == "ChatType.CHANNELS":
+        await message.reply_text(
+                "Samahani forward hii command kwa robot private",
+                quote=True
+            )
+        return
     if not status:
         return
     userid = message.from_user.id if message.from_user else None
     if not userid:
         return await message.reply(f"Samahan wewe ni anonymous(bila kujulikana) admin tafadhali nenda kweny group lako edit **admin permission** remain anonymouse kisha disable jaribu tena kutuma /niunge.Kisha ka enable tena")
-    chat_type =f"{ message.chat.type}"
-    
     if chat_type == "ChatType.PRIVATE":
-        await message.reply_text(
+        if str(message.forward_from_chat.type) =="ChatType.CHANNELS":
+            group_id = message.forward_from_chat.id
+        else:
+            await message.reply_text(
                 "Samahan add hii bot kama admin kwenye group lako kisha tuma command hii <b>/niunge </b>kwenye group lako",
                 quote=True
             )
-        return
+            return
 
     elif chat_type in ["ChatType.GROUP", "ChatType.SUPERGROUP","ChatType.CHANNELS"]:
         group_id = message.chat.id
@@ -822,7 +831,7 @@ async def addconnection(client,message):
                     group_id,
                     f"Group lako tumeiunga kikamlifu,Wateja wako watapa huduma za robot kupitia kikundi",
                 )           
-            if chat_type == "ChatType.CHANNELS":
+            if chat_type == "ChatType.PRIVATE":
                 mk2= await db.get_db_status(usetid)
                 inv_lnk = await client.create_chat_invite_link(group_id)
                 await db.update_db(userid,f'channels {group_id}##{inv_lnk}',mk2)
