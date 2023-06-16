@@ -768,7 +768,7 @@ async def delallconfirm(Client, message):
         reply_markup = reply_markup,
         quote=True
     )
-@Bot1.on_message((filters.private | filters.group) & filters.command('niunge'))
+@Bot1.on_message(filters.command('niunge'))
 async def addconnection(client,message):
     botusername=await client.get_me()
     nyva=botusername.username  
