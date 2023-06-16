@@ -70,7 +70,7 @@ class Database:
 
     async def is_admin_exist(self, id,bot):
         filter={'id': int(id)}
-        filter["db_staus.bot_link"]= bot
+        filter["db_status.bot_link"]= bot
         user = await self.col.find_one(filter)
         return True if user else False
 
