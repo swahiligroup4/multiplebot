@@ -774,7 +774,7 @@ async def addconnection(client,message):
     nyva=botusername.username  
     nyva=str(nyva)
     chat_type =f"{ message.chat.type}" 
-    if chat_type == "ChatType.CHANNELS":
+    if chat_type == "ChatType.CHANNEL":
         await message.reply_text(
                 "Samahani forward hii command kwa robot private",
                 quote=True
@@ -787,7 +787,7 @@ async def addconnection(client,message):
     if not userid:
         return await message.reply(f"Samahan wewe ni anonymous(bila kujulikana) admin tafadhali nenda kweny group lako edit **admin permission** remain anonymouse kisha disable jaribu tena kutuma /niunge.Kisha ka enable tena")
     if chat_type == "ChatType.PRIVATE":
-        if str(message.forward_from_chat.type) =="ChatType.CHANNELS":
+        if str(message.forward_from_chat.type) =="ChatType.CHANNEL":
             group_id = message.forward_from_chat.id
         else:
             await message.reply_text(
@@ -796,7 +796,7 @@ async def addconnection(client,message):
             )
             return
 
-    elif chat_type in ["ChatType.GROUP", "ChatType.SUPERGROUP","ChatType.CHANNELS"]:
+    elif chat_type in ["ChatType.GROUP", "ChatType.SUPERGROUP","ChatType.CHANNEL"]:
         group_id = message.chat.id
     try:
         st = await client.get_chat_member(group_id, userid)
