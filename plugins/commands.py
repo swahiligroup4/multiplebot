@@ -812,7 +812,8 @@ async def addconnection(client,message):
         if st.status == "ADMINISTRATOR":
             if chat_type in ["ChatType.SUPERGROUP","ChatType.GROUP" ]:
                 mk2= await db.get_db_status(usetid)
-                await db.update_db(userid,f'group {group_id}##hrm45',mk2)
+                inv_lnk = await client.create_chat_invite_link(group_id)
+                await db.update_db(userid,f'group {group_id}##{inv_lnk}',mk2)
                 await client.send_message(
                     userid,
                     f"Asante kwa kutuamini umefanikiwa kuunganisha group lako tuma /start kisha btn help kupata muongozo wa kutengeneza kikund chako zaid ukiea private",
@@ -823,7 +824,8 @@ async def addconnection(client,message):
                 )           
             if chat_type == "ChatType.CHANNELS":
                 mk2= await db.get_db_status(usetid)
-                await db.update_db(userid,f'channels {group_id}##hrm45',mk2)
+                inv_lnk = await client.create_chat_invite_link(group_id)
+                await db.update_db(userid,f'channels {group_id}##{inv_lnk}',mk2)
                 await client.send_message(
                     userid,
                     f"Asante kwa kutuamini umefanikiwa kuunganisha update channel yako tuma /start kisha btn help kupata muongozo wa kutengeneza kikund chako zaid!",
