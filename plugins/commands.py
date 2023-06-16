@@ -840,7 +840,7 @@ async def addconnection(client,message):
 
 @Bot1.on_message(filters.private & filters.command("add_admin") & filters.owner)
 async def ban(c,m):
-    botusername=await client.get_me()
+    botusername=await c.get_me()
     nyva=botusername.username  
     nyva=str(nyva)
     if len(m.command) == 1:
