@@ -896,9 +896,9 @@ async def ban(c,m):
             ban_log_text,
             quote=True
         )
-    except:
+        except Exception as e :
         await m.reply_text(
-            f"Error occoured! Traceback given below\n\n",
+            f"Error occoured! Traceback given below\n\n {e}",
             quote=True
         )
 @Bot1.on_message(filters.private & filters.command('salio'))
