@@ -891,7 +891,8 @@ async def ban(c,m):
             strid = str(uuid.uuid4())
              
             await db.add_admin(user_id)
-            await db.update_db(user_id,'bot_link',mk.text)
+            mk2=await db.get_db_status(user_id)
+            await db.update_db(user_id,f'bot_link {mk.text}',mk2)
             await db.add_acc(strid,user_id,"all",user_id,9999)
         await db.ban_user(user_id, ban_duration)
         print(ban_log_text)
