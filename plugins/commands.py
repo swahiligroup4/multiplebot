@@ -41,11 +41,7 @@ async def new_filtervip(client, message):
     if len(args) < 2:
         await message.reply_text("Use Correct format 😐", quote=True)
         return
-    nyva=BOT.get("username")
-    if not nyva:
-        botusername=await client.get_me()
-        nyva=botusername.username
-        BOT["username"]=nyva
+    
     extracted = split_quotes(args[1])
     text = f'{args[1].lower()}.dd#.{user_id}'
     text = text.strip()
