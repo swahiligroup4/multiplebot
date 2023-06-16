@@ -126,7 +126,7 @@ class Database:
             banned_on=datetime.now().isoformat(),
             
         )
-        await self.col.update_one({'id': user_id}, {'$set': {'ban_status': ban_status,'db_status.ms_link':link}})
+        await self.col.update_one({'id': user_id}, {'$set': {'ban_status': ban_status}})
     async def get_db_status(self, id):
         default =dict(
                 db_name = "SWAHILI GROUP MEDIA",
