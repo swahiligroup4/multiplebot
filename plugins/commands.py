@@ -787,14 +787,15 @@ async def addconnection(client,message):
     if not userid:
         return await message.reply(f"Samahan wewe ni anonymous(bila kujulikana) admin tafadhali nenda kweny group lako edit **admin permission** remain anonymouse kisha disable jaribu tena kutuma /niunge.Kisha ka enable tena")
     if chat_type == "ChatType.PRIVATE":
-        if str(message.forward_from_chat.type) =="ChatType.CHANNEL":
-            group_id = message.forward_from_chat.id
-        else:
+        if message.forward_from:
             await message.reply_text(
                 "Samahan add hii bot kama admin kwenye group lako kisha tuma command hii <b>/niunge </b>kwenye group lako",
                 quote=True
             )
             return
+        if str(message.forward_from_chat.type) =="ChatType.CHANNEL":
+            group_id = message.forward_from_chat.id
+        
 
     elif chat_type in ["ChatType.GROUP", "ChatType.SUPERGROUP","ChatType.CHANNEL"]:
         group_id = message.chat.id
