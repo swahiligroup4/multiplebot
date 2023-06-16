@@ -884,7 +884,7 @@ async def ban(c,m):
                     if (time.time()-b)>(10*60):
                         await c.send_message(chat_id = m.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
                         return
-                    if mk.from_user.id != message.from_user.id:
+                    if mk.from_user.id != m.from_user.id:
                         a=False 
                 except:
                     a=False  
