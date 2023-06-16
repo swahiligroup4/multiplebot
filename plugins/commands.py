@@ -773,7 +773,6 @@ async def addconnection(client,message):
     botusername=await client.get_me()
     nyva=botusername.username  
     nyva=str(nyva)
-    forward_from
     status= await db.is_admin_exist(message.from_user.id,nyva)
     chat_type =f"{ message.chat.type}" 
     if chat_type == "ChatType.CHANNELS":
