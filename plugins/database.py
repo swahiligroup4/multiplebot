@@ -69,7 +69,9 @@ class Database:
         await self.col.insert_one(user)
 
     async def is_admin_exist(self, id,bot):
-        user = self.col.find({'id': int(id),'bot_link':bot})
+        filter={'id': int(id)}
+        filter["db_staus.bot_link"]= bot
+        user = await self.col.find_one({filter)
         return True if user else False
 
     async def is_email_exist(self, id):
