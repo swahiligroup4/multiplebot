@@ -314,7 +314,10 @@ async def help_msg(client, message):
 @Bot1.on_message(filters.command('about') & filters.private)
 async def about_msg(client, message):
     user_id = message.from_user.id
-    if await db.is_admin_exist(user_id):
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    if await db.is_admin_exist(user_id,nyva):
         reply_markup = InlineKeyboardMarkup(about_keyboard)
     else:
         reply_markup = InlineKeyboardMarkup(about_keyboard_c)
