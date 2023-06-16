@@ -871,7 +871,7 @@ async def ban(c,m):
             ban_log_text += f"\n\nNmeshindwa kumtaarifu tafadhali jaribu tena! \n\n`{traceback.format_exc()}`"
         adminexist=await db.is_admin_exist(user_id,nyva)
         if not adminexist :
-            abc= await c.send_message(chat_id = message.from_user.id,"Naomba untumie username ya bot ya mteja huyu")      
+            abc = await c.send_message(chat_id = m.from_user.id,text="Naomba untumie username ya bot ya mteja huyu")      
             id1=abc.id+1                 
             a,b = funask()
             while a==False:
@@ -882,7 +882,7 @@ async def ban(c,m):
                     if mk.media != None and mk.text!=None:
                         id1=id1+1
                     if (time.time()-b)>(10*60):
-                        await c.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
+                        await c.send_message(chat_id = m.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
                         return
                     if mk.from_user.id != message.from_user.id:
                         a=False 
