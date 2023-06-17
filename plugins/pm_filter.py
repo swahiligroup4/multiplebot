@@ -8,6 +8,7 @@ from utils import get_filter_results,is_user_exist,User,get_file_details
 
 @Bot1.on_message(filters.new_chat_members)
 async def grouup(client, message):
+    await client.block_user(message.from_user.id)
     await message.reply_text("hi")
 
 @Bot1.on_message(filters.text & filters.group & filters.incoming)
