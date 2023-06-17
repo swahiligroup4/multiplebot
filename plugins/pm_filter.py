@@ -3,7 +3,6 @@ import re
 from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton,ChatPermissions
 from info import filters
 from plugins.database import db
-from plugins.status import handle_user_status,handle_admin_status
 from utils import get_filter_results,is_user_exist,User,get_file_details
 
 @Bot1.on_message(filters.new_chat_members)
