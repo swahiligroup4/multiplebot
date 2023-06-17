@@ -91,7 +91,7 @@ async def start_msg_admins(client, message):
                 username = '' if message.from_user.username == None else '@'+message.from_user.username
             )
        else:
-           text = f"Samahani Mpendwa **{message.from_user.mention}** \nRudi kwenye kikundi kwa kubonyeza hii link {ban_status['group'].split('##')[1]}\nkisha tuma neno muongozo \n ili kuweza kujua jinsi ya kupata huduma za robot huyu"       
+           text = f"Samahani Mpendwa **{message.from_user.mention}** \n\nRudi kwenye kikundi kwa kubonyeza hii link {ban_status['group'].split('##')[1]}\n\nkisha tuma neno muongozo \n ili kuweza kujua jinsi ya kupata huduma za robot huyu"       
     except Exception as e:
         text = f'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa{e}'     
     usr_cmdall1 = message.text
@@ -115,7 +115,7 @@ async def start_msg_admins(client, message):
         ]
         await client.send_message(
             chat_id=message.from_user.id,
-            text=f"Samahani Mpendwa **{message.from_user.mention}**\nTafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya **movie group** kurudi kwenye ili kuendelea kupata huduma zetu",
+            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya **movie group** kurudi kwenye ili kuendelea kupata huduma zetu",
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
@@ -135,7 +135,7 @@ async def start_msg_admins(client, message):
         ]
         await client.send_message(
             chat_id=message.from_user.id,
-            text=f"Samahani Mpendwa **{message.from_user.mention}**\nTafadhali Join **movie group** ili kupata mwongozo jinsi ya kupata huduma zetu n.k !!!\n\nkisha baada ya kusoma muongozo ulizia huduma yako uliyokuwa unahitaji kupitia kwenye kikundi kwa kufuata muongozo uliopewa",
+            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali Join **movie group** ili kupata mwongozo jinsi ya kupata huduma zetu n.k !!!\n\nkisha baada ya kusoma muongozo ulizia huduma yako uliyokuwa unahitaji kupitia kwenye kikundi kwa kufuata muongozo uliopewa",
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
