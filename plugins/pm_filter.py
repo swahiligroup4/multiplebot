@@ -5,7 +5,9 @@ from info import filters
 from plugins.database import db
 from plugins.status import handle_user_status,handle_admin_status
 from utils import get_filter_results,is_user_exist,User,get_file_details
-    
+@Bot1.on_message(filters.new_chat_members)
+async def grouup(client, message):
+    await client.send_message(chat_id=message.from_user.id,text=f'hi')
 @Bot1.on_message(filters.text & filters.group & filters.incoming)
 async def group(client, message):
     await handle_user_status(client,message)
