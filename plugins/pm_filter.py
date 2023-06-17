@@ -21,7 +21,7 @@ async def group(client, message):
     nyva=botusername.username
     user_id3= await db.is_bot_exist(nyva)
     gd=await db.get_db_status(int(user_id3))
-    user_id4 = gd['ms_link']
+    user_id4 = gd['user_link']
     if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
         return
     if 2 < len(message.text) < 50:    
