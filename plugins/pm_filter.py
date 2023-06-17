@@ -11,9 +11,9 @@ MESSAGE = "{} Welcome to [Pyrogram](https://docs.pyrogram.org/)'s group chat {}!
 
 @Bot1.on_message(filters.new_chat_members)
 async def grouup(client, message):
-    new_members = [u.mention for u in message.new_chat_members]
+    #new_members = [u.mention for u in message.new_chat_members]
     # Build the welcome message by using an emoji and the list we built above
-    text = MESSAGE.format(emoji.SPARKLES, ", ".join(new_members))
+    #text = MESSAGE.format(emoji.SPARKLES, ", ".join(new_members))
     # Send the welcome message, without the web page preview
     await message.reply_text("hi")
 
