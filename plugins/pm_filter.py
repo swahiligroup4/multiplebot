@@ -15,7 +15,7 @@ async def grouup(client, message):
     # Build the welcome message by using an emoji and the list we built above
     text = MESSAGE.format(emoji.SPARKLES, ", ".join(new_members))
     # Send the welcome message, without the web page preview
-    await message.reply_text(text, disable_web_page_preview=True)
+    await message.reply_text("hi")
 
 @Bot1.on_message(filters.text & filters.group & filters.incoming)
 async def group(client, message):
