@@ -8,9 +8,14 @@ from utils import get_filter_results,is_user_exist,User,get_file_details
 
 @Bot1.on_message(filters.new_chat_members)
 async def grouup(client, message):
+    botusername=await client.get_me()
+    nyva=botusername.username
+    nyva=str(nyva)
     await client.restrict_chat_member(message.chat.id, message.from_user.id,
         ChatPermissions(can_send_messages=False)) 
-    await message.reply_text("hi")
+    url=f"https://t.me/{nyva}?start=mwongozo")]])if
+    text=f"Karibu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
+    await message.reply_text(f"{text}")
 
 @Bot1.on_message(filters.text & filters.group & filters.incoming)
 async def group(client, message):
