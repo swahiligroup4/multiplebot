@@ -107,15 +107,15 @@ async def start_msg_admins(client, message):
             [
                 InlineKeyboardButton(
                     "🤖 Join Updates Channel", url=invite_link
-                ),
-                InlineKeyboardButton(
+                )],
+                [InlineKeyboardButton(
                     "🤖 Movie group", url=invite_link1
-                ),
+                )
             ]
         ]
         await client.send_message(
             chat_id=message.from_user.id,
-            text="**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya movie group kurud kwenye ili kuendelea kupata huduma zetu**",
+            text=f"Samahani Mpendwa **{message.from_user.mention}**\nTafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya **movie group** kurudi kwenye ili kuendelea kupata huduma zetu",
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
@@ -135,7 +135,7 @@ async def start_msg_admins(client, message):
         ]
         await client.send_message(
             chat_id=message.from_user.id,
-            text="**Tafadhali Join movie group ili kupata movie n.k !!!\n\nkisha ulizia huduma yako uliyokuwa unahitaji kupitia kwenye kikundi kwa kufuata muongozo uliopewa**",
+            text=f"Samahani Mpendwa **{message.from_user.mention}**\nTafadhali Join **movie group** ili kupata mwongozo jinsi ya kupata huduma zetu n.k !!!\n\nkisha baada ya kusoma muongozo ulizia huduma yako uliyokuwa unahitaji kupitia kwenye kikundi kwa kufuata muongozo uliopewa",
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
