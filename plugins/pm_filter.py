@@ -7,9 +7,6 @@ from utils import get_filter_results,is_user_exist,User,get_file_details
 
 @Bot1.on_message(filters.new_chat_members)
 async def grouup(client, message):
-    botusername=await client.get_me()
-    nyva=botusername.username
-    nyva=str(nyva)
     await client.restrict_chat_member(message.chat.id, message.from_user.id,
         ChatPermissions(can_send_messages=False)) 
     url=f"https://t.me/{nyva}?start=mwongozo"
@@ -19,12 +16,9 @@ async def grouup(client, message):
 @Bot1.on_message(filters.text & filters.group & filters.incoming)
 async def group(client, message):
     await handle_admin_status(client,message)
-    group_status= await is_user_exist(message.chat.id)
-    if group_status:
-        for user in group_status:
-            user_id3 = user.group_id
-    else:
-        return
+    botusername=await client.get_me()
+    nyva=botusername.username
+    user_id3= await db.is_bot_exist(nyva)
     gd=await db.get_db_status(int(user_id3))
     user_id4 = gd['ms_link']
     if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
