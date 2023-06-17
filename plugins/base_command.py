@@ -98,7 +98,7 @@ async def start_msg_admins(client, message):
     cmd=message
     if not await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
         try:
-           invite_link = ban_status['channels'].spli('##')[1]    
+           invite_link = ban_status['channels'].split('##')[1]    
            invite_link1 = ban_status['group'].split('##')[1]
         except ChatAdminRequired:
             logger.error("Make sure Bot is admin in Forcesub channel")
