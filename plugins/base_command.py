@@ -96,7 +96,7 @@ async def start_msg_admins(client, message):
         text = f'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa{e}'     
     usr_cmdall1 = message.text
     cmd=message
-    if not  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
+    if not await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
         try:
            invite_link = ban_status['channels'].spli('##')[1]    
            invite_link1 = ban_status['group'].split('##')[1]
@@ -119,7 +119,7 @@ async def start_msg_admins(client, message):
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
-    if not  is_subscribed(client, message, int(ban_status['group'].split('##')[0] )):                                                             
+    if not  await is_subscribed(client, message, int(ban_status['group'].split('##')[0] )):                                                             
         try:
             invite_link1 = ban_status['group'].split('##')[1]  
         except ChatAdminRequired:
