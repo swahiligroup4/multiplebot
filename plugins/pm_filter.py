@@ -11,7 +11,7 @@ async def grouup(client, message):
     botusername=await client.get_me()
     nyva=botusername.username
     await client.restrict_chat_member(message.chat.id, message.from_user.id,
-        ChatPermissions(can_send_messages=True)) 
+        ChatPermissions(can_send_messages=False)) 
     url=f"https://t.me/{nyva}?start=mwongozo"
     text=f"Karibu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
     await message.reply_text(f"{text}")
