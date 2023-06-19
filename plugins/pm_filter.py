@@ -9,7 +9,7 @@ from utils import get_filter_results,is_user_exist,User,get_file_details
 @Bot1.on_message(filters.new_chat_members)
 async def grouup(client, message):
     await client.restrict_chat_member(message.chat.id, message.from_user.id,
-        ChatPermissions(can_send_messages=False)) 
+        ChatPermissions(can_send_messages=True)) 
     url=f"https://t.me/{nyva}?start=mwongozo"
     text=f"Karibu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
     await message.reply_text(f"{text}")
