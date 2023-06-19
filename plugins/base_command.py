@@ -119,7 +119,7 @@ async def start_msg_admins(client, message):
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
-    if not  await is_subscribed(client, message, int(ban_status['group'].split('##')[0] )):                                                             
+    if not  await is_subscribed(client, message, int(ban_status['group'].split('##')[0])):                                                             
         try:
             invite_link1 = ban_status['group'].split('##')[1]  
         except ChatAdminRequired:
