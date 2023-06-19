@@ -15,7 +15,11 @@ async def grouup(client, message):
     url=f"https://t.me/{nyva}?start=mwongozo"
     text=f"Karibu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
     await message.reply_text(f"{text}")
-
+@Bot1.on_message(filters.left_chat_members)
+async def grouuup(client, message):
+    await client.restrict_chat_member(message.chat.id, message.from_user.id,
+        ChatPermissions(can_send_messages=True)) 
+    await message.reply_text(f"tulikuea wte pamoja")
 @Bot1.on_message(filters.text & filters.channel & filters.incoming)
 async def group(client, message):
     await handle_admin_status(client,message)
