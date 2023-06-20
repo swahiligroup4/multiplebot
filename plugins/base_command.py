@@ -143,7 +143,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
         await client.send_message(
                 chat_id=cmd.from_user.id,
                 text=mtext,
-                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f"mbele {cmd.text.split("##")[1]} {user_details}")]]),                        
+                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele {cmd.text.split("##")[1]} {user_details}')]]),                        
             )
         return
     elif usr_cmdall1.startswith("/start subinps"):
