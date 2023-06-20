@@ -121,10 +121,9 @@ async def start_msg_admins(client, message):
             )
         return
     if usr_cmdall1.startswith("/start mwongozo"):
-        mtext="""💥💥💥💥💥💥💥💥💥💥💥💥  
-        {db_name}
-Karibu sana
-
+        mtext="""💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥  
+        <b>MWONGOZO {db_name}</b>
+        
 👉Tunahusika na uuzaji wa movie na series kwa njia ya kidigital na kupata movie yako hapo hapo...baada ya  kufanya malipo ya series/movie husika na kuipakua mda wowote saa 24
 📖:Soma kiumakin maana  hutofanya chochote kama muongozo huu huja soma.
 
