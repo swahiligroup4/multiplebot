@@ -31,6 +31,7 @@ async def group(client, message):
             url=f"https://t.me/{nyva}?start=mwongozo"
             text=f"Ndugu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
             await message.reply_text(f"{text}")
+            return 
 
     user_id4 = gd['user_link']
     if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
