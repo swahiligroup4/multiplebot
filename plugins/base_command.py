@@ -96,6 +96,7 @@ async def start_msg_admins(client, message):
         text = f'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa{e}'     
     usr_cmdall1 = message.text
     cmd=message
+
     if not await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
         try:
            invite_link = ban_status['channels'].split('##')[1]    
@@ -119,27 +120,32 @@ async def start_msg_admins(client, message):
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
-    if not  await is_subscribed(client, message, int(ban_status['group'].split('##')[0])):                                                             
-        try:
-            invite_link1 = ban_status['group'].split('##')[1]  
-        except ChatAdminRequired:
-            logger.error("Make sure Bot is admin in Forcesub channel")
-            return
-        btn = [
-            [
-                
-                InlineKeyboardButton(
-                    "🤖 Movie group", url=invite_link1
-                ),
-            ]
-        ]
+    if usr_cmdall1.startswith("/start mwongozo"):
+        mtext="""💥💥💥💥💥💥💥💥💥💥💥💥  
+        {db_name}
+Karibu sana
+
+👉Tunahusika na uuzaji wa movie na series kwa njia ya kidigital na kupata movie yako hapo hapo...baada ya  kufanya malipo ya series/movie husika na kuipakua mda wowote saa 24
+📖:Soma kiumakin maana  hutofanya chochote kama muongozo huu huja soma.
+
+☀️Telegram tunatumia roboti kutoa huduma zetu hivyo kila mtu anajihudumia na huduma ni saa 24 kwasababu roboti hachoki, halali wala haishiwi bando cha kufanya fuata maelekezo jinsi ya kupakua huduma zetu.
+
+1⃣Ukitaka movie/singo yoyote ile iwe ya kibongo, ya nje, iliyotafsiriwa au ambayo haijatafsiriwa, anza kwa kuandika MOVIE kisha acha nafasi andika jina la hiyo movie unayotaka. 
+Mfano: MOVIE SPIDER MAN.
+
+2⃣Ukitaka series anza kwa kuandika SERIES kisha acha nafasi andika jina la hiyo series unayotaka. 
+Mfano: SERIES soz.
+
+🚴‍♀Ukifuata maelekezo hayo hapo juu kwa usahihi utaletewa kitu unachotaka na utakachotakiwa kufanya utabonyeza mahali palipoandikwa download kisha ukurasa unaofuata utabonyeza neno START utapata unachotaka au kupata mwongozo jinsi ya kukipakua..
+💥Kumbuka kama series au movie haipo tafadhali bonyeza sehemu husika ili admin aipakie chapu
+
+Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
+        mtext=mtext.format(db_name=ban_status["db_name"].upper())
         await client.send_message(
-            chat_id=message.from_user.id,
-            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali Join **movie group** ili kupata mwongozo jinsi ya kupata huduma zetu n.k !!!\n\nkisha baada ya kusoma muongozo ulizia huduma yako uliyokuwa unahitaji kupitia kwenye kikundi kwa kufuata muongozo uliopewa",
-            reply_markup=InlineKeyboardMarkup(btn),
-            )
+                chat_id=cmd.from_user.id,
+                text=mtext)
         return
-    if usr_cmdall1.startswith("/start subinps"):
+    elif usr_cmdall1.startswith("/start subinps"):
         try:
             ident, file_id = cmd.text.split("_-_-_-_")
             filedetails = await get_file_details(file_id)
