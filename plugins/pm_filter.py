@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton,ChatPermiss
 from info import filters
 from plugins.status import handle_admin_status
 from plugins.database import db
-from utils import get_filter_results,is_user_exist,User,get_file_details
+from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed
 
 @Bot1.on_message(filters.new_chat_members)
 async def grouup(client, message):
@@ -23,6 +23,15 @@ async def group(client, message):
     nyva=botusername.username
     user_id3= await db.is_bot_exist(nyva)
     gd=await db.get_db_status(int(user_id3))
+    if not await  is_subscribed(client, message, message.chat.id):
+        gh=await is_user_exist(message.from_user.id,nyva)
+        if not gh:
+            await client.restrict_chat_member(message.chat.id, message.from_user.id,
+                ChatPermissions(can_send_messages=False)) 
+            url=f"https://t.me/{nyva}?start=mwongozo"
+            text=f"Ndugu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
+            await message.reply_text(f"{text}")
+
     user_id4 = gd['user_link']
     if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
         return
