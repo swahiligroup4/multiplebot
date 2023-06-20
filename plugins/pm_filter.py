@@ -12,7 +12,7 @@ async def grouup(client, message):
     nyva=botusername.username
     await client.restrict_chat_member(message.chat.id, message.from_user.id,
         ChatPermissions(can_send_messages=False)) 
-    url=f"https://t.me/{nyva}?start=mwongozo"
+    url=f"https://t.me/{nyva}?start=mwongozo##{message.chat.id}"
     text=f"Karibu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
     await message.reply_text(f"{text}")
 
@@ -28,7 +28,7 @@ async def group(client, message):
         if not gh:
             await client.restrict_chat_member(message.chat.id, message.from_user.id,
                 ChatPermissions(can_send_messages=False)) 
-            url=f"https://t.me/{nyva}?start=mwongozo"
+            url=f"https://t.me/{nyva}?start=mwongozo##{message.chat.id}"
             text=f"Ndugu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
             await message.reply_text(f"{text}")
             return 
