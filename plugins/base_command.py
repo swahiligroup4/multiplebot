@@ -148,9 +148,10 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
         while a==False:
             try:
                 if (time.time()-b)>20:
+                    a=True
                     await ab.edit_reply_markup(reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele {cmd.text.split("##")[1]} {user_details}')]]))
-                except:
-                    a=False
+            except:
+                a=False
         return
     elif usr_cmdall1.startswith("/start subinps"):
         try:
