@@ -394,9 +394,9 @@ async def cb_handler(client, query):
         pass
     if (clicked == typed):
         if query.data == "test":
-            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka")
+            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka",show_alert=True)
         elif query.data.startswith("mbele"): 
-            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbukaddfffffffffffffgggg")
+            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbukaddfffffffffffffgggg",show_alert=True)
     
         elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
