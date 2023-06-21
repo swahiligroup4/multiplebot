@@ -140,16 +140,17 @@ Mfano: SERIES GHUM HE.
 
 Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
         mtext=mtext.format(db_name=ban_status["db_name"].upper())
-        ab=await client.send_message(
+        abx=await client.send_message(
                 chat_id=cmd.from_user.id,
                 text=mtext,
                 reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test')]]),                        
             )
+        a,b=funask()
         while a==False:
             try:
                 if (time.time()-b)>20:
                     a=True
-                    await ab.edit_reply_markup(reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele {cmd.text.split("##")[1]} {user_details}')]]))
+                    await abx.edit_reply_markup(reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele {cmd.text.split("##")[1]} {user_details}')]]))
             except:
                 a=False
         return
