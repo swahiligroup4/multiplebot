@@ -140,11 +140,17 @@ Mfano: SERIES GHUM HE.
 
 Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
         mtext=mtext.format(db_name=ban_status["db_name"].upper())
-        await client.send_message(
+        ab=await client.send_message(
                 chat_id=cmd.from_user.id,
                 text=mtext,
-                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele {cmd.text.split("##")[1]} {user_details}')]]),                        
+                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test')]]),                        
             )
+        while a==False:
+            try:
+                if (time.time()-b)>20:
+                    await ab.edit_reply_markup(reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele {cmd.text.split("##")[1]} {user_details}')]]))
+                except:
+                    a=False
         return
     elif usr_cmdall1.startswith("/start subinps"):
         try:
@@ -386,7 +392,12 @@ async def cb_handler(client, query):
         typed = query.from_user.id
         pass
     if (clicked == typed):
-        if query.data == "kundii":
+        if query.data == "test":
+            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka")
+        elif query.data.startswith("mbele"): 
+            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbukaddfffffffffffffgggg")
+    
+        elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
             grp="grp"
             if ab['g_1']=="hrm45":
