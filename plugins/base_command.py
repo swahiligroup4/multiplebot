@@ -143,7 +143,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
         abx=await client.send_message(
                 chat_id=cmd.from_user.id,
                 text=mtext,
-                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test')]]),                        
+                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1')]]),                        
             )
         a,b=funask()
         while a==False:
@@ -391,7 +391,7 @@ async def cb_handler(client, query):
         typed = query.from_user.id
         pass
     if (clicked == typed):
-        if query.data == "test":
+        if query.data == "test1":
             await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka",show_alert=True)
         elif query.data.startswith("mbele"): 
             await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbukaddfffffffffffffgggg",show_alert=True)
