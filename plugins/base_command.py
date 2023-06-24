@@ -388,7 +388,7 @@ async def cb_handler(client, query):
         pass
     if (clicked == typed):
         if query.data == "test1":
-            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka",show_alert=True,cache_time=10)
+            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka",show_alert=True,cache_time=30)
             await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie jina jipya la movie/series  hii')
            
         elif query.data.startswith("mbele"): 
