@@ -388,13 +388,8 @@ async def cb_handler(client, query):
         pass
     if (clicked == typed):
         if query.data == "test1":
-            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka",show_alert=True)
-            a,b=funask()
-            while a==False:
-                 if (time.time()-b)>20:
-                     a=True
-                     #await abx.edit_reply_markup(reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele {cmd.text.split("##")[1]} {user_details}')]]))
-                     await query.answer("hi")
+            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka",show_alert=True,cache_time=10)
+                   
         elif query.data.startswith("mbele"): 
             await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbukaddfffffffffffffgggg",show_alert=True)
     
