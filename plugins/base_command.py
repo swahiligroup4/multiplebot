@@ -121,29 +121,10 @@ async def start_msg_admins(client, message):
             )
         return
     if usr_cmdall1.startswith("/start mwongozo"):
-        mtext="""💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥  
-        <b>MWONGOZO {db_name}</b>
-        
-👉Tunahusika na uuzaji wa movie na series kwa njia ya kidigital na kupata movie yako hapo hapo...baada ya  kufanya malipo ya series/movie husika na kuipakua mda wowote saa 24
-📖:Soma kiumakin maana  hutofanya chochote kama muongozo huu huja soma.
-
-☀️Telegram tunatumia roboti kutoa huduma zetu hivyo kila mtu anajihudumia na huduma ni saa 24 kwasababu roboti hachoki, halali wala haishiwi bando cha kufanya fuata maelekezo jinsi ya kupakua huduma zetu.
-
-1⃣Ukitaka movie/singo yoyote ile iwe ya kibongo, ya nje, iliyotafsiriwa au ambayo haijatafsiriwa, anza kwa kuandika MOVIE kisha acha nafasi andika jina la hiyo movie unayotaka. 
-Mfano: MOVIE FAST X.
-
-2⃣Ukitaka series anza kwa kuandika SERIES kisha acha nafasi andika jina la hiyo series unayotaka. 
-Mfano: SERIES GHUM HE.
-
-🚴‍♀Ukifuata maelekezo hayo hapo juu kwa usahihi utaletewa kitu unachotaka na utakachotakiwa kufanya utabonyeza mahali palipoandikwa download kisha ukurasa unaofuata utabonyeza neno START utapata unachotaka au kupata mwongozo jinsi ya kukipakua..
-💥Kumbuka kama series au movie haipo tafadhali bonyeza sehemu husika ili admin aipakie chapu
-
-Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
-        mtext=mtext.format(db_name=ban_status["db_name"].upper())
         abx=await client.send_message(
                 chat_id=cmd.from_user.id,
-                text=mtext,
-                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1')]]),                        
+                text="welcome boss ",
+                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele')]]),                        
             )
         return
         
@@ -391,7 +372,36 @@ async def cb_handler(client, query):
             await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka",show_alert=True,cache_time=30)
             await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie jina jipya la movie/series  hii')
            
-        elif query.data.startswith("mbele"): 
+        elif query.data.startswith("mbele"):
+            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka tutakurudisha hapa utakapo kosea kusoma sheria hizi",show_alert=True,cache_time=30)
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            user_details = await db.is_bot_exist(nyva)
+            if not user_details:
+                return
+            hjkl = f'{user_details}##{message.from_user.id}'
+            user_details1 = await is_user_exist(hjkl,nyva)
+            ban_status = await db.get_db_status(user_details)   
+            mtext="""💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥  
+        <b>MWONGOZO {db_name}</b>
+        
+👉Tunahusika na uuzaji wa movie na series kwa njia ya kidigital na kupata movie yako hapo hapo...baada ya  kufanya malipo ya series/movie husika na kuipakua mda wowote saa 24
+📖:Soma kiumakin maana  hutofanya chochote kama muongozo huu huja soma.
+
+☀️Telegram tunatumia roboti kutoa huduma zetu hivyo kila mtu anajihudumia na huduma ni saa 24 kwasababu roboti hachoki, halali wala haishiwi bando cha kufanya fuata maelekezo jinsi ya kupakua huduma zetu.
+
+1⃣Ukitaka movie/singo yoyote ile iwe ya kibongo, ya nje, iliyotafsiriwa au ambayo haijatafsiriwa, anza kwa kuandika MOVIE kisha acha nafasi andika jina la hiyo movie unayotaka. 
+Mfano: MOVIE FAST X.
+
+2⃣Ukitaka series anza kwa kuandika SERIES kisha acha nafasi andika jina la hiyo series unayotaka. 
+Mfano: SERIES GHUM HE.
+
+🚴‍♀Ukifuata maelekezo hayo hapo juu kwa usahihi utaletewa kitu unachotaka na utakachotakiwa kufanya utabonyeza mahali palipoandikwa download kisha ukurasa unaofuata utabonyeza neno START utapata unachotaka au kupata mwongozo jinsi ya kukipakua..
+💥Kumbuka kama series au movie haipo tafadhali bonyeza sehemu husika ili admin aipakie chapu
+
+Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
+            mtext=mtext.format(db_name=ban_status["db_name"].upper())
             await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbukaddfffffffffffffgggg",show_alert=True)
     
         elif query.data == "kundii":
