@@ -123,8 +123,8 @@ async def start_msg_admins(client, message):
     if usr_cmdall1.startswith("/start mwongozo"):
         abx=await client.send_message(
                 chat_id=cmd.from_user.id,
-                text="welcome boss ",
-                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele')]]),                        
+                text="Samahani mpendwa\n\nJe wewe unamda gani katika huduma za telegram",
+                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MGENI", callback_data =f'mbele m'),InlineKeyboardButton("MZOEFU", callback_data =f'mbele z')]]),                        
             )
         return
         
@@ -373,7 +373,13 @@ async def cb_handler(client, query):
             await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie jina jipya la movie/series  hii')
            
         elif query.data.startswith("mbele"):
-            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka tutakurudisha hapa utakapo kosea kusoma sheria hizi",show_alert=True,cache_time=5)
+            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka tutakurudisha hapa utakapo kosea kusoma sheria hizi",show_alert=True,cache_time=10)
+            if query.data.split(" ")[1]=="c":
+                await query.answer("Telegram n moja ya app rahisi sana kutumia ukiwa na changamoto usisite kuuliza tukusaidie mfano jinsi ya kuforward ,kureply,kudownload n.k Pia soma muongozo kiumakini kama mwanzo wa kuanza matumizi ya huduma telegram ",show_alert=True,cache_time=10)
+            elif query.data.split(" ")[1]=="z":
+                await query.answer("Sina maneno zaid we bpnyeza ok kisha soma mwongozo wa huduma zetu",show_alert=True,cache_time=10)
+            else:
+                await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka tutakurudisha hapa utakapo kosea kusoma sheria hizi",show_alert=True,cache_time=10)
             botusername=await client.get_me()
             nyva=botusername.username  
             nyva=str(nyva)
@@ -402,7 +408,7 @@ Mfano: SERIES GHUM HE.
 
 Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             mtext=mtext.format(db_name=ban_status["db_name"].upper())
-            await client.send_message(chat_id = query.from_user.id,text=f'{mtext}')
+            await client.send_message(chat_id = query.from_user.id,text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele q')]]))
            
         elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
