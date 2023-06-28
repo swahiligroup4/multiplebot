@@ -374,7 +374,7 @@ async def cb_handler(client, query):
            
         elif query.data.startswith("mbele"):
             await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka tutakurudisha hapa utakapo kosea kusoma sheria hizi",show_alert=True,cache_time=10)
-            if query.data.split(" ")[1]=="c":
+            if query.data.split(" ")[1]=="m":
                 await query.answer("Telegram n moja ya app rahisi sana kutumia ukiwa na changamoto usisite kuuliza tukusaidie mfano jinsi ya kuforward ,kureply,kudownload n.k Pia soma muongozo kiumakini kama mwanzo wa kuanza matumizi ya huduma telegram ",show_alert=True,cache_time=10)
             elif query.data.split(" ")[1]=="z":
                 await query.answer("Sina maneno zaid we bpnyeza ok kisha soma mwongozo wa huduma zetu",show_alert=True,cache_time=10)
