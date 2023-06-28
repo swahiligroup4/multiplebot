@@ -408,7 +408,7 @@ Mfano: SERIES GHUM HE.
 
 Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             mtext=mtext.format(db_name=ban_status["db_name"].upper())
-            await client.send_message(chat_id = query.from_user.id,text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele q')]]))
+            await query.edit_message_text(chat_id = query.from_user.id,text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele q')]]))
            
         elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
