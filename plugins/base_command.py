@@ -373,7 +373,7 @@ async def cb_handler(client, query):
             await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie jina jipya la movie/series  hii')
            
         elif query.data.startswith("mbele"):
-            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka tutakurudisha hapa utakapo kosea kusoma sheria hizi",show_alert=True,cache_time=30)
+            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka tutakurudisha hapa utakapo kosea kusoma sheria hizi",show_alert=True,cache_time=5)
             botusername=await client.get_me()
             nyva=botusername.username  
             nyva=str(nyva)
@@ -402,8 +402,8 @@ Mfano: SERIES GHUM HE.
 
 Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             mtext=mtext.format(db_name=ban_status["db_name"].upper())
-            await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbukaddfffffffffffffgggg",show_alert=True)
-    
+            await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie jina jipya la movie/series  hii')
+           
         elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
             grp="grp"
