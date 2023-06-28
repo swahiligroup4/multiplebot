@@ -373,12 +373,6 @@ async def cb_handler(client, query):
             await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie jina jipya la movie/series  hii')
            
         elif query.data.startswith("mbele"):
-            if query.data.split(" ")[1]=="m":
-                await query.answer("Ndugu mwanzo mzuri huanza kufuata sheria husika utakapo kwa tuulize tukusaidie bonyeza ok kusoma muongozo",show_alert=True,cache_time=10)
-            elif query.data.split(" ")[1]=="z":
-                await query.answer("Sina maneno zaid we bpnyeza ok kisha soma mwongozo wa huduma zetu",show_alert=True,cache_time=10)
-            else:
-                await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka tutakurudisha hapa utakapo kosea kusoma sheria hizi",show_alert=True,cache_time=10)
             botusername=await client.get_me()
             nyva=botusername.username  
             nyva=str(nyva)
@@ -407,8 +401,16 @@ Mfano: SERIES GHUM HE.
 
 Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             mtext=mtext.format(db_name=ban_status["db_name"].upper())
-            await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele q')]]))
-           
+            if query.data.split(" ")[1]=="m":
+                await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele q')]]))
+                await query.answer("Ndugu mwanzo mzuri huanza kufuata sheria husika utakapo kwa tuulize tukusaidie bonyeza ok kusoma muongozo",show_alert=True,cache_time=10)
+            elif query.data.split(" ")[1]=="z":
+                await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele q')]]))
+                await query.answer("Sina maneno zaid we bpnyeza ok kisha soma mwongozo wa huduma zetu",show_alert=True,cache_time=10)
+            else:
+                await query.edit_message_text(text=f'{mtext} xyz',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele q')]]))
+                await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka tutakurudisha hapa utakapo kosea kusoma sheria hizi",show_alert=True,cache_time=10)
+            
         elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
             grp="grp"
