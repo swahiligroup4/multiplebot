@@ -380,7 +380,7 @@ async def cb_handler(client, query):
             user_details = await db.is_bot_exist(nyva)
             if not user_details:
                 return
-            hjkl = f'{user_details}##{message.from_user.id}'
+            hjkl = f'{user_details}##{query.from_user.id}'
             user_details1 = await is_user_exist(hjkl,nyva)
             ban_status = await db.get_db_status(user_details)   
             mtext="""💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥  
@@ -402,7 +402,7 @@ Mfano: SERIES GHUM HE.
 
 Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             mtext=mtext.format(db_name=ban_status["db_name"].upper())
-            await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie jina jipya la movie/series  hii')
+            await client.send_message(chat_id = query.from_user.id,text=f'{mtext}')
            
         elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
