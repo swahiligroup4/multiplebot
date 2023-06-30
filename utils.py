@@ -56,8 +56,8 @@ async def add_test(id, usr):
     try:
         data = Test(
             id = id,
-            time3 = usr,
-            time3 = "hrm45",
+            time1 = usr,
+            time2 = "hrm45",
             time3= "hrm45"
         )
     except ValidationError:
