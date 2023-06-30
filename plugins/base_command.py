@@ -124,8 +124,8 @@ async def start_msg_admins(client, message):
     if usr_cmdall1.startswith("/start mwongozo"):
         abx=await client.send_message(
                 chat_id=cmd.from_user.id,
-                text=f"{message.text}Samahani mpendwa\n\nJe wewe n mgeni au mzoefu na telegram \nBASI KAMA WEWE NI:\n\nMGENI\nTunakukaribisha telegram kuwa huru kuuliza chochote ambacho utaona huelew mfano jinsi ya kuforward,kudownload,kureply ujumbe wa mtu na pia jinsi ya kutuma media.\n Yote haya utauliza baada ya kusoma muongozo mpaka mwisho kisha kurudi kwenye kikundi na kuanza kupata huduma zetu na kusema changamoto uliokumbana nayo kama ipo.\n\nMZOEFU\nSina maneno mengi bonyeza button Soma zaidi kuendelea \n**Note**\nJitahidi kusoma mpaka mwisho kiumakini..yaan ukutane na button ya kukurudisha kwenye kikundi ndio utaruhusiwa kutuma ujumbe kwenye kikundi ",
-                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("SOMA ZAIDI", callback_data =f'mbele')]]),                        
+                text=f"Samahani mpendwa\n\nJe wewe n mgeni au mzoefu na telegram \nBASI KAMA WEWE NI:\n\nMGENI\nTunakukaribisha telegram kuwa huru kuuliza chochote ambacho utaona huelew mfano jinsi ya kuforward,kudownload,kureply ujumbe wa mtu na pia jinsi ya kutuma media.\n Yote haya utauliza baada ya kusoma muongozo mpaka mwisho kisha kurudi kwenye kikundi na kuanza kupata huduma zetu na kusema changamoto uliokumbana nayo kama ipo.\n\nMZOEFU\nSina maneno mengi bonyeza button Soma zaidi kuendelea \n**Note**\nJitahidi kusoma mpaka mwisho kiumakini..yaan ukutane na button ya kukurudisha kwenye kikundi ndio utaruhusiwa kutuma ujumbe kwenye kikundi ",
+                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("SOMA ZAIDI", callback_data =f'mbele {cmd.text.split("hrm")[1]}')]]),                        
             )
         return
         
@@ -258,7 +258,6 @@ async def start_msg_admins(client, message):
             grp1,grp2=grp.split(" ")
             if filedetails:
                 if filedetails:  
-                    
                     link = files.descp.split('.dd#.')[2]
                     if link == 'data':
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha text', callback_data = f"xtext {file_id}")],[InlineKeyboardButton('Rekebisha caption', callback_data = f"xcaption {id2}")],[InlineKeyboardButton('Rekebisha video/file',callback_data = f"xfile {id2}")],[InlineKeyboardButton('Rekebisha kundi', callback_data = "xba")],[InlineKeyboardButton('Rekebisha Maelezo ya media', callback_data = f"xdescp {id2}")]])
@@ -404,7 +403,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             await query.answer("Soma kiumakini maana mimi ntakurudisha hapa utakapo shindwa kufuata muongozo wa huduma zetu",show_alert=True,cache_time=10)
             await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele m')]]))
             await asyncio.sleep(9)
-            await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
+            await query.edit_message_text(text=f'{mtext} .',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
             
         elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
