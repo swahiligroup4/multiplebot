@@ -369,9 +369,9 @@ async def cb_handler(client, query):
     if (clicked == typed):
         if query.data.startswith("test1"):
             await query.answer("Soma kiumakini maana mimi ntakurudisha hapa utakapo shindwa kufuata muongozo wa huduma zetu",show_alert=True,cache_time=10)
-            await query.edit_message_text(text=f'{mtext}x',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele m')]]))
+            await query.edit_message_text(text=f'hi x',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele m')]]))
             await asyncio.sleep(9)
-            await query.edit_message_text(text=f'{mtext} b.',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
+            await query.edit_message_text(text=f'hi b.',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
         elif query.data.startswith("mbele"):
             botusername=await client.get_me()
             nyva=botusername.username  
