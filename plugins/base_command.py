@@ -1,6 +1,7 @@
 from info import filters,CHANNELS
 import uuid  
 import time 
+import asyncio
 from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file
 from botii  import Bot1,Bot
@@ -402,14 +403,13 @@ Mfano: SERIES GHUM HE.
 Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             mtext=mtext.format(db_name=ban_status["db_name"].upper())
             if query.data.split(" ")[1]=="m":
-                await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
+                await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele m')]]))
                 await query.answer("Ndugu mwanzo mzuri huanza kufuata sheria husika utakapo kwa tuulize tukusaidie bonyeza ok kusoma muongozo",show_alert=True,cache_time=10)
+                await asyncio.sleep(9)
+                await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
             elif query.data.split(" ")[1]=="z":
                 await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
                 await query.answer("Sina maneno zaid we bpnyeza ok kisha soma mwongozo wa huduma zetu",show_alert=True,cache_time=10)
-            else:
-                await query.edit_message_text(text=f'{mtext} xyz',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele q')]]))
-                await query.answer("Tafadhali usiharakie mbele soma kiumakini maana kumbuka tutakurudisha hapa utakapo kosea kusoma sheria hizi",show_alert=True,cache_time=10)
             
         elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
