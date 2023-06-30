@@ -370,7 +370,6 @@ async def cb_handler(client, query):
         pass
     if (clicked == typed):
         if query.data.startswith("test1"):
-            await client.answer_callback_query(callback_query_id=int(query.data.split(" ")[1]), text="Tafadhali usiharakie mbele soma kiumakini maana kumbuka",show_alert=True)
             await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie jina jipya la movie/series  hii')
            
         elif query.data.startswith("mbele"):
@@ -404,7 +403,8 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             mtext=mtext.format(db_name=ban_status["db_name"].upper())
             if query.data.split(" ")[1]=="m":
                 await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele m')]]))
-                await query.answer("Ndugu mwanzo mzuri huanza kufuata sheria husika utakapo kwa tuulize tukusaidie bonyeza ok kusoma muongozo",show_alert=True,cache_time=10)
+                await query.answer("Ndugu mwanzo mzuri huanza kufuata sheria husika utakapo kwa tuulize tukusaidie bonyeza ok kusoma muongozo",show_alert=True)
+                await query.answer("Soma kiumakini maana mimi ntakurudisha hapa utakapo shindwa kufuata muongozo wa huduma zetu",show_alert=True,cache_time=10)
                 await asyncio.sleep(9)
                 await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
             elif query.data.split(" ")[1]=="z":
