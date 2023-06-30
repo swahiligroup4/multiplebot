@@ -369,7 +369,7 @@ async def cb_handler(client, query):
         pass
     if (clicked == typed):
         if query.data.startswith("test1"):
-            await client.answer_callback_query(callback_query_id=int(query.data.split(" ")[1]), "Tafadhali usiharakie mbele soma kiumakini maana kumbuka",show_alert=True)
+            await client.answer_callback_query(callback_query_id=int(query.data.split(" ")[1]), text="Tafadhali usiharakie mbele soma kiumakini maana kumbuka",show_alert=True)
             await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie jina jipya la movie/series  hii')
            
         elif query.data.startswith("mbele"):
