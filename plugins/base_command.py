@@ -401,8 +401,8 @@ Mfano: SERIES GHUM HE.
 
 Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             mtext=mtext.format(db_name=ban_status["db_name"].upper())
-            await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele m')]]))
             await query.answer("Soma kiumakini maana mimi ntakurudisha hapa utakapo shindwa kufuata muongozo wa huduma zetu",show_alert=True,cache_time=10)
+            await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele m')]]))
             await asyncio.sleep(9)
             await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
             
