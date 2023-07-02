@@ -399,7 +399,7 @@ async def cb_handler(client, query):
             await client.restrict_chat_member(int(query.data.split(" ")[1]), query.from_user.id,
                 ChatPermissions(can_send_messages=True)) 
             st1 = await client.get_chat(int(query.data.split(" ")[1]))
-            inv_link=st1.inv_link
+            inv_link=st1.invite_link
             await query.edit_message_text(text=f'Shukrani zetu zikufikie wewe uliweza kusoma mpaka hapa nahisi umetuelewa tunahusika na nini pia jinsi ya kupata huduma zetu..\n**Tumeshakuruhusu kutuma ujumbe kwenye kikundi ulichojiunga nacho** \n\nBonyeza **kikundi** kurudi kwenye kikundi ',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'test1 {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 KIKUNDI", url =f'{inv_link}') ]]))
         elif query.data.startswith("mbele"):
             botusername=await client.get_me()
