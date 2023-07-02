@@ -396,10 +396,14 @@ async def cb_handler(client, query):
             await asyncio.sleep(9)
             await query.edit_message_text(text=f'{mtext1}..',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'mbele {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 HITIMISHA", callback_data =f'fnl {query.data.split(" ")[1]}') ]]))
         elif query.data.startswith('fnl') :
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            user_details = await db.is_bot_exist(nyva)
+            ban_status = await db.get_db_status(user_details)   
             await client.restrict_chat_member(int(query.data.split(" ")[1]), query.from_user.id,
                 ChatPermissions(can_send_messages=True)) 
-            st1 = await client.get_chat(int(query.data.split(" ")[1]))
-            inv_link=st1.invite_link
+            inv_link=ban_status["group"].split("##")[1]
             await query.edit_message_text(text=f'Shukrani zetu zikufikie wewe uliweza kusoma mpaka hapa nahisi umetuelewa tunahusika na nini pia jinsi ya kupata huduma zetu..\n**Tumeshakuruhusu kutuma ujumbe kwenye kikundi ulichojiunga nacho** \n\nBonyeza **kikundi** kurudi kwenye kikundi ',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'test1 {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 KIKUNDI", url =f'{inv_link}') ]]))
         elif query.data.startswith("mbele"):
             botusername=await client.get_me()
