@@ -388,7 +388,7 @@ async def cb_handler(client, query):
 🟡Mda wowote tuma  /msaada utapata maelekezo na kuweza kutatua changamoto yako iwe kwenye kikundi au private ➡️yaani kwenye robot"""
             st1 = await client.get_users(int(user_details))
             st2 = await client.get_users(int(OWNER_ID))
-            mtext1=mtext1.format(db_name=ban_status["db_name"].upper(),descp=ban_status["muongozo"],admin_name=st1.mention,owner_name=st2.mention)
+            mtext1=mtext1.format(db_name=ban_status["db_name"].upper(),descp=ban_status["mwongozo"],admin_name=st1.mention,owner_name=st2.mention)
             await query.edit_message_text(text=f'{mtext1}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'mbele {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 HITIMISHA", callback_data =f'test1 {query.data.split(" ")[1]}') ]]))
             await asyncio.sleep(9)
             await query.edit_message_text(text=f'{mtext1}..',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'mbele {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 HITIMISHA", callback_data =f'fnl {query.data.split(" ")[1]}') ]]))
