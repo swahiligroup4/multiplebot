@@ -100,7 +100,14 @@ async def start_msg_admins(client, message):
         text = f'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa{e}'     
     usr_cmdall1 = message.text
     cmd=message
-
+    try:
+        aby = await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
+        aby = await  is_subscribed(client, message, int(ban_status['group'].split('##')[0]) ):
+    except:
+        await client.send_message(
+            chat_id=message.from_user.id,
+            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kumtumia robot huyu mwambie admiba wako add update channel na main movie group",
+        )
     if not await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
         try:
            invite_link = ban_status['channels'].split('##')[1]    
