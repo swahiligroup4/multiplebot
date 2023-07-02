@@ -60,7 +60,10 @@ markdown_keyboard = [
 
 @Bot1.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
-    status= await db.is_admin_exist(message.from_user.id)
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
         return
     await client.send_message(chat_id= message.from_user.id,text="chagua huduma unayotaka kufanya marekebisho",
