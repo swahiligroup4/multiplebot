@@ -6,7 +6,7 @@ from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file
 from botii  import Bot1,Bot
 from plugins.database import db
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 from plugins.strings import START_MESSAGE, HELP_MESSAGE, ABOUT_MESSAGE, MARKDOWN_HELP
 start_keyboard = [
     [
@@ -393,6 +393,8 @@ async def cb_handler(client, query):
             await asyncio.sleep(9)
             await query.edit_message_text(text=f'{mtext}..',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'mbele {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 HITIMISHA", callback_data =f'fnl {query.data.split(" ")[1]}') ]]))
         elif query.data.startswith('fnl') :
+            await client.restrict_chat_member(int(query.data.split(" ")[1]), query.from_user.id,
+                ChatPermissions(can_send_messages=True)) 
             st1 = await client.get_chat(int(query.data.split(" ")[1]))
             inv_link=st1.inv_link
             await query.edit_message_text(text=f'Shukrani zetu zikufikie wewe uliweza kusoma mpaka hapa nahisi umetuelewa tunahusika na nini pia jinsi ya kupata huduma zetu..\n**Tumeshakuruhusu kutuma ujumbe kwenye kikundi ulichojiunga nacho** \n\nBonyeza **kikundi** kurudi kwenye kikundi ',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'test1 {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 KIKUNDI", url =f'{inv_link}') ]]))
