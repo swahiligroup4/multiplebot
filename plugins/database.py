@@ -171,7 +171,7 @@ class Database:
                 channels =ab["channels"],
                 user_link = ab["user_link"],
                 muda = ab["muda"],
-                mwongozo = ab["mwongozo"]
+                mwongozo = ab["mwongozo"],
                 g_1 = ab["g_1"],
                 g_2 = ab["g_2"],
                 g_3 = ab["g_3"],
