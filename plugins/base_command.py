@@ -1,4 +1,4 @@
-from info import filters,CHANNELS
+from info import filters,CHANNELS,OWNER_ID
 import uuid  
 import time 
 import asyncio
@@ -368,10 +368,34 @@ async def cb_handler(client, query):
         pass
     if (clicked == typed):
         if query.data.startswith("test1"):
-            await query.answer("Soma kiumakini maana mimi ntakurudisha hapa utakapo shindwa kufuata muongozo wa huduma zetu",show_alert=True,cache_time=10)
-            await query.edit_message_text(text=f'hi x',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele m')]]))
+            await query.answer("🎙Soma tangulizi mfupi wa robot huyu kama upo na Viongozi wangu walionitengeneza",show_alert=True,cache_time=10)
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            user_details = await db.is_bot_exist(nyva)
+            if not user_details:
+                return
+            ban_status = await db.get_db_status(user_details)
+            mtext=f"""<b>{db_name}</b>
+{descp}
+<b>ABOUT THE BOT</b>
+⭐️Mmiliki na anayehusika na robot Huyu:
+{admin_name}🥹
+
+☘Developer and designer
+{owner_name}🥹
+
+🟡Mda wowote tuma  /msaada utapata maelekezo na kuweza kutatua changamoto yako iwe kwenye kikundi au private ➡️yaani kwenye robot"""
+            st1 = await client.get_users(int(user_details))
+            st2 = await client.get_users(int(OWNER_ID))
+            mtext=mtext.format(db_name=ban_status["db_name"].upper(),descp=ban_status["muongozo"],admin_name=st1.mention,owner_name=st2.mention)
+            await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'mbele {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 HITIMISHA", callback_data =f'test1 {query.data.split(" ")[1]}') ]]))
             await asyncio.sleep(9)
-            await query.edit_message_text(text=f'hi b.',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
+            await query.edit_message_text(text=f'{mtext}..',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'mbele {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 HITIMISHA", callback_data =f'fnl {query.data.split(" ")[1]}') ]]))
+        elif query.data.startswith('fnl') :
+            st1 = await client.get_chat(int(query.data.split(" ")[1]))
+            inv_link=st1.inv_link
+            await query.edit_message_text(text=f'Shukrani zetu zikufikie wewe uliweza kusoma mpaka hapa nahisi umetuelewa tunahusika na nini pia jinsi ya kupata huduma zetu..\n**Tumeshakuruhusu kutuma ujumbe kwenye kikundi ulichojiunga nacho** \n\nBonyeza **kikundi** kurudi kwenye kikundi ',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'test1 {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 KIKUNDI", url =f'{inv_link}') ]]))
         elif query.data.startswith("mbele"):
             botusername=await client.get_me()
             nyva=botusername.username  
@@ -379,8 +403,6 @@ async def cb_handler(client, query):
             user_details = await db.is_bot_exist(nyva)
             if not user_details:
                 return
-            hjkl = f'{user_details}##{query.from_user.id}'
-            user_details1 = await is_user_exist(hjkl,nyva)
             ban_status = await db.get_db_status(user_details)   
             mtext="""💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥  
         <b>MWONGOZO {db_name}</b>
@@ -402,9 +424,9 @@ Mfano: SERIES GHUM HE.
 Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             mtext=mtext.format(db_name=ban_status["db_name"].upper())
             await query.answer("💥Usiharakie mbele Soma kiumakini ntakurudisha hapa utakapo shindwa kufuata muongozo wa huduma zetu",show_alert=True,cache_time=10)
-            await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele m')]]))
+            await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele {query.data.split(" ")[1] }')]]))
             await asyncio.sleep(9)
-            await query.edit_message_text(text=f'{mtext} .',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query.id}')]]))
+            await query.edit_message_text(text=f'{mtext} .',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query. data.spit(" ")[1] }')]]))
             
         elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
