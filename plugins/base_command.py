@@ -114,7 +114,7 @@ async def start_msg_admins(client, message):
                     "🤖 Join Updates Channel", url=invite_link
                 )],
                 [InlineKeyboardButton(
-                    "🤖 Movie group", url=invite_link1
+                    "🤖MAIN Movie group", url=invite_link1
                 )
             ]
         ]
