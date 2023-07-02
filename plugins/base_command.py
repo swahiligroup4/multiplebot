@@ -428,7 +428,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             await query.answer("💥Usiharakie mbele Soma kiumakini ntakurudisha hapa utakapo shindwa kufuata muongozo wa huduma zetu",show_alert=True,cache_time=10)
             await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele {query.data.split(" ")[1] }')]]))
             await asyncio.sleep(9)
-            await query.edit_message_text(text=f'{mtext} ......',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query. data.spit(" ")[1] }')]]))
+            await query.edit_message_text(text=f'{mtext} .',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query. data.split(" ")[1] }')]]))
             
         elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
