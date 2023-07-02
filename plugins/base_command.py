@@ -376,7 +376,7 @@ async def cb_handler(client, query):
             if not user_details:
                 return
             ban_status = await db.get_db_status(user_details)
-            mtext1=f"""<b>{db_name}</b>
+            mtext1="""<b>{db_name}</b>
 {descp}
 <b>ABOUT THE BOT</b>
 ⭐️Mmiliki na anayehusika na robot Huyu:
