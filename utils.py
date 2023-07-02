@@ -18,7 +18,7 @@ logger.setLevel(logging.INFO)
 
 instance = Instance.from_db(DB2)
 imdb=Instance.from_db(DB2)
-users=Instance.from_db(DB2)
+
 @instance.register
 class Media(Document):
     id = fields.StrField(attribute='_id')
@@ -43,33 +43,6 @@ class User(Document):
     class Meta:
         collection_name = COLLECTION_NAME_2
 
-@users.register
-class Test(Document):
-    id = fields.StrField(attribute='_id')
-    time1 = fields.StrField(required=True )
-    time2 =fields.StrField(required=True)
-    time3 = fields.StrField(required=True)
-    class Meta:
-        collection_name = "link"
-        
-async def add_test(id, usr):
-    try:
-        data = Test(
-            id = id,
-            time1 = usr,
-            time2 = "hrm45",
-            time3= "hrm45"
-        )
-    except ValidationError:
-        logger.exception('Error occurred while saving group in database')
-    else:
-        try:
-            await data.commit()
-        except DuplicateKeyError:
-            logger.warning("already saved in database")
-        else:
-            logger.info("group is saved in database")
-     
 async def add_user(id, usr,sts):
     try:
         data = User(
