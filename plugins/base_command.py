@@ -381,12 +381,13 @@ async def cb_handler(client, query):
             ban_status = await db.get_db_status(user_details)
             mtext1="""<b>{db_name}</b>
 {descp}
+
 <b>ABOUT THE BOT</b>
 ⭐️Mmiliki na anayehusika na robot Huyu:
-{admin_name}🥹
+**{admin_name}**🥹
 
 ☘Developer and designer
-{owner_name}🥹
+**{owner_name}**🥹
 
 🟡Mda wowote tuma  /msaada utapata maelekezo na kuweza kutatua changamoto yako iwe kwenye kikundi au private ➡️yaani kwenye robot"""
             st1 = await client.get_users(int(user_details))
