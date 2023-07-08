@@ -28,9 +28,11 @@ async def total(bot, message):
         await msg.edit(f'Error: {e}')
 @Bot1.on_message(filters.private & filters.command('adddata'))
 async def new_filtervip(client, message):
-    status= await db.is_admin_exist(message.from_user.id)
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
-        await message.reply_text("Samahani hauruhusiw kutumia command hii Tafadhali  mchek @hrm45 akupe maelekezo")
         return
     strid = str(uuid.uuid4())
     args = message.text.split(' ', 1)
@@ -38,18 +40,14 @@ async def new_filtervip(client, message):
     if len(args) < 2:
         await message.reply_text("Use Correct format 😐", quote=True)
         return
-    nyva=BOT.get("username")
-    if not nyva:
-        botusername=await client.get_me()
-        nyva=botusername.username
-        BOT["username"]=nyva
+    
     extracted = split_quotes(args[1])
     text = f'{args[1].lower()}.dd#.{user_id}'
     text = text.strip()
     ab = f'{args[1].lower()}'
     msg_type = 'Text'
     ab1="fggh"
-    abb = await save_file(text, 'reply_text', [], 'fileid', 'alert', 'msg_type', 'strid',message.from_user.id,'descp',"chec",'normal')
+    abb = await save_file(text, 'reply_text', [], 'fileid', 'msg_type', 'strid',message.from_user.id,'descp',"chec",'normal')
     if abb == "hrm46":
         abb = await client.send_message(text=f'Kuna movie au series yenye jina kama hili kama unataka hili lichukue mbadala wa movie au series iliyopita **tuma neno y** au **tuma n** ili uanze upya ubadalishe jina maana robot haruhusu majina ya movie/series  yanayo fanana unaweza kuweka hata . ili kuonyesha utofauti na jina la kwanza',chat_id = message.from_user.id)
         a,b = funask()
@@ -69,7 +67,7 @@ async def new_filtervip(client, message):
                 a=False
         ab1=mkv.text.lower()
     if ab1=="y":
-        ab= await save_file(text, 'reply_text', [], 'fileid', 'alert', 'msg_type', 'strid',message.from_user.id,'descp',"hrm46",'normal')
+        ab= await save_file(text, 'reply_text', [], 'fileid', 'msg_type', 'strid',message.from_user.id,'descp',"hrm46",'normal')
     elif ab1 !='n' and ab1 !='y' and ab1 != 'fggh':
         await client.send_message(text=f'tafadhali anza upya tuma kama ulivyoelekezwa',chat_id = message.from_user.id)
         return
@@ -272,7 +270,7 @@ async def new_filtervip(client, message):
         if not mkvl.text:
             mkvl.text=msg_type
         descp = f'x.dd#.{mkv2.text}.dd#.{mkvl.text}.dd#.s'
-        await save_file(text, reply_text, [], fileid, alert, msg_type, strid,user_id,descp,ab1,ab2)
+        await save_file(text, reply_text, [], fileid, msg_type, strid,user_id,descp,ab1,ab2)
     elif mkv.text.lower()=='h':
         mkv22 = await client.send_message(text='naomba untumie maelezo kidogo mfano imetafsiriwa singo',chat_id = message.from_user.id)
         a,b = funask()
@@ -370,7 +368,7 @@ async def new_filtervip(client, message):
                     mkv22.delete()
                     mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
             elif ab33=="ms":
-                await mkvl1.reply_text("hi",reply_markup=btn2("season","series"))
+                await mkvl1.reply_text("hi",reply_markup=btn22("season","series",f"sss##{strid}"))
     try:
         if fileid:
             data1=await is_group_exist(message.from_user.id)
@@ -454,9 +452,11 @@ async def log_file(bot, message):
 
 @Bot1.on_message(filters.private & filters.command('add'))
 async def new_filter(client, message):
-    status= await db.is_admin_exist(message.from_user.id)
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
-        await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
         return
     strid = str(uuid.uuid4())
     args = message.text.split(' ', 1)
@@ -671,7 +671,7 @@ async def new_filter(client, message):
             pass
         return
 
-    await save_file(text, reply_text, btn, fileid, alert, msg_type, strid,user_id,descp,599,'normal')
+    await save_file(text, reply_text, btn, fileid, msg_type, strid,user_id,descp,alert,'normal')
     text = text.split('.dd#.',1)[0]
     reply_markup = InlineKeyboardMarkup(
         [
@@ -685,9 +685,11 @@ async def new_filter(client, message):
 
 @Bot1.on_message(filters.private & filters.command('delete'))
 async def del_filter(client, message):
-    status= await db.is_admin_exist(message.from_user.id)
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
-        await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
         return
     try:
         cmd, text1 = message.text.split(" ", 1)
@@ -718,9 +720,11 @@ async def del_filter(client, message):
         await message.reply_text("Couldn't find that filter!", quote=True)
 @Bot1.on_message(filters.private & filters.command('filters'))
 async def get_all(client, message):
-    status= await db.is_admin_exist(message.from_user.id)
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
-        await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
         return
     text = ''
     texts = await get_filter_results(text,message.from_user.id)
@@ -764,27 +768,37 @@ async def delallconfirm(Client, message):
         reply_markup = reply_markup,
         quote=True
     )
-@Bot1.on_message((filters.private | filters.group) & filters.command('niunge'))
+@Bot1.on_message(filters.command('niunge'))
 async def addconnection(client,message):
-    status= await db.is_admin_exist(message.from_user.id)
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    chat_type =f"{ message.chat.type}" 
+    if chat_type == "ChatType.CHANNEL":
+        await message.reply_text(
+                "Samahani forward hii command kwa robot private",
+                quote=True
+            )
+        return
+    status= await db.is_admin_exist(message.from_user.id,nyva) 
     if not status:
-        await message.reply_text("Samahani hauruhusiw kutumia command hii tafadhali mchek @hrm45 akupe maelekezo")
         return
     userid = message.from_user.id if message.from_user else None
     if not userid:
         return await message.reply(f"Samahan wewe ni anonymous(bila kujulikana) admin tafadhali nenda kweny group lako edit **admin permission** remain anonymouse kisha disable jaribu tena kutuma /niunge.Kisha ka enable tena")
-    chat_type =f"{ message.chat.type}"
-    
     if chat_type == "ChatType.PRIVATE":
-        await message.reply_text(
+        if not message.forward_from_chat:
+            await message.reply_text(
                 "Samahan add hii bot kama admin kwenye group lako kisha tuma command hii <b>/niunge </b>kwenye group lako",
                 quote=True
             )
-        return
+            return
+        if str(message.forward_from_chat.type) =="ChatType.CHANNEL":
+            group_id = message.forward_from_chat.id
+        
 
-    elif chat_type in ["ChatType.GROUP","ChatType.SUPERGROUP"]:
+    elif chat_type in ["ChatType.GROUP", "ChatType.SUPERGROUP","ChatType.CHANNEL"]:
         group_id = message.chat.id
-
     try:
         st = await client.get_chat_member(group_id, userid)
         st.status=(f"{st.status}".split(".")[1])
@@ -800,140 +814,62 @@ async def addconnection(client,message):
             "Invalid Group ID!\n\nIf correct, Make sure I'm present in your group!!",
             quote=True,
         )
-
         return
     try:
         st = await client.get_chat_member(group_id, "me")
         st.status=(f"{st.status}".split(".")[1])
         if st.status == "ADMINISTRATOR":
-            group_details= await is_user_exist(group_id)
-            for file in group_details:
-                user_id2=file.group_id
-            
-            if not group_details :
-                if await is_group_exist(message.from_user.id):
-                    await message.reply_text("Samahani tunaruhusu kikundi kimoja tu kumunga muhsin kuepuka usumbufu kwa wateja tuma /ondoa kikund cha mwanzo kisha tuma /niunge  kwenye kikundi hiki **\nkumbuka kuondoa group tunaondoa hadi waliojiunga kwenye database yetu kupitia kikundi hiko** ")
-                    return
-                await add_user(group_id,userid,'group')
-                await message.reply_text(
-                    f"Tumeliunganisha kikamilifu Sasa unaweza kuendelea kuongezea muv/series posters audio video n.k ukiwa private kwa kureply ujumbe wako kisha /add kisha jina LA text,movie,series n.k kama ndio unaanza uadmin tafadhali tuna neno /edit_admin ukiwa private kisha fuata maelekezo!",
-                    quote=True,
+            if chat_type in ["ChatType.SUPERGROUP","ChatType.GROUP" ]:
+                mk2= await db.get_db_status(userid)
+                inv_lnk = await client.get_chat(group_id)
+                await db.update_db(userid,f'group {group_id}##{inv_lnk.invite_link}',mk2)
+                await client.send_message(
+                    userid,
+                    f"Asante kwa kutuamini umefanikiwa kuunganisha group lako tuma /start kisha btn help kupata muongozo wa kutengeneza kikund chako zaid ukiea private",
                 )
-                if chat_type in ["group", "supergroup","private"]:
-                    await client.send_message(
-                        userid,
-                        f"Asante kwa kutuamini umefanikiwa kuunganisha group lako tuma /help kupata muongozo!",
-                        parse_mode="md"
-                    )
-                    return
-           
-            elif userid !=user_id2:
-                ttli = await client.get_users(user_id2)
-                await message.reply_text(
-                    f"Samahan hili group tayar limeshaunganishwa na admin **{ttli.first_name}** Msimaiz wangu kanikataza ku add wasimaz wawili kwenye group moja kama mnahitaj mabadiliko mcheki @hrm45!",
-                    quote=True
+                await client.send_message(
+                    group_id,
+                    f"Group lako tumeiunga kikamlifu,Wateja wako watapa huduma za robot kupitia kikundi",
+                )           
+            if chat_type == "ChatType.PRIVATE":
+                mk2= await db.get_db_status(userid)
+                inv_lnk = await client.get_chat(group_id)
+                await db.update_db(userid,f'channels {group_id}##{inv_lnk.invite_link}',mk2)
+                await client.send_message(
+                    userid,
+                    f"Asante kwa kutuamini umefanikiwa kuunganisha update channel yako tuma /start kisha btn help kupata muongozo wa kutengeneza kikund chako zaid!",
                 )
-            else:
-                ttli = await client.get_users(user_id2)
-                await message.reply_text(
-                    f"Samahani admin **{ttli.first_name}** hili group tayar umeshaliunga kulitoa  tuma command /ondoa !",
-                    quote=True
-                )
+                await client.send_message(
+                    group_id,
+                    f"Channel yako tumeiunga kikamlifu,Wateja wako watapa updates za robot kupitia channel hii",
+                )        
+            return   
         else:
             await message.reply_text("Ni add admin kwenye group lako kisha jaribu tena", quote=True)
     except Exception as e:
         logger.exception(e)
-        await message.reply_text('Kuna tatizo tafadhali jaribu badae!!!.', quote=True)
+        await message.reply_text('Kuna tatizo tafadhali jaribu badae!!!Likiendelea mcheki @hrm45 aweze kutatua tatizo', quote=True)
         return
 
-@Bot1.on_message((filters.private | filters.group | filters.channel) & filters.command("ondoa"))
-async def removegroup(client,message):
-    status= await db.is_admin_exist(message.from_user.id)
-    if not status:
-        await message.reply_text("Samahani huruhusiwi kutumia command  hii tafadhali mchek @hrm45 akupe maelekezo")
-        return
-    userid = message.from_user.id if message.from_user else None
-    if not userid:
-        return await message.reply(f"Samahan wewe ni anonymous(bila kujulikana) admin tafadhali nenda kweny group lako edit **admin permission** remain anonymouse kisha disable jaribu tena kutuma /niunge.Kisha ka enable tena")
-    chat_type =f"{ message.chat.type}"
-    
-    if chat_type == "ChatType.PRIVATE":
-        await message.reply_text(
-                "Samahan add hii bot kama admin kwenye group lako kisha tuma command hii <b>/niunge </b>kwenye group lako",
-                quote=True
-            )
-        return
-
-    elif chat_type in ["ChatType.GROUP","ChatType.SUPERGROUP"]:
-        group_id = message.chat.id
-
-    try:
-        st = await client.get_chat_member(group_id, userid)
-        st.status=(f"{st.status}".split(".")[1])
-        if not(
-            st.status == "ADMINISTRATOR"
-            or st.status == "OWNER"
-        ):
-            await message.reply_text("lazima uwe  admin kwenye group hili!", quote=True)
-            return
-    except Exception as e:
-        logger.exception(e)
-        await message.reply_text(
-            "Invalid Group ID!\n\nIf correct, Make sure I'm present in your group!!",
-            quote=True,
-        )
-
-        return
-    try:
-        st = await client.get_chat_member(group_id, "me")
-        st.status=(f"{st.status}".split(".")[1])
-        if st.status == "ADMINISTRATOR":
-            
-            group_details= await is_user_exist(group_id)
-            for file in group_details:
-                user_id2=file.group_id
-            if group_details and userid==user_id2:
-                await User.collection.delete_one({'_id':group_id})
-                await User.collection.deleteMany({'group_id':group_id})
-                await message.reply_text(
-                    f"tumeliondoa kikamilifu kuliunga tena tuma command /niunge",
-                    quote=True
-                )
-            elif not (group_details):
-                ttli = await client.get_users(user_id2)
-                await message.reply_text(
-                    f"Samahani admin **{ttli.first_name}** hili group halipo  kwenye database zetu tuma /niunge kuliunga!",
-                    quote=True
-                )
-            elif userid !=user_id2:
-                ttli = await client.get_users(user_id2)
-                await message.reply_text(
-                    f"Samahani hili group limeungwa na admin   admin **{ttli.first_name}** hili group yeye mwenyewe ndio unaweza kulitoa!",
-                    quote=True
-                )
-        else:
-            await message.reply_text("Ni add admin kwenye group lako kisha jaribu tena", quote=True)
-    except Exception as e:
-        logger.exception(e)
-        await message.reply_text('Kuna tatizo tafadhali jaribu badae!!!.', quote=True)
-        return
 @Bot1.on_message(filters.private & filters.command("add_admin") & filters.owner)
 async def ban(c,m):
+    botusername=await c.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
     if len(m.command) == 1:
         await m.reply_text(
             f"Use this command to add access to any user from the bot.\n\n"
             f"Usage:\n\n"
-            f"`/add_admin admin_id duration_in days link`\n\n"
+            f"`/add_admin admin_id duration_in days`\n\n"
             f"Eg: `/add_admin 1234567 28 Umepata ofa ya Siku 3 zaidi.`\n"
             f"This will add user with id `1234567` for `28` days for the reason `ofa siku 3 zaidi`.",
             quote=True
         )
         return
 
-    try:
+    if nyva=="Bandolako2021bot":
         user_id = int(m.command[1])
         ban_duration = int(m.command[2])
-        link = m.command[3]
         ban_reason = 'Kwa ajili ya kumtumia swahili robot kuuzia movie na series '
         ban_log_text = f"Adding user {user_id} for {ban_duration} days for the reason {ban_reason} ."
         try:
@@ -946,25 +882,48 @@ async def ban(c,m):
         except:
             
             ban_log_text += f"\n\nNmeshindwa kumtaarifu tafadhali jaribu tena! \n\n`{traceback.format_exc()}`"
-        adminexist=await db.is_admin_exist(user_id)
+        adminexist=await db.is_admin_exist(user_id,nyva)
         if not adminexist :
+            abc = await c.send_message(chat_id = m.from_user.id,text="Naomba untumie username ya bot ya mteja huyu")      
+            id1=abc.id+1                 
+            a,b = funask()
+            while a==False:
+                try:
+                    mk= await c.get_messages("me",id1)
+                    if mk.text!=None:
+                        a=True
+                    if mk.media != None and mk.text!=None:
+                        id1=id1+1
+                    if (time.time()-b)>(10*60):
+                        await c.send_message(chat_id = m.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
+                        return
+                    if mk.from_user.id != m.from_user.id:
+                        a=False 
+                except:
+                    a=False  
             strid = str(uuid.uuid4())
+             
             await db.add_admin(user_id)
+            mk2=await db.get_db_status(user_id)
+            await db.update_db(user_id,f'bot_link {mk.text.strip()}',mk2)
             await db.add_acc(strid,user_id,"all",user_id,9999)
-        await db.ban_user(user_id, ban_duration, ban_reason,link)
+        await db.ban_user(user_id, ban_duration)
         print(ban_log_text)
         await m.reply_text(
             ban_log_text,
             quote=True
         )
-    except:
+    else:
         await m.reply_text(
-            f"Error occoured! Traceback given below\n\n",
+            f"Error occoured! Traceback given below\n\n {nyva}",
             quote=True
         )
 @Bot1.on_message(filters.private & filters.command('salio'))
 async def get_statuss(bot,message):
-    status= await db.is_admin_exist(message.from_user.id)
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    status= await db.is_admin_exist(message.from_user.id,nyva)
     if status:
         async for user in await db.get_user(message.from_user.id):
             salio =user['ban_status']
@@ -1051,7 +1010,7 @@ async def delcancel(client, query):
         reply_markup = None
     )
     return
-def btn2(ab6,ab22):
+def btn22(ab6,ab22,ab43):
     ab=[]
     ab7="n"
     try:
@@ -1067,16 +1026,8 @@ def btn2(ab6,ab22):
             ab11=ab9+1
             ab10=f"season {ab11}"
             ab.append([
-                InlineKeyboardButton(f"{ab8}", callback_data =f"sss s{ab8}"),
-                InlineKeyboardButton(f"{ab10}", callback_data =f"sss s{ab11}")
-            ])
-        elif ab6==10 or ab6==1:
-            ab8 = f"{ab6*(ab9-1)}1 hadi {ab6*(ab9)}0"
-            ab11 = ab9+1  
-            ab10 = f"{ab6*(ab9-1)}1 hadi {ab6*(ab9)}0"
-            ab.append([
-                InlineKeyboardButton(f"{ab8}", callback_data =f"sss {ab22}.#{ab6*(ab9)}0"),
-                InlineKeyboardButton(f"{ab10}", callback_data =f"sss {ab22}.#{ab6*(ab11)}0")
+                InlineKeyboardButton(f"{ab8}", callback_data =f"{ab43} s{ab9}"),
+                InlineKeyboardButton(f"{ab10}", callback_data =f"{ab43} s{ab11}")
             ])
         ab9=ab9+1
     return InlineKeyboardMarkup(ab)

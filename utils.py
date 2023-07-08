@@ -27,7 +27,7 @@ class Media(Document):
     btn = fields.StrField(required=True)
     file = fields.StrField(required=True)
     type = fields.StrField(required=True)
-    group_id = fields.StrField(required=True)
+    group_id = fields.IntField(required=True)
     descp = fields.StrField(required=True)
     price = fields.IntField(required=True)
     grp = fields.StrField(required=True)
@@ -36,15 +36,19 @@ class Media(Document):
 
 @imdb.register
 class User(Document):
-    id = fields.IntField(attribute='_id')
+    id = fields.StrField(attribute='_id')
+    user_id = fields.IntField(required=True )
+    rbt =fields.StrField(required=True)
     email = fields.StrField(required=True)
     class Meta:
         collection_name = COLLECTION_NAME_2
-        
+
 async def add_user(id, usr,sts):
     try:
         data = User(
             id = id,
+            user_id = usr,
+            rbt = sts,
             email = 'hrm45'
         )
     except ValidationError:
@@ -75,10 +79,6 @@ async def save_file(text,reply,btn,file,type,id,user_id,descp,prc,grp):
             for ad in await get_file_details(dt.id):
                 await Media.collection.delete_one({'text':ad.text})
         await Media.collection.delete_one(fdata)
-        await message.reply_text(
-            f"<code>{text.split('.dd#.')[0]}</code>  imefutika kikamilifu sasa nitumie tena upya ili niadd kwenye database.",
-            quote=True
-        )
         return
     try:
         file = Media(
@@ -231,8 +231,9 @@ async def is_subscribed(bot, query,channel):
             return True
 
     return False
-async def is_user_exist(query):
+async def is_user_exist(query,rbt):
     filter = {'id': query}
+    filter['rbt'] = rbt
     cursor = User.find(filter)
     
     userdetails = await cursor.to_list(length=1)

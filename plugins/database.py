@@ -1,6 +1,6 @@
 from datetime import datetime
 import time
-from info import DB2
+from info import DB2  
 
 class Database:
 
@@ -16,16 +16,18 @@ class Database:
             db_status=dict(
                 db_name = "SWAHILI GROUP MEDIA",
                 descp = "Tunahusika na uuzaji wa muvi na sizon kal zilizotafsiriwa kwa bei ",
-                phone_no = "0 halopesa https://t.me/swahiliupdates hrm45",
-                phone_nh = "0 halopesa https://t.me/swahiliupdates hrm45",
-                phone_na = "0 halopesa https://t.me/swahiliupdates hrm45",
-                phone_nv = "0 halopesa https://t.me/swahiliupdates hrm45",
-                phone_nt = "0 halopesa https://t.me/swahiliupdates hrm45",
-                phone_ntt = "0 halopesa https://t.me/swahiliupdates hrm45",
-                bot_link= "link",
+                phone_no = "hrm45",
+                phone_nh = "hrm45",
+                phone_na = "hrm45",
+                phone_nv = "hrm45",
+                phone_nt = "hrm45",
+                phone_ntt = "hrm45",
+                bot_link= "hrm45",
+                group = "hrm45##hrm45",
+                channels ="hrm45##hrm45",
                 user_link = "link2",
-                srs_dsply = "list",
                 muda = "30 days",
+                mwongozo = "ufuatao n mwongozo mfupi",
                 g_1=  "hrm45",
                 g_2 = "hrm45",
                 g_3 = "hrm45",
@@ -37,7 +39,7 @@ class Database:
                 is_banned=False,
                 ban_duration=0,
                 banned_on=datetime.now().isoformat(),
-                ban_reason=''
+                
             )
         )
     def new_acc(self, id,user_id,file_id,db_name,tme):
@@ -51,6 +53,13 @@ class Database:
                 banned_on=datetime.now().isoformat(),
             )
         )
+    async def is_bot_exist(self, bot):
+        user = self.col.find({})
+        id2 = False
+        async for id in user:
+            if id['db_status']['bot_link']==bot.strip():
+                id2=id['id']
+        return id2
     async def add_acc(self, id,user_id,file_id,db_name,tme):
         user = self.new_acc(id,int(user_id),file_id,db_name,tme)
         await self.fls.insert_one(user)
@@ -59,8 +68,10 @@ class Database:
         user = self.new_user(id)
         await self.col.insert_one(user)
 
-    async def is_admin_exist(self, id):
-        user = await self.col.find_one({'id': int(id)})
+    async def is_admin_exist(self, id,bot):
+        filter={'id': int(id)}
+        filter["db_status.bot_link"]= bot
+        user = await self.col.find_one(filter)
         return True if user else False
 
     async def is_email_exist(self, id):
@@ -106,29 +117,38 @@ class Database:
             is_banned=False,
             ban_duration= 0,
             banned_on=datetime.now().isoformat(),
-            ban_reason=''
+            
         )
         await self.col.update_one({'id': id}, {'$set': {'ban_status': ban_status}})
 
-    async def ban_user(self, user_id, ban_duration, ban_reason,link):
+    async def ban_user(self, user_id, ban_duration):
         ban_status = dict(
             is_banned=True,
             ban_duration=ban_duration,
             banned_on=datetime.now().isoformat(),
-            ban_reason=ban_reason
+            
         )
-        await self.col.update_one({'id': user_id}, {'$set': {'ban_status': ban_status,'db_status.ms_link':link}})
+        await self.col.update_one({'id': user_id}, {'$set': {'ban_status': ban_status}})
     async def get_db_status(self, id):
         default =dict(
                 db_name = "SWAHILI GROUP MEDIA",
-                descp = "Tunahusika na uuzaji wa muvi na sizon kal zilizotafsiriwa kwa bei chee",
-                phone_no = "0 hrm45 halopesa",
-                ms_link= "link",
-                muda = "kuipakua mda wowote bila kikomo...",
-                g_1= "hrm45",
+                descp = "Tunahusika na uuzaji wa muvi na sizon kal zilizotafsiriwa kwa bei ",
+                phone_no = "hrm45",
+                phone_nh = "hrm45",
+                phone_na = "hrm45",
+                phone_nv = "hrm45",
+                phone_nt = "hrm45",
+                phone_ntt = "hrm45",
+                bot_link= "hrm45",
+                group ="hrm45##hrm45",
+                channels ="hrm45##hrm45",
+                user_link = "link2",
+                muda = "30 days",
+                mwongozo = "ufuatao n mwongozo mfupi",
+                g_1=  "hrm45",
                 g_2 = "hrm45",
                 g_3 = "hrm45",
-                g_4= "hrm45",
+                g_4 = "hrm45",
                 g_5 = "hrm45",
                 g_6 = "hrm45",
             )
@@ -141,8 +161,17 @@ class Database:
                 db_name = ab["db_name"],
                 descp = ab["descp"],
                 phone_no = ab["phone_no"],
-                ms_link = ab["ms_link"],
+                phone_nh = ab["phone_nh"],
+                phone_na = ab["phone_na"],
+                phone_nv = ab["phone_nv"],
+                phone_nt = ab["phone_nt"],
+                phone_ntt = ab["phone_ntt"],
+                bot_link= ab["bot_link"],
+                group =ab["group"],
+                channels =ab["channels"],
+                user_link = ab["user_link"],
                 muda = ab["muda"],
+                mwongozo = ab["mwongozo"],
                 g_1 = ab["g_1"],
                 g_2 = ab["g_2"],
                 g_3 = ab["g_3"],
@@ -157,7 +186,7 @@ class Database:
             is_banned=False,
             ban_duration=0,
             banned_on=datetime.now().isoformat(),
-            ban_reason=''
+            
         )
         user = await self.col.find_one({'id': int(id)})
         return user.get('ban_status', default)

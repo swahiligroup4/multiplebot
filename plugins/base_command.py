@@ -1,13 +1,13 @@
-from info import filters,CHANNELS
-import uuid 
-import time   
+from info import filters,CHANNELS,OWNER_ID
+import uuid    
+import time 
+import asyncio
 from pyrogram.errors import ChatAdminRequired
-from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist
+from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file
 from botii  import Bot1,Bot
 from plugins.database import db
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 from plugins.strings import START_MESSAGE, HELP_MESSAGE, ABOUT_MESSAGE, MARKDOWN_HELP
-
 start_keyboard = [
     [
         InlineKeyboardButton(text = '🤔 Help', callback_data = "help"),
@@ -60,7 +60,10 @@ markdown_keyboard = [
 
 @Bot1.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
-    status= await db.is_admin_exist(message.from_user.id)
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
         return
     await client.send_message(chat_id= message.from_user.id,text="chagua huduma unayotaka kufanya marekebisho",
@@ -69,66 +72,74 @@ async def group2(client, message):
 
 @Bot1.on_message(filters.command('start') & filters.private)
 async def start_msg_admins(client, message):
-    if await db.is_admin_exist(message.from_user.id):
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    if await db.is_admin_exist(message.from_user.id,nyva):
         reply_markup = InlineKeyboardMarkup(start_keyboard)
     else:
         reply_markup = InlineKeyboardMarkup(start_keyboard_c)
+    user_details = await db.is_bot_exist(nyva)
+    if not user_details:
+        return
+    hjkl = f'{user_details}##{message.from_user.id}'
+    user_details1 = await is_user_exist(hjkl,nyva)
+    ban_status = await db.get_db_status(user_details)   
     try:
-       user_details = await is_user_exist(message.from_user.id)
-       if user_details:
-           for flt in user_details:
-               gid=await is_user_exist(flt.group_id)
-           for flt in gid:
-               ban_status = await db.get_db_status(flt.group_id)
-               text = ban_status['descp'].format(
-                    mention = message.from_user.mention,
-                    first_name = message.from_user.first_name,
-                    last_name = message.from_user.last_name,
-                    user_id = message.from_user.id,
-                    username = '' if message.from_user.username == None else '@'+message.from_user.username
-                )
-       else:
-           text = START_MESSAGE.format(
+       if user_details1:
+           text = ban_status['descp'].format(
                 mention = message.from_user.mention,
                 first_name = message.from_user.first_name,
                 last_name = message.from_user.last_name,
                 user_id = message.from_user.id,
                 username = '' if message.from_user.username == None else '@'+message.from_user.username
             )
-    except:
-        text = START_MESSAGE.format(
-            mention = message.from_user.mention,
-            first_name = message.from_user.first_name,
-            last_name = message.from_user.last_name,
-            user_id = message.from_user.id,
-            username = '' if message.from_user.username == None else '@'+message.from_user.username
-        )
+       else:
+           text = f"Samahani Mpendwa **{message.from_user.mention}** \n\nRudi kwenye kikundi kwa kubonyeza hii link {ban_status['group'].split('##')[1]}\n\nkisha tuma neno muongozo \n ili kuweza kujua jinsi ya kupata huduma za robot huyu"       
+    except Exception as e:
+        text = f'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa{e}'     
     usr_cmdall1 = message.text
     cmd=message
-    if not await is_subscribed(client, message,CHANNELS ):
+    try:
+        aby = await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) )
+        aby = await  is_subscribed(client, message, int(ban_status['group'].split('##')[0]) )
+    except:
+        await client.send_message(
+            chat_id=message.from_user.id,
+            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kumtumia robot huyu mwambie admiba wako add update channel na main movie group",
+        )
+    if not await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
         try:
-            invite_link = await client.create_chat_invite_link(int(CHANNELS))
+           invite_link = ban_status['channels'].split('##')[1]    
+           invite_link1 = ban_status['group'].split('##')[1]
         except ChatAdminRequired:
             logger.error("Make sure Bot is admin in Forcesub channel")
             return
         btn = [
             [
                 InlineKeyboardButton(
-                    "🤖 Join Updates Channel", url=invite_link.invite_link
-                ),
-                InlineKeyboardButton(
-                    "🤖 Movie group", url=invite_link.invite_link
-                ),
+                    "🤖 Join Updates Channel", url=invite_link
+                )],
+                [InlineKeyboardButton(
+                    "🤖MAIN Movie group", url=invite_link1
+                )
             ]
         ]
         await client.send_message(
             chat_id=message.from_user.id,
-            text="**Tafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha rudia tena kuboyeza btn ulibonyeza kabla au kusearch kabla**",
+            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya **movie group** kurudi kwenye ili kuendelea kupata huduma zetu",
             reply_markup=InlineKeyboardMarkup(btn),
             )
         return
-    
-    if usr_cmdall1.startswith("/start subinps"):
+    if usr_cmdall1.startswith("/start mwongozo"):
+        abx=await client.send_message(
+                chat_id=cmd.from_user.id,
+                text=f"Samahani mpendwa\n\nJe wewe n mgeni au mzoefu na telegram \nBASI KAMA WEWE NI:\n\nMGENI\nTunakukaribisha telegram kuwa huru kuuliza chochote ambacho utaona huelew mfano jinsi ya kuforward,kudownload,kureply ujumbe wa mtu na pia jinsi ya kutuma media.\n Yote haya utauliza baada ya kusoma muongozo mpaka mwisho kisha kurudi kwenye kikundi na kuanza kupata huduma zetu na kusema changamoto uliokumbana nayo kama ipo.\n\nMZOEFU\nSina maneno mengi bonyeza button Soma zaidi kuendelea \n**Note**\nJitahidi kusoma mpaka mwisho kiumakini..yaan ukutane na button ya kukurudisha kwenye kikundi ndio utaruhusiwa kutuma ujumbe kwenye kikundi ",
+                reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("SOMA ZAIDI", callback_data =f'mbele {cmd.text.split("hrm")[1]}')]]),                        
+            )
+        return
+        
+    elif usr_cmdall1.startswith("/start subinps"):
         try:
             ident, file_id = cmd.text.split("_-_-_-_")
             filedetails = await get_file_details(file_id)
@@ -146,8 +157,7 @@ async def start_msg_admins(client, message):
                 return 
             grp1,grp2=grp.split(" ") 
             ban_status = await db.get_ban_status(group_id)
-            if ban_status["is_banned"] == False and group_id != cmd.from_user.id :
-                
+            if ban_status["is_banned"] == False and group_id != cmd.from_user.id :           
                 await client.send_message(
                         chat_id=cmd.from_user.id,
                         text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu Kifurushi cha admin alicho lipia kumtumia robot huyu kimeisha mtaarifu alipie ***\n\n[BONYEZA HAPA KUMTAARIFU](tg://user?id={group_id})\n\n***Ili muweze kuendelea kumutumia robot huyu")
@@ -257,7 +267,6 @@ async def start_msg_admins(client, message):
             grp1,grp2=grp.split(" ")
             if filedetails:
                 if filedetails:  
-                    
                     link = files.descp.split('.dd#.')[2]
                     if link == 'data':
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha text', callback_data = f"xtext {file_id}")],[InlineKeyboardButton('Rekebisha caption', callback_data = f"xcaption {id2}")],[InlineKeyboardButton('Rekebisha video/file',callback_data = f"xfile {id2}")],[InlineKeyboardButton('Rekebisha kundi', callback_data = "xba")],[InlineKeyboardButton('Rekebisha Maelezo ya media', callback_data = f"xdescp {id2}")]])
@@ -303,7 +312,10 @@ async def help_msg(client, message):
 @Bot1.on_message(filters.command('about') & filters.private)
 async def about_msg(client, message):
     user_id = message.from_user.id
-    if await db.is_admin_exist(user_id):
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    if await db.is_admin_exist(user_id,nyva):
         reply_markup = InlineKeyboardMarkup(about_keyboard)
     else:
         reply_markup = InlineKeyboardMarkup(about_keyboard_c)
@@ -335,7 +347,10 @@ async def help_cbq(client, query):
 @Bot1.on_callback_query(filters.regex('^about$'))
 async def about_cbq(client, query):
     user_id = query.from_user.id
-    if await db.is_admin_exist(user_id):
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    if await db.is_admin_exist(user_id,nyva):
         reply_markup = InlineKeyboardMarkup(about_keyboard)
     else:
         reply_markup = InlineKeyboardMarkup(about_keyboard_c)
@@ -362,7 +377,75 @@ async def cb_handler(client, query):
         typed = query.from_user.id
         pass
     if (clicked == typed):
-        if query.data == "kundii":
+        if query.data.startswith("test1"):
+            await query.answer("🎙Soma tangulizi mfupi wa robot huyu kama upo na Viongozi wangu walionitengeneza",show_alert=True,cache_time=10)
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            user_details = await db.is_bot_exist(nyva)
+            if not user_details:
+                return
+            ban_status = await db.get_db_status(user_details)
+            mtext1="""<b>{db_name}</b>
+{descp}
+
+<b>ABOUT THE BOT</b>
+⭐️Mmiliki na anayehusika na robot Huyu:
+**{admin_name}**🥹
+
+☘Developer and designer
+**{owner_name}**🥹
+
+🟡Mda wowote tuma  /msaada utapata maelekezo na kuweza kutatua changamoto yako iwe kwenye kikundi au private ➡️yaani kwenye robot"""
+            st1 = await client.get_users(int(user_details))
+            st2 = await client.get_users(int(OWNER_ID))
+            mtext1=mtext1.format(db_name=ban_status["db_name"].upper(),descp=ban_status["mwongozo"],admin_name=st1.mention.upper(),owner_name=st2.mention.upper())
+            await query.edit_message_text(text=f'{mtext1}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'mbele {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 HITIMISHA", callback_data =f'test1 {query.data.split(" ")[1]}') ]]))
+            await asyncio.sleep(9)
+            await query.edit_message_text(text=f'{mtext1}..',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'mbele {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 HITIMISHA", callback_data =f'fnl {query.data.split(" ")[1]}') ]]))
+        elif query.data.startswith('fnl') :
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            user_details = await db.is_bot_exist(nyva)
+            ban_status = await db.get_db_status(user_details)   
+            await client.restrict_chat_member(int(query.data.split(" ")[1]), query.from_user.id,
+                ChatPermissions(can_send_messages=True)) 
+            inv_link=ban_status["group"].split("##")[1]
+            await query.edit_message_text(text=f'✔️ Shukrani zetu zikufikie wewe uliweza kusoma mpaka hapa nahisi umetuelewa tunahusika na nini pia jinsi ya kupata huduma zetu..\n\n**Tumeshakuruhusu kutuma ujumbe kwenye kikundi ulichojiunga nacho** \n\nBonyeza **KIKUNDI** kurudi kwenye kikundi ',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'test1 {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 KIKUNDI", url =f'{inv_link}') ]]))
+        elif query.data.startswith("mbele"):
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            user_details = await db.is_bot_exist(nyva)
+            if not user_details:
+                return
+            ban_status = await db.get_db_status(user_details)   
+            mtext="""💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥  
+        <b>MWONGOZO {db_name}</b>
+        
+👉Tunahusika na uuzaji wa movie na series kwa njia ya kidigital na kupata movie yako hapo hapo...baada ya  kufanya malipo ya series/movie husika na kuipakua mda wowote saa 24
+📖:Soma kiumakin maana  hutofanya chochote kama muongozo huu huja soma.
+
+☀️Telegram tunatumia roboti kutoa huduma zetu hivyo kila mtu anajihudumia na huduma ni saa 24 kwasababu roboti hachoki, halali wala haishiwi bando cha kufanya fuata maelekezo jinsi ya kupakua huduma zetu.
+
+1⃣Ukitaka movie/singo yoyote ile iwe ya kibongo, ya nje, iliyotafsiriwa au ambayo haijatafsiriwa, anza kwa kuandika MOVIE kisha acha nafasi andika jina la hiyo movie unayotaka. 
+Mfano: MOVIE FAST X.
+
+2⃣Ukitaka series anza kwa kuandika SERIES kisha acha nafasi andika jina la hiyo series unayotaka. 
+Mfano: SERIES GHUM HE.
+
+🚴‍♀Ukifuata maelekezo hayo hapo juu kwa usahihi utaletewa kitu unachotaka na utakachotakiwa kufanya utabonyeza mahali palipoandikwa download kisha ukurasa unaofuata utabonyeza neno START utapata unachotaka au kupata mwongozo jinsi ya kukipakua..
+💥Kumbuka kama series au movie haipo tafadhali bonyeza sehemu husika ili admin aipakie chapu
+
+Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
+            mtext=mtext.format(db_name=ban_status["db_name"].upper())
+            await query.answer("💥Usiharakie mbele Soma kiumakini ntakurudisha hapa utakapo shindwa kufuata muongozo wa huduma zetu",show_alert=True,cache_time=10)
+            await query.edit_message_text(text=f'{mtext}',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'mbele {query.data.split(" ")[1] }')]]))
+            await asyncio.sleep(9)
+            await query.edit_message_text(text=f'{mtext} .',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("MBELE ZAIDI", callback_data =f'test1 {query. data.split(" ")[1] }')]]))
+            
+        elif query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
             grp="grp"
             if ab['g_1']=="hrm45":
@@ -999,33 +1082,39 @@ async def cb_handler(client, query):
                 reply_markup =InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha Makundi', callback_data = "kundii")],[InlineKeyboardButton('Rekebisha Jina la Kikundi', callback_data = "dbname")],[InlineKeyboardButton('Rekebisha Startup sms', callback_data = "startup")],[InlineKeyboardButton('Rekebisha Mawasiliano', callback_data = "xba")]])
             )
         elif query.data.startswith("sss"):
+            ab=''
             bb,ab=query.data.split(' ',1)
             await client.send_message(query.from_user.id,text='101')
-                      
+            ab=str(ab) 
+            strid=bb.split('##')[1]
             try:
-                ab1=ab.split('.#') 
-                await client.send_message(query.from_user.id,text='100')
-                await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab))    
+                ab1=ab.split('##')
+                await client.send_message(query.from_user.id,text=f'100{ab}{bb}')
+                if len(ab1) != 1:
+                    ab1,ab2,ab3,ab4 = ab.split('##')
+                await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab,bb))    
             except:
                 try:
-                    ab1,ab2=ab.split('.#')
+                    ab1,ab2=ab.split('##')
                     await client.send_message(query.from_user.id,text='10')         
-                    await query.edit_message_text(text=f"huklli",reply_markup=btn2(1,ab))    
+                    await query.edit_message_text(text=f"hukllrrri{bb}",reply_markup=btn2(1,ab,bb))    
                 except:
-                    try:
-                        ab1,ab2,ab3=ab.split('.#')
+                    try: 
+                        ab1,ab2,ab3=ab.split('##')
                         dta='start'
-                        icount = ab3
+                        icount = int(ab3)
                         details4 =await get_filter_results(bb.split('##')[1],query.from_user.id)
                         for document in details4:
-                            await client.send_cached_media(
+                            if ab3==document.grp.split('##')[2]:
+                                await client.send_cached_media(
                                         chat_id = query.from_user.id,
-                                        file_id = document.id,
+                                        file_id = document.file,
                                         caption = document.reply,
-                                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='delete',callback_data=f'delte {document.id}')]])
+                                        reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton(text='delete',callback_data=f'3ydelte {document.id}'),InlineKeyboardButton(text='close',callback_data=f'close')]])
                                     )
+                            icount+=1
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
-                        mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
+                        mkv22=await client.send_message(text = text1, chat_id = query.from_user.id)
                         id1=mkv22.id+1
                         while dta!='stop':
                             stridm = str(uuid.uuid4())
@@ -1038,9 +1127,9 @@ async def cb_handler(client, query):
                                     if mk.media != None or mk.text!=None:
                                         id1=id1+1
                                     if (time.time()-b)>(10*60):
-                                        await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
+                                        await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
                                         return
-                                    if mk.from_user.id != message.from_user.id:
+                                    if mk.from_user.id != query.from_user.id:
                                         a=False 
                                 except:
                                     a=False
@@ -1048,10 +1137,10 @@ async def cb_handler(client, query):
                             if mk.media and not (mk.photo):
                                 for file_type in ("document", "video", "audio"):
                                     media = getattr(mk, file_type, None)
-                                if media is not None:
-                                    media.file_type = file_type
-                                    media.caption = mk.caption
-                                    break
+                                    if media is not None:
+                                        media.file_type = file_type
+                                        media.caption = mk.caption
+                                        break
                                 try:
                                     await client.send_cached_media(
                                         chat_id = CHANNELS,
@@ -1059,40 +1148,46 @@ async def cb_handler(client, query):
                                         caption = media.caption,
                                     )
                                     media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
-                                    await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,query.from_user.id,'hrm45',0,f'{ab}')
-                                except:
+                                    await save_file(f'+{icount}.{strid}.{stridm.split("-")[1]}', media.caption, [], media.file_id, media.file_type, stridm,query.from_user.id,'hrm45',0,f'{ab}')
+                                except Exception as e :
                                     await client .send_cached_media(
-                                        chat_id = message.from_user.id,
+                                        chat_id = query.from_user.id,
                                         file_id = media.file_id,
-                                        caption = 'Samahani hii media kusave nmeshindwa huenda caption n kubwa tafadhal punguza kisha itume tena',
+                                        caption =f'❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌ **Samahani hii media nmeshindwa kusave** huenda caption n kubwa tafadhal punguza kisha itume tena \n Au kama hujui tatizo ntumie msimizi maneno haya ili atatue changamoto yako {e} @hrm46',
                                     )
                             elif mk.text.lower()=='stop':
                                 dta = 'stop'
-                                await mk.reply(f'all file sent to database with id  {fileid}')
+                                await mk.reply(f'all file sent to database with id  {strid}')
                                 break
                     
                             icount+=1
                             mkv22.delete()
-                            mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
+                            mkv22=await client.send_message(text =text1, chat_id = query.from_user.id)  
             
-                    except:
-                        pass
-        elif query.data.startswith("ydelte"):
+                    except Exception as e :
+                        await client.send_message(query.from_user.id,text=f'error{e}')         
+                    
+        elif query.data.startswith("3ydelte"):
             id1=query.data.split(" ")[1]                                                              
-            await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'deelte')] ,[InlineKeyboardButton(text='yes',callback_data=f'delte {id1}')]] )                                                                        
+            await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'delte {id1}')] ,[InlineKeyboardButton(text='Close',callback_data=f'close')]]))                                                                        
         elif query.data.startswith("delte"):
-            id1=query.data.split(" ")[1]                                                                 
-            details = await  get_filter_results(id,user_id)
-            for dt in details:
-                await Media.collection.delete_one({'id':dt.id})
-            await Media.collection.delete_one({"id":id1})
-            await query.reply_text(
-                f"imefutika kikamilifu sasa nitumie tena upya ili niadd kwenye database.",
-                quote=True
-            )
+            try:
+                id1=query.data.split(" ")[1]                                                                 
+                await Media.collection.delete_one({"id":id1})
+                await client.send_message(
+                    chat_id =query.from_user.id,
+                    text = f"imefutika kikamilifu",
+                    
+                )
+            except:
+                await client.send_message(
+                      chat_id =query.from_user.id,
+                      text = f"samahani huenda hii media imeshafutwa nmeikosa kwenye database yng  ",
+                      
+                )
                                                                              
-def btn2(ab6,ab22):
-    ab=[]
+def btn2(ab6,ab22,ab34):
+    ab77=[]
     ab7="n"
     try:
         ab6=int(ab6)
@@ -1105,12 +1200,12 @@ def btn2(ab6,ab22):
         if ab6==10 or ab6==1:
             ab8 = f"{ab6*(ab9-1)}1 hadi {ab6*(ab9)}0" 
             ab10 = f"{ab6*(ab9)}1 hadi {ab6*(ab9+1)}0"
-            ab.append([
-                InlineKeyboardButton(f"{ab8}", callback_data =f"sss {ab22}.#{ab6*(ab9)}0"),
-                InlineKeyboardButton(f"{ab10}", callback_data =f"sss {ab22}.#{ab6*(ab9+1)}0")
+            ab77.append([
+                InlineKeyboardButton(f"{ab8}", callback_data =f"{ab34} {ab22}##{ab6*(ab9)}0"),
+                InlineKeyboardButton(f"{ab10}", callback_data =f"{ab34} {ab22}##{ab6*(ab9+1)}0")
             ])
         ab9=ab9+1
-    return InlineKeyboardMarkup(ab)
+    return InlineKeyboardMarkup(ab77)
 
 def replymkup2(msg2,msg4):
     msg1 = msg2.split('tsh ')[1]
