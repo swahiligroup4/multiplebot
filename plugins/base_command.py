@@ -3,7 +3,7 @@ import uuid
 import time 
 import asyncio
 from pyrogram.errors import ChatAdminRequired
-from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file
+from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file,add_user
 from botii  import Bot1,Bot
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
@@ -95,7 +95,7 @@ async def start_msg_admins(client, message):
                 username = '' if message.from_user.username == None else '@'+message.from_user.username
             )
        else:
-           text = f"Samahani Mpendwa **{message.from_user.mention}** \n\nRudi kwenye kikundi kwa kubonyeza hii link {ban_status['group'].split('##')[1]}\n\nkisha tuma neno muongozo \n ili kuweza kujua jinsi ya kupata huduma za robot huyu"       
+           text = f"Samahani Mpendwa **{message.from_user.mention}** \n\nRudi kwenye main group kwa kubonyeza hii link {ban_status['group'].split('##')[1]}\n\nkisha tuma neno muongozo \n ili kuweza kujua jinsi ya kupata huduma za robot huyu Au Soma maelekezo utakayo pewa ili kusoma muongozo"       
     except Exception as e:
         text = f'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa{e}'     
     usr_cmdall1 = message.text
@@ -411,6 +411,8 @@ async def cb_handler(client, query):
             ban_status = await db.get_db_status(user_details)   
             await client.restrict_chat_member(int(query.data.split(" ")[1]), query.from_user.id,
                 ChatPermissions(can_send_messages=True)) 
+            hjkl = f'{user_details}##{query.from_user.id}'
+            await add_user(hjkl,nyva)
             inv_link=ban_status["group"].split("##")[1]
             await query.edit_message_text(text=f'✔️ Shukrani zetu zikufikie wewe uliweza kusoma mpaka hapa nahisi umetuelewa tunahusika na nini pia jinsi ya kupata huduma zetu..\n\n**Tumeshakuruhusu kutuma ujumbe kwenye kikundi ulichojiunga nacho** \n\nBonyeza **KIKUNDI** kurudi kwenye kikundi ',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'test1 {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 KIKUNDI", url =f'{inv_link}') ]]))
         elif query.data.startswith("mbele"):
@@ -421,10 +423,10 @@ async def cb_handler(client, query):
             if not user_details:
                 return
             ban_status = await db.get_db_status(user_details)   
-            mtext="""💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥  
-        <b>MWONGOZO {db_name}</b>
+            mtext="""💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥  
+        <b>MWONGOZO {db_name}</b>
         
-👉Tunahusika na uuzaji wa movie na series kwa njia ya kidigital na kupata movie yako hapo hapo...baada ya  kufanya malipo ya series/movie husika na kuipakua mda wowote saa 24
+👉Tunahusika na uuzaji wa movie na series kwa njia ya kidigital na kupata movie yako hapo hapo...baada ya  kufanya malipo ya series/movie husika na kuipakua mda wowote saa 24
 📖:Soma kiumakin maana  hutofanya chochote kama muongozo huu huja soma.
 
 ☀️Telegram tunatumia roboti kutoa huduma zetu hivyo kila mtu anajihudumia na huduma ni saa 24 kwasababu roboti hachoki, halali wala haishiwi bando cha kufanya fuata maelekezo jinsi ya kupakua huduma zetu.
