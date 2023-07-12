@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton,ChatPermiss
 from info import filters
 from plugins.status import handle_admin_status
 from plugins.database import db
-from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed
+from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user
 
 @Bot1.on_message(filters.new_chat_members)
 async def grouup(client, message):
@@ -32,7 +32,12 @@ async def group(client, message):
             text=f"Ndugu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
             await message.reply_text(f"{text}")
             return 
-
+    try:
+        hjkl = f'{user_id3}##{message.from_user.id}'
+        if not await is_user_exist(hjkl,nyva):
+            await add_user(hjkl,nyva)         
+    except :
+        pass
     user_id4 = gd['user_link']
     if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
         return
@@ -45,7 +50,7 @@ async def group(client, message):
                 id3 = document.id
                 reply_text = document.reply
                 button = document.btn
-                alert = document.alert
+                alert = document.price
                 file_status = document.grp
                 fileid = document.file
                 keyword = document.text.split('.dd#.',1)[0]
