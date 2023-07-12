@@ -18,20 +18,23 @@ from info import filters,OWNER_ID,CHANNELS,AUTH_CHANNEL
 BOT = {}
 @Bot1.on_inline_query(filters.inline)
 async def give_filter(client, query):
-    if not await is_subscribed(client, query,CHANNELS):
-        await query.answer(results=[],
-                           cache_time=0,
-                           switch_pm_text='👉 Bonyeza hapa kujoin channel kupata updates zake',
-                           switch_pm_parameter="subscribe")
-        return
+
     nyva=BOT.get("username")
     if not nyva:
         botusername=await client.get_me()
         nyva=botusername.username
         BOT["username"]=nyva
     group_id= await db.is_bot_exist(nyva)
-    userdetails1= await is_user_exist(query.from_user.id,nyva)
+    hjkl = f'{group_id}##{query.from_user.id}'  
+    userdetails1= await is_user_exist(hjkl,nyva)
     text = query.query.strip()
+    db_sts =await db.get_db_status(group_id)
+    if not await is_subscribed(client, query,int(db_sts['channels'].split('##')[0])):
+        await query.answer(results=[],
+                           cache_time=0,
+                           switch_pm_text='👉 Bonyeza hapa kujoin channel kupata updates zake',
+                           switch_pm_parameter="subscribe")
+        return
     if not userdetails1:
         await query.answer(results=[],
             cache_time=0,
@@ -39,7 +42,6 @@ async def give_filter(client, query):
             switch_pm_parameter="start")
         return
     ban = await db.get_ban_status(group_id) 
-    db_sts =await db.get_db_status(group_id)
     offset = int(query.offset or 0)
     documents, next_offset = await get_search_results(text,
                                               group_id = group_id,
@@ -51,7 +53,7 @@ async def give_filter(client, query):
         id3 = document.id
         reply_text = document.reply
         button = document.btn
-        alert = document.alert
+        alert = document.price
         file_status = document.grp
         fileid = document.file
         keyword = document.text.split('.dd#.',1)[0]
