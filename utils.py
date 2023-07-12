@@ -1,4 +1,4 @@
-import re
+import re  
 import base64
 import logging
 from struct import pack
@@ -29,7 +29,7 @@ class Media(Document):
     type = fields.StrField(required=True)
     group_id = fields.IntField(required=True)
     descp = fields.StrField(required=True)
-    price = fields.IntField(required=True)
+    price = fields.StrField(required=True)
     grp = fields.StrField(required=True)
     class Meta:
         collection_name = COLLECTION_NAME
@@ -37,17 +37,15 @@ class Media(Document):
 @imdb.register
 class User(Document):
     id = fields.StrField(attribute='_id')
-    user_id = fields.IntField(required=True )
     rbt =fields.StrField(required=True)
     email = fields.StrField(required=True)
     class Meta:
         collection_name = COLLECTION_NAME_2
-
-async def add_user(id, usr,sts):
+        
+async def add_user(id,sts):
     try:
         data = User(
             id = id,
-            user_id = usr,
             rbt = sts,
             email = 'hrm45'
         )
@@ -90,7 +88,7 @@ async def save_file(text,reply,btn,file,type,id,user_id,descp,prc,grp):
             type=str(type),
             group_id =user_id,
             descp=descp,
-            price = prc,
+            price = str(prc),
             grp = grp
        )
     except ValidationError:
