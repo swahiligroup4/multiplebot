@@ -208,7 +208,7 @@ async def start_msg_admins(client, message):
                     return
                 elif strg.lower() == 's':
                     link = files.descp.split('.dd#.')[2]
-                    f_caption =f'{f_caption}\n💥Kama huwezi kufungua link zetu \ntuma **email yako**\nMfano**mohamed@gmail.com **\nkumbuka tuma kwa herufi ndogo \n\n**[BONYEZA HAPA](tg://user?id={int(group_id)})**\nNikupe maelekezo\n🌟 @Bandolako2bot'
+                    f_caption =f'{f_caption}\n💥Kama huwezi kufungua link zetu \ntuma **email yako**\nMfano**mohamed@gmail.com **\nkumbuka tuma kwa herufi ndogo \n\n**[BONYEZA HAPA](tg://user?id={int(group_id)})**\nNikupe maelekezo\n🌟@{nyva}'
                     if msg_type =="Photo":
                         await client.send_photo(
                             chat_id=cmd.from_user.id,
