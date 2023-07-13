@@ -712,6 +712,7 @@ async def del_filter(client, message):
     if int(found) >=1:
         for dt in details:
             for ad in await get_file_details(dt.id):
+               await client.send_message(chat_id=message.from_user.id,text="hi")
                await Media.collection.delete_one({'id':ad.id})
         await Media.collection.delete_one(filter)
         await message.reply_text(
