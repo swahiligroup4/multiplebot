@@ -72,10 +72,12 @@ async def save_file(text,reply,btn,file,type,id,user_id,descp,prc,grp):
     elif prc =='chec':
         return
     if found and prc=='hrm46':
-        details = await  get_filter_results(id,user_id)
-        for dt in details:
-            for ad in await get_file_details(dt.id):
-                await Media.collection.delete_one({'text':ad.text})
+        dtav =await get_filter_results(text,user_id)
+        for dt3 in dtav:
+            details = await  get_filter_results(id,user_id)
+            for dt in details:
+                for ad in await get_file_details(dt.id):
+                    await Media.collection.delete_one({'_id':ad.id})
         await Media.collection.delete_one(fdata)
         return
     try:
