@@ -704,10 +704,10 @@ async def del_filter(client, message):
         )
         return
     text=f'{text1}.dd#.{message.from_user.id}'
-    query = text1.lower()
+    query = text.lower()
     filter={'text': query}
     details = await  get_filter_results(query,message.from_user.id)
-    #filter['group_id'] = message.from_user.id
+    filter['group_id'] = message.from_user.id
     found =await Media.count_documents(filter)
     if int(found) >=0:
         for dt in details:
