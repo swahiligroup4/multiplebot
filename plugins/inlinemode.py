@@ -149,7 +149,7 @@ async def give_filter(client, query):
                 title=title,
                 input_message_content=InputTextMessageContent(message_text = text1, disable_web_page_preview = True),
                 description=f'Gusa hapa kupata melezo zaid na maelekezo '
-                
+                 
             ))
         await query.answer(
             results = result,
