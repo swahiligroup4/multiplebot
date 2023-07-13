@@ -707,14 +707,14 @@ async def del_filter(client, message):
     query = text1.lower()
     filter={'text': query}
     details = await  get_filter_results(query,message.from_user.id)
-    filter['group_id'] = message.from_user.id
+    #filter['group_id'] = message.from_user.id
     found =await Media.count_documents(filter)
     if int(found) >=1:
         for dt in details:
             for ad in await  get_filter_results(dt.id,message.from_user.id):
                await client.send_message(chat_id=message.from_user.id,text="hi")
                await Media.collection.delete_one({'id':ad.id})
-        await Media.collection.delete_one(filter)
+            await Media.collection.delete_one(filter)
         await message.reply_text(
             f"<code>{text.split('.dd#.')[0]}</code>  deleted successful.",
             quote=True
