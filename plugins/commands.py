@@ -354,7 +354,7 @@ async def new_filtervip(client, message):
                                 caption = media.caption,
                             )
                             media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
-                            await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,user_id,'x.dd#.batch_name',500,'normal')
+                            await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,user_id,'d.dd#.batch_name',500,'normal')
                         except:
                             await client .send_cached_media(
                                 chat_id = message.from_user.id,
