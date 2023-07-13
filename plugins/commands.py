@@ -213,8 +213,7 @@ async def new_filtervip(client, message):
     try:
         ab1=int(mkv.text)
         if ab1==0:
-            await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa, tafadhali anza upya kwa usahihi')
-            return
+            await mkv.reply(text='Movie hii umeset iwe bure kwa wateja wako endelea kujaza maelezo mengine')
     except:
         await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi')
         return
