@@ -169,19 +169,19 @@ async def start_msg_admins(client, message):
                         chat_id=cmd.from_user.id,
                         photo=files.file,
                         caption=f_caption,
-                        #reply_markup=reply_markup
-                    )      
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔗 DOWNLOAD",url= f'https://t.me/{nyva}?start=subinps_-_-_-_{file_id}')]])
+                    )     
                 else:
                     await client.send_cached_media(
                         chat_id=cmd.from_user.id,
                         file_id=files.file,
                         caption=f_caption,
-                        #reply_markup=reply_markup 
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔗 DOWNLOAD",url= f'https://t.me/{nyva}?start=subinps_-_-_-_{file_id}')]])
                     )
                              
                 await client.send_message(
                     chat_id=cmd.from_user.id,
-                    text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n Tafadhal chagua nchi uliopo kuweza kulipia uweze kuitazama",
+                    text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n Tafadhal chagua nchi uliopo kuweza kulipia uweze kuitazama \n\n**Kisha baada ya kufanya malipo na kuthibitishiwa malipo yako na admin utabonyeza download hapo juu kuipata movie yako kama utalipia kifurushi utazipakua nyingine zaid kwenye kikundi....** ",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -196,7 +196,7 @@ async def start_msg_admins(client, message):
             if filedetails:
                 if filedetails:
                     if strg.lower() == 'm':
-                        filez=await get_filter_results(file_id,group_id)
+                        filez=await get_filter_results( file_id ,group_id)
                         for file in reversed(filez):
                             filedetails = await get_file_details(file.id)
                             for files in filedetails:
