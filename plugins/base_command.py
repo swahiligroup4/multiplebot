@@ -164,34 +164,13 @@ async def start_msg_admins(client, message):
                         text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu Kifurushi cha admin alicho lipia kumtumia robot huyu kimeisha mtaarifu alipie ***\n\n[BONYEZA HAPA KUMTAARIFU](tg://user?id={group_id})\n\n***Ili muweze kuendelea kumutumia robot huyu")
                 return
             if (not (await db.is_acc_exist(cmd.from_user.id,grp1,group_id) or await db.is_acc_exist(cmd.from_user.id,id2,group_id) or await db.is_acc_exist(cmd.from_user.id,grp2,group_id))) or prc == '0' and group_id != cmd.from_user.id :
-                faund=False
-                filez=await get_filter_results(file_id,group_id)
-                for file in reversed(filez):
-                    filedetails = await get_file_details(file.id)
-                    for files in filedetails:
-                        try:
-                            files.text.split('##')[1]
-                        except:
-                            faund=True
-                            break
-                        f_caption=files.reply
-                        await client.send_cached_media(
-                            chat_id=cmd.from_user.id,
-                            file_id=files.file,
-                            caption=f_caption
-                        )
-                if not filez:
-                    reply_markup=[]
-                elif faund:
-                    reply_markup=[]
                 if msg_type =="Photo":
                     await client.send_photo(
                         chat_id=cmd.from_user.id,
                         photo=files.file,
                         caption=f_caption,
                         #reply_markup=reply_markup
-                    )
-                        
+                    )      
                 else:
                     await client.send_cached_media(
                         chat_id=cmd.from_user.id,
