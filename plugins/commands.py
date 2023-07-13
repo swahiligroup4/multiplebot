@@ -704,17 +704,17 @@ async def del_filter(client, message):
         )
         return
     text=f'{text1}.dd#.{message.from_user.id}'
-    query = text1.lower()
+    query = text.lower()
     filter={'text': query}
     details = await  get_filter_results(query,message.from_user.id)
     filter['group_id'] = message.from_user.id
     found =await Media.count_documents(filter)
-    if int(found) >=0:
+    if int(found) >=1:
         for dt in details:   
             for ad in await  get_filter_results(dt.id,message.from_user.id):
                await client.send_message(chat_id=message.from_user.id,text="hi")
                await Media.collection.delete_one({'_id':ad.id})
-            await Media.collection.delete_one({'_id':dt.id})
+            await Media.collection.delete_one(filter)
             await message.reply_text(
                 f"<code>{text.split('.dd#.')[0]}</code>  deleted successful.",
                 quote=True
@@ -729,9 +729,11 @@ async def get_all(client, message):
     status= await db.is_admin_exist(message.from_user.id,nyva)
     if not status:
         return
-    text = ''
+    text = f'{message.from_user.id}'
+    filter={'text':text}
+    filter["group_id"]=message.from_user.id
     texts = await get_filter_results(text,message.from_user.id)
-    count = await Media.count_documents({'group_id':message.from_user.id})
+    count = await Media.count_documents(filter)
     if count:
         filterlist = f"<b>Bot have total {count} filters</b>\n\n"
 
