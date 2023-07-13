@@ -194,10 +194,9 @@ async def start_msg_admins(client, message):
                 return
             strg=files.descp.split('.dd#.')[3]
             if filedetails:
-                if filedetails:
                 if strg.lower() == 'm':
-                     filez=await get_filter_results( file_id ,group_id)
-                     for file in reversed(filez):
+                    filez=await get_filter_results( file_id ,group_id)
+                    for file in reversed(filez):
                         filedetails = await get_file_details(file.id)
                         for files in filedetails:
                             f_caption=files.reply
