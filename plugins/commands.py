@@ -711,7 +711,7 @@ async def del_filter(client, message):
     found =await Media.count_documents(filter)
     if int(found) >=1:
         for dt in details:
-            for ad in await  get_filter_results(dt.id,message.from_user.id)::
+            for ad in await  get_filter_results(dt.id,message.from_user.id):
                await client.send_message(chat_id=message.from_user.id,text="hi")
                await Media.collection.delete_one({'id':ad.id})
         await Media.collection.delete_one(filter)
