@@ -153,44 +153,47 @@ async def new_filtervip(client, message):
             x+=1
             p.append(usr[gs].split('#@')[0])
             usrr=f'{usrr}\n{x}:{usr[gs].split("#@")[0]}'
-    mkv1= await client.send_message(text=f'CHAGUA KIFURUSHI WAKILISHI YA KITU UNACHOTAKA KUHIFADHI \n (kwa kutuma namba ya kifurush husika kama imemilikiwa na zaid ya kifurushi kimoja tuma namba kifurushi kisha acha nafasi namba ya kifurushi kingine mfano 1 3 NOTE Media ina weza kumilikiwa na kifurushi 1 au viwili Tu sio zaidi)\n\n{usrr} ',chat_id = message.from_user.id)
-    a,b = funask()
-    id1=mkv1.id + 1
-    while a==False:
-        try:
-            mkv = await client.get_messages("me",id1)
-            if mkv.text!=None:
-                a=True
-            if (time.time()-b)>(60):
-                await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 1 iliniweze kuhudumia na wengine")
-                return
-            if mkv.from_user.id != message.from_user.id :
+    if usrr ==' ':
+        ab2 = f'g_0 hrm44'
+    else:
+        mkv1= await client.send_message(text=f'CHAGUA KIFURUSHI WAKILISHI YA KITU UNACHOTAKA KUHIFADHI \n (kwa kutuma namba ya kifurush husika kama imemilikiwa na zaid ya kifurushi kimoja tuma namba kifurushi kisha acha nafasi namba ya kifurushi kingine mfano 1 3 NOTE Media ina weza kumilikiwa na kifurushi 1 au viwili Tu sio zaidi)\n\n{usrr} ',chat_id = message.from_user.id)
+        a,b = funask()
+        id1=mkv1.id + 1
+        while a==False:
+            try:
+                mkv = await client.get_messages("me",id1)
+                if mkv.text!=None:
+                    a=True
+                if (time.time()-b)>(60):
+                    await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 1 iliniweze kuhudumia na wengine")
+                    return
+                if mkv.from_user.id != message.from_user.id :
+                    a=False
+                    id1=id1+1
+            except:
                 a=False
-                id1=id1+1
-        except:
-            a=False
-    try:
-        mkev=mkv.text.strip()
-        ab5,ab6=mkev.split(" ",1)
-        ab5= int(ab5)
-        ab6 = int(ab6)
-        if ab6>i<ab5 or ab5==ab6 or ab5==0 or ab6==0:
-            await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa idadi ya kutuma mwisho ni 6 anza upya')
-            return
-        ab7='y'
-        ab2 = f'g_{ab5} g_{ab6}'
-    except:
-        pass
-    if ab7!='y':
         try:
-            ab00 = int(mkv.text)
-            ab2 = f'g_{ab00} hrm44'
-            if i<ab00 and ab00!=0:
+            mkev=mkv.text.strip()
+            ab5,ab6=mkev.split(" ",1)
+            ab5= int(ab5)
+            ab6 = int(ab6)
+            if ab6>i<ab5 or ab5==ab6 or ab5==0 or ab6==0:
                 await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa idadi ya kutuma mwisho ni 6 anza upya')
                 return
+            ab7='y'
+            ab2 = f'g_{ab5} g_{ab6}'
         except:
-            await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa anza upya')
-            return
+            pass
+        if ab7!='y':
+            try:
+                ab00 = int(mkv.text)
+                ab2 = f'g_{ab00} hrm44'
+                if i<ab00 and ab00!=0:
+                    await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa idadi ya kutuma mwisho ni 6 anza upya')
+                    return
+            except:
+                await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa anza upya')
+                return
     mkv1 = await client.send_message(text=f'tafadhal naomba utume bei(namba tu) ya **{ab}** kama ni bure tuma namba 0 mfano 500. **(Kumbuka Hamna bei 0 ukiweka movie/Series hii itakuea free kwa wateja wako)**',chat_id = message.from_user.id)
     a,b = funask()
     id1=mkv1.id+1
