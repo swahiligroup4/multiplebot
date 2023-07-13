@@ -714,11 +714,11 @@ async def del_filter(client, message):
             for ad in await  get_filter_results(dt.id,message.from_user.id):
                await client.send_message(chat_id=message.from_user.id,text="hi")
                await Media.collection.delete_one({'id':ad.id})
-            await Media.collection.delete_one(filter)
-        await message.reply_text(
-            f"<code>{text.split('.dd#.')[0]}</code>  deleted successful.",
-            quote=True
-        )
+            await Media.collection.delete_one({'id':dt.id})
+            await message.reply_text(
+                f"<code>{text.split('.dd#.')[0]}</code>  deleted successful.",
+                quote=True
+            )
     else:
         await message.reply_text("Couldn't find that filter!", quote=True)
 @Bot1.on_message(filters.private & filters.command('filters'))
