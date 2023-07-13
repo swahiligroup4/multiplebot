@@ -703,8 +703,8 @@ async def del_filter(client, message):
             quote=True
         )
         return
-    text=f'{text1}.dd#.{message.from_user.id}'
-    query = text.lower()
+    #text=f'{text1}.dd#.{message.from_user.id}'
+    query = text1.lower()
     filter={'text': query}
     details = await  get_filter_results(text,message.from_user.id)
     filter['group_id'] = message.from_user.id
