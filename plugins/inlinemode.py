@@ -58,6 +58,7 @@ async def give_filter(client, query):
         fileid = document.file
         keyword = document.text.split('.dd#.',1)[0]
         msg_type = document.type
+        await client.send_message(chat_id=query.from_user.id,textf"{document.descp}")
         descp = document.descp.split('.dd#.')[1]
         acs = document.descp.split('.dd#.')[0]
         if button =="[]":
