@@ -658,14 +658,13 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             if descp[2]!="data":
                 a=False
                 b=time.time()
-                mkv1 = await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️\nNtumie link mpya ya series/movie hii')
+                mkv1 = await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️\nNtumie link mpya ya series/movie hii Au neno **video** ubadilshe kutoka kwenye mfumo wa link kwenda kwenye vipande')
                 id1=mkv1.id+1
                 while a==False:
                     try:
                         mkv = await client.get_messages("me",id1)
                         if mkv.text!=None:
                             a=True
-                    
                         if (time.time()-b)>100:
                             mkv2 = await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 1 iliniweze kuhudumia na wengine")
                             return
@@ -674,13 +673,41 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                             id1=id1+1
                     except:
                         a=False
-                
                 if mkv.text==None:
                     await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali tuna maneno sio picha wala kingine")
                     return
+                if mkv.text.lower()=="video":
+                    mkv22 = await client.send_message(text=f'Samahani kidogo naomba utume neno m kama hii n singo movie au s kama n series ',chat_id = message.from_user.id)
+                    a,b = funask()
+                    id1 = mkv22.id+1
+                    while a==False:
+                    try:
+                        mkvl1 = await client.get_messages("me",id1)
+                        if mkvl1.text!=None:
+                            a=True
+                        if (time.time()-b)>(3*60):
+                            await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 3 iliniweze kuhudumia na wengine")
+                            return
+                        if mkvl1.from_user.id != message.from_user.id :
+                            a=False
+                            id1=id1+1
+                    except:
+                        a=False
+                    if mkvl1.text.lower()!='m' and mkvl1.text.lower()!='s' :
+                        await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi kama umeambia tuma s kwa series au m kwa movie ugumu hapo upo wap jamani')
+                        return
+                    if mkvl1.text.lower()=='m':
+                        ab33='m'
+                    elif mkvl1.text.lower()=='s':
+                        ab33='ms'
+                    descp=descp[0]+".dd#."+descp[1]+".dd#.data.dd#."+ab33
+                    await Media.collection.update_one({'_id':query.data.split(" ",1)[1]},{'$set':{'descp':descp}})
+                    await mkv.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
                 descp=descp[0]+".dd#."+descp[1]+".dd#."+mkv.text+".dd#."+descp[3]
                 await Media.collection.update_one({'_id':query.data.split(" ",1)[1]},{'$set':{'descp':descp}})
                 await mkv.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
+            
+                
         elif query.data.startswith("xdescp"): 
             filedetails = await get_file_details(query.data.split(" ",1)[1])
             await query.answer(f'{query.data.split(" ",1)[1]}')
