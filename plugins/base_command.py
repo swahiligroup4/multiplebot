@@ -681,18 +681,18 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                     a,b = funask()
                     id1 = mkv22.id+1
                     while a==False:
-                    try:
-                        mkvl1 = await client.get_messages("me",id1)
-                        if mkvl1.text!=None:
-                            a=True
-                        if (time.time()-b)>(3*60):
-                            await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 3 iliniweze kuhudumia na wengine")
-                            return
-                        if mkvl1.from_user.id != message.from_user.id :
+                        try:
+                            mkvl1 = await client.get_messages("me",id1)
+                            if mkvl1.text!=None:
+                                a=True
+                            if (time.time()-b)>(3*60):
+                                await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 3 iliniweze kuhudumia na wengine")
+                                return
+                            if mkvl1.from_user.id != message.from_user.id :
+                                a=False
+                                id1=id1+1
+                        except:
                             a=False
-                            id1=id1+1
-                    except:
-                        a=False
                     if mkvl1.text.lower()!='m' and mkvl1.text.lower()!='s' :
                         await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi kama umeambia tuma s kwa series au m kwa movie ugumu hapo upo wap jamani')
                         return
