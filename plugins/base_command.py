@@ -707,8 +707,8 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                     descp=descp[0]+".dd#."+descp[1]+".dd#."+mkv.text+".dd#."+descp[3]
                     await Media.collection.update_one({'_id':query.data.split(" ",1)[1]},{'$set':{'descp':descp}})
                     await mkv.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
-            
-                
+            else:
+                await mkvl1.reply_text("hi",reply_markup=btn22("season","series",f"sss##{ query.data.split(" ",1)[1] }"))
         elif query.data.startswith("xdescp"): 
             filedetails = await get_file_details(query.data.split(" ",1)[1])
             await query.answer(f'{query.data.split(" ",1)[1]}')
