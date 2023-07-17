@@ -1251,3 +1251,24 @@ def replymkup3(ab,typ,nmb):
     ab2=[InlineKeyboardButton(text = f'🦋 RUDI NYUMA' , callback_data = f'zkb')]
     ab3.append(ab2)
     return InlineKeyboardMarkup(ab3)
+def btn22(ab6,ab22,ab43):
+    ab=[]
+    ab7="n"
+    try:
+        ab6=int(ab6)
+        ab7="y"
+    except:
+        pass
+    ab9=0
+    for i in range(0,5):
+        ab9=ab9+1
+        if ab7=="n":
+            ab8=f"season {ab9}"
+            ab11=ab9+1
+            ab10=f"season {ab11}"
+            ab.append([
+                InlineKeyboardButton(f"{ab8}", callback_data =f"{ab43} s{ab9}"),
+                InlineKeyboardButton(f"{ab10}", callback_data =f"{ab43} s{ab11}")
+            ])
+        ab9=ab9+1
+    return InlineKeyboardMarkup(ab)
