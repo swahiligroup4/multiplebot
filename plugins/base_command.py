@@ -1164,6 +1164,8 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                                     )
                             elif mk.text.lower()=='stop':
                                 dta = 'stop'
+                                await query.message.forward(chat_id=query.from_user.id)
+                                await query.message.delete()
                                 await mk.reply(f'all file sent to database with id  {strid}')
                                 break
                     
