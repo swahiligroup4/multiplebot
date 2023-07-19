@@ -1091,19 +1091,16 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
         elif query.data.startswith("sss"):
             ab=''
             bb,ab=query.data.split(' ',1)
-            await client.send_message(query.from_user.id,text='101')
             ab=str(ab) 
             strid=bb.split('##')[1]
             try:
                 ab1=ab.split('##')
-                await client.send_message(query.from_user.id,text=f'100{ab}{bb}')
                 if len(ab1) != 1:
                     ab1,ab2,ab3,ab4 = ab.split('##')
                 await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab,bb))    
             except:
                 try:
                     ab1,ab2=ab.split('##')
-                    await client.send_message(query.from_user.id,text='10')         
                     await query.edit_message_text(text=f"hukllrrri{bb}",reply_markup=btn2(1,ab,bb))    
                 except:
                     try: 
@@ -1164,8 +1161,9 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                                     )
                             elif mk.text.lower()=='stop':
                                 dta = 'stop'
-                                await query.message.copy(chat_id=query.from_user.id)
                                 await query.message.delete()
+                                await query.message.copy(chat_id=query.from_user.id)
+                                
                                 await mk.reply(f'all file sent to database with id  {strid}')
                                 break
                     
