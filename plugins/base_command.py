@@ -1097,11 +1097,11 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                 ab1=ab.split('##')
                 if len(ab1) != 1:
                     ab1,ab2,ab3,ab4 = ab.split('##')
-                await query.edit_message_text(text=f"huklli",reply_markup=btn2(10,ab,bb))    
+                await query.edit_message_caption(caption=f'{query.message.caption}\n\n Chagua button husika kuadi vipande vya series hii',reply_markup=btn2(10,ab,bb))    
             except:
                 try:
                     ab1,ab2=ab.split('##')
-                    await query.edit_message_caption(caption=f'{query.message.caption}\n\n Chagua button husika kuad series',reply_markup=btn2(1,ab,bb))    
+                    await query.edit_message_caption(caption=f'{query.message.caption}\n\n Chagua button husika ili kuad vipande vya  series hii',reply_markup=btn2(1,ab,bb))    
                 except:
                     try: 
                         ab1,ab2,ab3=ab.split('##')
