@@ -1101,7 +1101,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             except:
                 try:
                     ab1,ab2=ab.split('##')
-                    await query.edit_message_text(text=f"hukllrrri{bb}",reply_markup=btn2(1,ab,bb))    
+                    await query.edit_message_caption(caption=f'{query.message.caption}\n\n Chagua button husika kuad series',reply_markup=btn2(1,ab,bb))    
                 except:
                     try: 
                         ab1,ab2,ab3=ab.split('##')
@@ -1120,6 +1120,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                         text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
                         mkv22=await client.send_message(text = text1, chat_id = query.from_user.id)
                         id1=mkv22.id+1
+                        await query.message.delete()
                         while dta!='stop':
                             stridm = str(uuid.uuid4())
                             a,b = funask()
@@ -1161,9 +1162,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                                     )
                             elif mk.text.lower()=='stop':
                                 dta = 'stop'
-                                await query.message.delete()
-                                await query.message.copy(chat_id=query.from_user.id)
-                                
+                                await query.message.copy(chat_id=query.from_user.id)    
                                 await mk.reply(f'all file sent to database with id  {strid}')
                                 break
                     
@@ -1181,10 +1180,9 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             try:
                 id1=query.data.split(" ")[1]                                                                 
                 await Media.collection.delete_one({"_id":id1})
-                await client.send_message(
-                    chat_id =query.from_user.id,
-                    text = f"imefutika kikamilifu",
-                    
+                await query.edit_message_caption(
+                    caption = f"imefutika kikamilifu bonyeza close kuifuta hapa",  
+                    reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='Close',callback_data=f'close')]])
                 )
             except:
                 await client.send_message(
