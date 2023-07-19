@@ -1180,7 +1180,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
         elif query.data.startswith("delte"):
             try:
                 id1=query.data.split(" ")[1]                                                                 
-                await Media.collection.delete_one({"id":id1})
+                await Media.collection.delete_one({"_id":id1})
                 await client.send_message(
                     chat_id =query.from_user.id,
                     text = f"imefutika kikamilifu",
