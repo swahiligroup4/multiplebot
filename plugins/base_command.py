@@ -251,7 +251,7 @@ async def start_msg_admins(client, message):
                     else:
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha text', callback_data = f"xtext {file_id}")],[InlineKeyboardButton('Rekebisha caption', callback_data = f"xcaption {id2}")],[InlineKeyboardButton('Rekebisha link', callback_data = f"xfile {id2}")],[InlineKeyboardButton('Rekebisha kundi', callback_data = "xba")],[InlineKeyboardButton('Rekebisha Maelezo ya media', callback_data = f"xdescp {id2}")]])
             
-                    f_caption =f'{f_caption}\n\n**chagua kitu cha kuedit kwa kubonyeza button husika \n@Bandolako2bot'
+                    f_caption =f'{f_caption}\n\n**...chagua kitu cha kuedit kwa kubonyeza button husika \n@Bandolako2bot'
                     if msg_type =="Photo":
                         await client.send_photo(
                             chat_id=cmd.from_user.id,
@@ -1097,11 +1097,11 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                 ab1=ab.split('##')
                 if len(ab1) != 1:
                     ab1,ab2,ab3,ab4 = ab.split('##')
-                await query.edit_message_caption(caption=f'{query.message.caption}\n\n Chagua button husika kuadi vipande vya series hii',reply_markup=btn2(10,ab,bb))    
+                await query.edit_message_caption(caption=f'{query.message.caption.split("...")[0]}\n\n Chagua button husika kuadi vipande vya series hii kwa mpangilio.Note kama usha tuma vipande vya nyuma vitatumwa kama kuna ambacho ulikosea waeza futa kisha ukatuma tena..kama sivyo bonyeza close kwenye kila kipande',reply_markup=btn2(10,ab,bb))    
             except:
                 try:
                     ab1,ab2=ab.split('##')
-                    await query.edit_message_caption(caption=f'{query.message.caption}\n\n Chagua button husika ili kuad vipande vya  series hii',reply_markup=btn2(1,ab,bb))    
+                    await query.edit_message_caption(caption=f'{query.message.caption}',reply_markup=btn2(1,ab,bb))    
                 except:
                     try: 
                         ab1,ab2,ab3=ab.split('##')
