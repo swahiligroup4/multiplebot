@@ -1099,7 +1099,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                 ab1=ab.split('##')
                 if len(ab1) != 1:
                     ab1,ab2,ab3,ab4 = ab.split('##')
-                await query.edit_message_caption(caption=f'{query.message.caption}',reply_markup=btn2(10,ab,bb))    
+                await query.edit_message_caption(caption=f'{query.message.caption}_',reply_markup=btn2(10,ab,bb))    
             except:
                 try:
                     ab1,ab2=ab.split('##')
