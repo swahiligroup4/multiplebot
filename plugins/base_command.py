@@ -1090,7 +1090,11 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             await query.edit_message_text(text="chagua huduma unayotaka kufanya marekebisho",
                 reply_markup =InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha Makundi', callback_data = "kundii")],[InlineKeyboardButton('Rekebisha Jina la Kikundi', callback_data = "dbname")],[InlineKeyboardButton('Rekebisha Startup sms', callback_data = "startup")],[InlineKeyboardButton('Rekebisha Mawasiliano', callback_data = "xba")]])
             )
-        
+        elif query.data.startswith("4ddd"):
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            await query.edit_message_reply_markup(reply_markup=btn22(nyva,"series",f"sss##{query.data.split(' ',1)[1] }"))
         elif query.data.startswith("sss"):
             ab=''
             bb,ab=query.data.split(' ',1)
@@ -1207,9 +1211,14 @@ def btn2(ab6,ab22,ab34):
                 InlineKeyboardButton(f"{ab10}", callback_data =f"{ab34} {ab22}##{ab6*(ab9+1)}0")
             ])
         ab9=ab9+1
-    ab77.append([
-                InlineKeyboardButton(f"rudi nyuma", callback_data =f"{ab34} {ab22}")
-        ])
+    if ab6==10:
+        ab77.append([
+                    InlineKeyboardButton(f"rudi nyuma", callback_data =f"4ddd {ab34.split('##')[1]}")
+            ])
+    elif ab6==1:
+        ab77.append([
+                    InlineKeyboardButton(f"rudi nyuma", callback_data =f"{ab34} {ab22.split("##")[0]}")
+            ])
     return InlineKeyboardMarkup(ab77)
 
 def replymkup2(msg2,msg4):
