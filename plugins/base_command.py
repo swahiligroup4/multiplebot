@@ -1206,6 +1206,9 @@ def btn2(ab6,ab22,ab34):
                 InlineKeyboardButton(f"{ab10}", callback_data =f"{ab34} {ab22}##{ab6*(ab9+1)}0")
             ])
         ab9=ab9+1
+    ab77.append([
+                InlineKeyboardButton(f"rudi nyuma", callback_data =f"{ab34} {ab22}"),
+        ])
     return InlineKeyboardMarkup(ab77)
 
 def replymkup2(msg2,msg4):
