@@ -649,7 +649,9 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             await Media.collection.update_one({'_id':query.data.split(" ",1)[1]},{'$set':{'reply':mkv.text}})
             await mkv.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
         elif query.data.startswith("xfile"):
-            
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
             filedetails = await get_file_details(query.data.split(" ",1)[1])
             await query.answer(f'{query.data.split(" ",1)[1]}')
             for files in filedetails:
@@ -708,7 +710,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                     await Media.collection.update_one({'_id':query.data.split(" ",1)[1]},{'$set':{'descp':descp}})
                     await mkv.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
             else:
-                await query.edit_message_reply_markup(reply_markup=btn22("season","series",f"sss##{ query.data.split(' ',1)[1] }"))
+                await query.edit_message_reply_markup(reply_markup=btn22(nyva,"series",f"sss##{ query.data.split(' ',1)[1] }"))
         elif query.data.startswith("xdescp"): 
             filedetails = await get_file_details(query.data.split(" ",1)[1])
             await query.answer(f'{query.data.split(" ",1)[1]}')
@@ -1193,12 +1195,6 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                                                                              
 def btn2(ab6,ab22,ab34):
     ab77=[]
-    ab7="n"
-    try:
-        ab6=int(ab6)
-        ab7="y"
-    except:
-        pass
     ab9=0
     for i in range(0,5):
         ab9=ab9+1
@@ -1267,6 +1263,9 @@ def btn22(ab6,ab22,ab43):
             ab.append([
                 InlineKeyboardButton(f"{ab8}", callback_data =f"{ab43} s{ab9}"),
                 InlineKeyboardButton(f"{ab10}", callback_data =f"{ab43} s{ab11}")
+            ])
+        ab.append([
+                InlineKeyboardButton(f"rudi nyuma", url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{ab43.split("##")[1]}"),
             ])
         ab9=ab9+1
     return InlineKeyboardMarkup(ab)
