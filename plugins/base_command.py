@@ -1245,11 +1245,11 @@ def replymkup3(ab,typ,nmb):
     ab2=[InlineKeyboardButton(text = f'🦋 RUDI NYUMA' , callback_data = f'zkb')]
     ab3.append(ab2)
     return InlineKeyboardMarkup(ab3)
-def btn22(ab6,ab22,ab43):
+def btn22(nyva,ab22,ab43):
     ab=[]
     ab7="n"
     try:
-        ab6=int(ab6)
+        ab6=int(nyva)
         ab7="y"
     except:
         pass
