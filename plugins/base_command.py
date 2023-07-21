@@ -1090,7 +1090,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             await query.edit_message_text(text="chagua huduma unayotaka kufanya marekebisho",
                 reply_markup =InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha Makundi', callback_data = "kundii")],[InlineKeyboardButton('Rekebisha Jina la Kikundi', callback_data = "dbname")],[InlineKeyboardButton('Rekebisha Startup sms', callback_data = "startup")],[InlineKeyboardButton('Rekebisha Mawasiliano', callback_data = "xba")]])
             )
-        elif query.data.startswith("ddd"):
+        elif query.data.startswith("4ddd"):
             ab=''
             bb,ab=query.data.split(' ',1)
             ab=str(ab) 
@@ -1223,7 +1223,7 @@ def btn2(ab6,ab22,ab34):
             ])
         ab9=ab9+1
     ab77.append([
-                InlineKeyboardButton(f"rudi nyuma", callback_data =f"ddd{ab34} {ab22}"),
+                InlineKeyboardButton(f"rudi nyuma", callback_data =f"4ddd{ab34} {ab22}")
         ])
     return InlineKeyboardMarkup(ab77)
 
