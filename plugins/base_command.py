@@ -1127,7 +1127,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                         icount = int(ab3)
                         details4 =await get_filter_results(bb.split('##')[1],query.from_user.id)
                         for document in details4:
-                            if ab3==document.grp.split('##')[2]:
+                            if ab==document.grp:
                                 await client.send_cached_media(
                                         chat_id = query.from_user.id,
                                         file_id = document.file,
