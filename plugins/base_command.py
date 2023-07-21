@@ -1217,7 +1217,7 @@ def btn2(ab6,ab22,ab34):
             ])
     elif ab6==1:
         ab77.append([
-                    InlineKeyboardButton(f"rudi nyuma", callback_data =f"{ab34} {ab22.split("##")[0]}")
+                    InlineKeyboardButton(f"rudi nyuma", callback_data =f"{ab34} {ab22.split('##')[0]}")
             ])
     return InlineKeyboardMarkup(ab77)
 
