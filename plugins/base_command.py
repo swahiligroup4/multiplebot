@@ -1264,8 +1264,8 @@ def btn22(ab6,ab22,ab43):
                 InlineKeyboardButton(f"{ab8}", callback_data =f"{ab43} s{ab9}"),
                 InlineKeyboardButton(f"{ab10}", callback_data =f"{ab43} s{ab11}")
             ])
-        ab.append([
-                InlineKeyboardButton(f"rudi nyuma", url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{ab43.split("##")[1]}"),
-            ])
         ab9=ab9+1
+    ab.append([
+                InlineKeyboardButton(f"rudi nyuma", url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{ab43.split('##')[1]}"),
+        ])
     return InlineKeyboardMarkup(ab)
