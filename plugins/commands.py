@@ -888,7 +888,7 @@ async def ban(c,m):
             
             ban_log_text += f"\n\nNmeshindwa kumtaarifu tafadhali jaribu tena! \n\n`{traceback.format_exc()}`"
         adminexist=await db.is_admin_exist(user_id,nyva)
-        if not adminexist :
+        if adminexist :
             abc = await c.send_message(chat_id = m.from_user.id,text="Naomba untumie username ya bot ya mteja huyu")      
             id1=abc.id+1                 
             a,b = funask()
@@ -908,12 +908,11 @@ async def ban(c,m):
                     a=False  
             strid = str(uuid.uuid4())
             ts=await c.get_users(user_id)
-            await db.add_admin(user_id)
+            #await db.add_admin(user_id)
             mk2=await db.get_db_status(user_id)
-            await db.update_db(user_id,f'bot_link {mk.text.strip()}',mk2)
-        ts=await c.get_users(user_id)
-        await db.update_db(user_id,f"user_link https://t.me/{ts.username}",mk2)
-        #await db.add_acc(strid,user_id,"all",user_id,9999)
+            #await db.update_db(user_id,f'bot_link {mk.text.strip()}',mk2)
+            await db.update_db(user_id,f"user_link https://t.me/{ts.username}",mk2)
+            #await db.add_acc(strid,user_id,"all",user_id,9999)
         await db.ban_user(user_id, ban_duration)
         print(ban_log_text)
         await m.reply_text(
