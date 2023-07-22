@@ -387,7 +387,7 @@ async def cb_handler(client, query):
             user_details = await db.is_bot_exist(nyva)
             ban_status = await db.get_db_status(user_details)   
             await client.restrict_chat_member(int(query.data.split(" ")[1]), query.from_user.id,
-                ChatPermissions(can_send_messages=True)) 
+                ChatPermissions(can_send_messages=True,can_send_media_messages=True)) 
             hjkl = f'{user_details}##{query.from_user.id}'
             await add_user(hjkl,nyva)
             inv_link=ban_status["group"].split("##")[1]
