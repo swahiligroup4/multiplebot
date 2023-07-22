@@ -74,7 +74,7 @@ async def group(client, message):
                             caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua',
                             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != message.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
                         )
-                
+                 
                     elif msg_type == 'Photo':
                         await message.reply_photo(
                             photo = fileid,
