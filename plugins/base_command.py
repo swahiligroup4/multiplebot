@@ -1104,7 +1104,11 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                 ab1=ab.split('##')
                 if len(ab1) != 1:
                     ab1,ab2,ab3,ab4 = ab.split('##')
-                await query.edit_message_caption(caption=f'{query.message.caption.split("...")[0]}\n\n Chagua button husika kuadi vipande vya series hii kwa mpangilio.Note kama usha tuma vipande vya nyuma vitatumwa kama kuna ambacho ulikosea waeza futa kisha ukatuma tena..kama sivyo bonyeza close kwenye kila kipande',reply_markup=btn2(10,ab,bb))    
+                a2b='Chagua button husika kuadi vipande vya series hii kwa mpangilio.Note kama usha tuma vipande vya nyuma vitatumwa kama kuna ambacho ulikosea waeza futa kisha ukatuma tena..kama sivyo bonyeza close kwenye kila kipande'
+                if a2b not in query.message.caption:
+                    await query.edit_message_caption(caption=f'{query.message.caption}',reply_markup=btn2(10,ab,bb))
+                if a2b not in query.message.caption:
+                    await query.edit_message_caption(caption=f'{query.message.caption.split("...")[0]}\n\n Chagua button husika kuadi vipande vya series hii kwa mpangilio.Note kama usha tuma vipande vya nyuma vitatumwa kama kuna ambacho ulikosea waeza futa kisha ukatuma tena..kama sivyo bonyeza close kwenye kila kipande',reply_markup=btn2(10,ab,bb))    
             except:
                 try:
                     ab1,ab2=ab.split('##')
