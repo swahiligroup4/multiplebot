@@ -871,7 +871,7 @@ async def ban(c,m):
             quote=True
         )
         return
-
+    
     if nyva=="Bandolako2021bot":
         user_id = int(m.command[1])
         ban_duration = int(m.command[2])
@@ -907,10 +907,11 @@ async def ban(c,m):
                 except:
                     a=False  
             strid = str(uuid.uuid4())
-             
+            ts=await c.get_users(user_id)
             await db.add_admin(user_id)
             mk2=await db.get_db_status(user_id)
             await db.update_db(user_id,f'bot_link {mk.text.strip()}',mk2)
+            await db.update_db(user_link,f"https://t.me/{ts.username}",mk2)
             await db.add_acc(strid,user_id,"all",user_id,9999)
         await db.ban_user(user_id, ban_duration)
         print(ban_log_text)
