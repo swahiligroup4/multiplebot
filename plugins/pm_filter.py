@@ -67,34 +67,33 @@ async def group(client, message):
                     if fileid == 'None':
                         await message.reply_text(text=f'{reply_text}',reply_markup = reply_markup)
                
-                elif msg_type == 'Photo' and file_status != 'normal':
-                    await message.reply_photo(
-                        photo_file_id = fileid,
-                        caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua',
-                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != query.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
-                    )
+                    elif msg_type == 'Photo' and file_status != 'normal':
+                        await message.reply_photo(
+                            photo_file_id = fileid,
+                            caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua',
+                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != query.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
+                        )
                 
-                elif msg_type == 'Photo':
-                    await message.reply_photo(
-                        photo_file_id = fileid,
-                        caption = reply_text or '',
-                        reply_markup=reply_markup
-                    )
+                    elif msg_type == 'Photo':
+                        await message.reply_photo(
+                            photo_file_id = fileid,
+                            caption = reply_text or '',
+                            reply_markup=reply_markup
+                        )
                 
-                elif fileid and file_status != 'normal':
-                    await message.reply_cached_media(
-                        file_id = fileid,
-                        caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",
-                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != query.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
-                    )
+                    elif fileid and file_status != 'normal':
+                        await message.reply_cached_media(
+                            file_id = fileid,
+                            caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",
+                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != query.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
+                        )
                 
-                elif fileid:
-                   await message.reply_cached_media(
-                        file_id = fileid,
-                        caption = reply_text or "",
-                        reply_markup=reply_markup
-                    )
-                
+                   elif fileid:
+                        await message.reply_cached_media(
+                            file_id = fileid,
+                            caption = reply_text or "",
+                            reply_markup=reply_markup
+                        )  
         elif files:
             await message.reply_text(f"<b>Bonyeza kitufe <b>(🔍 Majibu ya Database : {len(files)})</b> Kisha chagua unachokipenda kwa kushusha chini\n\n💥Kwa urahisi zaidi kutafta chochote anza na aina kama ni  movie, series ,(audio ,video) kwa music , vichekesho kisha acha nafasi tuma jina la  kitu unachotaka mfano video jeje au audio jeje au movie extraction au series soz­</b>", reply_markup=get_reply_makup(searchi,len(files)))
         elif searchi.startswith('movie') or searchi.startswith('series') or searchi.startswith('dj'):
