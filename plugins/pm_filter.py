@@ -23,6 +23,7 @@ async def group(client, message):
     nyva=botusername.username
     user_id3= await db.is_bot_exist(nyva)
     gd=await db.get_db_status(int(user_id3))
+    group_id = int(user_id3)
     if not await  is_subscribed(client, message, message.chat.id):
         gh=await is_user_exist(message.from_user.id,nyva)
         if not gh:
