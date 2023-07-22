@@ -10,6 +10,9 @@ from utils import get_filter_results, is_user_exist,User ,get_file_details,is_su
 async def grouup(client, message):
     botusername=await client.get_me()
     nyva=botusername.username
+    user_id3= await db.is_bot_exist(nyva)
+    if await is_user_exist(f"{message.from_user.id}##{user_id3}",nyva):
+        return
     await client.restrict_chat_member(message.chat.id, message.from_user.id,
         ChatPermissions(can_send_messages=False)) 
     url=f"https://t.me/{nyva}?start=mwongozohrm{message.chat.id}"
