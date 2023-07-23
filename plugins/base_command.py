@@ -265,7 +265,7 @@ async def start_msg_admins(client, message):
             reply_markup = reply_markup,
             disable_web_page_preview = True
         )
- @Bot1.on_message(filters.command('help') & filters.private)
+@Bot1.on_message(filters.command('help') & filters.private)
 async def help_msg(client, message):
     await message.reply(
         text = HELP_MESSAGE,
