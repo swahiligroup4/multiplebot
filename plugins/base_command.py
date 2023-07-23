@@ -278,73 +278,7 @@ async def start_msg_admins(client, message):
             disable_web_page_preview = True
         )
     
-@Bot1.on_message(filters.command('help') & filters.private)
-async def help_msg(client, message):
-    await message.reply(
-        text = HELP_MESSAGE,
-        quote = True,
-        reply_markup = InlineKeyboardMarkup(help_keyboard)
-    )
 
-@Bot1.on_message(filters.command('about') & filters.private)
-async def about_msg(client, message):
-    user_id = message.from_user.id
-    botusername=await client.get_me()
-    nyva=botusername.username  
-    nyva=str(nyva)
-    if await db.is_admin_exist(user_id,nyva):
-        reply_markup = InlineKeyboardMarkup(about_keyboard)
-    else:
-        reply_markup = InlineKeyboardMarkup(about_keyboard_c)
-    await message.reply(
-        text = ABOUT_MESSAGE,
-        quote = True,
-        reply_markup = reply_markup,
-        disable_web_page_preview = True
-    )
-
-@Bot1.on_callback_query(filters.regex(r'^close$'))
-async def close_cbb(client, query):
-    try:
-        await query.message.reply_to_message.delete()
-    except:
-        pass
-    try:
-        await query.message.delete()
-    except:
-        pass
-
-@Bot1.on_callback_query(filters.regex(r'^help$'))
-async def help_cbq(client, query):
-    await query.edit_message_text(
-        text = HELP_MESSAGE,
-        reply_markup = InlineKeyboardMarkup(help_keyboard)
-    )
-    
-@Bot1.on_callback_query(filters.regex('^about$'))
-async def about_cbq(client, query):
-    user_id = query.from_user.id
-    botusername=await client.get_me()
-    nyva=botusername.username  
-    nyva=str(nyva)
-    if await db.is_admin_exist(user_id,nyva):
-        reply_markup = InlineKeyboardMarkup(about_keyboard)
-    else:
-        reply_markup = InlineKeyboardMarkup(about_keyboard_c)
-    await query.edit_message_text(
-        text = ABOUT_MESSAGE,
-        reply_markup = reply_markup,
-        disable_web_page_preview = True
-    )
-    
-@Bot1.on_callback_query(filters.regex('^markdownhelper$'))
-async def md_helper(client, query):
-    await query.edit_message_text(
-        text = MARKDOWN_HELP,
-        reply_markup = InlineKeyboardMarkup(markdown_keyboard),
-        disable_web_page_preview = True,
-        
-    )
 @Bot1.on_callback_query()
 async def cb_handler(client, query):
     clicked = query.from_user.id
