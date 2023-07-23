@@ -370,7 +370,7 @@ async def new_filtervip(client, message):
                     mkv22.delete()
                     mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
             elif ab33=="ms":
-                await mkvl1.reply_text("hi",reply_markup=btn22("season","series",f"sss##{strid}"))
+                await mkvl1.reply_text("hi",reply_markup=btn22("season","series",f"3hsss##{strid}"))
     try:
         if fileid:
             data1=await is_group_exist(message.from_user.id)
