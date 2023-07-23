@@ -195,7 +195,32 @@ async def start_msg_admins(client, message):
                             )
                     return
                 elif strg.lower()=="ms":
-                    h=3
+                    filez=await get_filter_results( file_id ,group_id)
+                    for file in reversed(filez):
+                        filedetails = await get_file_details(file.id)
+                        for files in filedetails:
+                            f_caption=files.reply
+                            await client.send_cached_media(
+                                chat_id=cmd.from_user.id,
+                                file_id=files.file,
+                                caption=f_caption
+                            )
+                    if msg_type =="Photo":
+                        await client.send_photo(
+                            chat_id=cmd.from_user.id,
+                            photo=files.file,
+                            caption=f_caption,
+                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔗 DOWNLOAD",url= link)]])
+                        )
+                        
+                    else:
+                        await client.send_cached_media(
+                                chat_id=cmd.from_user.id,
+                                file_id=files.file,
+                                caption=f_caption,
+                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔗 DOWNLOAD",url= link)]])
+                        )         
+                    return
                 elif strg.lower() == 's':
                     link = files.descp.split('.dd#.')[2]
                     f_caption =f'{f_caption}\n💥Kama huwezi kufungua link zetu \ntuma **email yako**\nMfano**mohamed@gmail.com **\nkumbuka tuma kwa herufi ndogo \n\n**[BONYEZA HAPA](tg://user?id={int(group_id)})**\nNikupe maelekezo\n🌟@{nyva}'
