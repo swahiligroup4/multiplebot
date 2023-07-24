@@ -429,6 +429,33 @@ async def cb_handler(client, query):
             except:
                 try: 
                     ab1,ab2,ab3=ab.split('##')
+                    await get_filter_results( ab2,user_details)
+                    for file in reversed(filez):
+                        btn3=[]
+                        abtext=file.grp.split("##")[1]
+                        if abdata == "":
+                            abdata=abtext
+                        elif abtext not in abdata:
+                            abdata =f"{abdata}##{abtext}"       
+                    for s in range(0,1000,100):
+                        s+=100
+                        if f"{s}" in abdata:
+                            dtc=s
+                    if btn3==None:
+                        rpymk=None
+                    else:
+                        for st in range(0,dtc,200):
+                            if st+200 <= dtc :
+                                btn3.append([
+                                    InlineKeyboardButton(f"🧳  {st} hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
+                                    InlineKeyboardButton(f"🧳  {st+100} hadi {st+200}", callback_data =f"3hszn {ab1}##{st+200}##{ab2}")
+                                ])
+                            else:
+                                btn3.append([
+                                    InlineKeyboardButton(f"🧳  {st} hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
+                                ])
+                        rpymk=InlineKeyboardMarkup(btn3)
+                
                 except:
                     pass
         elif query.data.startswith("3htest1"):
