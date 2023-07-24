@@ -215,7 +215,7 @@ async def start_msg_admins(client, message):
                         for st in range(0,dtc,2):
                             if st+2 <= dtc :
                                 btn3.append([
-                                    InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f3hszn s{st+1}##{file_id}"),
+                                    InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f"3hszn s{st+1}##{file_id}"),
                                     InlineKeyboardButton(f"🧳  season {st+2}", callback_data =f"3hszn s{st+2}##{file_id}")
                                 ])
                             else:
@@ -408,7 +408,7 @@ async def cb_handler(client, query):
                         abdata =f"{abdata}##{abtext}"       
                 for s in range(0,1000,100):
                     s+=100
-                    if f"s{s}" in abdata:
+                    if f"{s}" in abdata:
                         dtc=s
                 if btn3==None:
                     rpymk=None
@@ -416,7 +416,7 @@ async def cb_handler(client, query):
                     for st in range(0,dtc,200):
                         if st+200 <= dtc :
                             btn3.append([
-                                InlineKeyboardButton(f"🧳  {st} hadi {st+100}", callback_data =f3hszn {ab1}##{st+100}##{ab2}"),
+                                InlineKeyboardButton(f"🧳  {st} hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
                                 InlineKeyboardButton(f"🧳  {st+100} hadi {st+200}", callback_data =f"3hszn {ab1}##{st+200}##{ab2}")
                             ])
                         else:
