@@ -213,11 +213,10 @@ async def start_msg_admins(client, message):
                         rpymk=None
                     else:
                         for st in range(0,dtc,2):
-                            st+=1
-                            if st+=2 <= dtc :
+                            if st+2 <= dtc :
                                 btn3.append([
-                                    InlineKeyboardButton(f"🧳  season {st+=1}", callback_data =f"sss"),
-                                    InlineKeyboardButton(f"🧳  season {st+=2}", callback_data =f"sss")
+                                    InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f"sss"),
+                                    InlineKeyboardButton(f"🧳  season {st+2}", callback_data =f"sss")
                                 ])
                             else:
                                 btn3.append([
