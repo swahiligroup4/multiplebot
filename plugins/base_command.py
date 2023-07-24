@@ -195,22 +195,41 @@ async def start_msg_admins(client, message):
                             )
                     return
                 elif strg.lower()=="ms":
+                    abdata = ""
+                    btn3 = None
                     filez=await get_filter_results( file_id ,group_id)
                     for file in reversed(filez):
-                        filedetails = await get_file_details(file.id)
-                        for files in filedetails:
-                            f_caption=files.reply
-                            await client.send_cached_media(
-                                chat_id=cmd.from_user.id,
-                                file_id=files.file,
-                                caption=f_caption
-                            )
+                        btn3=[]
+                        abtext=file.grp.split("##")[0]
+                        if abdata == "":
+                            abdata=abtext
+                        elif abtext not in abdata:
+                            abdata =f"{abdata}##{abtext}"       
+                    for s in range(0,10):
+                        s+=1
+                        if f"s{s}" in abdata:
+                            dtc=s
+                    if btn3==None:
+                        rpymk=None
+                    else:
+                        for st in range(0,dtc,2):
+                            st+=1
+                            if st+=2 <= dtc :
+                                btn3.append([
+                                    InlineKeyboardButton(f"🧳  season {st+=1}", callback_data =f"sss"),
+                                    InlineKeyboardButton(f"🧳  season {st+=2}", callback_data =f"sss")
+                                ])
+                            else:
+                                btn3.append([
+                                    InlineKeyboardButton(f"🧳  season {st+=1}", callback_data =f"sss"),
+                                ])
+                        rpymk=InlineKeyboardMarkup(btn3)
                     if msg_type =="Photo":
                         await client.send_photo(
                             chat_id=cmd.from_user.id,
                             photo=files.file,
                             caption=f_caption,
-                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔗 DOWNLOAD",url= link)]])
+                            reply_markup= rpymk
                         )
                         
                     else:
@@ -218,7 +237,7 @@ async def start_msg_admins(client, message):
                                 chat_id=cmd.from_user.id,
                                 file_id=files.file,
                                 caption=f_caption,
-                                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔗 DOWNLOAD",url= link)]])
+                                reply_markup=rpymk
                         )         
                     return
                 elif strg.lower() == 's':
