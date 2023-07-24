@@ -215,12 +215,12 @@ async def start_msg_admins(client, message):
                         for st in range(0,dtc,2):
                             if st+2 <= dtc :
                                 btn3.append([
-                                    InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f"sss"),
-                                    InlineKeyboardButton(f"🧳  season {st+2}", callback_data =f"sss")
+                                    InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f3hszn s{st+1}##{file_id}"),
+                                    InlineKeyboardButton(f"🧳  season {st+2}", callback_data =f"3hszn s{st+2}##{file_id}")
                                 ])
                             else:
                                 btn3.append([
-                                    InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f"sss"),
+                                    InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f"3hszn s{st+1}##{file_id}"),
                                 ])
                         rpymk=InlineKeyboardMarkup(btn3)
                     if msg_type =="Photo":
@@ -387,7 +387,51 @@ async def cb_handler(client, query):
         typed = query.from_user.id
         pass
     if (clicked == typed):
-        if query.data.startswith("3htest1"):
+        if query.data.startswith("3hszn"):
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            user_details = await db.is_bot_exist(nyva)
+            if not user_details:
+                return
+            try:
+                ab1,ab2=query.data.split('##')
+                abdata = ""
+                btn3=None
+                filez=await get_filter_results( ab2,user_details)
+                for file in reversed(filez):
+                    btn3=[]
+                    abtext=file.grp.split("##")[1]
+                    if abdata == "":
+                        abdata=abtext
+                    elif abtext not in abdata:
+                        abdata =f"{abdata}##{abtext}"       
+                for s in range(0,1000,100):
+                    s+=100
+                    if f"s{s}" in abdata:
+                        dtc=s
+                if btn3==None:
+                    rpymk=None
+                else:
+                    for st in range(0,dtc,200):
+                        if st+200 <= dtc :
+                            btn3.append([
+                                InlineKeyboardButton(f"🧳  {st} hadi {st+100}", callback_data =f3hszn {ab1}##{st+100}##{ab2}"),
+                                InlineKeyboardButton(f"🧳  {st+100} hadi {st+200}", callback_data =f"3hszn {ab1}##{st+200}##{ab2}")
+                            ])
+                        else:
+                            btn3.append([
+                                InlineKeyboardButton(f"🧳  {st} hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
+                            ])
+                    rpymk=InlineKeyboardMarkup(btn3)
+                
+                await query.edit_message_reply_markup(reply_markup=rpymk)    
+            except:
+                try: 
+                    ab1,ab2,ab3=ab.split('##')
+                except:
+                    pass
+        elif query.data.startswith("3htest1"):
             await query.answer("🎙Soma tangulizi mfupi wa robot huyu kama upo na Viongozi wangu walionitengeneza",show_alert=True,cache_time=10)
             botusername=await client.get_me()
             nyva=botusername.username  
