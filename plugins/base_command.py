@@ -220,7 +220,7 @@ async def start_msg_admins(client, message):
                                 ])
                             else:
                                 btn3.append([
-                                    InlineKeyboardButton(f"🧳  season {st+=1}", callback_data =f"sss"),
+                                    InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f"sss"),
                                 ])
                         rpymk=InlineKeyboardMarkup(btn3)
                     if msg_type =="Photo":
