@@ -619,9 +619,21 @@ def btn2(ab6,ab22,ab34):
     ab9=0
     for i in range(0,5):
         ab9=ab9+1
-        if ab6==10 or ab6==1:
+        if ab6==10:
             ab8 = f"{ab6*(ab9-1)}1 hadi {ab6*(ab9)}0" 
             ab10 = f"{ab6*(ab9)}1 hadi {ab6*(ab9+1)}0"
+            ab77.append([
+                InlineKeyboardButton(f"{ab8}", callback_data =f"{ab34} {ab22}##{ab6*(ab9)}0"),
+                InlineKeyboardButton(f"{ab10}", callback_data =f"{ab34} {ab22}##{ab6*(ab9+1)}0")
+            ])
+        elif ab6==1:
+            abd=(int(ab22.split("##")[1]))-100
+            sd1=int(f"{ab6*(ab9-1)}1")+abd
+            sd2=int(f"{ab6*(ab9)}0")+abd
+            sd3=int(f"{ab6*(ab9)}1")+abd
+            sd4= int(f"{ab6*(ab9+1)}0")+abd
+            ab8 = f"{sd1} hadi {sd2}" 
+            ab10 = f"{sd3} hadi {sd4}"
             ab77.append([
                 InlineKeyboardButton(f"{ab8}", callback_data =f"{ab34} {ab22}##{ab6*(ab9)}0"),
                 InlineKeyboardButton(f"{ab10}", callback_data =f"{ab34} {ab22}##{ab6*(ab9+1)}0")
