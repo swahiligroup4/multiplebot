@@ -432,6 +432,7 @@ async def cb_handler(client, query):
                     ab1,ab2,ab3=ab.split('##')
                     abdata = ""
                     btn3=None
+                    ab2=int(ab2)
                     filez=await get_filter_results( ab3,user_details)
                     for file in reversed(filez): 
                         if f"{ab1}##{ab2}" in file.grp:
