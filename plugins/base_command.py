@@ -402,13 +402,20 @@ async def cb_handler(client, query):
                 filez=await get_filter_results( ab2,user_details)
                 for file in reversed(filez):
                     await client.send_message(text=f"{file.grp}",chat_id=query.from_user.id)
-                    if ab1 in file.grp:
+                    if ab1 in file.grp and ab1!="s10":
                         btn3=[]
                         abtext=file.grp.split("##")[1]
                         if abdata == "":
                             abdata=abtext
                         elif abtext not in abdata:
-                            abdata =f"{abdata}##{abtext}"       
+                            abdata =f"{abdata}##{abtext}"   
+                    elif ab1 in file.grp and ab1=="s10":
+                        btn3=[]
+                        abtext=file.grp.split("##")[1]
+                        if abdata == "":
+                            abdata=abtext
+                        elif abtext not in abdata:
+                            abdata =f"{abdata}##{abtext}"
                 for s in range(0,1000,100):
                     s+=100
                     if f"{s}" in abdata:
@@ -444,7 +451,8 @@ async def cb_handler(client, query):
                             if abdata == "":
                                 abdata=abtext
                             elif abtext not in abdata:
-                                abdata =f"{abdata}##{abtext}"       
+                                abdata =f"{abdata}##{abtext}"   
+                        
                     for s in range(0,100,10):
                         s+=10
                         if f"{s}" in abdata:
@@ -460,7 +468,7 @@ async def cb_handler(client, query):
                                 ])
                             else:
                                 btn3.append([
-                                    InlineKeyboardButton(f"🧳  {st} hadi {st+100}", callback_data =f"3hszn {ab1}##{ab2}####{st+10}##{ab3}"),
+                                    InlineKeyboardButton(f"🧳  {st+ab2-99} hadi {st+ab2-90}", callback_data =f"3hszn {ab1}##{ab2}####{st+10}##{ab3}"),
                                 ])
                         rpymk=InlineKeyboardMarkup(btn3)
                     await query.edit_message_reply_markup(reply_markup=rpymk)    
