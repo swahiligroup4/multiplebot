@@ -397,13 +397,12 @@ async def cb_handler(client, query):
             try:
                 ab1,ab2=query.data.split('##')
                 abdata = ""
+                ab1=ab1.split(" ")[1]
                 btn3=None
                 filez=await get_filter_results( ab2,user_details)
                 for file in reversed(filez):
-                    btn3=[]
-                    await client.send_message(text=f"{ab1}  mtc {file.grp} ",chat_id=query.from_user.id)
-                        
                     if ab1 in file.grp:
+                        btn3=[]
                         abtext=file.grp.split("##")[1]
                         if abdata == "":
                             abdata=abtext
@@ -435,6 +434,7 @@ async def cb_handler(client, query):
                 try: 
                     ab1,ab2,ab3=ab.split('##')
                     abdata = ""
+                    ab1=ab1.split(" ")[1]
                     btn3=None
                     ab2=int(ab2)
                     filez=await get_filter_results( ab3,user_details)
