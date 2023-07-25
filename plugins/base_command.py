@@ -401,7 +401,8 @@ async def cb_handler(client, query):
                 filez=await get_filter_results( ab2,user_details)
                 for file in reversed(filez):
                     btn3=[]
-                    if ab1 in file.grp:
+                    #if ab1 in file.grp:
+                    if btn3==None:
                         abtext=file.grp.split("##")[1]
                         if abdata == "":
                             abdata=abtext
