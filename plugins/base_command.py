@@ -472,6 +472,7 @@ async def cb_handler(client, query):
                         rpymk=InlineKeyboardMarkup(btn3)
                     await query.edit_message_reply_markup(reply_markup=rpymk)    
                 except:
+                    await query.message.delete()
                     ab1,ab2,ab4,ab3=query.data.split('##')
                     abdata = ""
                     ab1=ab1.split(" ")[1]
@@ -485,6 +486,7 @@ async def cb_handler(client, query):
                                 file_id=file.file,
                                 caption=file.reply,
                             ) 
+                    await query.message.copy(chat_id=query.from_user.id)
         elif query.data.startswith("3htest1"):
             await query.answer("🎙Soma tangulizi mfupi wa robot huyu kama upo na Viongozi wangu walionitengeneza",show_alert=True,cache_time=10)
             botusername=await client.get_me()
