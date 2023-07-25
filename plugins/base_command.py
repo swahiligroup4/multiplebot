@@ -471,8 +471,20 @@ async def cb_handler(client, query):
                                 ])
                         rpymk=InlineKeyboardMarkup(btn3)
                     await query.edit_message_reply_markup(reply_markup=rpymk)    
-                except Exception as e :
-                    await query.edit_message_caption(f"{e}")
+                except:
+                    ab1,ab2,ab4,ab3=query.data.split('##')
+                    abdata = ""
+                    ab1=ab1.split(" ")[1]
+                    btn3=None
+                    ab2=int(ab2)
+                    filez=await get_filter_results( ab3,user_details)
+                    for file in reversed(filez): 
+                        if f"{ab1}##{ab2}##{ab4}" in file.grp:
+                            await client.send_cached_media(
+                                chat_id=query.from_user.id,
+                                file_id=file.file,
+                                caption=file.reply,
+                            ) 
         elif query.data.startswith("3htest1"):
             await query.answer("🎙Soma tangulizi mfupi wa robot huyu kama upo na Viongozi wangu walionitengeneza",show_alert=True,cache_time=10)
             botusername=await client.get_me()
