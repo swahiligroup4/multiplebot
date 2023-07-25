@@ -396,6 +396,12 @@ async def cb_handler(client, query):
                 return
             abdata = ""
             btn3=None
+            filedetails = await get_file_details(query.data.split(" ")[1])
+            for files in filedetails:
+                f_caption=files.reply
+                group_id = files.group_id
+                msg_type =files.type
+                
             filez=await get_filter_results( query.data.split(" ")[1] ,group_id)
             for file in reversed(filez):
                 btn3=[]
