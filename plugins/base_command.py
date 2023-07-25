@@ -464,8 +464,8 @@ async def cb_handler(client, query):
                                 ])
                         rpymk=InlineKeyboardMarkup(btn3)
                     await query.edit_message_reply_markup(reply_markup=rpymk)    
-                except:
-                    pass
+                except Exception as e :
+                    await query.edit_message_caption(f"{e}")
         elif query.data.startswith("3htest1"):
             await query.answer("🎙Soma tangulizi mfupi wa robot huyu kama upo na Viongozi wangu walionitengeneza",show_alert=True,cache_time=10)
             botusername=await client.get_me()
