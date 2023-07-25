@@ -467,7 +467,7 @@ async def cb_handler(client, query):
                                 ])
                             else:
                                 btn3.append([
-                                    InlineKeyboardButton(f"🧳  {st+ab2-99} hadi {st+ab2-90}", callback_data =f"3hszn {ab1}##{ab2}####{st+10}##{ab3}"),
+                                    InlineKeyboardButton(f"🧳  {st+ab2-99} hadi {st+ab2-90}", callback_data =f"3hszn {ab1}##{ab2}##{st+10}##{ab3}"),
                                 ])
                         rpymk=InlineKeyboardMarkup(btn3)
                     await query.edit_message_reply_markup(reply_markup=rpymk)    
