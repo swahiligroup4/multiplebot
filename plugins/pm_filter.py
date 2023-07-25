@@ -11,8 +11,12 @@ async def grouup(client, message):
     botusername=await client.get_me()
     nyva=botusername.username
     user_id3= await db.is_bot_exist(nyva)
-    if await is_user_exist(f"{message.from_user.id}##{user_id3}",nyva):
+    if await is_user_exist(f"{user_id3}##{message.from_user.id}",nyva):
         return
+    if await  is_subscribed(client, message, message.chat.id):
+        hjkl = f'{user_id3}##{message.from_user.id}'
+        if not await is_user_exist(hjkl,nyva):
+            await add_user(hjkl,nyva)
     await client.restrict_chat_member(message.chat.id, message.from_user.id,
         ChatPermissions(can_send_messages=False)) 
     url=f"https://t.me/{nyva}?start=mwongozohrm{message.chat.id}"
