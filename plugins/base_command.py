@@ -396,13 +396,8 @@ async def cb_handler(client, query):
                 return
             abdata = ""
             btn3=None
-            filedetails = await get_file_details(query.data.split(" ")[1])
-            for files in filedetails:
-                f_caption=files.reply
-                group_id = files.group_id
-                msg_type =files.type
-                
-            filez=await get_filter_results( query.data.split(" ")[1] ,group_id)
+            file_id= query.data.split(" ")[1]
+            filez=await get_filter_results( file_id ,group_id)
             for file in reversed(filez):
                 btn3=[]
                 abtext=file.grp.split("##")[0]
@@ -428,21 +423,7 @@ async def cb_handler(client, query):
                             InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f"3hszn s{st+1}##{file_id}"),
                         ])
                 rpymk=InlineKeyboardMarkup(btn3)
-            if msg_type =="Photo":
-                await client.send_photo(
-                    chat_id=cmd.from_user.id,
-                    photo=files.file,
-                    caption=f_caption,
-                    reply_markup= rpymk
-                )
-                        
-            else:
-                await client.send_cached_media(
-                        chat_id=cmd.from_user.id,
-                        file_id=files.file,
-                        caption=f_caption,
-                        reply_markup=rpymk
-                )         
+            await query.edit_message_reply_markup(reply_markup=rpymk)    
         elif query.data.startswith("3hszn"):
             botusername=await client.get_me()
             nyva=botusername.username  
