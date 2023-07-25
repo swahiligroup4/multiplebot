@@ -403,6 +403,7 @@ async def cb_handler(client, query):
                     btn3=[]
                     if ab1 in file.grp:
                         abtext=file.grp.split("##")[1]
+                        await client.send_message(text="hi",chat_id=query.from_user.id)
                         if abdata == "":
                             abdata=abtext
                         elif abtext not in abdata:
