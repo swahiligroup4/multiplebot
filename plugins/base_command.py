@@ -470,7 +470,7 @@ async def cb_handler(client, query):
                                 InlineKeyboardButton(f"🧳  {st+1} hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
                             ])
                     btn3.append([
-                                InlineKeyboardButton(f"RUDI NYUMA", callback_data =f"3hvdo {ab2}"),
+                                InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hvdo {ab2}"),
                             ])
                     rpymk=InlineKeyboardMarkup(btn3)
                 
@@ -510,7 +510,7 @@ async def cb_handler(client, query):
                                     InlineKeyboardButton(f"🧳  {st+ab2-99} hadi {st+ab2-90}", callback_data =f"3hszn {ab1}##{ab2}##{st+10}##{ab3}"),
                                 ])
                         btn3.append([
-                                InlineKeyboardButton(f"RUDI NYUMA", callback_data =f"3hszn {ab1}##{ab3}"),
+                                InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hszn {ab1}##{ab3}"),
                             ])
                         rpymk=InlineKeyboardMarkup(btn3)
                     await query.edit_message_reply_markup(reply_markup=rpymk)    
