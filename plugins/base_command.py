@@ -409,7 +409,7 @@ async def cb_handler(client, query):
                             abdata=abtext
                         elif abtext not in abdata:
                             abdata =f"{abdata}##{abtext}"   
-                    elif (ab1 in file.grp) and "s10" in file.grp:
+                    elif (ab1 in file.grp) and ab1=="s10":
                         btn3=[]
                         abtext=file.grp.split("##")[1]
                         if abdata == "":
