@@ -392,8 +392,10 @@ async def cb_handler(client, query):
             nyva=botusername.username  
             nyva=str(nyva)
             group_id = await db.is_bot_exist(nyva)
-            if not user_details:
+            if not group_id:
                 return
+            abdata = ""
+            btn3=None
             filez=await get_filter_results( query.split(" ")[1] ,group_id)
             for file in reversed(filez):
                 btn3=[]
