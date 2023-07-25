@@ -431,7 +431,7 @@ async def cb_handler(client, query):
                 await query.edit_message_reply_markup(reply_markup=rpymk)    
             except :
                 try: 
-                    ab1,ab2,ab3=ab.split('##')
+                    ab1,ab2,ab3=query.data.split('##')
                     abdata = ""
                     ab1=ab1.split(" ")[1]
                     btn3=None
