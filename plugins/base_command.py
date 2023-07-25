@@ -387,7 +387,55 @@ async def cb_handler(client, query):
         typed = query.from_user.id
         pass
     if (clicked == typed):
-        if query.data.startswith("3hszn"):
+        if query.data.startswith("3hvdo"):
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            group_id = await db.is_bot_exist(nyva)
+            if not user_details:
+                return
+            filez=await get_filter_results( query.split(" ")[1] ,group_id)
+            for file in reversed(filez):
+                btn3=[]
+                abtext=file.grp.split("##")[0]
+                if abdata == "":
+                    abdata=abtext
+                elif abtext not in abdata:
+                    abdata =f"{abdata}##{abtext}"       
+            for s in range(0,10):
+                s+=1
+                if f"s{s}" in abdata:
+                    dtc=s
+            if btn3==None:
+                rpymk=None
+            else:
+                for st in range(0,dtc,2):
+                    if st+2 <= dtc :
+                        btn3.append([
+                            InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f"3hszn s{st+1}##{file_id}"),
+                            InlineKeyboardButton(f"🧳  season {st+2}", callback_data =f"3hszn s{st+2}##{file_id}")
+                        ])
+                    else:
+                        btn3.append([
+                            InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f"3hszn s{st+1}##{file_id}"),
+                        ])
+                rpymk=InlineKeyboardMarkup(btn3)
+            if msg_type =="Photo":
+                await client.send_photo(
+                    chat_id=cmd.from_user.id,
+                    photo=files.file,
+                    caption=f_caption,
+                    reply_markup= rpymk
+                )
+                        
+            else:
+                await client.send_cached_media(
+                        chat_id=cmd.from_user.id,
+                        file_id=files.file,
+                        caption=f_caption,
+                        reply_markup=rpymk
+                )         
+        elif query.data.startswith("3hszn"):
             botusername=await client.get_me()
             nyva=botusername.username  
             nyva=str(nyva)
@@ -432,6 +480,9 @@ async def cb_handler(client, query):
                             btn3.append([
                                 InlineKeyboardButton(f"🧳  {st+1} hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
                             ])
+                    btn3.append([
+                                InlineKeyboardButton(f"RUDI NYUMA", callback_data =f"3hvdo {ab2}"),
+                            ])
                     rpymk=InlineKeyboardMarkup(btn3)
                 
                 await query.edit_message_reply_markup(reply_markup=rpymk)    
@@ -469,6 +520,9 @@ async def cb_handler(client, query):
                                 btn3.append([
                                     InlineKeyboardButton(f"🧳  {st+ab2-99} hadi {st+ab2-90}", callback_data =f"3hszn {ab1}##{ab2}##{st+10}##{ab3}"),
                                 ])
+                        btn3.append([
+                                InlineKeyboardButton(f"RUDI NYUMA", callback_data =f"3hvdo {ab1}## {ab3}"),
+                            ])
                         rpymk=InlineKeyboardMarkup(btn3)
                     await query.edit_message_reply_markup(reply_markup=rpymk)    
                 except:
