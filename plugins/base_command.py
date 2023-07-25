@@ -429,7 +429,8 @@ async def cb_handler(client, query):
                     rpymk=InlineKeyboardMarkup(btn3)
                 
                 await query.edit_message_reply_markup(reply_markup=rpymk)    
-            except:
+            except Exception as e:
+                await query.edit_message_caption(f"{e}")
                 try: 
                     ab1,ab2,ab3=ab.split('##')
                     abdata = ""
