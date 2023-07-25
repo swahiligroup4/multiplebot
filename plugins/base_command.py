@@ -401,9 +401,10 @@ async def cb_handler(client, query):
                 filez=await get_filter_results( ab2,user_details)
                 for file in reversed(filez):
                     btn3=[]
+                    await client.send_message(text="hi",chat_id=query.from_user.id)
+                        
                     if ab1 in file.grp:
                         abtext=file.grp.split("##")[1]
-                        await client.send_message(text="hi",chat_id=query.from_user.id)
                         if abdata == "":
                             abdata=abtext
                         elif abtext not in abdata:
