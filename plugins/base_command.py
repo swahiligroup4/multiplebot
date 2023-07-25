@@ -401,8 +401,7 @@ async def cb_handler(client, query):
                 filez=await get_filter_results( ab2,user_details)
                 for file in reversed(filez):
                     btn3=[]
-                    #if ab1 in file.grp:
-                    if btn3==None:
+                    if ab1 in file.grp:
                         abtext=file.grp.split("##")[1]
                         if abdata == "":
                             abdata=abtext
@@ -410,13 +409,13 @@ async def cb_handler(client, query):
                             abdata =f"{abdata}##{abtext}"       
                 for s in range(0,1000,100):
                     s+=100
+                    dtc=0
                     if f"{s}" in abdata:
                         dtc=s
                 if btn3==None:
                     rpymk=None
                 else:
-                    for st in range(0,dtc,200):
-                        
+                    for st in range(0,dtc,200):  
                         if st+200 <= dtc :
                             btn3.append([
                                 InlineKeyboardButton(f"🧳  {st+1} hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
