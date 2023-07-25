@@ -520,6 +520,7 @@ async def cb_handler(client, query):
                     abdata = ""
                     ab1=ab1.split(" ")[1]
                     btn3=None
+                    await query.answer("🎙Subir kidogo",show_alert=True,cache_time=30)
                     ab2=int(ab2)
                     filez=await get_filter_results( ab3,user_details)
                     for file in reversed(filez): 
