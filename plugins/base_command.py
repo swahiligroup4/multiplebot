@@ -529,7 +529,7 @@ async def cb_handler(client, query):
                                 file_id=file.file,
                                 caption=file.reply,
                             )
-                            await asyncio.sleep(2)
+                            await asyncio.sleep(3)
                     await query.message.copy(chat_id=query.from_user.id)
         elif query.data.startswith("3htest1"):
             await query.answer("🎙Soma tangulizi mfupi wa robot huyu kama upo na Viongozi wangu walionitengeneza",show_alert=True,cache_time=10)
