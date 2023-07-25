@@ -415,14 +415,15 @@ async def cb_handler(client, query):
                     rpymk=None
                 else:
                     for st in range(0,dtc,200):
+                        
                         if st+200 <= dtc :
                             btn3.append([
-                                InlineKeyboardButton(f"🧳  {st+1021 hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
+                                InlineKeyboardButton(f"🧳  {st+1} hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
                                 InlineKeyboardButton(f"🧳  {st+101} hadi {st+200}", callback_data =f"3hszn {ab1}##{st+200}##{ab2}")
                             ])
                         else:
                             btn3.append([
-                                InlineKeyboardButton(f"🧳  {st+100} hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
+                                InlineKeyboardButton(f"🧳  {st+1} hadi {st+100}", callback_data =f"3hszn {ab1}##{st+100}##{ab2}"),
                             ])
                     rpymk=InlineKeyboardMarkup(btn3)
                 
