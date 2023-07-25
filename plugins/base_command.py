@@ -450,7 +450,7 @@ async def cb_handler(client, query):
                         if f"{s}" in abdata:
                             dtc=s
                     if btn3==None:
-                        rpymk=None
+                        rpymk=None 
                     else:
                         for st in range(0,dtc,20):
                             if st+20 <= dtc :
