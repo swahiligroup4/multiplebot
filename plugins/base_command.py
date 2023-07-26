@@ -519,12 +519,12 @@ async def cb_handler(client, query):
                     for usr1 in user_dts:
                         tme1=usr1.tme
                     if tme1 != 0 :
-                        abk=await client.send_message(chat_id=query.from_user.id,text=f'tafadhal subiri kwa sekunde {tme1}')
+                        abk=await client.send_message(chat_id=query.from_user.id,text=f'tafadhal subiri kwa sekunde {tme1} kabla ya kutuma ombi jengine')
                         for i in range(0,tme1,10):
                             await asyncio.sleep(10)
                             if tme1 < 10:
                                 tme1=10
-                            if tme1-11 != 0:
+                            if (tme1-i-10) != 0:
                                 await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-i-10} kabla ya kutuma ombi lingine")
                             else:
                                 await abk.edit_text(text=f"Sasa unaweza kutuma ombi lingine")
