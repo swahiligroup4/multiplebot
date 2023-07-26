@@ -517,6 +517,7 @@ async def cb_handler(client, query):
                     user_dts=await is_user_exist(f"{user_details}##{query.from_user.id}",nyva)
                     for usr1 in user_dts:
                         tme1=usr1.tme
+                        tme1=tne1*-1
                     if tme1 != 0 :
                         abk=await client.send_message(chat_id=query.from_user.id,text=f'tafadhal subiri kwa sekunde {tme1} kabla ya kutuma ombi jengine')
                         for i in range(0,tme1,10):
