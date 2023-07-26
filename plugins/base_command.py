@@ -522,10 +522,13 @@ async def cb_handler(client, query):
                         abk=await client.send_message(chat_id=query.from_user.id,text=f'tafadhal subiri kwa sekunde {tme1}')
                         for i in range(0,tme1,10):
                             await asyncio.sleep(10)
+                            await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme-i-10}})
                             if tme1 < 10:
                                 tme1=10
-                            await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-i-10}")
-                        await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':0}})
+                            if tme-11 != 0:
+                                await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-i-10} kabla ya kutuma ombi kengine")
+                            else:
+                                await abk.edit_text(text=f"Sasa unaweza kutuma ombi lingine")
                         return 
                     await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':60}})
                     await query.message.delete()
@@ -533,7 +536,6 @@ async def cb_handler(client, query):
                     abdata = ""
                     ab1=ab1.split(" ")[1]
                     btn3=None
-                    await query.answer("🎙Subir kidogo",show_alert=True,cache_time=30)
                     ab2=int(ab2)
                     filez=await get_filter_results( ab3,user_details)
                     for file in reversed(filez): 
