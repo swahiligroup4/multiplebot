@@ -527,7 +527,8 @@ async def cb_handler(client, query):
                             for usr1 in user_dts:
                                 tme2=usr1.tme
                             if tme2==tme1:
-                                await User.collection.updateMany({},{'$set':{'tme':0}})
+                                await User.collection.update_One({'_id':f"{user_details}##{query.from_user.id}"} ,{'$set':{'tme':0}})
+                                break 
                             if (tme1-i-10) != 0:
                                 await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-i-10} kabla ya kutuma ombi lingine")
                             else:
@@ -556,7 +557,7 @@ async def cb_handler(client, query):
                     if tme1 != 0 :
                         for i in range(0,tme1,10):
                             await asyncio.sleep(10)
-                            await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme1-i-10}})
+                            await User.collection.update_one( {'_id':f"{user_details}##{query.from_user.id}"} , {'$set':{'tme':tme1-i-10}})
         elif query.data.startswith("3htest1"):
             await query.answer("🎙Soma tangulizi mfupi wa robot huyu kama upo na Viongozi wangu walionitengeneza",show_alert=True,cache_time=10)
             botusername=await client.get_me()
