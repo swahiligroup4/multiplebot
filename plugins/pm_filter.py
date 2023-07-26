@@ -6,7 +6,7 @@ from plugins.status import handle_admin_status
 from plugins.database import db
 from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user
 
-@Bot1.on_message(filters.new_chat_members)
+@Bot1.on_message(filters.new_chat_members & filters.group)
 async def grouup(client, message):
     botusername=await client.get_me()
     nyva=botusername.username
