@@ -516,8 +516,6 @@ async def cb_handler(client, query):
                     await query.edit_message_reply_markup(reply_markup=rpymk)    
                 except:
                     user_dts=await is_user_exist(f"{user_details}##{query.from_user.id}",nyva)
-                    await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':60}})
-                   
                     for usr1 in user_dts:
                         tme1=usr1.tme
                         await client.send_message(chat_id=query.from_user.id,text=f'hi')
@@ -527,7 +525,7 @@ async def cb_handler(client, query):
                             asyncio.sleep(10)
                             if tme1 < 10:
                                 tme1=10
-                            await abk.edit_message_text(text=f"tafadhali subir kwa sekunde {tme1-10}")
+                            await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-10}")
                         await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':0}})
                         return 
                     await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':60}})
