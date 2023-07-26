@@ -525,7 +525,7 @@ async def cb_handler(client, query):
                             await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme1-i-10}})
                             if tme1 < 10:
                                 tme1=10
-                            if tme-11 != 0:
+                            if tme1-11 != 0:
                                 await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-i-10} kabla ya kutuma ombi lingine")
                             else:
                                 await abk.edit_text(text=f"Sasa unaweza kutuma ombi lingine")
