@@ -523,13 +523,7 @@ async def cb_handler(client, query):
                             await asyncio.sleep(10)
                             if tme1 < 10:
                                 tme1=10
-                            user_dts=await is_user_exist(f"{user_details}##{query.from_user.id}",nyva)
-                            for usr1 in user_dts:
-                                tme2=usr1.tme
-                            if tme2==tme1:
-                                await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"} ,{'$set':{'tme':0}})
-                                await abk.edit_text(text=f"Samahani kidogo nlikuwa katika matengenezo naomba ubonyeze button tena ili nkupe unachaohitaji")
-                                break 
+                            await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"} ,{'$set':{'tme':0}}) 
                             if (tme1-i-10) != 0:
                                 await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-i-10} kabla ya kutuma ombi lingine")
                             else:
