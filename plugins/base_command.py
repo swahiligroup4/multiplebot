@@ -519,13 +519,12 @@ async def cb_handler(client, query):
                         tme1=usr1.tme
                     if tme1 != 0 :
                         abk=await client.send_message(chat_id=query.from_user.id,text=f'tafadhal subiri kwa sekunde {tme1} kabla ya kutuma ombi jengine')
-                        for i in range(0,tme1,1):
+                        for i in range(0,tme1,10):
                             await asyncio.sleep(1)
-                            await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme1-i-1}})
-                            if tme1 < 1:
-                                tme1=1
-                            if (tme1-i-1) != 0:
-                                await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-i-1} kabla ya kutuma ombi lingine")
+                            if tme1 < 10:
+                                tme1=10
+                            if (tme1-i-10) != 0:
+                                await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-i-10} kabla ya kutuma ombi lingine")
                             else:
                                 await abk.edit_text(text=f"Sasa unaweza kutuma ombi lingine")
                         return 
