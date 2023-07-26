@@ -490,8 +490,7 @@ async def cb_handler(client, query):
                             if abdata == "":
                                 abdata=abtext
                             elif abtext not in abdata:
-                                abdata =f"{abdata}##{abtext}"   
-                        
+                                abdata =f"{abdata}##{abtext}"  
                     for s in range(0,100,10):
                         s+=10
                         if f"{s}" in abdata:
@@ -522,6 +521,7 @@ async def cb_handler(client, query):
                         abk=await client.send_message(chat_id=query.from_user.id,text=f'tafadhal subiri kwa sekunde {tme1} kabla ya kutuma ombi jengine')
                         for i in range(0,tme1,10):
                             await asyncio.sleep(10)
+                            await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme1-i-10}})
                             if tme1 < 10:
                                 tme1=10
                             if (tme1-i-10) != 0:
