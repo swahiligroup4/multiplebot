@@ -520,7 +520,7 @@ async def cb_handler(client, query):
                     if tme1 != 0 :
                         abk=await client.send_message(chat_id=query.from_user.id,text=f'tafadhal subiri kwa sekunde {tme1} kabla ya kutuma ombi jengine')
                         for i in range(0,tme1,10):
-                            await asyncio.sleep(1)
+                            await asyncio.sleep(10)
                             if tme1 < 10:
                                 tme1=10
                             if (tme1-i-10) != 0:
