@@ -527,6 +527,7 @@ async def cb_handler(client, query):
                             user_dts=await is_user_exist(f"{user_details}##{query.from_user.id}",nyva)
                             for usr1 in user_dts:
                                 tme2=usr1.tme
+                                tme2=tme2*-1
                             if tme2==tme1:
                                 await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"} ,{'$set':{'tme':0}}) 
                             if (tme1-i-10) != 0:
