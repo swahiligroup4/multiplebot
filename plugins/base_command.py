@@ -525,7 +525,7 @@ async def cb_handler(client, query):
                             asyncio.sleep(10)
                             if tme1 < 10:
                                 tme1=10
-                            await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-10}")
+                            await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-i-10}")
                         await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':0}})
                         return 
                     await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':60}})
