@@ -39,6 +39,7 @@ class User(Document):
     id = fields.StrField(attribute='_id')
     rbt =fields.StrField(required=True)
     email = fields.StrField(required=True)
+    tme = fields.IntField(required=True)
     class Meta:
         collection_name = COLLECTION_NAME_2
         
@@ -48,6 +49,7 @@ async def add_user(id,sts):
             id = id,
             rbt = sts,
             email = 'hrm45'
+            tme=0
         )
     except ValidationError:
         logger.exception('Error occurred while saving group in database')
