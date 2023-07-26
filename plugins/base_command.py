@@ -556,7 +556,7 @@ async def cb_handler(client, query):
                     if tme1 != 0 :
                         for i in range(0,tme1*2,1):
                             await asyncio.sleep(0.05)
-                            await User.collection.update_one( {'_id':f"{user_details}##{query.from_user.id}"} , {'$set':{'tme':tme1-i-10}})
+                            await User.collection.update_one( {'_id':f"{user_details}##{query.from_user.id}"} , {'$set':{'tme':tme1-i-0.05}})
         elif query.data.startswith("3htest1"):
             await query.answer("🎙Soma tangulizi mfupi wa robot huyu kama upo na Viongozi wangu walionitengeneza",show_alert=True,cache_time=10)
             botusername=await client.get_me()
