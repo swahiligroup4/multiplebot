@@ -515,6 +515,19 @@ async def cb_handler(client, query):
                         rpymk=InlineKeyboardMarkup(btn3)
                     await query.edit_message_reply_markup(reply_markup=rpymk)    
                 except:
+                    user_dts=await is_user_exist(f"{user_details}##{query.from_user.id}",nyva)
+                    for usr1 in user_dts:
+                        tme1=usr1.tme
+                    if tme1 != 0 :
+                        abk=await client.send_message(chat_id=query.from_user.id,text=f'tafadhali subir kwa sec {}')
+                        for i in range(0,tme1,10):
+                            asyncio.sleep(10)
+                            if tme1 < 10:
+                                tme1=10
+                            await abk.edit_message_text(text=f"tafadhali subir kwa sekunde {tme1-10}")
+                        await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':0}})
+                        return 
+                    await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':60}})
                     await query.message.delete()
                     ab1,ab2,ab4,ab3=query.data.split('##')
                     abdata = ""
