@@ -48,7 +48,7 @@ async def add_user(id,sts):
         data = User(
             id = id,
             rbt = sts,
-            email = 'hrm45'
+            email = 'hrm45',
             tme=0
         )
     except ValidationError:
