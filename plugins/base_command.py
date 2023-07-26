@@ -522,7 +522,6 @@ async def cb_handler(client, query):
                         abk=await client.send_message(chat_id=query.from_user.id,text=f'tafadhal subiri kwa sekunde {tme1}')
                         for i in range(0,tme1,10):
                             await asyncio.sleep(10)
-                            await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme1-i-10}})
                             if tme1 < 10:
                                 tme1=10
                             if tme1-11 != 0:
@@ -547,6 +546,13 @@ async def cb_handler(client, query):
                             )
                             await asyncio.sleep(3)
                     await query.message.copy(chat_id=query.from_user.id)
+                    user_dts=await is_user_exist(f"{user_details}##{query.from_user.id}",nyva)
+                    for usr1 in user_dts:
+                        tme1=usr1.tme
+                    if tme1 != 0 :
+                        for i in range(0,tme1,10):
+                            await asyncio.sleep(10)
+                            await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme1-i-10}})
         elif query.data.startswith("3htest1"):
             await query.answer("🎙Soma tangulizi mfupi wa robot huyu kama upo na Viongozi wangu walionitengeneza",show_alert=True,cache_time=10)
             botusername=await client.get_me()
