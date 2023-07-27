@@ -522,8 +522,8 @@ async def cb_handler(client, query):
                             dtc=s
                     if btn3==None:
                         rpymk=None 
-                        await query.edit_message_caption(caption=f"{query.message.caption}\n\nSamahani Vipande hivi uliokuwa unaiomba bado havijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza..bonyeza rudi nyuma kutizama season nyingine",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hvdo {ab2}")]]))
-                        await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season hii kuanzia kipande cha \n--->{ab1}**{ab2-99} hadi {ab2}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])) 
+                        await query.edit_message_caption(caption=f"{query.message.caption}\n\nSamahani Vipande hivi uliokuwa unaiomba bado havijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza..bonyeza rudi nyuma kutizama season nyingine",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hvdo {ab3}")]]))
+                        await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season hii kuanzia kipande cha \n--->**{ab1}.{ab2-99} hadi {ab2}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])) 
                         return
                     else:
                         for st in range(0,dtc,20):
@@ -584,8 +584,8 @@ async def cb_handler(client, query):
                             tme3-=2
                             await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme3}})
                     else:
-                        await query.edit_message_caption(caption=f"{query.message.caption}\n\nSamahani Vipande hivi uliokuwa unaiomba bado havijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza..bonyeza rudi nyuma kutizama vipande vingine",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hvdo {ab2}")]]))
-                        await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season hii kuanzia kipande cha \n--->{ab1}**{ab2-89+ab4} hadi {ab2-100+ab4}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])) 
+                        await query.edit_message_caption(caption=f"{query.message.caption}\n\nSamahani Vipande hivi uliokuwa unaiomba bado havijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza..bonyeza rudi nyuma kutizama vipande vingine",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hvdo {ab3}")]]))
+                        await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season hii kuanzia kipande cha \n--->**{ab1}.{ab2-89+ab4} hadi {ab2-100+ab4}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])) 
                         
                     user_dts=await is_user_exist(f"{user_details}##{query.from_user.id}",nyva)
                     for usr1 in user_dts:
