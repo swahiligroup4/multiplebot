@@ -585,6 +585,7 @@ async def cb_handler(client, query):
                     await query.message.delete()
                     sb7=0
                     for file in reversed(filez): 
+                        await client.send_message(chay_id=query.from_user.id,text=f"{file.grp}")
                         if (f"{ab1}##{ab2}##{ab4}") in file.grp and ab4==100:
                             sb7=1
                             await client.send_cached_media(
