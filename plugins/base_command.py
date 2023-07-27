@@ -580,14 +580,12 @@ async def cb_handler(client, query):
                     ab2=int(ab2)
                     tme3=80
                     filez=await get_filter_results( ab3,user_details)
-                    if not filez:
-                        await query.edit_message_caption(caption=f"{query.message.caption}\n\nSamahani Vipande hivi uliokuwa unaiomba bado havijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza..bonyeza rudi nyuma kutizama vipande vingine",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hvdo {ab3}")]]))
-                        await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season hii kuanzia kipande cha \n--->**{ab1}.{ab2-89+ab4} hadi {ab2-100+ab4}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])) 
-                        return
                     await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':80}})
                     await query.message.delete()
+                    sb7=0
                     for file in reversed(filez): 
                         if f"{ab1}##{ab2}##{ab4}" in file.grp and ab4==100:
+                            sb7=1
                             await client.send_cached_media(
                                 chat_id=query.from_user.id,
                                 file_id=file.file,
@@ -597,6 +595,7 @@ async def cb_handler(client, query):
                             tme3-=2
                             await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme3}})   
                         elif f"{ab1}##{ab2}##{ab4}" in file.grp and ab4==10:
+                            sb7=1
                             await client.send_cached_media(
                                 chat_id=query.from_user.id,
                                 file_id=file.file,
@@ -608,6 +607,11 @@ async def cb_handler(client, query):
                     user_dts=await is_user_exist(f"{user_details}##{query.from_user.id}",nyva)
                     for usr1 in user_dts:
                         tme1=usr1.tme
+                    if sb7==0:
+                        await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':0}})
+                        await query.message.copy(chat_id=query.from_user.id,caption=f"{query.message.caption}\n\nSamahani Vipande hivi uliokuwa unaiomba bado havijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza..bonyeza rudi nyuma kutizama vipande vingine",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hvdo {ab3}")]]))
+                        await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season hii kuanzia kipande cha \n--->**{ab1}.{ab2-89+ab4} hadi {ab2-100+ab4}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])) 
+                        return
                     await query.message.copy(chat_id=query.from_user.id)
                     if tme1 != 0 :
                         for i in range(0,tme1,1):
