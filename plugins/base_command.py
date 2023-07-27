@@ -509,13 +509,22 @@ async def cb_handler(client, query):
                     ab2=int(ab2)
                     filez=await get_filter_results( ab3,user_details)
                     for file in reversed(filez): 
-                        if f"{ab1}##{ab2}" in file.grp:
+                        
+                        if f"{ab1}##{ab2}" in file.grp and ab2==1000:
                             btn3=[]
                             abtext=file.grp.split("##")[2]
                             if abdata == "":
                                 abdata=abtext
                             elif abtext not in abdata:
                                 abdata =f"{abdata}##{abtext}"  
+                        elif f"{ab1}##{ab2}" in file.grp and ab2==100:
+                            btn3=[]
+                            abtext=file.grp.split("##")[2]
+                            if abdata == "":
+                                abdata=abtext
+                            elif abtext not in abdata:
+                                abdata =f"{abdata}##{abtext}"
+
                     for s in range(0,100,10):
                         s+=10
                         if f"{s}" in abdata:
@@ -578,7 +587,16 @@ async def cb_handler(client, query):
                     await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':80}})
                     await query.message.delete()
                     for file in reversed(filez): 
-                        if f"{ab1}##{ab2}##{ab4}" in file.grp:
+                        if f"{ab1}##{ab2}##{ab4}" in file.grp and ab4==100:
+                            await client.send_cached_media(
+                                chat_id=query.from_user.id,
+                                file_id=file.file,
+                                caption=file.reply,
+                            )
+                            await asyncio.sleep(2)
+                            tme3-=2
+                            await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme3}})   
+                        elif f"{ab1}##{ab2}##{ab4}" in file.grp and ab4==10:
                             await client.send_cached_media(
                                 chat_id=query.from_user.id,
                                 file_id=file.file,
