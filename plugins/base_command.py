@@ -586,7 +586,7 @@ async def cb_handler(client, query):
                     sb7=0
                     for file in reversed(filez): 
                         await client.send_message(chat_id=query.from_user.id,text=f"{file.grp}")
-                        if (f"{ab1}##{ab2}##{ab4}") in file.grp and "0##100" not in file.grp::
+                        if (f"{ab1}##{ab2}##{ab4}") in file.grp and "0##100" not in file.grp:
                             sb7=1
                             await client.send_cached_media(
                                 chat_id=query.from_user.id,
