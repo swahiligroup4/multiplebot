@@ -459,8 +459,7 @@ async def cb_handler(client, query):
                 if btn3==None:
                     rpymk=None
                     await query.edit_message_caption(caption=f"{query.message.caption}\n\nSamahani mteja season uliokuwa unaiomba bado haijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza..bonyeza rudi nyuma kutizama season nyingine",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hvdo {ab2}")]]))
-                    await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season **{ab1}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]]))
-                    
+                    #await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season **{ab1}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])) 
                 else:
                     for st in range(0,dtc,200):  
                         if st+200 <= dtc :
