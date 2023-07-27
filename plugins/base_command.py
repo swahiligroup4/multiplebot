@@ -510,14 +510,14 @@ async def cb_handler(client, query):
                     filez=await get_filter_results( ab3,user_details)
                     for file in reversed(filez): 
                         
-                        if f"{ab1}##{ab2}" in file.grp and ab2==1000:
+                        if (f"{ab1}##{ab2}") in file.grp and ab2==1000:
                             btn3=[]
                             abtext=file.grp.split("##")[2]
                             if abdata == "":
                                 abdata=abtext
                             elif abtext not in abdata:
                                 abdata =f"{abdata}##{abtext}"  
-                        elif f"{ab1}##{ab2}" in file.grp and ab2==100:
+                        elif (f"{ab1}##{ab2}") in file.grp and ab2==100:
                             btn3=[]
                             abtext=file.grp.split("##")[2]
                             if abdata == "":
@@ -585,7 +585,7 @@ async def cb_handler(client, query):
                     await query.message.delete()
                     sb7=0
                     for file in reversed(filez): 
-                        if f"{ab1}##{ab2}##{ab4}" in file.grp and ab4==100:
+                        if (f"{ab1}##{ab2}##{ab4}") in file.grp and ab4==100:
                             sb7=1
                             await client.send_cached_media(
                                 chat_id=query.from_user.id,
@@ -595,7 +595,7 @@ async def cb_handler(client, query):
                             await asyncio.sleep(2)
                             tme3-=2
                             await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme3}})   
-                        elif f"{ab1}##{ab2}##{ab4}" in file.grp and ab4==10:
+                        elif (f"{ab1}##{ab2}##{ab4}" in file.grp) and ab4==10:
                             sb7=1
                             await client.send_cached_media(
                                 chat_id=query.from_user.id,
