@@ -411,6 +411,8 @@ async def cb_handler(client, query):
                     dtc=s
             if btn3==None:
                 rpymk=None
+                await query.edit_message_caption(caption=f"{query.message.caption}\n\nSamahani mteja Series hii uliokuwa unaiomba bado haijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza.")
+                await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])) 
             else:
                 for st in range(0,dtc,2):
                     if st+2 <= dtc :
@@ -423,7 +425,10 @@ async def cb_handler(client, query):
                             InlineKeyboardButton(f"🧳  season {st+1}", callback_data =f"3hszn s{st+1}##{file_id}"),
                         ])
                 rpymk=InlineKeyboardMarkup(btn3)
-            await query.edit_message_reply_markup(reply_markup=rpymk)    
+            stz = await get_file_details(file_id)
+            for file in stz:
+                f_caption = file.stz
+            await query.edit_message_caption(caption=f_caption,reply_markup=rpymk)    
         elif query.data.startswith("3hszn"):
             botusername=await client.get_me()
             nyva=botusername.username  
@@ -459,7 +464,7 @@ async def cb_handler(client, query):
                 if btn3==None:
                     rpymk=None
                     await query.edit_message_caption(caption=f"{query.message.caption}\n\nSamahani mteja season uliokuwa unaiomba bado haijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza..bonyeza rudi nyuma kutizama season nyingine",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hvdo {ab2}")]]))
-                    #await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season **{ab1}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])) 
+                    await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season **{ab1}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])) 
                 else:
                     for st in range(0,dtc,200):  
                         if st+200 <= dtc :
