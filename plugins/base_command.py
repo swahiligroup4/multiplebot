@@ -458,7 +458,7 @@ async def cb_handler(client, query):
                         dtc=s
                 if btn3==None:
                     rpymk=None
-                    await message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season **{ab1}** ya series au movie hii..Kisha baada ya kuweka bonyeza done",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"__DONE__", callback_data =f"3hdns")]]))
+                    await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\nSamahani kuna mteja alikuwa anaomba uweke season **{ab1}** ya series au movie hii..Kisha baada ya kuweka bonyeza done",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"__DONE__", callback_data =f"3hdns")]]))
                 else:
                     for st in range(0,dtc,200):  
                         if st+200 <= dtc :
