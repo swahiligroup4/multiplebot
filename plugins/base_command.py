@@ -211,6 +211,24 @@ async def start_msg_admins(client, message):
                             dtc=s
                     if btn3==None:
                         rpymk=None
+                        caption=f"{f_caption }\n\nSamahani kuna mteja alikuwa anaomba uweke series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka"
+                        rpymk1=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns")]])
+                        f_caption=f"{f_caption}\n\nSamahani mteja Series hii uliokuwa unaiomba bado haijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza."
+                        if msg_type =="Photo":
+                            await client.send_photo(
+                                chat_id=group_id,
+                                photo=files.file,
+                                caption=caption,
+                                reply_markup= rpymk1
+                            )
+                        
+                        else:
+                            await client.send_cached_media(
+                                chat_id=group_id,
+                                file_id=files.file,
+                                caption=caption,
+                                reply_markup=rpymk1
+                            )
                     else:
                         for st in range(0,dtc,2):
                             if st+2 <= dtc :
