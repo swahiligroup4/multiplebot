@@ -528,8 +528,8 @@ async def cb_handler(client, query):
                             for usr1 in user_dts:
                                 tme2=usr1.tme
                                 tme2=tme2*-1
-                            if tme2==tme1:
-                                await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"} ,{'$set':{'tme':0}}) 
+                            #if tme2==tme1:
+                            await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"} ,{'$set':{'tme':0}}) 
                             if (tme1-i-10) != 0:
                                 await abk.edit_text(text=f"tafadhali subir kwa sekunde {tme1-i-10} kabla ya kutuma ombi lingine")
                             else:
