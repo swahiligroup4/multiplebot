@@ -536,13 +536,14 @@ async def cb_handler(client, query):
                                 await abk.edit_text(text=f"Sasa unaweza kutuma ombi lingine")
                                 break
                         return 
-                    await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':60}})
+                    await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':80}})
                     await query.message.delete()
                     ab1,ab2,ab4,ab3=query.data.split('##')
                     abdata = ""
                     ab1=ab1.split(" ")[1]
                     btn3=None
                     ab2=int(ab2)
+                    tme3=60
                     filez=await get_filter_results( ab3,user_details)
                     for file in reversed(filez): 
                         if f"{ab1}##{ab2}##{ab4}" in file.grp:
@@ -551,7 +552,9 @@ async def cb_handler(client, query):
                                 file_id=file.file,
                                 caption=file.reply,
                             )
-                            await asyncio.sleep(3)
+                            await asyncio.sleep(2)
+                            tme3-=2
+                            await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':tme3}})
                     await query.message.copy(chat_id=query.from_user.id)
                     user_dts=await is_user_exist(f"{user_details}##{query.from_user.id}",nyva)
                     for usr1 in user_dts:
