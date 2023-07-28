@@ -405,7 +405,7 @@ async def cb_handler(client, query):
         typed = query.from_user.id
         pass
     if (clicked == typed):
-        if query.data.startswith("3hhns"):
+        if query.data.startswith("3hdns"):
             f_caption=query.message.caption.replace(".Samahani kuna mteja alikuwa anaomba uweke",'👍Shukrani kwa subra yako tayar tumeshaweka')
             f_caption = f_caption.replace("Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka"," ")
             await query.message.copy(chat_id=int(query.data.split(" ")[1]),caption=f"{f_caption}\n\n**Rudi kwenye kikundi kisha idownload tena ili uweze kuvipakua**") 
