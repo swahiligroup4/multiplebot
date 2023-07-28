@@ -370,16 +370,24 @@ async def new_filtervip(client, message):
                     mkv22.delete()
                     mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
             elif ab33=="ms":
-                await mkvl1.reply_text("hi",reply_markup=btn22("season","series",f"3hsss##{strid}"))
+                reply_markup=btn22("season","series",f"3hsss##{strid}")
+                if msg_type == 'Photo':
+                    await message.reply_photo(
+                        photo = fileid,
+                        caption = reply_text+"\n Tafadhali chagua season unayotaka kuanza nayo ili uanze kuongeza vipande kwenye season husika",
+                        reply_markup = reply_markup 
+                    )
+                else:
+                    await message.reply_cached_media(
+                        file_id = fileid,
+                        caption = reply_text+"\n Tafadhali chagua season unayotaka kuanza nayo ili uanze kuongeza vipande kwenye season husika",
+                        reply_markup = reply_markup 
+                    )
     try:
         if fileid:
             data1=await is_group_exist(message.from_user.id)
             if msg_type == 'Photo':
-                await message.reply_photo(
-                    photo = fileid,
-                    caption = reply_text,
-                    reply_markup = InlineKeyboardMarkup(btn) if len(btn) != 0 else None
-                )
+                
                 await client.send_photo(
                     chat_id = CHANNELS,
                     photo = fileid,
@@ -398,12 +406,7 @@ async def new_filtervip(client, message):
                     except Exception as err:
                         await message.reply_text(f"Something went wrong!\n\n**Error:** `{err}`")                    
             else:
-                await message.reply_cached_media(
-                    
-                    file_id = fileid,
-                    caption = reply_text,
-                    reply_markup = InlineKeyboardMarkup(btn) if len(btn) != 0 else None
-                )
+                
                 await client.send_cached_media(
                     chat_id = CHANNELS,
                     file_id = fileid,
