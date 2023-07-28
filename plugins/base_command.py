@@ -407,7 +407,7 @@ async def cb_handler(client, query):
     if (clicked == typed):
         if query.data.startswith("3hdns"):
             p_caption = query.message.caption.split(".Samahani kuna mteja alikuwa anaomba uweke")[0]
-            p_caption =f"{p_caption}\n**tumemtaarifu kikamilifu**"
+            p_caption =f"{p_caption}\n**🩸🩸🩸tumemtaarifu kikamilifu🩸🩸🩸**"
             f_caption=query.message.caption.replace(".Samahani kuna mteja alikuwa anaomba uweke",'👍Shukrani kwa subra yako tayar tumeshaweka')
             f_caption = f_caption.replace("Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka"," ")
             await query.edit_message_caption(caption=p_caption,reply_markup=None)
