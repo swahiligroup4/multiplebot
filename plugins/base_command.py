@@ -616,7 +616,7 @@ async def cb_handler(client, query):
                     if sb7==0:
                         await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':0}})
                         await query.message.copy(chat_id=query.from_user.id,caption=f"{query.message.caption}\n\nSamahani Vipande hivi uliokuwa unaiomba bado havijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza..bonyeza rudi nyuma kutizama vipande vingine",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"🔙 RUDI NYUMA", callback_data =f"3hvdo {ab3}")]]))
-                        await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\n.Samahani kuna mteja alikuwa anaomba uweke season hii kuanzia kipande cha \n--->**{ab1}.{ab2-111+ab4} hadi {ab2-100+ab4}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns {query.from_user.id}")]])) 
+                        await query.message.copy(chat_id=user_details,caption=f"{query.message.caption}\n\n.Samahani kuna mteja alikuwa anaomba uweke season hii kuanzia kipande cha \n--->**{ab1}.{ab2-109+ab4} hadi {ab2-100+ab4}** ya series au movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns {query.from_user.id}")]])) 
                         return
                     await query.message.copy(chat_id=query.from_user.id)
                     if tme1 != 0 :
