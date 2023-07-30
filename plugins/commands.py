@@ -317,58 +317,28 @@ async def new_filtervip(client, message):
             descp = f'x.dd#.{mkv1.text}.dd#.data.dd#.{ab33}'
             await save_file(text, reply_text, [], fileid, msg_type, strid,user_id,descp,ab1,ab2)
             if ab33=='m':
-                dta='start'
-                icount = 0
-                text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
-                mkv22=await client.send_message(text = text1, chat_id = message.from_user.id)
-                id1=mkv22.id+1
-                while dta!='stop':
-                    stridm = str(uuid.uuid4())
-                    a,b = funask()
-                    while a==False:
-                        try:
-                            mk= await client.get_messages("me",id1)
-                            if (mk.media!=None or mk.text!=None) and not mk.photo:
-                                a=True
-                            if mk.media != None or mk.text!=None:
-                                id1=id1+1
-                            if (time.time()-b)>(10*60):
-                                await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
-                                return
-                            if mk.from_user.id != message.from_user.id:
-                                a=False 
-                        except:
-                            a=False
-                
-                    if mk.media and not (mk.photo):
-                        for file_type in ("document", "video", "audio"):
-                            media = getattr(mk, file_type, None)
-                            if media is not None:
-                                media.file_type = file_type
-                                media.caption = mk.caption
-                                break
-                        try:
-                            await client .send_cached_media(
-                                chat_id = CHANNELS,
-                                file_id = media.file_id,
-                                caption = media.caption,
-                            )
-                            media.caption = f'{media.caption}\n🌟@{nyva} 'if media.caption else f'🌟 @{nyva}'
-                            await save_file(f'+{icount}.{strid}', media.caption, [], media.file_id, media.file_type, stridm,user_id,'d.dd#.batch_name',500,'normal')
-                        except:
-                            await client .send_cached_media(
-                                chat_id = message.from_user.id,
-                                file_id = media.file_id,
-                                caption = 'Samahani hii media kusave nmeshindwa huenda caption n kubwa tafadhal punguza kisha itume tena',
-                            )
-                    elif mk.text.lower()=='stop':
-                        dta = 'stop'
-                        await mk.reply(f'all file sent to database with id  {fileid}')
-                        break
-                    
-                    icount+=1
-                    mkv22.delete()
-                    mkv22=await client.send_message(text =text1, chat_id = message.from_user.id)  
+                reply_markup=InlineKeyboardMarkup(([
+                        InlineKeyboardButton(f"📡360p", callback_data =f"3hmuv##360 {fileid}"),
+                        InlineKeyboardButton(f"📡480p", callback_data =f"3hmuv##480 {fileid}"),
+                        InlineKeyboardButton(f"📡720p", callback_data =f"3hmuv##720 {fileid}")
+                    ],
+                    [
+                        InlineKeyboardButton(f"📡 DONE", callback_data =f"close")
+                    ]
+                ])
+                if msg_type == 'Photo':
+                    await message.reply_photo(
+                        photo = fileid,
+                        caption = reply_text+"\n Tafadhali chagua formate unayotaka kuanza nayo ili uanze kuongeza movie hii",
+                        reply_markup = reply_markup 
+                    )
+                else:
+                    await message.reply_cached_media(
+                        file_id = fileid,
+                        caption = reply_text+"\n Tafadhali chagua formate unayotaka kuanza nayo ili uanze kuongeza movie hii",
+                        reply_markup = reply_markup 
+                    )
+                  
             elif ab33=="ms":
                 reply_markup=btn22("season","series",f"3hsss##{strid}")
                 if msg_type == 'Photo':
