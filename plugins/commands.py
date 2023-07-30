@@ -323,19 +323,19 @@ async def new_filtervip(client, message):
                         InlineKeyboardButton(f"📡720p", callback_data =f"3hmuv##720 {fileid}")
                     ],
                     [
-                        InlineKeyboardButton(f"📡 DONE", callback_data =f"close")
+                        InlineKeyboardButton(f"💥  DONE", callback_data =f"close")
                     ]
                 ])
                 if msg_type == 'Photo':
                     await message.reply_photo(
                         photo = fileid,
-                        caption = reply_text+"\n Tafadhali chagua formate unayotaka kuanza nayo ili uanze kuongeza movie hii",
+                        caption = reply_text+"\n\n**Tafadhali chagua formate unayotaka kuanza nayo ili uanze kuongeza movie hii**",
                         reply_markup = reply_markup 
                     )
                 else:
                     await message.reply_cached_media(
                         file_id = fileid,
-                        caption = reply_text+"\n Tafadhali chagua formate unayotaka kuanza nayo ili uanze kuongeza movie hii",
+                        caption = reply_text+"\n\n**Tafadhali chagua formate unayotaka kuanza nayo ili uanze kuongeza movie hii**",
                         reply_markup = reply_markup 
                     )
                   
@@ -344,13 +344,13 @@ async def new_filtervip(client, message):
                 if msg_type == 'Photo':
                     await message.reply_photo(
                         photo = fileid,
-                        caption = reply_text+"\n Tafadhali chagua season unayotaka kuanza nayo ili uanze kuongeza vipande kwenye season husika",
+                        caption = reply_text+"\n\n**Tafadhali chagua season unayotaka kuanza nayo ili uanze kuongeza vipande kwenye season husika**",
                         reply_markup = reply_markup 
                     )
                 else:
                     await message.reply_cached_media(
                         file_id = fileid,
-                        caption = reply_text+"\n Tafadhali chagua season unayotaka kuanza nayo ili uanze kuongeza vipande kwenye season husika",
+                        caption = reply_text+"\n\n**Tafadhali chagua season unayotaka kuanza nayo ili uanze kuongeza vipande kwenye season husika**",
                         reply_markup = reply_markup 
                     )
     try:
