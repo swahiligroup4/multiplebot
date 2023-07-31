@@ -418,7 +418,7 @@ async def cb_handler(client, query):
                         reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton(text='delete',callback_data=f'3hydelte {document.id}'),InlineKeyboardButton(text='close',callback_data=f'close')]])
                     )
             text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
-            await client.send_message(text = text1, chat_id = query.from_user.id)
+            mkv22=await client.send_message(text = text1, chat_id = query.from_user.id)
             id1=mkv22.id+1
             await query.message.delete()
             while dta!='stop':
