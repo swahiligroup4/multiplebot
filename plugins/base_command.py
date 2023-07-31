@@ -408,6 +408,8 @@ async def cb_handler(client, query):
         if query.data.startswith("3hmuv"):
             frmt=query.data.split(" ")[0].split("##")[1]
             fileid=query.data.split(" ")[1]
+            dta='start'
+            icount = 0
             details4 =await get_filter_results(fileid,query.from_user.id)
             for document in details4:
                 if document.grp == frmt:
@@ -417,6 +419,7 @@ async def cb_handler(client, query):
                         caption = document.reply,
                         reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton(text='delete',callback_data=f'3hydelte {document.id}'),InlineKeyboardButton(text='close',callback_data=f'close')]])
                     )
+                    icount+=1
             text1=" Tuma video au document au audio au neno stop kama ushamaliza kutuma ili njumuishe kwenye tangazo la movie au series yako"
             mkv22=await client.send_message(text = text1, chat_id = query.from_user.id)
             id1=mkv22.id+1
