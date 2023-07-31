@@ -406,7 +406,7 @@ async def cb_handler(client, query):
         pass
     if (clicked == typed):
         if query.data.startswith("3hmuv"):
-            frmt=query.data.split(" ")[].split("##")[1]
+            frmt=query.data.split(" ")[0].split("##")[1]
             fileid=query.data.split(" ")[1]
             details4 =await get_filter_results(fileid,query.from_user.id)
             for document in details4:
