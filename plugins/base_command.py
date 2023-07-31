@@ -417,7 +417,58 @@ async def cb_handler(client, query):
                         caption = document.reply,
                         reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton(text='delete',callback_data=f'3hydelte {document.id}'),InlineKeyboardButton(text='close',callback_data=f'close')]])
                     )
-                     
+            await client.send_message(text = text1, chat_id = query.from_user.id)
+            id1=mkv22.id+1
+            await query.message.delete()
+            while dta!='stop':
+                stridm = str(uuid.uuid4())
+                a,b = funask()
+                while a==False:
+                    try:
+                        mk= await client.get_messages("me",id1)
+                        if (mk.media!=None or mk.text!=None) and not mk.photo:
+                            a=True
+                        if mk.media != None or mk.text!=None:
+                            id1=id1+1
+                        if (time.time()-b)>(10*60):
+                            await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 10 iliniweze kuhudumia na wengine")
+                            return
+                        if mk.from_user.id != query.from_user.id:
+                            a=False 
+                    except:
+                        a=False
+                
+                if mk.media and not (mk.photo):
+                    for file_type in ("document", "video", "audio"):
+                        media = getattr(mk, file_type, None)
+                        if media is not None:
+                            media.file_type = file_type
+                            media.caption = mk.caption
+                            break
+                    try:
+                        await client.send_cached_media(
+                            chat_id = CHANNELS,
+                            file_id = media.file_id,
+                            caption = media.caption,
+                        )
+                        media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
+                        await save_file(f'+{icount}.{strid}.{stridm.split("-")[1]}', media.caption, [], media.file_id, media.file_type, stridm,query.from_user.id,'d.dd#.data',0,f'frmt}')
+                    except Exception as e :
+                        await client .send_cached_media(
+                            chat_id = query.from_user.id,
+                            file_id = media.file_id,
+                            caption =f'❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌ **Samahani hii media nmeshindwa kusave** huenda caption n kubwa tafadhal punguza kisha itume tena \n Au kama hujui tatizo ntumie msimizi maneno haya ili atatue changamoto yako {e} @hrm46',
+                        )
+                elif mk.text.lower()=='stop':
+                    dta = 'stop'
+                    await query.message.copy(chat_id=query.from_user.id)    
+                    await mk.reply(f'all file sent to database with id  {strid}')
+                    break
+                    
+                icount+=1
+                mkv22.delete()
+                mkv22=await client.send_message(text =text1, chat_id = query.from_user.id)  
+                
         if query.data.startswith("3hdns"):
             p_caption = query.message.caption.split(".Samahani kuna mteja alikuwa anaomba uweke")[0]
             p_caption =f"{p_caption}\n**🩸🩸🩸tumemtaarifu kikamilifu🩸🩸🩸**"
