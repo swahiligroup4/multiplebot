@@ -405,6 +405,19 @@ async def cb_handler(client, query):
         typed = query.from_user.id
         pass
     if (clicked == typed):
+        if query.data.startswith("3hmuv"):
+            frmt=query.data.split(" ")[].split("##")[1]
+            fileid=query.data.split(" ")[1]
+            details4 =await get_filter_results(fileid,query.from_user.id)
+            for document in details4:
+                if document.grp == frmt:
+                    await client.send_cached_media(
+                        chat_id = query.from_user.id,
+                        file_id = document.file,
+                        caption = document.reply,
+                        reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton(text='delete',callback_data=f'3hydelte {document.id}'),InlineKeyboardButton(text='close',callback_data=f'close')]])
+                    )
+                     
         if query.data.startswith("3hdns"):
             p_caption = query.message.caption.split(".Samahani kuna mteja alikuwa anaomba uweke")[0]
             p_caption =f"{p_caption}\n**🩸🩸🩸tumemtaarifu kikamilifu🩸🩸🩸**"
