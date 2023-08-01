@@ -184,15 +184,62 @@ async def start_msg_admins(client, message):
             if filedetails:
                 if strg.lower() == 'm':
                     filez=await get_filter_results( file_id ,group_id)
-                    for file in reversed(filez):
-                        filedetails = await get_file_details(file.id)
-                        for files in filedetails:
-                            f_caption=files.reply
+                    abx=[]
+                    for file in (filez):
+                        if abx==[]:
+                            abx.append(files.grp)
+                        elif files.grp not in abx:
+                            abx.append(files.grp)
+                    if abx==[]:
+                        reply_markup = None
+                        caption=f"{f_caption }\n\n.Samahani kuna mteja alikuwa anaomba uweke movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka"
+                        rpymk1=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns {message.from_user.id}")]])
+                        f_caption=f"{f_caption}\n\nSamahani mteja Series hii uliokuwa unaiomba bado haijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza."
+                        if msg_type =="Photo":
+                            await client.send_photo(
+                                chat_id=group_id,
+                                photo=files.file,
+                                caption=caption,
+                                reply_markup= rpymk1
+                            )
+                        
+                        else:
                             await client.send_cached_media(
+                                chat_id=group_id,
+                                file_id=files.file,
+                                caption=caption,
+                                reply_markup=rpymk1
+                            )
+                    elif len(abx)==1:
+                        reply_markup=InlineKeyboardMarkup([[
+                            InlineKeyboardButton(f"📡{abx[0]}p", callback_data =f"3hmuv##{abx[0]} {file_id}")
+                        ]])
+                    elif len(abx)==2:
+                        reply_markup=InlineKeyboardMarkup([[
+                            InlineKeyboardButton(f"📡{abx[0]}p", callback_data =f"3hmuv##{abx[0]} {file_id}"),
+                            InlineKeyboardButton(f"📡{abx[1]}p", callback_data =f"3hmuv##{abx[1]} {file_id}")
+                        ]])
+                    elif len(abx)==3:
+                        reply_markup=InlineKeyboardMarkup([[
+                            InlineKeyboardButton(f"📡{abx[0]}p", callback_data =f"3hdmuv##{abx[0]} {file_id}"),
+                            InlineKeyboardButton(f"📡{abx[1]}p", callback_data =f"3hdmuv##{abx[1]} {file_id}"),
+                            InlineKeyboardButton(f"📡{abx[2]}p", callback_data =f"3hdmuv##{abx[2]} {file_id}")
+                        ]])
+                    if msg_type =="Photo":
+                        await client.send_photo(
+                            chat_id=cmd.from_user.id,
+                            photo=files.file,
+                            caption= f"{f_caption}\n\n**Chagua formate ya kudownload**",
+                            reply_markup = reply_markup
+                        )
+                        
+                    else:
+                        await client.send_cached_media(
                                 chat_id=cmd.from_user.id,
                                 file_id=files.file,
-                                caption=f_caption
-                            )
+                                caption= f"{f_caption}\n\n**Chagua formate ya kudownload**",
+                                reply_markup=reply_markup
+                        )
                     return
                 elif strg.lower()=="ms":
                     abdata = ""
