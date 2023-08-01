@@ -187,9 +187,9 @@ async def start_msg_admins(client, message):
                     abx=[]
                     for file in (filez):
                         if abx==[]:
-                            abx.append(files.grp)
-                        elif files.grp not in abx:
-                            abx.append(files.grp)
+                            abx.append(file.grp)
+                        elif file.grp not in abx:
+                            abx.append(file.grp)
                     if abx==[]:
                         reply_markup = None
                         caption=f"{f_caption }\n\n.Samahani kuna mteja alikuwa anaomba uweke movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka"
