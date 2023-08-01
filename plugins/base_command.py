@@ -194,7 +194,7 @@ async def start_msg_admins(client, message):
                         reply_markup = None
                         caption=f"{f_caption }\n\n.Samahani kuna mteja alikuwa anaomba uweke movie hii..Kisha baada ya kuweka bonyeza done ili tumtaarifu kuwa ushaiweka"
                         rpymk1=InlineKeyboardMarkup([[InlineKeyboardButton(f"✅  DONE__", callback_data =f"3hdns {message.from_user.id}")]])
-                        f_caption=f"{f_caption}\n\nSamahani mteja Series hii uliokuwa unaiomba bado haijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza."
+                        f_caption=f"{f_caption}\n\n**Samahani mteja Series hii uliokuwa unaiomba bado haijawekwa nmeshatoa taarifa kwa msimamizi wangu atakapoiweka tu ntakujuza.**"
                         if msg_type =="Photo":
                             await client.send_photo(
                                 chat_id=group_id,
@@ -211,15 +211,18 @@ async def start_msg_admins(client, message):
                                 reply_markup=rpymk1
                             )
                     elif len(abx)==1:
+                        f_caption = f"{f_caption}\n\n**Chagua formate ya kudownload**"
                         reply_markup=InlineKeyboardMarkup([[
-                            InlineKeyboardButton(f"📡{abx[0]}p", callback_data =f"3hmuv##{abx[0]} {file_id}")
+                            InlineKeyboardButton(f"📡{abx[0]}p", callback_data =f"3hdmuv##{abx[0]} {file_id}")
                         ]])
                     elif len(abx)==2:
+                        f_caption = f"{f_caption}\n\n**Chagua formate ya kudownload**"
                         reply_markup=InlineKeyboardMarkup([[
-                            InlineKeyboardButton(f"📡{abx[0]}p", callback_data =f"3hmuv##{abx[0]} {file_id}"),
-                            InlineKeyboardButton(f"📡{abx[1]}p", callback_data =f"3hmuv##{abx[1]} {file_id}")
+                            InlineKeyboardButton(f"📡{abx[0]}p", callback_data =f"3hdmuv##{abx[0]} {file_id}"),
+                            InlineKeyboardButton(f"📡{abx[1]}p", callback_data =f"3hdmuv##{abx[1]} {file_id}")
                         ]])
                     elif len(abx)==3:
+                        f_caption = f"{f_caption}\n\n**Chagua formate ya kudownload**"
                         reply_markup=InlineKeyboardMarkup([[
                             InlineKeyboardButton(f"📡{abx[0]}p", callback_data =f"3hdmuv##{abx[0]} {file_id}"),
                             InlineKeyboardButton(f"📡{abx[1]}p", callback_data =f"3hdmuv##{abx[1]} {file_id}"),
@@ -229,7 +232,7 @@ async def start_msg_admins(client, message):
                         await client.send_photo(
                             chat_id=cmd.from_user.id,
                             photo=files.file,
-                            caption= f"{f_caption}\n\n**Chagua formate ya kudownload**",
+                            caption= f_caption,
                             reply_markup = reply_markup
                         )
                         
@@ -237,7 +240,7 @@ async def start_msg_admins(client, message):
                         await client.send_cached_media(
                                 chat_id=cmd.from_user.id,
                                 file_id=files.file,
-                                caption= f"{f_caption}\n\n**Chagua formate ya kudownload**",
+                                caption= f_caption ,
                                 reply_markup=reply_markup
                         )
                     return
@@ -452,7 +455,20 @@ async def cb_handler(client, query):
         typed = query.from_user.id
         pass
     if (clicked == typed):
-        if query.data.startswith("3hmuv"):
+        if query.data.startswith("3hdmuv"):
+            await query.answer("hi")
+            await query.message.delete()
+            frmt=query.data.split(" ")[0].split("##")[1]
+            fileid=query.data.split(" ")[1]
+            details4 =await get_filter_results(fileid,query.from_user.id)
+            for document in details4:
+                if document.grp == frmt:
+                    await client.send_cached_media(
+                        chat_id = query.from_user.id,
+                        file_id = document.file,
+                        caption = document.reply,
+                    )
+        elif query.data.startswith("3hmuv"):
             frmt=query.data.split(" ")[0].split("##")[1]
             fileid=query.data.split(" ")[1]
             strid = fileid
