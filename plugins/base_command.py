@@ -173,8 +173,8 @@ async def start_msg_admins(client, message):
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
-                                InlineKeyboardButton("🇹🇿 TANZANIA", callback_data =f"tanzania {file_id}"),
-                                InlineKeyboardButton("🇰🇪 KENYA",callback_data ="kenya" )
+                                InlineKeyboardButton("🇹🇿 TANZANIA", callback_data =f"tzn##tsh {file_id}"),
+                                InlineKeyboardButton("🇰🇪 KENYA",callback_data ="tzn##ksh {file_id}" )
                             ]
                         ]
                     )
