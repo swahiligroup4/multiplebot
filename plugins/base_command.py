@@ -174,7 +174,7 @@ async def start_msg_admins(client, message):
                         [
                             [
                                 InlineKeyboardButton("🇹🇿 TANZANIA", callback_data =f"tzn##tsh {file_id}"),
-                                InlineKeyboardButton("🇰🇪 KENYA",callback_data ="tzn##ksh {file_id}" )
+                                InlineKeyboardButton("🇰🇪 KENYA",callback_data =f"tzn##ksh {file_id}" )
                             ]
                         ]
                     )
