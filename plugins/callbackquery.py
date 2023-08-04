@@ -387,8 +387,8 @@ async def cb_handler(client, query):
                 
         elif query.data == "xba":
             await query.answer('Mtandao pendwa ndio bora')
-            mkv1 = await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️\nTafadhali Tuma namba kisha acha nafasi kampuni Mfano Halopesa au Lipa_kwa_mpesa(kumbuka sehemu ya nafasi weka_ acha nafasi link ya maelekezo jinsi ya kulipia acha nafas jina ulilosajiria namba hiimfano\n 062466xxxx halopesa https://t.me/swahiliupda hassan ramadhani\nMfano\n345546 Lipa_kwa_mpesa https://t.me/swahiliupda baoflix company \nkumbuka namba ianze na 0 sio +255 au kama ni lipa namba uiandike kiusahihi',disable_web_page_preview = True)
-            a=False 
+            mkv1 = await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️\nTafadhali Tuma namba ya simu/lipa namba \n kumbuka tuma namba tu ',disable_web_page_preview = True)
+            a=False  
             b=time.time()
             id1=mkv1.id+1
             while a==False:
@@ -409,8 +409,7 @@ async def cb_handler(client, query):
                 await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali tuna maneno sio picha wala kingine anza upya kubonyez btn")
                 return
             try:
-                 int(mkv.text.split(" ")[0])
-                 mkv.text.split(" ")[2]
+                 int(mkv.text)
             except:
                 await mkv.delete()
                 await client.send_message(chat_id = query.from_user.id,text=f"umetuma ujumbe ambao s sahihi,Kama hujaelewa jinsi tafadhal mcheki msimamiz @hrm45 akusaidie bonyeza rudi nyuma uanze upya kutengeneza namba ya miamala yako",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
