@@ -18,7 +18,7 @@ class Database:
                 descp = "Tunahusika na uuzaji wa muvi na sizon kal zilizotafsiriwa kwa bei ",
                 p0 = "hrm45",
                 p1 = "hrm45",
-                
+                lpa=False,
                 bot_link= "hrm45",
                 group = "hrm45##hrm45",
                 channels ="hrm45##hrm45",
@@ -132,7 +132,7 @@ class Database:
                 descp = "Tunahusika na uuzaji wa muvi na sizon kal zilizotafsiriwa kwa bei ",
                 p0 = "hrm45",
                 p1 = "hrm45",
-                
+                lpa = False,
                 bot_link= "hrm45",
                 group ="hrm45##hrm45",
                 channels ="hrm45##hrm45",
@@ -156,7 +156,7 @@ class Database:
                 descp = ab["descp"],
                 p0 = ab["p0"],
                 p1 = ab["p1"],
-                
+                lpa = ab["lpa"]
                 bot_link= ab["bot_link"],
                 group =ab["group"],
                 channels =ab["channels"],
