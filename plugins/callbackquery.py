@@ -28,19 +28,7 @@ async def cb_handler(client, query):
         typed = query.from_user.id
         pass
     if (clicked == typed):
-        if query.data.startswith("kzn"):
-            ab = await db.get_db_status(query.from_user.id)
-            abz="no"
-            if query.data.split(" ")[1] in ab["p0"]:
-                abz="yes"
-                abx=ab["p0"].replace(f'{query.data.split(" ")[1]}##',"")
-                await db.update_db(query.from_user.id,f"p0 {abx}",ab)
-    
-            if abz=="no":
-                abx=f'{ab["p0"]}{query.data.split(" ")[1]}##')
-                await db.update_db(query.from_user.id,f"p0 {abx}",ab)
-                
-        elif query.data == "kundii":
+        if query.data == "kundii":
             ab = await db.get_db_status(query.from_user.id)
             grp="grp"
             if ab['g_1']=="hrm45":
