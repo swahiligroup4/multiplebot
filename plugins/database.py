@@ -156,7 +156,7 @@ class Database:
                 descp = ab["descp"],
                 p0 = ab["p0"],
                 p1 = ab["p1"],
-                lpa = ab["lpa"]
+                lpa = ab["lpa"],
                 bot_link= ab["bot_link"],
                 group =ab["group"],
                 channels =ab["channels"],
