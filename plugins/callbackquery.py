@@ -387,7 +387,7 @@ async def cb_handler(client, query):
                 
         elif query.data == "xba":
             await query.answer('Mtandao pendwa ndio bora')
-            mkv1 = await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️\nTafadhali Tuma namba ya simu/lipa namba \n kumbuka tuma namba tu ',disable_web_page_preview = True)
+            mkv1 = await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️\nTafadhali Tuma namba ya simu \n kumbuka tuma namba tu acha nafasi kampuni/aina ya huduma kisha acha nafasi jina litakalotoka baada ya kufanya malipo mfano 0679×××××× tigopesa hassan mohamed ',disable_web_page_preview = True)
             a=False  
             b=time.time()
             id1=mkv1.id+1
@@ -405,16 +405,16 @@ async def cb_handler(client, query):
                         id1=id1+1
                 except:
                     a=False 
-            if mkv.text==None:
+            if mkv.text==None :
                 await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali tuna maneno sio picha wala kingine anza upya kubonyez btn")
                 return
             try:
-                 int(mkv.text)
+                 int(mkv.text.split(" ")[1])
             except:
                 await mkv.delete()
                 await client.send_message(chat_id = query.from_user.id,text=f"umetuma ujumbe ambao s sahihi,Kama hujaelewa jinsi tafadhal mcheki msimamiz @hrm45 akusaidie bonyeza rudi nyuma uanze upya kutengeneza namba ya miamala yako",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
                 return
-            ghi=f'phone_no {mkv.text}'
+            ghi=f'p0 {mkv.text}'
             ab = await db.get_db_status(query.from_user.id)
             await db.update_db(query.from_user.id,ghi,ab)
             await mkv.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
