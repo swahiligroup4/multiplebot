@@ -95,7 +95,7 @@ async def start_msg_admins(client, message):
         ts=await c.get_users(user_details)
         await client.send_message(
             chat_id=user_details,
-            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kumtumia robot huyu mwambie admin wako add update channel na main movie group bonyeza @{ts.username} kumfuata inbox",
+            text=f"Tafadhali ili wateja wako waweze kumtumia robot huyu add update channel na main movie group.......\n\nGroup\nkwenye kikundi(group) muadd robot huyu kama admin kisha tuma /niunge\nCHANNEL\nTuma /niunge kwenye channel kishannel kisha forward ujumbe huo kwa robot huyu.... ",
         )
         await client.send_message(
             chat_id=message.from_user.id,
