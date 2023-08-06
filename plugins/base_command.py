@@ -92,7 +92,7 @@ async def start_msg_admins(client, message):
         aby = await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) )
         aby = await  is_subscribed(client, message, int(ban_status['group'].split('##')[0]) )
     except:
-        ts=await c.get_users(user_details)
+        ts=await client.get_users(user_details)
         await client.send_message(
             chat_id=user_details,
             text=f"Tafadhali ili wateja wako waweze kumtumia robot huyu add update channel na main movie group.......\n\nGroup\nkwenye kikundi(group) muadd robot huyu kama admin kisha tuma /niunge\nCHANNEL\nTuma /niunge kwenye channel kishannel kisha forward ujumbe huo kwa robot huyu.... ",
