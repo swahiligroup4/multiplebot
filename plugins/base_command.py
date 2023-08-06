@@ -462,11 +462,15 @@ async def cb_handler(client, query):
         pass
     if (clicked == typed):
         if query.data.startswith("3hdmuv"):
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            group_id = await db.is_bot_exist(nyva)
             await query.answer("hi")
             await query.message.delete()
             frmt=query.data.split(" ")[0].split("##")[1]
             fileid=query.data.split(" ")[1]
-            details4 =await get_filter_results(fileid,query.from_user.id)
+            details4 =await get_filter_results(fileid,group_id)
             for document in details4:
                 if document.grp == frmt:
                     await client.send_cached_media(
@@ -475,12 +479,16 @@ async def cb_handler(client, query):
                         caption = document.reply,
                     )
         elif query.data.startswith("3hmuv"):
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            group_id = await db.is_bot_exist(nyva)
             frmt=query.data.split(" ")[0].split("##")[1]
             fileid=query.data.split(" ")[1]
             strid = fileid
             dta='start'
             icount = 0
-            details4 =await get_filter_results(fileid,query.from_user.id)
+            details4 =await get_filter_results(fileid,group_id)
             for document in details4:
                 if document.grp == frmt:
                     await client.send_cached_media(
@@ -525,7 +533,7 @@ async def cb_handler(client, query):
                             file_id = media.file_id,
                             caption = media.caption,
                         )
-                        media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
+                        media.caption = f'{media.caption}\n🌟 @{nyva} 'if media.caption else f'🌟 @{nyva}'
                         await save_file(f'+{icount}.{strid}.{stridm.split("-")[1]}', media.caption, [], media.file_id, media.file_type, stridm,query.from_user.id,'d.dd#.data',0,f'{frmt}')
                     except Exception as e :
                         await client .send_cached_media(
@@ -841,6 +849,11 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             nyva=str(nyva)
             await query.edit_message_reply_markup(reply_markup=btn22(nyva,"series",f"3hsss##{query.data.split(' ',1)[1] }"))
         elif query.data.startswith("3hsss"):
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
+            group_id = await db.is_bot_exist(nyva)
+            
             ab=''
             bb,ab=query.data.split(' ',1)
             ab=str(ab) 
@@ -863,7 +876,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                         ab1,ab2,ab3=ab.split('##')
                         dta='start'
                         icount = int(ab3)
-                        details4 =await get_filter_results(bb.split('##')[1],query.from_user.id)
+                        details4 =await get_filter_results(bb.split('##')[1],group_id )
                         for document in details4:
                             if ab==document.grp:
                                 await client.send_cached_media(
@@ -908,7 +921,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                                         file_id = media.file_id,
                                         caption = media.caption,
                                     )
-                                    media.caption = f'{media.caption}\n🌟 @Bandolako2bot 'if media.caption else '🌟 @Bandolako2bot'
+                                    media.caption = f'{media.caption}\n🌟 @{nyva} 'if media.caption else '🌟 @{nyva}'
                                     await save_file(f'+{icount}.{strid}.{stridm.split("-")[1]}', media.caption, [], media.file_id, media.file_type, stridm,query.from_user.id,'d.dd#.data',0,f'{ab}')
                                 except Exception as e :
                                     await client .send_cached_media(
