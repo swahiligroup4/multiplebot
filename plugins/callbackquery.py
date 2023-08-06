@@ -453,7 +453,6 @@ async def cb_handler(client, query):
         elif query.data.startswith("tzn"):
             await query.answer()
             fileid = query.data.split(" ",1)[1]
-            await query.message.delete()
             filedetails = await get_file_details(fileid)
             for files in filedetails:
                 f_caption=files.reply
@@ -463,7 +462,10 @@ async def cb_handler(client, query):
             if query.data.split(" ")[0].split("##")[1]=="tsh":
                 kdflg="🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿"
             elif query.data.split(" ")[0].split("##")[1]=="ksh":
+                await query.answer("Huduma hii badoo ipo kwny matengenezo ",show_alert=True)
                 kdflg="🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪"
+                return
+            await query.message.delete()
             db_details = await db.get_db_status(group_id)
             if type1=="Photo":
                 await client.send_photo(
