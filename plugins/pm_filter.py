@@ -23,7 +23,7 @@ async def grouup(client, message):
     text=f"Karibu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote (Sababu ukituma nafuta) ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
     await message.reply_text(f"{text}")
 
-@Bot1.on_message(filters.text & filters.group & filters.incoming)
+@Bot1.on_message(filters.group & filters.incoming)
 async def group(client, message):
     await handle_admin_status(client,message)
     botusername=await client.get_me()
@@ -50,6 +50,8 @@ async def group(client, message):
         url=f"https://t.me/{nyva}?start=mwongozo##{message.chat.id}"
         text=f"Ndugu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote **(Sababu ukituma nafuta)** ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
         await message.reply_text(f"{text}")
+        return 
+    if not message.text:
         return 
     try:
         hjkl = f'{user_id3}##{message.from_user.id}'
