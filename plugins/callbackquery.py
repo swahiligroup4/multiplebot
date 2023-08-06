@@ -517,12 +517,12 @@ async def cb_handler(client, query):
             else:
                 tme1=tme
             data2 = data1.split("#@")[0]
-            p1,p2,p3,p4=details["phone_no"].split(" ",3)
+            p1,p2,p4=details["p0"].split(" ",3)
             mda = details["muda"]
             await query.message.delete()
             if tme == "m":
                 await client.send_message(chat_id=query.from_user.id,
-                        text = f'🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\n{details["db_name"].upper} PAYMENT SECTION \nTafadhali lipia\n Tsh {prc2} kwenda \nNo : {p1}\nKampuni : {p2}\nJina : {p4}\n\n**[BONYEZA HAPA kujua jinsi ya kufanya malipo ]({p3})**\n\nKumbuka unalipia tsh {prc2} kwa ajili ya kununua {name} {mda} \n\nUkishafanya  malipo bonyeza button nmeshafanya malipo kisha tuma screenshot ya malipo/muamala',disable_web_page_preview = True,
+                        text = f'🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\n{details["db_name"].upper} PAYMENT SECTION \nTafadhali lipia\n Tsh {prc2} kwenda \nNo : {p1}\nKampuni : {p2}\nJina : {p4}\n\nKumbuka unalipia tsh {prc2} kwa ajili ya kununua {name} {mda} \n\nUkishafanya  malipo bonyeza button nmeshafanya malipo kisha tuma screenshot ya malipo/muamala',disable_web_page_preview = True,
                         reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("nmeshafanya malipo", callback_data=f"malipo {query.data.split(' ')[1]}"),InlineKeyboardButton("rudi mwanzo ", callback_data=f"tanzania {fileid}")]]),
                     )
             else:
@@ -553,7 +553,7 @@ async def cb_handler(client, query):
             details = await db.get_db_status(group_id)
             data1 = details[msg2]
             data2 = data1.split("#@")[0]
-            p1,p2,p3,p4=details['phone_no'].split(" ",3)
+            p1,p2,p4=details['p0'].split(" ",3)
             mda = details['muda']
             dbname = details['db_name']
             mkv1 =await client.send_message(chat_id = query.from_user.id,text='🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\nTuma picha ya screenshot ya malipo yako kisha subir kidogo wasimamiz wangu wahakiki muamala wako')
