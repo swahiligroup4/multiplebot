@@ -17,10 +17,10 @@ async def grouup(client, message):
         hjkl = f'{user_id3}##{message.from_user.id}'
         if not await is_user_exist(hjkl,nyva):
             await add_user(hjkl,nyva)
-    await client.restrict_chat_member(message.chat.id, message.from_user.id,
-        ChatPermissions(can_send_messages=False)) 
+    #await client.restrict_chat_member(message.chat.id, message.from_user.id,
+        #ChatPermissions(can_send_messages=False)) 
     url=f"https://t.me/{nyva}?start=mwongozohrm{message.chat.id}"
-    text=f"Karibu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
+    text=f"Karibu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote (Sababu ukituma nafuta) ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
     await message.reply_text(f"{text}")
 
 @Bot1.on_message(filters.text & filters.group & filters.incoming)
@@ -32,12 +32,13 @@ async def group(client, message):
     gd=await db.get_db_status(int(user_id3))
     group_id = int(user_id3)
     if not await  is_subscribed(client, message, message.chat.id):
+        await message.delete()
         gh=await is_user_exist(message.from_user.id,nyva)
         if not gh:
-            await client.restrict_chat_member(message.chat.id, message.from_user.id,
-                ChatPermissions(can_send_messages=False)) 
+            #await client.restrict_chat_member(message.chat.id, message.from_user.id,
+                #ChatPermissions(can_send_messages=False)) 
             url=f"https://t.me/{nyva}?start=mwongozo##{message.chat.id}"
-            text=f"Ndugu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
+            text=f"Ndugu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote **(Sababu ukituma nafuta)** ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
             await message.reply_text(f"{text}")
             return 
     try:
