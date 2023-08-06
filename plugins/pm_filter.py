@@ -31,9 +31,10 @@ async def group(client, message):
     user_id3= await db.is_bot_exist(nyva)
     gd=await db.get_db_status(int(user_id3))
     group_id = int(user_id3)
+    hjkl = f'{user_id3}##{message.from_user.id}'
     if not await  is_subscribed(client, message, message.chat.id):
         await message.delete()
-        gh=await is_user_exist(message.from_user.id,nyva)
+        gh=await is_user_exist(hjkl,nyva)
         if not gh:
             #await client.restrict_chat_member(message.chat.id, message.from_user.id,
                 #ChatPermissions(can_send_messages=False)) 
@@ -41,6 +42,12 @@ async def group(client, message):
             text=f"Ndugu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote **(Sababu ukituma nafuta)** ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
             await message.reply_text(f"{text}")
             return 
+    elif not await is_user_exist(hjkl,nyva):
+        await message.delete()
+        url=f"https://t.me/{nyva}?start=mwongozo##{message.chat.id}"
+        text=f"Ndugu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote **(Sababu ukituma nafuta)** ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
+        await message.reply_text(f"{text}")
+        return 
     try:
         hjkl = f'{user_id3}##{message.from_user.id}'
         if not await is_user_exist(hjkl,nyva):
