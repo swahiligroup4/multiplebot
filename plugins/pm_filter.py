@@ -47,7 +47,7 @@ async def group(client, message):
             chat_id=message.chat.id,
             message_ids=message.id
         )
-        url=f"https://t.me/{nyva}?start=mwongozo##{message.chat.id}"
+        url=f"https://t.me/{nyva}?start=mwongozohrm{message.chat.id}"
         text=f"Ndugu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote **(Sababu ukituma nafuta)** ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
         await message.reply_text(f"{text}")
         return 
