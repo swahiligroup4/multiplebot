@@ -112,15 +112,15 @@ async def get_search_results(query, group_id, max_results=10, offset=0):
     query = query.lower()
     ab='empty'
     if query.startswith('movie'):
-        ab='movie'
+        ab='x movie'
         query=query.replace('movie','')
         query = query.strip()
-        raw_pattern1 = r'\b' + ab + r'.*'
+        raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
     elif query.startswith('series'):
         query=query.replace('series','')
-        ab='series'
+        ab='x series'
         query = query.strip()
-        raw_pattern1 = r'\b' + ab + r'.*'
+        raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
     elif query.startswith('dj'):
         try:
             ab,query=query.split('#',1)
@@ -128,11 +128,11 @@ async def get_search_results(query, group_id, max_results=10, offset=0):
         except:
             ab=query.strip()
             query =''
-        if ' ' not in ab:
-            raw_pattern1 = r'\b' + ab + r'.*'
-        else:
-            raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
-    
+        ab=f"x {ab}"
+        raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
+    else:
+        ab="x dd#"
+        raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
     if not query:
         raw_pattern = '.'
     elif ' ' not in query:
