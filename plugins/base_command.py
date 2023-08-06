@@ -808,7 +808,7 @@ async def cb_handler(client, query):
                 ChatPermissions(can_send_messages=True,can_send_media_messages=True,can_send_other_messages=True,can_send_polls=True,can_invite_users=True,can_add_web_page_previews=True)) 
             hjkl = f'{user_details}##{query.from_user.id}'
             existt=await is_user_exist(hjkl,nyva)
-            if not existt:
+            if not existt: 
                 await add_user(hjkl,nyva)
             inv_link=ban_status["group"].split("##")[1]
             await query.edit_message_text(text=f'✔️ Shukrani zetu zikufikie wewe uliweza kusoma mpaka hapa nahisi umetuelewa tunahusika na nini pia jinsi ya kupata huduma zetu..\n\n**Tumeshakuruhusu kutuma ujumbe kwenye kikundi ulichojiunga nacho** \n\nBonyeza **KIKUNDI** kurudi kwenye kikundi ',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'3htest1 {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 KIKUNDI", url =f'{inv_link}') ]]))
