@@ -805,7 +805,7 @@ async def cb_handler(client, query):
             user_details = await db.is_bot_exist(nyva)
             ban_status = await db.get_db_status(user_details)   
             await client.restrict_chat_member(int(query.data.split(" ")[1]), query.from_user.id,
-                ChatPermissions(can_send_messages=True,can_send_media_messages=True,can_send_other_messages=True,can_send_polls=True,can_invite_users=True)) 
+                ChatPermissions(can_send_messages=True,can_send_media_messages=True,can_send_other_messages=True,can_send_polls=True,can_invite_users=True,can_add_web_page_previews=True)) 
             hjkl = f'{user_details}##{query.from_user.id}'
             existt=await is_user_exist(hjkl,nyva)
             if not existt:
