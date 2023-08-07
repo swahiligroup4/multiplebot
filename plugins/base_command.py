@@ -811,7 +811,7 @@ async def cb_handler(client, query):
             if not existt: 
                 await add_user(hjkl,nyva)
             inv_lnk = await client.get_chat( int(query.data.split(" ")[1]) )
-            inv_link=inv_link.invite_link
+            inv_link=inv_lnk.invite_link
             await query.edit_message_text(text=f'✔️ Shukrani zetu zikufikie wewe uliweza kusoma mpaka hapa nahisi umetuelewa tunahusika na nini pia jinsi ya kupata huduma zetu..\n\n**Tumeshakuruhusu kutuma ujumbe kwenye kikundi ulichojiunga nacho** \n\nBonyeza **KIKUNDI** kurudi kwenye kikundi ',reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("⬅️ BACK", callback_data =f'3htest1 {query.data.split(" ")[1]}'),InlineKeyboardButton("💥 KIKUNDI", url =f'{inv_link}') ]]))
         elif query.data.startswith("3hmbele"):
             botusername=await client.get_me()
