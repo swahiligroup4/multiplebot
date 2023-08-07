@@ -139,21 +139,21 @@ async def groupprv(client, message):
         if group_status:
             for user in group_status:
                 user_id3 = user.email
-            text1='TAFADHALI MPE ACCESS YA MOVIE HIZI'
+            text1='TAFADHALI MPE ACCESS YA MOVIE/VIFURUSHI HIVI'
             async for dtls in await db.get_acc(message.from_user.id ):
                 if dtls["user_id"] == message.from_user.id:
                     if dtls["file_id"].startswith("g_") and dtls["db_name"]==group_id:
-                        text1+=f"gh"
+                        text1+=f"gh\n"
                     else:
-                        text1+='gh'
+                        text1+='gh\n'
             if user_id3 == text.lower():
                 await message.reply_text('Hii email tayar Tulishaihifadhi kama unataka kuibadisha ntumie nyingene')
-            elif text1!='TAFADHALI MPE ACCESS YA MOVIE HIZI':
+            elif text1!='TAFADHALI MPE ACCESS YA MOVIE/VIFURUSHI HIVI\n':
                 await message.reply_text('Tumeibadilisha kikamilifu')
                 await User.collection.update_one({'_id':message.from_user.id},{'$set':{'email':text.lower()}})
                 if await db.is_email_exist(message.from_user.id):
                     await message.reply_text(f'Tafadhali subir kidogo tutakupa taarifa tutakaipo iwezesha')
-                    await client.send_message(chat_id=group_id,text=f'Tafadhal iwezeshe email hii **{message.text.strip()}** \n kisha ondoa uwezo kwenye email hii **{user_id3}** Kisha baada ya kumaliza kumuwekea access bonyeza {text1}done',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Done', callback_data =f'done {message.from_user.id}')]]))
+                    await client.send_message(chat_id=group_id,text=f'Tafadhal iwezeshe email hii **{message.text.strip()}** \n kisha ondoa uwezo kwenye email hii **{user_id3}** Kisha baada ya kumaliza kumuwekea access bonyeza done..\n{text1}done',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Done', callback_data =f'done {message.from_user.id}')]]))
             else:
                 await message.reply_text('Tafadhali hujajiunga na kifurushi chochote cha kwetu jiunge kwanza ndio tutawezesha email yako')
         else:
