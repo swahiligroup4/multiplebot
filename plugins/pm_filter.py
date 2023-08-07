@@ -142,7 +142,7 @@ async def groupprv(client, message):
             text1='TAFADHALI MPE ACCESS YA MOVIE HIZI'
             async for dtls in await db.get_acc(message.from_user.id ):
                 if dtls["user_id"] == message.from_user.id:
-                    if dtls["file_id"].startswith("g_"):
+                    if dtls["file_id"].startswith("g_") and dtls["db_name"]==group_id:
                         text1+=f"gh"
                     else:
                         text1+='gh'
