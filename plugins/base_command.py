@@ -571,7 +571,7 @@ async def cb_handler(client, query):
             btn3=None
             file_id= query.data.split(" ")[1]
             filez=await get_filter_results( file_id ,group_id)
-            for file in reversed(filez):
+            for file in (filez):
                 btn3=[]
                 abtext=file.grp.split("##")[0]
                 if abdata == "":
