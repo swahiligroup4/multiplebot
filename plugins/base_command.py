@@ -97,7 +97,7 @@ async def start_msg_admins(client, message):
                 chat_id=user_details,
                 text=f"Tafadhali ili wateja wako waweze kumtumia robot huyu add update channel na main movie group upya.......\n\n**Group**\nkwenye kikundi(group) muadd robot huyu kama admin kisha tuma /niunge\n**CHANNEL**\nTuma /niunge kwenye channel kisha forward ujumbe huo kwa robot huyu kumbuka umuadd robot huyu kama admin kwenye channel hiyo.... ",
             )
-except Exception as e :
+    except Exception as e :
         ts=await client.get_users(user_details)
         await client.send_message(
             chat_id=user_details,
