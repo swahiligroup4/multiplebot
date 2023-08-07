@@ -739,7 +739,7 @@ async def cb_handler(client, query):
                     await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"},{'$set':{'tme':80}})
                     await query.message.delete()
                     sb7=0
-                    for file in reversed(filez): 
+                    for file in (filez): 
                         if (f"{ab1}##{ab2}##{ab4}") in file.grp and "0##100" not in file.grp:
                             sb7=1
                             await client.send_cached_media(
