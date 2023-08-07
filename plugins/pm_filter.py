@@ -153,7 +153,7 @@ async def groupprv(client, message):
                 await User.collection.update_one({'_id':message.from_user.id},{'$set':{'email':text.lower()}})
                 if await db.is_email_exist(message.from_user.id):
                     await message.reply_text(f'Tafadhali subir kidogo tutakupa taarifa tutakaipo iwezesha')
-                    await client.send_message(chat_id=message.from_user.id,text=f'Tafadhal iwezeshe email hii **{message.text.strip()}** \n kisha ondoa uwezo kwenye email hii **{user_id3}** Kisha baada ya kumaliza kumuwekea access bonyeza done',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Done', callback_data =f'done {message.from_user.id}')]]))
+                    await client.send_message(chat_id=group_id,text=f'Tafadhal iwezeshe email hii **{message.text.strip()}** \n kisha ondoa uwezo kwenye email hii **{user_id3}** Kisha baada ya kumaliza kumuwekea access bonyeza {text1}done',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Done', callback_data =f'done {message.from_user.id}')]]))
             else:
                 await message.reply_text('Tafadhali hujajiunga na kifurushi chochote cha kwetu jiunge kwanza ndio tutawezesha email yako')
         else:
