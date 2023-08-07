@@ -91,6 +91,12 @@ async def start_msg_admins(client, message):
     try:
         aby = await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) )
         aby = await  is_subscribed(client, message, int(ban_status['group'].split('##')[0]) )
+        if (await client.get_chat_invite_link(int(ban_status['group'].split('##')[0]),int(ban_status['group'].split('##')[1]))).is_revoked:
+            ts=await client.get_users(user_details)
+            await client.send_message(
+                chat_id=user_details,
+                text=f"Tafadhali ili wateja wako waweze kumtumia robot huyu add update channel na main movie group upya.......\n\n**Group**\nkwenye kikundi(group) muadd robot huyu kama admin kisha tuma /niunge\n**CHANNEL**\nTuma /niunge kwenye channel kisha forward ujumbe huo kwa robot huyu kumbuka umuadd robot huyu kama admin kwenye channel hiyo.... ",
+            )
     except:
         ts=await client.get_users(user_details)
         await client.send_message(
