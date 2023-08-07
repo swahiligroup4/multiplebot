@@ -134,7 +134,7 @@ async def groupprv(client, message):
     hjkl = f'{user_id3}##{message.from_user.id}'
     text=message.text
     if " " not in text.strip() and "@gmail.com" in text.lower():
-        group_status = await is_user_exist(hjkl,group_id)
+        group_status = await is_user_exist(hjkl,nyva)
         user_id3='hrm45'
         if group_status:
             for user in group_status:
