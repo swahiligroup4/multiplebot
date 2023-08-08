@@ -918,6 +918,7 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
                                         media.caption = mk.caption
                                         break
                                 try:
+                                    await asyncio.sleep(2)
                                     await client.send_cached_media(
                                         chat_id = CHANNELS,
                                         file_id = media.file_id,
