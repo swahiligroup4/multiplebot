@@ -18,7 +18,7 @@ class Bot(Client):
             bot_token=BOT_TOKEN,
             workers=50,
             plugins={"root": "plugins"},
-            sleep_threshold=5,
+            sleep_threshold=4,
         )
 
     async def start(self):
@@ -36,7 +36,7 @@ class Bot1(Client):
             name='Mediasiearch',
             api_id=API_ID,
             api_hash=API_HASH,
-            bot_token='2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE',
+            bot_token='6332194321:AAE2pkCDZzeYkNfM_jd5gFt3wc-QyD6QfDY',
             workers=50,
             plugins={"root": "plugins"},
             sleep_threshold=5,
