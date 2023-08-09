@@ -15,7 +15,7 @@ class Bot(Client):
             name=SESSION ,
             api_id=API_ID,
             api_hash=API_HASH,
-            bot_token=BOT_TOKEN,
+            bot_token="2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE",
             workers=50,
             plugins={"root": "plugins"},
             sleep_threshold=4,
