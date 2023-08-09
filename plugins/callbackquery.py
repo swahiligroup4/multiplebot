@@ -8,6 +8,7 @@ from utils import get_file_details,get_filter_results,is_user_exist,Media,is_sub
 from botii  import Bot1,Bot
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
+@Bot.on_message( filters.command('edit_admin') & filters.private)
 @Bot1.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     botusername=await client.get_me()
@@ -18,7 +19,8 @@ async def group2(client, message):
         return
     await client.send_message(chat_id= message.from_user.id,text="chagua huduma unayotaka kufanya marekebisho",
             reply_markup =InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha Makundi', callback_data = "kundii")],[InlineKeyboardButton('Rekebisha Jina la Kikundi', callback_data = "dbname")],[InlineKeyboardButton('Rekebisha Startup sms', callback_data = "startup")],[InlineKeyboardButton('Rekebisha Mawasiliano', callback_data = "xba")]])
-        )          
+        ) 
+@Bot.on_callback_query()
 @Bot1.on_callback_query()
 async def cb_handler(client, query):
     clicked = query.from_user.id
