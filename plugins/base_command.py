@@ -4,7 +4,7 @@ import time
 import asyncio
 from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,User,is_subscribed,is_group_exist,save_file,add_user
-from botii  import Bot1,Bot,Bot0
+from botii  import Bot0
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 from plugins.strings import START_MESSAGE, HELP_MESSAGE, ABOUT_MESSAGE, MARKDOWN_HELP
@@ -57,15 +57,7 @@ markdown_keyboard = [
         InlineKeyboardButton(text = '🔙 Back', callback_data = 'help')
     ]
 ]
-@Bot0.on_message(filters.command('starti') & filters.private)
-async def start_msgi_admins(client, message):
-    await client.send_message(chat_id=message.from_user.id,text="hi")
-#@Bot1.on_message(filters.command('start') & filters.private)
-#@Bot1.on_message(filters.command('start') & filters.private)
-#@Bot1.on_message(filters.command('start') & filters.private)
-#@Bot1.on_message(filters.command('start') & filters.private)
-@Bot.on_message(filters.command('start') & filters.private)
-@Bot1.on_message(filters.command('start') & filters.private)
+@Bot0.on_message(filters.command('start') & filters.private)
 async def start_msg_admins(client, message):
     botusername=await client.get_me()
     nyva=botusername.username  
@@ -392,26 +384,16 @@ async def start_msg_admins(client, message):
             reply_markup = reply_markup,
             disable_web_page_preview = True
         )
-#@Bot1.on_message(filters.command('help') & filters.private)
-#@Bot1.on_message(filters.command('help') & filters.private)
-#@Bot1.on_message(filters.command('help') & filters.private)
-#@Bot1.on_message(filters.command('help') & filters.private)
-@Bot.on_message(filters.command('help') & filters.private) 
-
-@Bot1.on_message(filters.command('help') & filters.private)
+        
+@Bot0.on_message(filters.command('help') & filters.private)
 async def help_msg(client, message):
     await message.reply(
         text = HELP_MESSAGE,
         quote = True,
         reply_markup = InlineKeyboardMarkup(help_keyboard)
     )
-#@Bot1.on_message(filters.command('about') & filters.private)
-#@Bot1.on_message(filters.command('about') & filters.private)
-#@Bot1.on_message(filters.command('about') & filters.private)
 
-#@Bot1.on_message(filters.command('about') & filters.private)
-@Bot.on_message(filters.command('about') & filters.private)
-@Bot1.on_message(filters.command('about') & filters.private)
+@Bot0.on_message(filters.command('about') & filters.private)
 async def about_msg(client, message):
     user_id = message.from_user.id
     botusername=await client.get_me()
@@ -427,13 +409,8 @@ async def about_msg(client, message):
         reply_markup = reply_markup,
         disable_web_page_preview = True
     )
-#@Bot1.on_callback_query(filters.regex(r'^close$'))
-#@Bot1.on_callback_query(filters.regex(r'^close$'))
 
-#@Bot1.on_callback_query(filters.regex(r'^close$'))
-#@Bot1.on_callback_query(filters.regex(r'^close$'))
-@Bot.on_callback_query(filters.regex(r'^close$'))
-@Bot1.on_callback_query(filters.regex(r'^close$'))
+@Bot0.on_callback_query(filters.regex(r'^close$'))
 async def close_cbb(client, query):
     try:
         await query.message.reply_to_message.delete()
@@ -443,15 +420,15 @@ async def close_cbb(client, query):
         await query.message.delete()
     except:
         pass
-@Bot.on_callback_query(filters.regex(r'^help$'))
-@Bot1.on_callback_query(filters.regex(r'^help$'))
+
+@Bot0.on_callback_query(filters.regex(r'^help$'))
 async def help_cbq(client, query):
     await query.edit_message_text(
         text = HELP_MESSAGE,
         reply_markup = InlineKeyboardMarkup(help_keyboard)
     )
-@Bot.on_callback_query(filters.regex('^about$'))   
-@Bot1.on_callback_query(filters.regex('^about$'))
+   
+@Bot0.on_callback_query(filters.regex('^about$'))
 async def about_cbq(client, query):
     user_id = query.from_user.id
     botusername=await client.get_me()
@@ -466,8 +443,8 @@ async def about_cbq(client, query):
         reply_markup = reply_markup,
         disable_web_page_preview = True
     )
-@Bot.on_callback_query( filters.regex('^markdownhelper$') )   
-@Bot1.on_callback_query( filters.regex('^markdownhelper$') )
+
+@Bot0.on_callback_query( filters.regex('^markdownhelper$') )
 async def md_helper(client, query):
     await query.edit_message_text(
         text = MARKDOWN_HELP,
@@ -475,8 +452,8 @@ async def md_helper(client, query):
         disable_web_page_preview = True,
         
     )   
-@Bot.on_callback_query(filters.regex('^3h.*'))
-@Bot1.on_callback_query(filters.regex('^3h.*'))
+
+@Bot0.on_callback_query(filters.regex('^3h.*'))
 async def cb_handler(client, query):
     clicked = query.from_user.id
     try:
