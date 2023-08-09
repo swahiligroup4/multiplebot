@@ -16,8 +16,8 @@ import os
 import logging
 logger = logging.getLogger(__name__)
 BOT ={}
-@Bot.on_message(filters.command('total') & filters.owner)
-@Bot1.on_message(filters.command('total') & filters.owner)
+
+@Bot0.on_message(filters.command('total') & filters.owner)
 async def total(bot, message):
     """Show total files in database"""
     msg = await message.reply("Processing...⏳", quote=True)
@@ -27,8 +27,8 @@ async def total(bot, message):
     except Exception as e:
         logger.exception('Failed to check total files')
         await msg.edit(f'Error: {e}')
-@Bot.on_message(filters.private & filters.command('adddata'))
-@Bot1.on_message(filters.private & filters.command('adddata'))
+
+@Bot0.on_message(filters.private & filters.command('adddata'))
 async def new_filtervip(client, message):
     botusername=await client.get_me()
     nyva=botusername.username  
@@ -418,16 +418,16 @@ async def new_filtervip(client, message):
         ]
     )
     await message.reply_text(f"<code>{text}</code> Added", quote = True, reply_markup = reply_markup)
-@Bot.on_message(filters.command('logger') & filters.owner)
-@Bot1.on_message(filters.command('logger') & filters.owner)
+
+@Bot0.on_message(filters.command('logger') & filters.owner)
 async def log_file(bot, message):
     """Send log file"""
     try:
         await message.reply_document('TelegramBot.log')
     except Exception as e:
         await message.reply(str(e))
-@Bot.on_message(filters.private & filters.command('add'))
-@Bot1.on_message(filters.private & filters.command('add'))
+
+@Bot0.on_message(filters.private & filters.command('add'))
 async def new_filter(client, message):
     botusername=await client.get_me()
     nyva=botusername.username  
@@ -659,8 +659,8 @@ async def new_filter(client, message):
         ]
     )
     await message.reply_text(f"<code>{text}</code> Added", quote = True, reply_markup = reply_markup)
-@Bot.on_message(filters.private & filters.command('delete'))
-@Bot1.on_message(filters.private & filters.command('delete'))
+
+@Bot0.on_message(filters.private & filters.command('delete'))
 async def del_filter(client, message):
     botusername=await client.get_me()
     nyva=botusername.username  
@@ -696,8 +696,8 @@ async def del_filter(client, message):
             )
     else:
         await message.reply_text("Couldn't find that filter!", quote=True)
-@Bot.on_message(filters.private & filters.command('filters'))        
-@Bot1.on_message(filters.private & filters.command('filters'))
+        
+@Bot0.on_message(filters.private & filters.command('filters'))
 async def get_all(client, message):
     botusername=await client.get_me()
     nyva=botusername.username  
@@ -733,8 +733,8 @@ async def get_all(client, message):
         text=filterlist,
         quote=True
     )
-@Bot.on_message(filters.command('delall') & filters.owner)   
-@Bot1.on_message(filters.command('delall') & filters.owner)
+
+@Bot0.on_message(filters.command('delall') & filters.owner)
 async def delallconfirm(Client, message):
     reply_markup = InlineKeyboardMarkup(
         [
@@ -749,8 +749,8 @@ async def delallconfirm(Client, message):
         reply_markup = reply_markup,
         quote=True
     )
-@Bot.on_message(filters.command('niunge'))
-@Bot1.on_message(filters.command('niunge'))
+
+@Bot0.on_message(filters.command('niunge'))
 async def addconnection(client,message):
     botusername=await client.get_me()
     nyva=botusername.username  
@@ -832,8 +832,8 @@ async def addconnection(client,message):
         logger.exception(e)
         await message.reply_text('Kuna tatizo tafadhali jaribu badae!!!Likiendelea mcheki @hrm45 aweze kutatua tatizo', quote=True)
         return
-@Bot.on_message(filters.private & filters.command("add_admin") & filters.owner)
-@Bot1.on_message(filters.private & filters.command("add_admin") & filters.owner)
+
+@Bot0.on_message(filters.private & filters.command("add_admin") & filters.owner)
 async def ban(c,m):
     botusername=await c.get_me()
     nyva=botusername.username  
@@ -901,8 +901,8 @@ async def ban(c,m):
             f"Error occoured! Traceback given below\n\n {nyva}",
             quote=True
         )
-@Bot.on_message(filters.private & filters.command('salio'))
-@Bot1.on_message(filters.private & filters.command('salio'))
+
+@Bot0.on_message(filters.private & filters.command('salio'))
 async def get_statuss(bot,message):
     botusername=await client.get_me()
     nyva=botusername.username  
@@ -983,11 +983,11 @@ Salio lako:Litaisha tarehe {salio} ::Kumbuka kufanya malipo mapema wateja wako w
     else:
         await message.reply_text(salio)
 
-@Bot1.on_callback_query(filters.regex("^delall$") & filters.owner)
+@Bot0.on_callback_query(filters.regex("^delall$") & filters.owner)
 async def delall(client, query):
     await del_all(query.message)
 
-@Bot1.on_callback_query(filters.regex("^delallclose$") & filters.owner)
+@Bot0.on_callback_query(filters.regex("^delallclose$") & filters.owner)
 async def delcancel(client, query):
     await query.edit_message_text(
         text = 'Process Cancelled',
