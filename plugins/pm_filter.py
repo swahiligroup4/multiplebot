@@ -1,12 +1,12 @@
-from botii import Bot1,Bot
+from botii import Bot0
 import re
 from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton,ChatPermissions
 from info import filters
 from plugins.status import handle_admin_status
 from plugins.database import db
 from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user
-@Bot.on_message(filters.new_chat_members & filters.group)
-@Bot1.on_message(filters.new_chat_members & filters.group)
+
+@Bot0.on_message(filters.new_chat_members & filters.group)
 async def grouup(client, message):
     botusername=await client.get_me()
     nyva=botusername.username
@@ -22,8 +22,7 @@ async def grouup(client, message):
     url=f"https://t.me/{nyva}?start=mwongozohrm{message.chat.id}"
     text=f"Karibu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote (Sababu ukituma nafuta) ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
     await message.reply_text(f"{text}")
-@Bot.on_message(filters.group & filters.incoming)
-@Bot1.on_message(filters.group & filters.incoming)
+@Bot0.on_message(filters.group & filters.incoming)
 async def group(client, message):
     await handle_admin_status(client,message)
     botusername=await client.get_me()
@@ -124,8 +123,8 @@ async def group(client, message):
             return
         if not btn:
             return
-@Bot.on_message(filters.regex('@gmail.com') & filters.incoming)            
-@Bot1.on_message(filters.regex('@gmail.com') & filters.incoming)
+            
+@Bot0.on_message(filters.regex('@gmail.com') & filters.incoming)
 async def groupprv(client, message): 
     botusername=await client.get_me()
     nyva=botusername.username
