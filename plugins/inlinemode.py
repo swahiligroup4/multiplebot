@@ -1,4 +1,4 @@
-from botii import Bot1,Bot
+from botii import Bot0
 import re
 import ast 
 from plugins.database import db
@@ -16,8 +16,8 @@ from pyrogram.types import (
 from utils import is_user_exist,get_search_results,Media,is_group_exist,add_user,is_subscribed
 from info import filters,OWNER_ID,CHANNELS,AUTH_CHANNEL
 BOT = {}
-@Bot.on_inline_query(filters.inline)
-@Bot1.on_inline_query(filters.inline)
+
+@Bot0.on_inline_query(filters.inline)
 async def give_filter(client, query):
 
     nyva=BOT.get("username")
@@ -179,8 +179,8 @@ async def give_filter(client, query):
             switch_pm_parameter="error")
     return
         
-@Bot.on_callback_query(filters.regex(r"^(alertmessage):(\d):(.*)"))       
-@Bot1.on_callback_query(filters.regex(r"^(alertmessage):(\d):(.*)"))
+       
+@Bot0.on_callback_query(filters.regex(r"^(alertmessage):(\d):(.*)"))
 async def alert_msg(client, callback):
     regex = r"^(alertmessage):(\d):(.*)"
     matches = re.match(regex, callback.data)
