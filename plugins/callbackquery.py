@@ -660,7 +660,7 @@ async def cb_handler(client, query):
                 name = files.text.split('.dd#.',1)[0]
                 grp = files.grp
             ban_status = await db.get_db_status(group_id)  
-            group_id2 = int(ban_status['channels'].split('##')[0])
+            group_id2 = int(ban_status['group'].split('##')[0])
             if tme=="wk0":
                 tme1= 1
             elif tme=="wk1":
