@@ -73,7 +73,7 @@ async def start_msg_admins(client, message):
         return
     fls=await get_filter_resultss("hrm45",int(user_details))
     for fls1 in fls:
-        for fl2 in await get_filter_resultss(fls.file,int(user_details)):
+        for fl2 in await get_filter_resultss(fls1.file,int(user_details)):
             await Media.collection.update_one({'_id':fl2.id},{'$set':{'text':fl2.text.replace(f"{fls1.file}",f"{fls1.id}")}})
         
     hjkl = f'{user_details}##{message.from_user.id}'
