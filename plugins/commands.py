@@ -317,12 +317,12 @@ async def new_filtervip(client, message):
             elif mkvl1.text.lower()=='s':
                 ab33='ms'
             descp = f'x.dd#.{mkv1.text}.dd#.data.dd#.{ab33}'
-            await save_file(text, reply_text, [], fileid, msg_type, strid,user_id,descp,ab1,ab2)
+            await save_file(text, reply_text, [], fileid, msg_type, strid ,user_id,descp,ab1,ab2)
             if ab33=='m':
                 reply_markup=InlineKeyboardMarkup([[
-                        InlineKeyboardButton(f"📡360p", callback_data =f"3hmuv##360 {fileid}"),
-                        InlineKeyboardButton(f"📡480p", callback_data =f"3hmuv##480 {fileid}"),
-                        InlineKeyboardButton(f"📡720p", callback_data =f"3hmuv##720 {fileid}")
+                        InlineKeyboardButton(f"📡360p", callback_data =f"3hmuv##360 { strid }"),
+                        InlineKeyboardButton(f"📡480p", callback_data =f"3hmuv##480 { strid }"),
+                        InlineKeyboardButton(f"📡720p", callback_data =f"3hmuv##720 { strid }")
                     ],
                     [
                         InlineKeyboardButton(f"💥  DONE", callback_data =f"close")
