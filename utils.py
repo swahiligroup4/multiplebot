@@ -169,8 +169,19 @@ async def get_search_results(query, group_id, max_results=10, offset=0):
     files = await cursor.to_list(length=max_results)
 
     return files, next_offset
-
-
+async def get_filter_resultss(query,group_id):
+    ab="x dd#"
+    raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
+    raw_pattern = '.'
+    regex = re.compile(raw_pattern, flags=re.IGNORECASE)
+    regex1 = re.compile(raw_pattern1, flags=re.IGNORECASE)   
+    filter = {"text": regex}
+    filter['descp']= regex1
+    total_results = await Media.count_documents(filter)
+    cursor = Media.find(filter)
+    cursor.sort('text', 1)
+    files = await cursor.to_list(length=int(total_results))
+    return files
 async def get_filter_results(query,group_id):
     query = query.strip()
     query = query.lower()
