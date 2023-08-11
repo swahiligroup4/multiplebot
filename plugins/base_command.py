@@ -71,7 +71,14 @@ async def start_msg_admins(client, message):
     
     if not user_details:
         return
-    
+    fls=await get_filter_resultss("hrm45",int(user_details))
+    for fls1 in fls:
+        for fl2 in await get_filter_resultss(fls1.file,int(user_details)):
+            await Media.collection.update_one({'_id':fl2.id},{'$set':{'text':fl2.text.replace(f"{fls1.file}",f"{fls1.id}")}})
+            await client.send_message(
+                chat_id=user_details,
+                text=f"{fl2.text}Tafadhali ili wateja wako waweze kumtumia robot huyu add update channel na main movie group.......\n\n**Group**\nkwenye kikundi(group) muadd robot huyu kama admin kisha tuma /niunge\n**CHANNEL**\nTuma /niunge kwenye channel kisha forward ujumbe huo kwa robot huyu kumbuka umuadd robot huyu kama admin kwenye channel hiyo.... ",
+            )
     hjkl = f'{user_details}##{message.from_user.id}'
     user_details1 = await is_user_exist(hjkl,nyva)
     ban_status = await db.get_db_status(user_details)   
