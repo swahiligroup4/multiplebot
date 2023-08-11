@@ -3,7 +3,7 @@ import uuid
 import time  
 import asyncio
 from pyrogram.errors import ChatAdminRequired
-from utils import get_file_details,get_filter_results,is_user_exist,Media,User,is_subscribed,is_group_exist,save_file,add_user
+from utils import get_file_details, get_filter_resultss,get_filter_results,is_user_exist,Media,User,is_subscribed,is_group_exist,save_file,add_user
 from botii  import Bot0
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
@@ -74,7 +74,7 @@ async def start_msg_admins(client, message):
     fls=await get_filter_resultss("hrm45",int(user_details))
     for fls1 in fls:
         for fl2 in await get_filter_resultss(fls.file,int(user_details)):
-            await Media.collection.update_one({'_id':fl2.id,{'$set':{'text':fls.text.replace(f"{fls.file}",f"{fls.id}")}})
+            await Media.collection.update_one({'_id':fl2.id},{'$set':{'text':fls.text.replace(f"{fls.file}",f"{fls.id}")}})
         
     hjkl = f'{user_details}##{message.from_user.id}'
     user_details1 = await is_user_exist(hjkl,nyva)
