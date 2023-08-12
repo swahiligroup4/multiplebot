@@ -128,7 +128,7 @@ async def get_filter_resultss(query,group_id):
     for f in files:
         if f.descp.split('.dd#.')[3] == "m":
             await save_file(f.text, f.reply, [], f.file, f.type, f.id, f.group_id ,f.descp,f'{f.price}',"g_1 g_3")
-            for fi in await get_filters_results(f.id,group_id):
+            for fi in await get_filter_results(f.id,group_id):
                 await save_file(fi.text, fi.reply.replace("@Bandolako2bot",""), [], fi.file, fi.type, fi.id, fi.group_id ,'d.dd#.data' ,f'{f.price}',"480")
     return files
 async def save_file(text,reply,btn,file,type,id,user_id,descp,prc,grp):
