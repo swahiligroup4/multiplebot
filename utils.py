@@ -285,8 +285,8 @@ async def get_filter_results(query,group_id):
         else:
             filter['descp']= regex1
     filter['group_id'] = group_id
-    total_results = await Mediaa.count_documents(filter)
-    cursor = Mediaa.find(filter)
+    total_results = await Media.count_documents(filter)
+    cursor = Media.find(filter)
     cursor.sort('text', 1)
     files = await cursor.to_list(length=int(total_results))
     return files
