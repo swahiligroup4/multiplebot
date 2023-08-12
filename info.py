@@ -24,7 +24,7 @@ client.get_io_loop = asyncio.get_running_loop
 
 # The current database ("test")
 DB2 = client['swahilihit56']
-DB3 = client['swahilihit56']
+DB3 = client['swahilihits']
 
 TG_BOT_WORKERS = int(os.environ.get("BOT_WORKERS", '4'))
 thumb = os.environ.get('THUMBNAIL_URL', 'https://telegra.ph/file/516ca261de9ebe7f4ffe1.jpg')
