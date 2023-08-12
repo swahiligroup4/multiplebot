@@ -129,8 +129,9 @@ async def get_filter_resultss(query,group_id):
         if f.descp.split('.dd#.')[3] == "m" and f.type == "Video":
             await Media.collection.delete_one({"_id":f.id})
             for fi in await get_filter_results(f.id,group_id):
-                await Media.collection.delete_one({"_id":f.id})
+                await Media.collection.delete_one({"_id":fi.id})
         elif f.descp.split('.dd#.')[3] == "m" and f.type != "Video":
+            await save_file(f.text, f.reply, [], f.file, f.type, f.id, f.group_id ,f.descp,f'{f.price}',"g_1 g_3")
             for fi in await get_filter_results(f.id,group_id):
                 await Media.collection.delete_one({"_id":fi.id})
            
