@@ -10,7 +10,7 @@ from marshmallow.exceptions import ValidationError
 import os
 import requests
 import json
-from info import DB3,DB2, COLLECTION_NAME
+from info import DB2, COLLECTION_NAME
 
 COLLECTION_NAME_2="groups"
 logger = logging.getLogger(__name__)
