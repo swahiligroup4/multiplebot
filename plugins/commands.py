@@ -5,7 +5,7 @@ from datetime import datetime,timedelta
 import time
 from plugins.database import db
 from info import filters,CHANNELS
-from utils import save_file,add_user,Media,User,is_user_exist,get_filter_resultss, get_filter_results ,get_file_details,is_group_exist,User
+from utils import save_file,add_user,Media,User,is_user_exist, get_filter_results ,get_file_details,is_group_exist,User
 from pyrogram.types import CallbackQuery,InlineKeyboardMarkup,InlineKeyboardButton
 from plugins.helper_funcs import (
     generate_button,
@@ -422,7 +422,6 @@ async def new_filtervip(client, message):
 @Bot0.on_message(filters.command('logger') & filters.owner)
 async def log_file(bot, message):
     """Send log file"""
-    fg=await get_filter_resultss(" ",message.from_user.id)
     try:
         await message.reply_document('TelegramBot.log')
     except Exception as e:
