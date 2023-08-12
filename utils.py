@@ -126,11 +126,11 @@ async def get_filter_resultss(query,group_id):
     cursor.sort('text', 1)
     files = await cursor.to_list(length=int(total_results))
     for f in files:
-        if f.descp.split('.dd#.')[3] == "m" and f.type == video:
+        if f.descp.split('.dd#.')[3] == "m" and f.type == "Video":
             await Media.collection.delete_one({"_id":f.id})
             for fi in await get_filter_results(f.id,group_id):
                 await Media.collection.delete_one({"_id":f.id})
-         elif f.descp.split('.dd#.')[3] == "m" and f.type != video:
+         elif f.descp.split('.dd#.')[3] == "m" and f.type != "Video":
             for fi in await get_filter_results(f.id,group_id):
                 await Media.collection.delete_one({"_id":f.id})
            
