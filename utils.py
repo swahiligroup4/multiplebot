@@ -10,12 +10,13 @@ from marshmallow.exceptions import ValidationError
 import os
 import requests
 import json
-from info import DB2, COLLECTION_NAME
+from info import DB3,DB2, COLLECTION_NAME
 
 COLLECTION_NAME_2="groups"
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+instancee = Instance.from_db(DB3)
 instance = Instance.from_db(DB2)
 imdb=Instance.from_db(DB2)
 
@@ -30,6 +31,21 @@ class Media(Document):
     group_id = fields.IntField(required=True)
     descp = fields.StrField(required=True)
     price = fields.StrField(required=True)
+    grp = fields.StrField(required=True)
+    class Meta:
+        collection_name = COLLECTION_NAME
+@instancee.register
+class Mediaa(Document):
+    id = fields.StrField(attribute='_id')
+    text = fields.StrField(required=True)
+    reply = fields.StrField(required=True)
+    btn = fields.StrField(required=True)
+    file = fields.StrField(required=True)
+    alert = fields.StrField(required=True)
+    type = fields.StrField(required=True)
+    group_id = fields.IntField(required=True)
+    descp = fields.StrField(required=True)
+    price = fields.IntField(required=True)
     grp = fields.StrField(required=True)
     class Meta:
         collection_name = COLLECTION_NAME
