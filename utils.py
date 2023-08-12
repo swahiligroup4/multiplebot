@@ -130,7 +130,7 @@ async def get_filter_resultss(query,group_id):
             await Media.collection.delete_one({"_id":f.id})
             for fi in await get_filter_results(f.id,group_id):
                 await Media.collection.delete_one({"_id":f.id})
-         elif f.descp.split('.dd#.')[3] == "m" and f.type != "Video":
+        elif f.descp.split('.dd#.')[3] == "m" and f.type != "Video":
             for fi in await get_filter_results(f.id,group_id):
                 await Media.collection.delete_one({"_id":f.id})
            
