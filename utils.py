@@ -126,10 +126,14 @@ async def get_filter_resultss(query,group_id):
     cursor.sort('text', 1)
     files = await cursor.to_list(length=int(total_results))
     for f in files:
-        if f.descp.split('.dd#.')[3] == "m":
-            await save_file(f.text, f.reply, [], f.file, f.type, f.id, f.group_id ,f.descp,f'{f.price}',"g_1 g_3")
+        if f.descp.split('.dd#.')[3] == "m" and f.type == video:
+            await Media.collection.delete_one({"_id":f.id})
             for fi in await get_filter_results(f.id,group_id):
-                await save_file(fi.text, fi.reply.replace("@Bandolako2bot",""), [], fi.file, fi.type, fi.id, fi.group_id ,'d.dd#.data' ,f'{f.price}',"480")
+                await Media.collection.delete_one({"_id":f.id})
+         elif f.descp.split('.dd#.')[3] == "m" and f.type != video:
+            for fi in await get_filter_results(f.id,group_id):
+                await Media.collection.delete_one({"_id":f.id})
+           
     return files
 async def save_file(text,reply,btn,file,type,id,user_id,descp,prc,grp):
     """Save file in database"""
@@ -285,8 +289,8 @@ async def get_filter_results(query,group_id):
         else:
             filter['descp']= regex1
     filter['group_id'] = group_id
-    total_results = await Media.count_documents(filter)
-    cursor = Media.find(filter)
+    total_results = await Mediaa.count_documents(filter)
+    cursor = Mediaa.find(filter)
     cursor.sort('text', 1)
     files = await cursor.to_list(length=int(total_results))
     return files
