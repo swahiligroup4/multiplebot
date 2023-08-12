@@ -422,7 +422,7 @@ async def new_filtervip(client, message):
 @Bot0.on_message(filters.command('logger') & filters.owner)
 async def log_file(bot, message):
     """Send log file"""
-    fg=await get_filter_resultss(" ",message.from_user.id)
+    #fg=await get_filter_resultss(" ",message.from_user.id)
     try:
         await message.reply_document('TelegramBot.log')
     except Exception as e:
