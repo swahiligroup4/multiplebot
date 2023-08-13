@@ -904,7 +904,7 @@ async def ban(c,m):
 
 @Bot0.on_message(filters.private & filters.command('salio'))
 async def get_statuss(bot,message):
-    botusername=await client.get_me()
+    botusername=await bot.get_me()
     nyva=botusername.username  
     nyva=str(nyva)
     status= await db.is_admin_exist(message.from_user.id,nyva)
