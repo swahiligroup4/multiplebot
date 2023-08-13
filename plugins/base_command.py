@@ -666,7 +666,7 @@ async def cb_handler(client, query):
                     btn3=None
                     ab2=int(ab2)
                     filez=await get_filter_results( ab3,user_details)
-                    for file in revers(filez): 
+                    for file in (filez): 
                         
                         if (f"{ab1}##{ab2}") in file.grp and "1000" not in file.grp:
                             btn3=[]
