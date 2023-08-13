@@ -480,7 +480,7 @@ async def cb_handler(client, query):
                     await client.send_cached_media(
                         chat_id = query.from_user.id,
                         file_id = document.file,
-                        caption = document.reply,
+                        caption = document.reply.replace("@bongohits_group",f"{nyva}") if "@bongohits_group" in document.reply else f"{nyva}.{document.reply}" ,
                     )
         elif query.data.startswith("3hmuv"):
             botusername=await client.get_me()
@@ -666,7 +666,7 @@ async def cb_handler(client, query):
                     btn3=None
                     ab2=int(ab2)
                     filez=await get_filter_results( ab3,user_details)
-                    for file in reversed(filez): 
+                    for file in revers(filez): 
                         
                         if (f"{ab1}##{ab2}") in file.grp and "1000" not in file.grp:
                             btn3=[]
@@ -748,7 +748,7 @@ async def cb_handler(client, query):
                             await client.send_cached_media(
                                 chat_id=query.from_user.id,
                                 file_id=file.file,
-                                caption=file.reply,
+                                caption=file.reply.replace("@bongohits_group",f"{nyva}") if "@bongohits_group" in file.reply else f"{nyva}.{file.reply}",
                             )
                             await asyncio.sleep(2)
                             tme3-=2
@@ -758,7 +758,7 @@ async def cb_handler(client, query):
                             await client.send_cached_media(
                                 chat_id=query.from_user.id,
                                 file_id=file.file,
-                                caption=file.reply,
+                                caption=file.reply.replace("@bongohits_group",f"{nyva}") if "@bongohits_group" in file.reply else f"{nyva}.{file.reply}",
                             )
                             await asyncio.sleep(2)
                             tme3-=2
