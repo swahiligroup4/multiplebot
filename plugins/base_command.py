@@ -470,10 +470,29 @@ async def cb_handler(client, query):
             nyva=botusername.username  
             nyva=str(nyva)
             group_id = await db.is_bot_exist(nyva)
-            await query.answer("hi")
-            await query.message.delete()
             frmt=query.data.split(" ")[0].split("##")[1]
             fileid=query.data.split(" ")[1]
+            cmd=query
+            for file in await get_file_details(fileid):
+                grp=file.grp
+                id2=file.id
+                prc = file.price
+            grp1,grp2 =grp.split(" ")
+            if (not (await db.is_acc_exist(cmd.from_user.id,grp1,group_id) or await db.is_acc_exist(cmd.from_user.id,id2,group_id) or await db.is_acc_exist(cmd.from_user.id,grp2,group_id)) or prc == '0')and group_id != cmd.from_user.id :
+                await query.edit_message_caption(
+                    caption=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n Tafadhal chagua nchi uliopo kuweza kulipia uweze kuitazama \n\n**Kisha baada ya kufanya malipo na kuthibitishiwa malipo yako na admin utabonyeza download hapo juu kuipata movie yako kama utalipia kifurushi utazipakua nyingine zaid kwenye kikundi....** ",
+                    reply_markup=InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton("🇹🇿 TANZANIA", callback_data =f"tzn##tsh {fileid}"),
+                                InlineKeyboardButton("🇰🇪 KENYA",callback_data =f"tzn##ksh {fileid}" )
+                            ]
+                        ]
+                    )
+                )
+                return     
+            await query.answer("hi")
+            await query.message.delete()
             details4 =await get_filter_results(fileid,group_id)
             for document in details4:
                 if document.grp == frmt:
@@ -612,13 +631,33 @@ async def cb_handler(client, query):
             user_details = await db.is_bot_exist(nyva)
             if not user_details:
                 return
+            ab8=query.data.split('##')[-1]
+            for file in await get_file_details(ab8):
+                grp=file.grp
+                id2=file.id
+                prc = file.price
+            cmd=query
+            grp1,grp2 =grp.split(" ")
+            if (not (await db.is_acc_exist(cmd.from_user.id,grp1,group_id) or await db.is_acc_exist(cmd.from_user.id,id2,group_id) or await db.is_acc_exist(cmd.from_user.id,grp2,group_id)) or prc == '0')and group_id != cmd.from_user.id :
+                await query.edit_message_caption(
+                    caption=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n Tafadhal chagua nchi uliopo kuweza kulipia uweze kuitazama \n\n**Kisha baada ya kufanya malipo na kuthibitishiwa malipo yako na admin utabonyeza download hapo juu kuipata movie yako kama utalipia kifurushi utazipakua nyingine zaid kwenye kikundi....** ",
+                    reply_markup=InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton("🇹🇿 TANZANIA", callback_data =f"tzn##tsh id2"),
+                                InlineKeyboardButton("🇰🇪 KENYA",callback_data =f"tzn##ksh id2" )
+                            ]
+                        ]
+                    )
+                )
+                return     
             try:
                 ab1,ab2=query.data.split('##')
                 abdata = ""
                 ab1=ab1.split(" ")[1]
                 btn3=None
                 filez=await get_filter_results( ab2,user_details)
-                for file in reversed(filez):
+                for file in (filez):
                     if (ab1 in file.grp) and "s10" not in file.grp:
                         btn3=[]
                         abtext=file.grp.split("##")[1]
