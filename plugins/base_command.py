@@ -632,6 +632,7 @@ async def cb_handler(client, query):
             if not user_details:
                 return
             ab8=query.data.split('##')[-1]
+            group_id = user_details
             for file in await get_file_details(ab8):
                 grp=file.grp
                 id2=file.id
