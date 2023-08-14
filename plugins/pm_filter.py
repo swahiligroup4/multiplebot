@@ -5,43 +5,7 @@ from info import filters
 from plugins.status import handle_admin_status
 from plugins.database import db
 from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user
-@Bot0.on_message(filters.command("hrm") & filters.private)
-async def grouupp(client, message):
-        a="start"
-        while a=="Stop":
-            for file await get_file_details():
-            
-                    if fileid == 'None':
-                        await message.reply_text(text=f'{reply_text}',reply_markup = reply_markup)
-               
-                    elif msg_type == 'Photo' and file_status != 'normal':
-                        await message.reply_photo(
-                            photo = fileid,
-                            caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua',
-                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != message.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
-                        )
-                 
-                    elif msg_type == 'Photo':
-                        await message.reply_photo(
-                            photo = fileid,
-                            caption = reply_text or '',
-                            reply_markup=reply_markup
-                        )
-                
-                    elif fileid and file_status != 'normal':
-                        await message.reply_cached_media(
-                            file_id = fileid,
-                            caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",
-                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != message.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
-                        )
-                
-                    elif fileid:
-                        await message.reply_cached_media(
-                            file_id = fileid,
-                            caption = reply_text or "",
-                            reply_markup=reply_markup
-                        )  
-            await asyncio.sleep(7200)
+
 @Bot0.on_message(filters.new_chat_members & filters.group)
 async def grouup(client, message):
     botusername=await client.get_me()
