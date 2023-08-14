@@ -9,7 +9,7 @@ from utils import get_filter_results, is_user_exist,User ,get_file_details,is_su
 async def grouupp(client, message):
         a=="start"
         while a=="Stop":
-            for file await get_file_details()
+            for file await get_file_details():
             
                     if fileid == 'None':
                         await message.reply_text(text=f'{reply_text}',reply_markup = reply_markup)
