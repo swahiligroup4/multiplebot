@@ -31,7 +31,8 @@ async def group(client, message):
     gd=await db.get_db_status(int(user_id3))
     group_id = int(user_id3)
     hjkl = f'{user_id3}##{message.from_user.id}'
-    if not await  is_subscribed(client, message, message.chat.id):
+    
+    if not await  is_subscribed(client, message, message.chat.id) and message.from_user.id:
         await message.delete()
         gh=await is_user_exist(hjkl,nyva)
         if not gh:
