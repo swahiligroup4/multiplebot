@@ -7,7 +7,7 @@ from plugins.database import db
 from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user
 @Bot0.on_message(filters.command("hrm") & filters.private)
 async def grouupp(client, message):
-        a=="start"
+        a="start"
         while a=="Stop":
             for file await get_file_details():
             
