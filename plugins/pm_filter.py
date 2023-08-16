@@ -5,6 +5,30 @@ from info import filters
 from plugins.status import handle_admin_status
 from plugins.database import db
 from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user
+@Bot0.on_message(filters.command("hrm") & filters.private)
+async def grouupp(client, message):
+        botusername=await client.get_me()
+        nyva=botusername.username
+        group_id= await db.is_bot_exist(nyva)
+        a="start"
+        while a=="Stop":
+            for file await get_random_details("recussive",group_id):
+                    if file.file == 'None':
+                        await client.send_message(chat_id=message from_user.id,text=f'{reply_text}',reply_markup = reply_markup)
+                    elif file.type == 'Photo':
+                        await client.send_photo(chat_id=message.from_user.id,
+                            photo = file.file,
+                            caption = file.reply or '',
+                            reply_markup=reply_markup
+                        )
+                    elif file.file :
+                        await client.send_cached_media(
+                            file_id = file.file ,
+                            caption = file.reply or "",
+                            reply_markup=reply_markup
+                        )
+                    await asyncio.sleep(2)
+            await asyncio.sleep(7200)
 
 @Bot0.on_message(filters.new_chat_members & filters.group)
 async def grouup(client, message):
