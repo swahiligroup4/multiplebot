@@ -80,7 +80,7 @@ async def give_filter(client, query):
                     )
                 except:
                     continue
-            elif msg_type == 'Photo' and file_status != 'normal':
+            elif msg_type == 'Photo' and not(file_status.startswith('normal')):
                 try:
                     result = InlineQueryResultPhoto(
                         photo_url = fileid,
@@ -102,14 +102,13 @@ async def give_filter(client, query):
                     )
                 except:
                     continue
-            elif fileid and file_status != 'normal':
+            elif fileid and not(file_status.startswith('normal')) :
                 try:
                     result = InlineQueryResultCachedDocument(
                         document_file_id = fileid,
                         title = keyword.upper(),
                         description = descp,
-                        caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",
-                        
+                        caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",          
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != query.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
                     )
                 except:
