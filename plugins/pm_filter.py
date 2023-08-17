@@ -11,7 +11,6 @@ async def grouupp(client, message):
     nyva=botusername.username
     group_id= await db.is_bot_exist(nyva)
     a="start"
-    while a==stop:
     while a=="Stop":
         await asyncio.sleep(12)
         for grp in await is_group_exist(nyva):
