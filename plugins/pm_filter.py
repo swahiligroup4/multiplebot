@@ -98,6 +98,7 @@ async def group(client, message):
     botusername=await client.get_me()
     nyva=botusername.username
     user_id3= await db.is_bot_exist(nyva)
+    await message.reply_text("hi")
     gd=await db.get_db_status(int(user_id3))
     group_id = int(user_id3)
     hjkl = f'{user_id3}##{message.from_user.id}'
