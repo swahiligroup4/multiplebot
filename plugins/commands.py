@@ -602,7 +602,7 @@ async def new_filter(client, message):
     else:
         await message.reply('Not Supported..!')
         return
-    mkv22 = await client.send_message(text='naomba untumie maelezo kidogo mfano imetafsiriwa singo',chat_id = message.from_user.id)
+    mkv22 = await client.send_message(text='naomba untumie maelezo kidogo mfano kwa ajili maelekezo ya huduma zetu',chat_id = message.from_user.id)
     a,b = funask()
     id1 = mkv22.id+1
     while a==False:
@@ -618,9 +618,40 @@ async def new_filter(client, message):
                 id1=id1+1
         except:
             a=False
+    
     if not mkvg.text:
         mkvg.text=msg_type
     descp = f'x.dd#.{mkvg.text}'
+    mkv22 = await client.send_message(text='💥Ok naomba utume namba tu 1,2 au 3.\nChagua machaguo yafuatayo:\n1.Ujumbe huu utumwa kila badaa ya muda fulani kwenye vikundi vyako hili n kundi no 1.\n\n2.Ujumbe huu utumwa kwenye kikundi baada ya (kundi za jumbe za 1) kutumwa kisha zo itatulia kwa muda na hizi ndio zitatumwa kundi no 2.\n\n3.Hapan uwe ujumbe wa kawaida tu\n\n💥Zingatia.....\nHapa itatumwa kwenye kikundi kama hivi:mfano tuchukulie zinapishana kwa lisaa\n\nKundi no 1 zitumwa zote kwenye vikundi vyako..\nTutatulia kwa lisaa\nKundi no 2 zitumwa zote kwenye vikundi vyako.\nTutatulia lisaa\nKundi no 1 zitumwa zote kwenye vikundi vyako \nTutatulia lisaa\nKundi no 2 zitumwa zote kwenye vikundi vyako.\n\nKitendi hiki kitakuwa endelevu',chat_id = message.from_user.id)
+    a,b = funask()
+    id1 = mkv22.id+1
+    while a==False:
+        try:
+            mkvg = await client.get_messages("me",id1)
+            if mkvg.text!=None:
+                a=True
+            if (time.time()-b)>(120):
+                await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 2 iliniweze kuhudumia na wengine")
+                return
+            if mkvg.from_user.id != message.from_user.id :
+                a=False
+                id1=id1+1
+        except:
+            a=False
+    try:
+        abc=int(mkvg.text)
+        if abc==1:
+            grp1="normalrsv1"
+        elif abc==2:
+            grp1="normalrsv2"
+        elif abc==3:
+            grp1="normal"
+        else:
+            await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya tuma 1 2 au 3 kama huelew mchek @hrm45 akuelekeze")
+            return
+    except:
+        await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya tuma 1 2 au 3 kama huelew mchek @hrm45 akuelekeze")
+        return
     try:
         if fileid:
             if msg_type == 'Photo':
@@ -648,7 +679,7 @@ async def new_filter(client, message):
             pass
         return
 
-    await save_file(text, reply_text, btn, fileid, msg_type, strid,user_id,descp,alert,'normal')
+    await save_file(text, reply_text, btn, fileid, msg_type, strid,user_id,descp,alert,grp1)
     text = text.split('.dd#.',1)[0]
     reply_markup = InlineKeyboardMarkup(
         [
