@@ -16,7 +16,7 @@ async def rrecussive(client, message):
         for grp in await is_group_exist(nyva):
             try:
                 grp_id = grp.id.split("##")[1]
-                for file await get_random_details("normalrsv1",group_id):
+                for file in await get_random_details("normalrsv1",group_id):
                     if file.btn =="[]":
                         reply_markup = None
                     else:
@@ -47,7 +47,7 @@ async def rrecussive(client, message):
         for grp in await is_group_exist(nyva):
             try:
                 grp_id = grp.id.split("##")[1]
-                for file await get_random_details("normalrsv2",group_id):
+                for file in await get_random_details("normalrsv2",group_id):
                     if file.btn =="[]":
                         reply_markup = None
                     else:
