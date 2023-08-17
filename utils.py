@@ -241,13 +241,22 @@ async def is_user_exist(query,rbt):
     return userdetails
 
 async def is_group_exist(query):
-    filter = {'status':'group'}
-    filter['group_id']= query
+    filter = {'email':'group'}
+    filter['rbt']= query
     cursor = User.find(filter)
     cursor.sort('$natural', -1)
     count = await User.count_documents(filter)
     userdetails = await cursor.to_list(length = int(count))
     return userdetails
+async  def get_random_details(query,group_id):
+    filter = {'email':'group'}
+    filter['group_id']= group_id
+    cursor = Media.find(filter)
+    cursor.sort('$natural', -1)
+    count = await Media.count_documents(filter)
+    userdetails = await cursor.to_list(length = int(count))
+    return userdetails
+
 async def get_file_details(query):
     filter = {'id': query}
     cursor = Media.find(filter)
