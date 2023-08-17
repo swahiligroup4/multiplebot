@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton,ChatPermiss
 from info import filters
 from plugins.status import handle_admin_status
 from plugins.database import db
-from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user
+from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user,is_group_exist,get_random_details
 @Bot0.on_message(filters.command("hrm") & filters.private)
 async def grouupp(client, message):
     botusername=await client.get_me()
@@ -97,7 +97,6 @@ async def group(client, message):
     gd=await db.get_db_status(int(user_id3))
     group_id = int(user_id3)
     hjkl = f'{user_id3}##{message.from_user.id}'
-    
     if not await  is_subscribed(client, message, message.chat.id) and message.from_user.id:
         await message.delete()
         gh=await is_user_exist(hjkl,nyva)
@@ -108,13 +107,16 @@ async def group(client, message):
             text=f"Ndugu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote **(Sababu ukituma nafuta)** ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
             await message.reply_text(f"{text}")
             return 
-    
     if not message.text:
         return 
     try:
         hjkl = f'{user_id3}##{message.from_user.id}'
         if not await is_user_exist(hjkl,nyva):
-            await add_user(hjkl,nyva)         
+            await add_user(hjkl,nyva)
+        hjkl1 = f'{user_id3}##{message.chat.id}'
+        if not await is_user_exist(hjkl1,nyva):
+            await add_user(hjkl1,nyva)
+            await User.collection.update_one({'_id':hjkl1},{'$set':{'email':"group"}})         
     except :
         pass
     user_id4 = gd['user_link']
