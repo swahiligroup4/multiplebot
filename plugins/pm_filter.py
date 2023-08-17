@@ -12,7 +12,9 @@ async def grouupp(client, message):
         group_id= await db.is_bot_exist(nyva)
         a="start"
         while a=="Stop":
-            for file await get_random_details("recussive",group_id):
+            await asyncio.sleep(12)
+            for grp in await is_group_exist(nyva):
+                for file await get_random_details("rsv1",group_id):
                     if file.file == 'None':
                         await client.send_message(chat_id=message from_user.id,text=f'{reply_text}',reply_markup = reply_markup)
                     elif file.type == 'Photo':
@@ -28,7 +30,25 @@ async def grouupp(client, message):
                             reply_markup=reply_markup
                         )
                     await asyncio.sleep(2)
-            await asyncio.sleep(7200)
+            await asyncio.sleep(12)
+            for grp in await is_group_exist(nyva):
+                for file await get_random_details("rsv2",group_id):
+                    if file.file == 'None':
+                        await client.send_message(chat_id=message from_user.id,text=f'{reply_text}',reply_markup = reply_markup)
+                    elif file.type == 'Photo':
+                        await client.send_photo(chat_id=message.from_user.id,
+                            photo = file.file,
+                            caption = file.reply or '',
+                            reply_markup=reply_markup
+                        )
+                    elif file.file :
+                        await client.send_cached_media(
+                            file_id = file.file ,
+                            caption = file.reply or "",
+                            reply_markup=reply_markup
+                        )
+                    await asyncio.sleep(1)
+            
 
 @Bot0.on_message(filters.new_chat_members & filters.group)
 async def grouup(client, message):
