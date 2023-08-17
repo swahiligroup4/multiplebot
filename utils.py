@@ -250,7 +250,7 @@ async def is_group_exist(query):
     return userdetails
 async  def get_random_details(query,group_id):
     filter = {'grp':query}
-    filter['group_id']= group_id
+    filter['group_id'] = int(group_id)
     cursor = Media.find(filter)
     cursor.sort('$natural', -1)
     count = await Media.count_documents(filter)
