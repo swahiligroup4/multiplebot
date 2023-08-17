@@ -7,10 +7,11 @@ from plugins.database import db
 from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user
 @Bot0.on_message(filters.command("hrm") & filters.private)
 async def grouupp(client, message):
-        botusername=await client.get_me()
-        nyva=botusername.username
-        group_id= await db.is_bot_exist(nyva)
-        a="start"
+    botusername=await client.get_me()
+    nyva=botusername.username
+    group_id= await db.is_bot_exist(nyva)
+    a="start"
+    while a==stop:
         while a=="Stop":
             await asyncio.sleep(12)
             for grp in await is_group_exist(nyva):
@@ -43,9 +44,9 @@ async def grouupp(client, message):
                     pass
             await asyncio.sleep(12)
             for grp in await is_group_exist(nyva):
-                for file await get_random_details("rsv2",group_id):
-                    try:
-                    file await get_random_details("rsv1",group_id):
+                try:
+                    grp_id = grp.id.split("##")[1]
+                    for file await get_random_details("rsv2",group_id):
                         if file.btn =="[]":
                             reply_markup = None
                         else:
@@ -70,8 +71,7 @@ async def grouupp(client, message):
                         await asyncio.sleep(2)
                 except:
                     pass
-            
-
+                    
 @Bot0.on_message(filters.new_chat_members & filters.group)
 async def grouup(client, message):
     botusername=await client.get_me()
