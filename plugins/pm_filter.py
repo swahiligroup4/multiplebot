@@ -12,65 +12,69 @@ async def grouupp(client, message):
     group_id= await db.is_bot_exist(nyva)
     a="start"
     while a==stop:
-        while a=="Stop":
-            await asyncio.sleep(12)
-            for grp in await is_group_exist(nyva):
-                try:
-                    grp_id = grp.id.split("##")[1]
-                    for file await get_random_details("normalrsv1",group_id):
-                        if file.btn =="[]":
-                            reply_markup = None
-                        else:
-                            reply_markup = InlineKeyboardMarkup(eval(btn))
-                        if file.reply:
-                            file.reply = file.reply.replace("\\n", "\n").replace("\\t", "\t")
-                        if file.file == 'None':
-                            await client.send_message( chat_id=grp_id ,text=f'{file.reply}',reply_markup = reply_markup)
-                        elif file.type == 'Photo':
-                            await client.send_photo(chat_id=grp_id,
-                                photo = file.file,
-                                caption = file.reply or '',
-                                reply_markup=reply_markup
-                            )
-                        elif file.file :
-                            await client.send_cached_media(
-                                chat_id=grp_id,
-                                file_id = file.file ,
-                                caption = file.reply or "",
-                               reply_markup=reply_markup
-                            )
-                        await asyncio.sleep(2)
-                except:
-                    pass
-            await asyncio.sleep(12)
-            for grp in await is_group_exist(nyva):
-                try:
-                    grp_id = grp.id.split("##")[1]
-                    for file await get_random_details("normalrsv2",group_id):
-                        if file.btn =="[]":
-                            reply_markup = None
-                        else:
-                            reply_markup = InlineKeyboardMarkup(eval(btn))
-                        if file.reply:
-                            file.reply = file.reply.replace("\\n", "\n").replace("\\t", "\t")
-                        if file.file == 'None':
-                            await client.send_message( chat_id=grp_id ,text=f'{file.reply}',reply_markup = reply_markup)
-                        elif file.type == 'Photo':
-                            await client.send_photo(chat_id=grp_id,
-                                photo = file.file,
-                                caption = file.reply or '',
-                                reply_markup=reply_markup
-                            )
-                        elif file.file :
-                            await client.send_cached_media(
-                                chat_id=grp_id,
-                                file_id = file.file ,
-                                caption = file.reply or "",
-                               reply_markup=reply_markup
-                            )
-                        await asyncio.sleep(2)
-                except:
-                    pass
+    while a=="Stop":
+        await asyncio.sleep(12)
+        for grp in await is_group_exist(nyva):
+            try:
+                grp_id = grp.id.split("##")[1]
+                for file await get_random_details("normalrsv1",group_id):
+                    if file.btn =="[]":
+                        reply_markup = None
+                    else:
+                        reply_markup = InlineKeyboardMarkup(eval(btn))
+                    if file.reply:
+                        file.reply = file.reply.replace("\\n", "\n").replace("\\t", "\t")
+                    if file.file == 'None':
+                        await client.send_message( chat_id=grp_id ,text=f'{file.reply}',reply_markup = reply_markup)
+                    elif file.type == 'Photo':
+                        await client.send_photo(chat_id=grp_id,
+                            photo = file.file,
+                            caption = file.reply or '',
+                            reply_markup=reply_markup
+                        )
+                    elif file.file :
+                        await client.send_cached_media(
+                            chat_id=grp_id,
+                            file_id = file.file ,
+                            caption = file.reply or "",
+                            reply_markup=reply_markup
+                        )
+                    await asyncio.sleep(2)
+            except:
+                #hjkl1 = f'{group_id}##{message.chat.id}'
+                #await User.collection.update_one({'_id':hjkl1})
+                pass
+        await asyncio.sleep(12)
+        for grp in await is_group_exist(nyva):
+            try:
+                grp_id = grp.id.split("##")[1]
+                for file await get_random_details("normalrsv2",group_id):
+                    if file.btn =="[]":
+                        reply_markup = None
+                    else:
+                        reply_markup = InlineKeyboardMarkup(eval(btn))
+                    if file.reply:
+                        file.reply = file.reply.replace("\\n", "\n").replace("\\t", "\t")
+                    if file.file == 'None':
+                        await client.send_message( chat_id=grp_id ,text=f'{file.reply}',reply_markup = reply_markup)
+                    elif file.type == 'Photo':
+                        await client.send_photo(chat_id=grp_id,
+                            photo = file.file,
+                            caption = file.reply or '',
+                            reply_markup=reply_markup
+                        )
+                    elif file.file :
+                        await client.send_cached_media(
+                            chat_id=grp_id,
+                            file_id = file.file ,
+                            caption = file.reply or "",
+                            reply_markup=reply_markup
+                        )
+                    await asyncio.sleep(2)
+            except:
+                #hjkl1 = f'{group_id}##{message.chat.id}'
+                #await User.collection.update_one({'_id':hjkl1})
+                pass
                     
 @Bot0.on_message(filters.new_chat_members & filters.group)
 async def grouup(client, message):
