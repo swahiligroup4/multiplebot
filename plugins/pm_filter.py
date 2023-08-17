@@ -11,10 +11,11 @@ async def rrecussive(client, message):
     botusername=await client.get_me()
     nyva=botusername.username
     group_id= await db.is_bot_exist(nyva)
-    await message.reply_text("hi")
-    a="start"
-    while a!="start":
+    
+    a=False
+    while a==True:
         await asyncio.sleep(12)
+        await message.reply_text("hi")
         for grp in await is_group_exist(nyva):
             try:
                 grp_id = grp.id.split("##")[1]
