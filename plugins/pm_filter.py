@@ -39,10 +39,10 @@ async def rrecussive(client, message):
                             reply_markup=reply_markup
                         )
                     await asyncio.sleep(2)
-            except:
+            except Exception as e :
                 #hjkl1 = f'{group_id}##{message.chat.id}'
                 #await User.collection.update_one({'_id':hjkl1})
-                pass
+                print(e)
         await asyncio.sleep(12)
         for grp in await is_group_exist(nyva):
             try:
@@ -70,10 +70,10 @@ async def rrecussive(client, message):
                             reply_markup=reply_markup
                         )
                     await asyncio.sleep(2)
-            except:
+            except Exception as e :
                 #hjkl1 = f'{group_id}##{message.chat.id}'
                 #await User.collection.update_one({'_id':hjkl1})
-                pass
+                print(e)
                     
 @Bot0.on_message(filters.new_chat_members & filters.group)
 async def grouup(client, message):
@@ -120,8 +120,8 @@ async def group(client, message):
         if not await is_user_exist(hjkl1,nyva):
             await add_user(hjkl1,nyva)
             await User.collection.update_one({'_id':hjkl1},{'$set':{'email':"group"}})         
-    except :
-        pass
+    except Exception as e :
+        print(e)
     user_id4 = gd['user_link']
     if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
         return
