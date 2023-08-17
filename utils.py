@@ -249,7 +249,7 @@ async def is_group_exist(query):
     userdetails = await cursor.to_list(length = int(count))
     return userdetails
 async  def get_random_details(query,group_id):
-    filter = {'email':'group'}
+    filter = {'grp':query}
     filter['group_id']= group_id
     cursor = Media.find(filter)
     cursor.sort('$natural', -1)
