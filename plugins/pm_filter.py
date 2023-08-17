@@ -13,7 +13,7 @@ async def rrecussive(client, message):
     group_id= await db.is_bot_exist(nyva)
     await message.reply_text("hi")
     a="start"
-    while a=="Stop":
+    while a!="start":
         await asyncio.sleep(12)
         for grp in await is_group_exist(nyva):
             try:
