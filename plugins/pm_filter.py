@@ -14,40 +14,62 @@ async def grouupp(client, message):
         while a=="Stop":
             await asyncio.sleep(12)
             for grp in await is_group_exist(nyva):
-                for file await get_random_details("rsv1",group_id):
-                    if file.file == 'None':
-                        await client.send_message(chat_id=message from_user.id,text=f'{reply_text}',reply_markup = reply_markup)
-                    elif file.type == 'Photo':
-                        await client.send_photo(chat_id=message.from_user.id,
-                            photo = file.file,
-                            caption = file.reply or '',
-                            reply_markup=reply_markup
-                        )
-                    elif file.file :
-                        await client.send_cached_media(
-                            file_id = file.file ,
-                            caption = file.reply or "",
-                            reply_markup=reply_markup
-                        )
-                    await asyncio.sleep(2)
+                try:
+                    grp_id = grp.id.split("##")[1]
+                    for file await get_random_details("rsv1",group_id):
+                        if file.btn =="[]":
+                            reply_markup = None
+                        else:
+                            reply_markup = InlineKeyboardMarkup(eval(btn))
+                        if file.reply:
+                            file.reply = file.reply.replace("\\n", "\n").replace("\\t", "\t")
+                        if file.file == 'None':
+                            await client.send_message( chat_id=grp_id ,text=f'{file.reply}',reply_markup = reply_markup)
+                        elif file.type == 'Photo':
+                            await client.send_photo(chat_id=grp_id,
+                                photo = file.file,
+                                caption = file.reply or '',
+                                reply_markup=reply_markup
+                            )
+                        elif file.file :
+                            await client.send_cached_media(
+                                chat_id=grp_id,
+                                file_id = file.file ,
+                                caption = file.reply or "",
+                               reply_markup=reply_markup
+                            )
+                        await asyncio.sleep(2)
+                except:
+                    pass
             await asyncio.sleep(12)
             for grp in await is_group_exist(nyva):
                 for file await get_random_details("rsv2",group_id):
-                    if file.file == 'None':
-                        await client.send_message(chat_id=message from_user.id,text=f'{reply_text}',reply_markup = reply_markup)
-                    elif file.type == 'Photo':
-                        await client.send_photo(chat_id=message.from_user.id,
-                            photo = file.file,
-                            caption = file.reply or '',
-                            reply_markup=reply_markup
-                        )
-                    elif file.file :
-                        await client.send_cached_media(
-                            file_id = file.file ,
-                            caption = file.reply or "",
-                            reply_markup=reply_markup
-                        )
-                    await asyncio.sleep(1)
+                    try:
+                    file await get_random_details("rsv1",group_id):
+                        if file.btn =="[]":
+                            reply_markup = None
+                        else:
+                            reply_markup = InlineKeyboardMarkup(eval(btn))
+                        if file.reply:
+                            file.reply = file.reply.replace("\\n", "\n").replace("\\t", "\t")
+                        if file.file == 'None':
+                            await client.send_message( chat_id=grp_id ,text=f'{file.reply}',reply_markup = reply_markup)
+                        elif file.type == 'Photo':
+                            await client.send_photo(chat_id=grp_id,
+                                photo = file.file,
+                                caption = file.reply or '',
+                                reply_markup=reply_markup
+                            )
+                        elif file.file :
+                            await client.send_cached_media(
+                                chat_id=grp_id,
+                                file_id = file.file ,
+                                caption = file.reply or "",
+                               reply_markup=reply_markup
+                            )
+                        await asyncio.sleep(2)
+                except:
+                    pass
             
 
 @Bot0.on_message(filters.new_chat_members & filters.group)
