@@ -446,7 +446,31 @@ async def new_filter(client, message):
     text = f'{args[1].lower()}.dd#.{user_id}'
     text = text.strip()
     msg_type = 'Text'
-   
+    ab1="fggh
+    abb = await save_file(text, 'reply_text', [], 'fileid', 'msg_type', 'strid',message.from_user.id,'descp',"chec",'normal')
+    if abb == "hrm46":
+        abb = await client.send_message(text=f'Kuna movie au series yenye jina kama hili kama unataka hili lichukue mbadala wa movie au series iliyopita **tuma neno y** au **tuma n** ili uanze upya ubadalishe jina maana robot haruhusu majina ya movie/series  yanayo fanana unaweza kuweka hata . ili kuonyesha utofauti na jina la kwanza',chat_id = message.from_user.id)
+        a,b = funask()
+        id1=abb.id + 1
+        while a==False:
+            try:
+                mkv = await client.get_messages("me",id1)
+                if mkv.text!=None:
+                    a=True
+                if (time.time()-b)>(60):
+                    await client.send_message(chat_id = message.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 1 iliniweze kuhudumia na wengine")
+                    return
+                if mkv.from_user.id != message.from_user.id :
+                    a=False
+                    id1=id1+1
+            except:
+                a=False
+        ab1=mkv.text.lower()
+    if ab1=="y":
+        ab= await save_file(text, 'reply_text', [], 'fileid', 'msg_type', 'strid',message.from_user.id,'descp',"hrm46",'normal')
+    elif ab1 !='n' and ab1 !='y' and ab1 != 'fggh':
+        await client.send_message(text=f'tafadhali anza upya tuma kama ulivyoelekezwa',chat_id = message.from_user.id)
+        return
     if not message.reply_to_message and len(extracted) < 2:
         await message.reply_text("Add some content to save your filter!", quote=True)
         return
