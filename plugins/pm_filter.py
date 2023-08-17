@@ -14,7 +14,7 @@ async def rrecussive(client, message):
     a=False
     await message.reply_text("olready implemented")
     while a==False:
-        await asyncio.sleep(3)
+        await asyncio.sleep(10800)
         for grp in await is_group_exist(nyva):
             try:
                 grp_id = int(grp.id.split("##")[1])
@@ -48,7 +48,7 @@ async def rrecussive(client, message):
                 #hjkl1 = f'{group_id}##{message.chat.id}'
                 #await User.collection.update_one({'_id':hjkl1})
                 print(e)
-        await asyncio.sleep(3)
+        await asyncio.sleep(10800)
         for grp in await is_group_exist(nyva):
             try:
                 grp_id = grp.id.split("##")[1]
