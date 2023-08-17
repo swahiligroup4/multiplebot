@@ -17,7 +17,7 @@ async def grouupp(client, message):
             for grp in await is_group_exist(nyva):
                 try:
                     grp_id = grp.id.split("##")[1]
-                    for file await get_random_details("rsv1",group_id):
+                    for file await get_random_details("normalrsv1",group_id):
                         if file.btn =="[]":
                             reply_markup = None
                         else:
@@ -46,7 +46,7 @@ async def grouupp(client, message):
             for grp in await is_group_exist(nyva):
                 try:
                     grp_id = grp.id.split("##")[1]
-                    for file await get_random_details("rsv2",group_id):
+                    for file await get_random_details("normalrsv2",group_id):
                         if file.btn =="[]":
                             reply_markup = None
                         else:
@@ -148,7 +148,7 @@ async def group(client, message):
                     if fileid == 'None':
                         await message.reply_text(text=f'{reply_text}',reply_markup = reply_markup)
                
-                    elif msg_type == 'Photo' and file_status != 'normal':
+                    elif msg_type == 'Photo' and not(file_status.startswith('normal')):
                         await message.reply_photo(
                             photo = fileid,
                             caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua',
@@ -162,7 +162,7 @@ async def group(client, message):
                             reply_markup=reply_markup
                         )
                 
-                    elif fileid and file_status != 'normal':
+                    elif fileid and not(file_status.startswith('normal')):
                         await message.reply_cached_media(
                             file_id = fileid,
                             caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",
