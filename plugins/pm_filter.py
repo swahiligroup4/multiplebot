@@ -17,7 +17,7 @@ async def rrecussive(client, message):
         await asyncio.sleep(3)
         for grp in await is_group_exist(nyva):
             try:
-                grp_id = grp.id.split("##")[1]
+                grp_id = int(grp.id.split("##")[1])
                 url=f"https://t.me/{nyva}?start=mwongozohrm{grp_id}"
                 text=f"\n\n💥💥💥💥💥💥💥💥\nkwa wageni wte tunaomba msome muongozo ili mjue jinsi ya kupata huduma zetu\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
                 await client.send_message(chat_id=grp_id,text=f"{text}")
