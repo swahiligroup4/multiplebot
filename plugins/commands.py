@@ -446,7 +446,7 @@ async def new_filter(client, message):
     text = f'{args[1].lower()}.dd#.{user_id}'
     text = text.strip()
     msg_type = 'Text'
-    ab1="fggh
+    ab1="fggh"
     abb = await save_file(text, 'reply_text', [], 'fileid', 'msg_type', 'strid',message.from_user.id,'descp',"chec",'normal')
     if abb == "hrm46":
         abb = await client.send_message(text=f'Kuna movie au series yenye jina kama hili kama unataka hili lichukue mbadala wa movie au series iliyopita **tuma neno y** au **tuma n** ili uanze upya ubadalishe jina maana robot haruhusu majina ya movie/series  yanayo fanana unaweza kuweka hata . ili kuonyesha utofauti na jina la kwanza',chat_id = message.from_user.id)
