@@ -19,8 +19,8 @@ async def rrecussive(client, message):
             try:
                 grp_id = int(grp.id.split("##")[1])
                 url=f"https://t.me/{nyva}?start=mwongozohrm{grp_id}"
-                text=f"\n\n💥💥💥💥💥💥💥💥\nkwa wageni wte tunaomba msome muongozo ili mjue jinsi ya kupata huduma zetu\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
-                await client.send_message(chat_id=grp_id,text=f"{text}")
+                text=f"\n\n💥💥💥💥💥💥💥💥\nKWA wageni wte tunaomba msome muongozo ili mjue jinsi ya kupata huduma zetu\n\n**[GUSA HAPA]({url})** au bonyeza button hapo chini \n kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
+                await client.send_message(chat_id=grp_id,text=f"{text}", reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("🗓 BONYEZA HAPA",url=f"{url}") )]]) )
                 for file in await get_random_details("normalrsv1",group_id):
                     if file.btn =="[]":
                         reply_markup = None
@@ -94,8 +94,8 @@ async def grouup(client, message):
     #await client.restrict_chat_member(message.chat.id, message.from_user.id,
         #ChatPermissions(can_send_messages=False)) 
     url=f"https://t.me/{nyva}?start=mwongozohrm{message.chat.id}"
-    text=f"Karibu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote (Sababu ukituma nafuta) ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
-    await message.reply_text(f"{text}")
+    text=f"Karibu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote (Sababu ukituma nafuta) ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** au bonyeza button hapo chin kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
+    await message.reply_text(text=f"{text}", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🗓 BONYEZA HAPA",url=f"{url}")]]))
 @Bot0.on_message(filters.group & filters.incoming)
 async def group(client, message):
     await handle_admin_status(client,message)
@@ -114,7 +114,7 @@ async def group(client, message):
                 #ChatPermissions(can_send_messages=False)) 
             url=f"https://t.me/{nyva}?start=mwongozohrm{message.chat.id}"
             text=f"Ndugu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote **(Sababu ukituma nafuta)** ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
-            await message.reply_text(f"{text}")
+            await message.reply_text(text=f"{text}",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🗓 BONYEZA HAPA",url=f"{url}")]]))
             return 
     if not message.text:
         return 
