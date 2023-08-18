@@ -362,7 +362,7 @@ async def start_msg_admins(client, message):
                     else:
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha text', callback_data = f"xtext {file_id}")],[InlineKeyboardButton('Rekebisha caption', callback_data = f"xcaption {id2}")],[InlineKeyboardButton('Rekebisha link', callback_data = f"xfile {id2}")],[InlineKeyboardButton('Rekebisha kundi', callback_data = "xba")],[InlineKeyboardButton('Rekebisha Maelezo ya media', callback_data = f"xdescp {id2}")]])
             
-                    f_caption =f'{f_caption}\n\n**...chagua kitu cha kuedit kwa kubonyeza button husika \n@Bandolako2bot'
+                    f_caption =f'{f_caption}\n\n**...chagua kitu cha kuedit kwa kubonyeza button husika'
                     if msg_type =="Photo":
                         await client.send_photo(
                             chat_id=cmd.from_user.id,
