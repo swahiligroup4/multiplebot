@@ -155,6 +155,7 @@ async def start_msg_admins(client, message):
                 return 
             grp1,grp2=grp.split(" ") 
             ban_status = await db.get_ban_status(group_id)
+            lk = await client.get_users(group_id)
             if ban_status["is_banned"] == False and group_id != cmd.from_user.id :           
                 await client.send_message(
                         chat_id=cmd.from_user.id,
@@ -178,7 +179,7 @@ async def start_msg_admins(client, message):
                              
                 await client.send_message(
                     chat_id=cmd.from_user.id,
-                    text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n Tafadhal chagua nchi uliopo kuweza kulipia uweze kuitazama \n\n**Kisha baada ya kufanya malipo na kuthibitishiwa malipo yako na admin utabonyeza download hapo juu kuipata movie yako kama utalipia kifurushi utazipakua nyingine zaid kwenye kikundi....** ",
+                    text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n Tafadhal chagua nchi uliopo kuweza kulipia uweze kuitazama \n\n**Kisha baada ya kufanya malipo na kuthibitishiwa malipo yako na admin utabonyeza download hapo juu kuipata movie yako kama utalipia kifurushi utazipakua nyingine zaid kwenye kikundi....\n** [BONYEZA HAPA](https://t.me/{lk.username})** kwa msaada/maelekezo zaidi ",
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -317,9 +318,9 @@ async def start_msg_admins(client, message):
                         )         
                     return
                 elif strg.lower() == 's':
-                    lk = await client.get_users(group_id)
+                    
                     link = files.descp.split('.dd#.')[2]
-                    f_caption =f'{f_caption}\n💥Kama huwezi kufungua link zetu \ntuma **email yako**\nMfano**mohamed@gmail.com **\nkumbuka tuma kwa herufi ndogo \n\n**[BONYEZA HAPA](https://t.me/{lk.username}**\nNikupe maelekezo\n🌟@{nyva}'
+                    f_caption =f'{f_caption}\n💥Kama huwezi kufungua link zetu \ntuma **email yako** Mfano:\n**mohamed@gmail.com **\nkumbuka tuma kwa herufi ndogo \n\n** [BONYEZA HAPA](https://t.me/{lk.username})**\nNikupe maelekezo\n🌟@{nyva}'
                     if msg_type =="Photo":
                         await client.send_photo(
                             chat_id=cmd.from_user.id,
