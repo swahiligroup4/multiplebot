@@ -180,6 +180,7 @@ async def start_msg_admins(client, message):
                 await client.send_message(
                     chat_id=cmd.from_user.id,
                     text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n Tafadhal chagua nchi uliopo kuweza kulipia uweze kuitazama \n\n**Kisha baada ya kufanya malipo na kuthibitishiwa malipo yako na admin utabonyeza download hapo juu kuipata movie yako kama utalipia kifurushi utazipakua nyingine zaid kwenye kikundi....\n** [BONYEZA HAPA](https://t.me/{lk.username})** kwa msaada/maelekezo zaidi ",
+                    disable_web_page_preview = True,
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
