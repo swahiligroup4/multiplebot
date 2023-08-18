@@ -20,7 +20,7 @@ async def rrecussive(client, message):
                 grp_id = int(grp.id.split("##")[1])
                 url=f"https://t.me/{nyva}?start=mwongozohrm{grp_id}"
                 text=f"\n\n💥💥💥💥💥💥💥💥\nKWA wageni wte tunaomba msome muongozo ili mjue jinsi ya kupata huduma zetu\n\n**[GUSA HAPA]({url})** au bonyeza button hapo chini \n kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
-                await client.send_message(chat_id=grp_id,text=f"{text}", reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("🗓 BONYEZA HAPA",url=f"{url}") )]]) )
+                await client.send_message(chat_id=grp_id,text=f"{text}", reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("🗓 BONYEZA HAPA",url=f"{url}")]]) )
                 for file in await get_random_details("normalrsv1",group_id):
                     if file.btn =="[]":
                         reply_markup = None
