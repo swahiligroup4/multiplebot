@@ -85,7 +85,7 @@ async def start_msg_admins(client, message):
                 username = '' if message.from_user.username == None else '@'+message.from_user.username
             )
        else:
-           text = f"Samahani Mpendwa **{message.from_user.mention}** \n\nRudi kwenye main group kwa kubonyeza hii link {ban_status['group'].split('##')[1]}\n\nkisha tuma neno muongozo \n ili kuweza kujua jinsi ya kupata huduma za robot huyu Au Soma maelekezo utakayo pewa ili kusoma muongozo"       
+           text = f"Samahani Mpendwa **{message.from_user.mention}** \n\nRudi kwenye main group kwa kubonyeza hii link {ban_status['group'].split('##')[1]}\n\nkisha tuma neno movie \n ili kuweza kujua jinsi ya kupata huduma za robot huyu Au Soma maelekezo utakayo pewa ili kusoma muongozo utakapo kwama tuulize kwenye kikundi tukusaidie"       
     except Exception as e:
         text = f'robot yupo kwenye matengenezo subiri mtajulishwa atakapo kuwa sawa{e}'     
     usr_cmdall1 = message.text
