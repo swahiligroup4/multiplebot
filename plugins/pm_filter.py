@@ -19,7 +19,7 @@ async def rrecussive(client, message):
             try:
                 grp_id = int(grp.id.split("##")[1])
                 url=f"https://t.me/{nyva}?start=mwongozohrm{grp_id}"
-                text=f"\n\n💥💥💥💥💥💥💥💥\nKWA wageni wte tunaomba msome muongozo ili mjue jinsi ya kupata huduma zetu\n\n**[GUSA HAPA]({url})** au bonyeza button hapo chini \n kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
+                text=f"\n\n💥💥💥💥💥💥💥💥\nKWA WAGENI WOTE\nTunaomba msome muongozo ili mjue jinsi ya kupata huduma zetu\n\n**[GUSA HAPA]({url})** au bonyeza button hapo chini \n kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
                 await client.send_message(chat_id=grp_id,text=f"{text}", disable_notification=True,reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("🗓 BONYEZA HAPA",url=f"{url}")]]) )
                 for file in await get_random_details("normalrsv1",group_id):
                     if file.btn =="[]":
@@ -82,52 +82,25 @@ async def rrecussive(client, message):
                 #await User.collection.update_one({'_id':hjkl1})
                 print(e)
                     
-@Bot0.on_message(filters.new_chat_members & filters.group)
-async def grouup(client, message):
-    botusername=await client.get_me()
-    nyva=botusername.username
-    user_id3= await db.is_bot_exist(nyva)
-    if await is_user_exist(f"{user_id3}##{message.from_user.id}",nyva):
-        return
-    if await  is_subscribed(client, message, message.chat.id):
-        hjkl = f'{user_id3}##{message.from_user.id}'
-        if not await is_user_exist(hjkl,nyva):
-            await add_user(hjkl,nyva)
-    #await client.restrict_chat_member(message.chat.id, message.from_user.id,
-        #ChatPermissions(can_send_messages=False)) 
-    url=f"https://t.me/{nyva}?start=mwongozohrm{message.chat.id}"
-    text=f"Karibu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote (Sababu ukituma nafuta) ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** au bonyeza button hapo chin kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
-    await message.reply_text(text=f"{text}", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🗓 BONYEZA HAPA",url=f"{url}")]]))
 @Bot0.on_message(filters.group & filters.incoming)
 async def group(client, message):
     await handle_admin_status(client,message)
     botusername=await client.get_me()
     nyva=botusername.username
     user_id3= await db.is_bot_exist(nyva)
-    
     gd=await db.get_db_status(int(user_id3))
     group_id = int(user_id3)
-    hjkl = f'{user_id3}##{message.from_user.id}'
-    if not await  is_subscribed(client, message, message.chat.id) and message.from_user.id:
-        await message.delete()
-        gh=await is_user_exist(hjkl,nyva)
-        if not gh:
-            #await client.restrict_chat_member(message.chat.id, message.from_user.id,
-                #ChatPermissions(can_send_messages=False)) 
-            url=f"https://t.me/{nyva}?start=mwongozohrm{message.chat.id}"
-            text=f"Ndugu **{message.from_user.mention}**\n\nSamahani hutoweza kutuma chochote **(Sababu ukituma nafuta)** ,Ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ,Ndio tutakuruhusu kutuma ujumbe utakao penda.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
-            await message.reply_text(text=f"{text}",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🗓 BONYEZA HAPA",url=f"{url}")]]))
-            return 
     if not message.text:
         return 
     try:
-        hjkl = f'{user_id3}##{message.from_user.id}'
-        if not await is_user_exist(hjkl,nyva):
-            await add_user(hjkl,nyva)
-        hjkl1 = f'{user_id3}##{message.chat.id}'
-        if not await is_user_exist(hjkl1,nyva):
-            await add_user(hjkl1,nyva)
-            await User.collection.update_one({'_id':hjkl1},{'$set':{'email':"group"}})         
+        if message.from_user.id:
+            hjkl = f'{user_id3}##{message.from_user.id}'
+            if not await is_user_exist(hjkl,nyva):
+                await add_user(hjkl,nyva)
+            hjkl1 = f'{user_id3}##{message.chat.id}'
+            if not await is_user_exist(hjkl1,nyva):
+                await add_user(hjkl1,nyva)
+                await User.collection.update_one({'_id':hjkl1},{'$set':{'email':"group"}})         
     except Exception as e :
         print(e)
     user_id4 = gd['user_link']
@@ -205,6 +178,8 @@ async def groupprv(client, message):
     group_id = int(user_id3)
     hjkl = f'{user_id3}##{message.from_user.id}'
     text=message.text
+    if not message.from_user.id:
+        return 
     if " " not in text.strip() and "@gmail.com" in text.lower():
         group_status = await is_user_exist(hjkl,nyva)
         user_id3='hrm45'
