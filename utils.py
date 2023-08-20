@@ -240,8 +240,8 @@ async def is_user_exist(query,rbt):
     userdetails = await cursor.to_list(length=1)
     return userdetails
 
-async def is_group_exist(query):
-    filter = {'email':'group'}
+async def is_group_exist(query1,query):
+    filter = {'email':query1}
     filter['rbt']= query
     cursor = User.find(filter)
     cursor.sort('$natural', -1)
