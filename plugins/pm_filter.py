@@ -12,15 +12,15 @@ async def addchannel(client, message):
     nyva=botusername.username  
     nyva=str(nyva)
     chat_type =f"{ message.chat.type}" 
-    if len(message.command) == 1 :
+    if len(message.command) != 2:
         await message.reply_text(
-            f"{len(message.command)}tafadhali anza na neno /ongeza kisha neno mfano \n/ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
+            f"{len(message.command)}Tafadhali anza na neno /ongeza kisha neno mfano \n/ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
             quote=True
         )
         return
     if chat_type == "ChatType.CHANNEL":
         await message.reply_text(
-                "Samahani forward hii command kwa robot private",
+                "Samahani forward hii command nlioreply kwa robot private",
                 quote=True
             )
         return
