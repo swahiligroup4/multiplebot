@@ -816,7 +816,7 @@ async def addconnection(client,message):
     chat_type =f"{ message.chat.type}" 
     if chat_type == "ChatType.CHANNEL":
         await message.reply_text(
-                "Samahani forward hii command kwa robot private",
+                "Samahani forward hii command nlioreply kwa robot private",
                 quote=True
             )
         return
