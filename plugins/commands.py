@@ -361,7 +361,7 @@ async def new_filtervip(client, message):
             abz=[]
             for dta1 in data1:
                 for data2 in ["haijatafsiriwa","imetafsiriwa","movie","series"]:
-                    if data2 in dta1.id and int(dta1.id.split("##")[0]) not in abz:
+                    if data2 in dta1.id and dta1.id.split("##")[0] not in abz:
                         abz.append(dta1.id.split("##")[0])
             if msg_type == 'Photo':  
                 await client.send_photo(
@@ -373,7 +373,7 @@ async def new_filtervip(client, message):
                 for data2 in abz:
                     try:
                         await client.send_photo(
-                            chat_id=data2,
+                            chat_id=int(data2),
                             photo = fileid,
                             caption = reply_text,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
@@ -391,7 +391,7 @@ async def new_filtervip(client, message):
                 for data2 in abz:
                     try:
                         await client.send_cached_media(
-                            chat_id=data2,
+                            chat_id=int(data2),
                             file_id = fileid,
                             caption = reply_text,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
