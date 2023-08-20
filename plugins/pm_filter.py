@@ -288,7 +288,11 @@ async def groupprv(client, message):
     else:
         await message.reply_text('Tafadhal ujumbe huu uliontumia sjauelewa Tafadhali kama n email:ntumie email tu bila neno jingine \nMfano  mohamed@gmail.com \n\nZingatia\n1.usiruke nafasi kwenye email yako  \n2.hakisha n gmail (hrmr5@gmail.com)\n3.hakikisha huongez neno lingine zaid ya email \n\nKwa salio lako tuma neno Salio \nZingatia lianze na herufi kubwa S na hizo nyingine ndogo\n\n Maelekezo mengine mchek hrm45')
         return
-
+@Bot0.on_callback_query(filters.regex('^3z.*'))
+async def grouppprv(client, message): 
+    await query.edit_message_text("tumetaarifu kikamilifu asante kwa kuonyesha uaminifu kwa wateja wako")
+    gd=await db.get_db_status(query.from_user.id)
+    await client.send_message(chat_id=int(query.data.split(" ")[1]),text=f'Shukrani kwa subra yako sasa unaeza pata huduma zote ulizolipia kifurushi chamgamoto yoyote tuulize kwenye kikundi\n\n{gd["group"].split("##")[1]}')
 def get_reply_makup(query,totol):
     buttons = [
         [
