@@ -1,4 +1,4 @@
-from botii import Bot1,Bot
+from botii import Bot0
 import re
 import ast 
 from plugins.database import db
@@ -16,22 +16,26 @@ from pyrogram.types import (
 from utils import is_user_exist,get_search_results,Media,is_group_exist,add_user,is_subscribed
 from info import filters,OWNER_ID,CHANNELS,AUTH_CHANNEL
 BOT = {}
-@Bot1.on_inline_query(filters.inline)
+
+@Bot0.on_inline_query(filters.inline)
 async def give_filter(client, query):
-    if not await is_subscribed(client, query,CHANNELS):
-        await query.answer(results=[],
-                           cache_time=0,
-                           switch_pm_text='👉 Bonyeza hapa kujoin channel kupata updates zake',
-                           switch_pm_parameter="subscribe")
-        return
+
     nyva=BOT.get("username")
     if not nyva:
         botusername=await client.get_me()
         nyva=botusername.username
         BOT["username"]=nyva
     group_id= await db.is_bot_exist(nyva)
-    userdetails1= await is_user_exist(query.from_user.id,nyva)
+    hjkl = f'{group_id}##{query.from_user.id}'  
+    userdetails1= await is_user_exist(hjkl,nyva)
     text = query.query.strip()
+    db_sts =await db.get_db_status(group_id)
+    if not await is_subscribed(client, query,int(db_sts['channels'].split('##')[0])):
+        await query.answer(results=[],
+                           cache_time=0,
+                           switch_pm_text='👉 Bonyeza hapa kujoin channel kupata updates zake',
+                           switch_pm_parameter="subscribe")
+        return
     if not userdetails1:
         await query.answer(results=[],
             cache_time=0,
@@ -39,7 +43,6 @@ async def give_filter(client, query):
             switch_pm_parameter="start")
         return
     ban = await db.get_ban_status(group_id) 
-    db_sts =await db.get_db_status(group_id)
     offset = int(query.offset or 0)
     documents, next_offset = await get_search_results(text,
                                               group_id = group_id,
@@ -51,7 +54,7 @@ async def give_filter(client, query):
         id3 = document.id
         reply_text = document.reply
         button = document.btn
-        alert = document.alert
+        alert = document.price
         file_status = document.grp
         fileid = document.file
         keyword = document.text.split('.dd#.',1)[0]
@@ -77,7 +80,7 @@ async def give_filter(client, query):
                     )
                 except:
                     continue
-            elif msg_type == 'Photo' and file_status != 'normal':
+            elif msg_type == 'Photo' and not(file_status.startswith('normal')):
                 try:
                     result = InlineQueryResultPhoto(
                         photo_url = fileid,
@@ -99,14 +102,13 @@ async def give_filter(client, query):
                     )
                 except:
                     continue
-            elif fileid and file_status != 'normal':
+            elif fileid and not(file_status.startswith('normal')) :
                 try:
                     result = InlineQueryResultCachedDocument(
                         document_file_id = fileid,
                         title = keyword.upper(),
                         description = descp,
-                        caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",
-                        
+                        caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",          
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != query.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
                     )
                 except:
@@ -146,7 +148,7 @@ async def give_filter(client, query):
                 title=title,
                 input_message_content=InputTextMessageContent(message_text = text1, disable_web_page_preview = True),
                 description=f'Gusa hapa kupata melezo zaid na maelekezo '
-                
+                 
             ))
         await query.answer(
             results = result,
@@ -161,8 +163,8 @@ async def give_filter(client, query):
             title=title,
             input_message_content=InputTextMessageContent(message_text = f"Mpendwa [{query. from_user.first_name}](tg://user?id={query.from_user.id})\nKama movie yako haipo ntumie Mara moja jina lake kisha subir ntakujibu nkishaiadd kwenye database bonyeza kitufe hapo chini kutuma kisha ukurasa unaofuata bonyeza start kisha ntumie jina LA muv au series au nyimbo unayotafta", disable_web_page_preview = True),
             description=f'Hapa ndiyo mwisho wa  matokeo yetu kutoka kwenye database\nBonyeza hapa kama haipo kupata maelezo zaidi',
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Bonyeza hapa kutuma', url=f"{db_sts['ms_link']}")]]))
-        )
+            #reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Bonyeza hapa kutuma', url=f"{db_sts['ms_link']}")]]))
+        ))
     try:
         await query.answer(results=results,
             is_personal = True,
@@ -176,8 +178,8 @@ async def give_filter(client, query):
             switch_pm_parameter="error")
     return
         
-        
-@Bot1.on_callback_query(filters.regex(r"^(alertmessage):(\d):(.*)"))
+       
+@Bot0.on_callback_query(filters.regex(r"^(alertmessage):(\d):(.*)"))
 async def alert_msg(client, callback):
     regex = r"^(alertmessage):(\d):(.*)"
     matches = re.match(regex, callback.data)

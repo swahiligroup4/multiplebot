@@ -1,4 +1,4 @@
-import re
+import re  
 import base64
 import logging
 from struct import pack
@@ -29,27 +29,27 @@ class Media(Document):
     type = fields.StrField(required=True)
     group_id = fields.IntField(required=True)
     descp = fields.StrField(required=True)
-    price = fields.IntField(required=True)
+    price = fields.StrField(required=True)
     grp = fields.StrField(required=True)
     class Meta:
         collection_name = COLLECTION_NAME
-
+        
 @imdb.register
 class User(Document):
     id = fields.StrField(attribute='_id')
-    user_id = fields.IntField(required=True )
     rbt =fields.StrField(required=True)
     email = fields.StrField(required=True)
+    tme = fields.IntField(required=True)
     class Meta:
         collection_name = COLLECTION_NAME_2
-
-async def add_user(id, usr,sts):
+        
+async def add_user(id,sts):
     try:
         data = User(
             id = id,
-            user_id = usr,
             rbt = sts,
-            email = 'hrm45'
+            email = 'hrm45',
+            tme=0
         )
     except ValidationError:
         logger.exception('Error occurred while saving group in database')
@@ -74,10 +74,12 @@ async def save_file(text,reply,btn,file,type,id,user_id,descp,prc,grp):
     elif prc =='chec':
         return
     if found and prc=='hrm46':
-        details = await  get_filter_results(id,user_id)
-        for dt in details:
-            for ad in await get_file_details(dt.id):
-                await Media.collection.delete_one({'text':ad.text})
+        dtav =await get_filter_results(text,user_id)
+        for dt3 in dtav:
+            details = await  get_filter_results(id,user_id)
+            for dt in details:
+                for ad in await get_file_details(dt.id):
+                    await Media.collection.delete_one({'_id':ad.id})
         await Media.collection.delete_one(fdata)
         return
     try:
@@ -90,7 +92,7 @@ async def save_file(text,reply,btn,file,type,id,user_id,descp,prc,grp):
             type=str(type),
             group_id =user_id,
             descp=descp,
-            price = prc,
+            price = str(prc),
             grp = grp
        )
     except ValidationError:
@@ -110,15 +112,15 @@ async def get_search_results(query, group_id, max_results=10, offset=0):
     query = query.lower()
     ab='empty'
     if query.startswith('movie'):
-        ab='movie'
+        ab='x movie'
         query=query.replace('movie','')
         query = query.strip()
-        raw_pattern1 = r'\b' + ab + r'.*'
+        raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
     elif query.startswith('series'):
         query=query.replace('series','')
-        ab='series'
+        ab='x series'
         query = query.strip()
-        raw_pattern1 = r'\b' + ab + r'.*'
+        raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
     elif query.startswith('dj'):
         try:
             ab,query=query.split('#',1)
@@ -126,11 +128,11 @@ async def get_search_results(query, group_id, max_results=10, offset=0):
         except:
             ab=query.strip()
             query =''
-        if ' ' not in ab:
-            raw_pattern1 = r'\b' + ab + r'.*'
-        else:
-            raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
-    
+        ab=f"x {ab}"
+        raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
+    else:
+        ab="x dd#"
+        raw_pattern1 = ab.replace(' ', r'.*[\s\.\+\-_]')
     if not query:
         raw_pattern = '.'
     elif ' ' not in query:
@@ -167,7 +169,6 @@ async def get_search_results(query, group_id, max_results=10, offset=0):
     files = await cursor.to_list(length=max_results)
 
     return files, next_offset
-
 
 async def get_filter_results(query,group_id):
     query = query.strip()
@@ -239,14 +240,23 @@ async def is_user_exist(query,rbt):
     userdetails = await cursor.to_list(length=1)
     return userdetails
 
-async def is_group_exist(query):
-    filter = {'status':'group'}
-    filter['group_id']= query
+async def is_group_exist(query1,query):
+    filter = {'email':query1}
+    filter['rbt']= query
     cursor = User.find(filter)
     cursor.sort('$natural', -1)
     count = await User.count_documents(filter)
     userdetails = await cursor.to_list(length = int(count))
     return userdetails
+async  def get_random_details(query,group_id):
+    filter = {'grp':query}
+    filter['group_id'] = int(group_id)
+    cursor = Media.find(filter)
+    cursor.sort('$natural', -1)
+    count = await Media.count_documents(filter)
+    userdetails = await cursor.to_list(length = int(count))
+    return userdetails
+
 async def get_file_details(query):
     filter = {'id': query}
     cursor = Media.find(filter)

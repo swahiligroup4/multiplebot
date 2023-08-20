@@ -1,38 +1,184 @@
-from botii import Bot1,Bot
+from botii import Bot0
 import re
 from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton,ChatPermissions
 from info import filters
+import asyncio
 from plugins.status import handle_admin_status
 from plugins.database import db
-from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed
-
-@Bot1.on_message(filters.new_chat_members)
-async def grouup(client, message):
+from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user,is_group_exist,get_random_details
+@Bot0.on_message(filters.command("ongeza"))
+async def addchannel(client, message):
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    chat_type =f"{ message.chat.type}" 
+    if len(message.command) != 2:
+        await message.reply_text(
+            f"{len(message.command)}Tafadhali anza na neno /ongeza kisha neno mfano \n/ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
+            quote=True
+        )
+        return
+    if chat_type == "ChatType.CHANNEL":
+        await message.reply_text(
+                "Samahani forward hii command nlioreply kwa robot private",
+                quote=True
+            )
+        return
+    status= await db.is_admin_exist(message.from_user.id,nyva) 
+    if not status:
+        return
+    userid = message.from_user.id if message.from_user else None
+    if not userid:
+        return await message.reply(f"Samahan wewe ni anonymous(bila kujulikana) admin tafadhali nenda kweny group lako edit **admin permission** remain anonymouse kisha disable jaribu tena kutuma /niunge.Kisha ka enable tena")
+    if chat_type == "ChatType.PRIVATE":
+        if not message.forward_from_chat:
+            await message.reply_text(
+                "Samahan add hii bot kama admin kwenye group au channel yako kisha tuma command hii \n<b>/ongeza weka neno</b>kwenye neno inabidi iwe kati ya maneno haya Imetafsiriwa au haijatafsiriwa au movie au series kwa maneno zaidi muulize @hrm45 akuelekeze",
+                quote=True
+            )
+            return
+        if str(message.forward_from_chat.type) =="ChatType.CHANNEL":
+            group_id = message.forward_from_chat.id
+    elif chat_type in ["ChatType.GROUP", "ChatType.SUPERGROUP","ChatType.CHANNEL"]:
+        group_id = message.chat.id
+    try:
+        st = await client.get_chat_member(group_id, userid)
+        st.status=(f"{st.status}".split(".")[1])
+        if not(
+            st.status == "ADMINISTRATOR"
+            or st.status == "OWNER"
+        ):
+            await message.reply_text("lazima uwe  admin kwenye group hili!", quote=True)
+            return
+    except Exception as e:
+        logger.exception(e)
+        await message.reply_text(
+            "Invalid Group ID!\n\nIf correct, Make sure I'm present in your group!!",
+            quote=True,
+        )
+        return
+    try:
+        st = await client.get_chat_member(group_id, "me")
+        st.status=(f"{st.status}".split(".")[1])
+        if st.status == "ADMINISTRATOR":
+            if message.command[1].lower() in "imetafsriwa haijatafsiriwa movie series":
+                abf=message.command[1].strip()
+                hjkl1 = f'{group_id}##{abf.lower()}'
+                if not await is_user_exist(hjkl1,nyva):
+                    await add_user(hjkl1,nyva)
+                    await User.collection.update_one({'_id':hjkl1},{'$set':{'email':"channel"}})
+                    await message.reply_text("kikundi tumekiongeza kikamilifu", quote=True)
+                else:
+                    await message.reply_text("Samahani hich kikundi tumeshakiadd", quote=True)
+            else:
+                await message.reply_text(
+                    f"tafadhali anza na neno /ongeza kisha neno mfano /ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
+                    quote=True
+                )
+                return
+        else:
+            await message.reply_text("Ni add admin kwenye group/channel yako kisha jaribu tena", quote=True)
+    except Exception as e:
+        logger.exception(e)
+        await message.reply_text('Kuna tatizo tafadhali jaribu badae!!!Likiendelea mcheki @hrm45 aweze kutatua tatizo', quote=True)
+        return
+@Bot0.on_message(filters.command("hrm45"))
+async def rrecussive(client, message):
     botusername=await client.get_me()
     nyva=botusername.username
-    await client.restrict_chat_member(message.chat.id, message.from_user.id,
-        ChatPermissions(can_send_messages=False)) 
-    url=f"https://t.me/{nyva}?start=mwongozohrm{message.chat.id}"
-    text=f"Karibu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
-    await message.reply_text(f"{text}")
-
-@Bot1.on_message(filters.text & filters.group & filters.incoming)
+    group_id= await db.is_bot_exist(nyva)
+    a=False
+    await message.reply_text("olready implemented")
+    while a==False:
+        await asyncio.sleep(10800)
+        for grp in await is_group_exist("group",nyva):
+            try:
+                grp_id = int(grp.id.split("##")[1])
+                url=f"https://t.me/{nyva}?start=mwongozohrm{grp_id}"
+                text=f"\n\n💥💥💥💥💥💥💥💥\nKWA WAGENI WOTE\nTunaomba msome muongozo ili mjue jinsi ya kupata huduma zetu\n\n**[GUSA HAPA]({url})** au bonyeza button hapo chini \n kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
+                await client.send_message(chat_id=grp_id,text=f"{text}", disable_notification=True,reply_markup=InlineKeyboardMarkup( [[InlineKeyboardButton("🗓 BONYEZA HAPA",url=f"{url}")]]) )
+                for file in await get_random_details("normalrsv1",group_id):
+                    if file.btn =="[]":
+                        reply_markup = None
+                    else:
+                        reply_markup = InlineKeyboardMarkup(eval(btn))
+                    if file.reply:
+                        file.reply = file.reply.replace("\\n", "\n").replace("\\t", "\t")
+                    if file.file == 'None':
+                        await client.send_message( chat_id=grp_id ,text=f'{file.reply}',disable_notification=True,reply_markup = reply_markup)
+                    elif file.type == 'Photo':
+                        await client.send_photo(chat_id=grp_id,
+                            photo = file.file,
+                            caption = file.reply or '',
+                            disable_notification = True,                    
+                            reply_markup=reply_markup
+                        )
+                    elif file.file :
+                        await client.send_cached_media(
+                            chat_id=grp_id,
+                            file_id = file.file ,
+                            caption = file.reply or "",
+                            disable_notification=True,
+                            reply_markup=reply_markup
+                        )
+                    await asyncio.sleep(2)
+            except Exception as e :
+                #hjkl1 = f'{group_id}##{message.chat.id}'
+                #await User.collection.update_one({'_id':hjkl1})
+                print(e)
+        await asyncio.sleep(10800)
+        for grp in await is_group_exist("group",nyva):
+            try:
+                grp_id = grp.id.split("##")[1]
+                for file in await get_random_details("normalrsv2",group_id):
+                    if file.btn =="[]":
+                        reply_markup = None
+                    else:
+                        reply_markup = InlineKeyboardMarkup(eval(btn))
+                    if file.reply:
+                        file.reply = file.reply.replace("\\n", "\n").replace("\\t", "\t")
+                    if file.file == 'None':
+                        await client.send_message( chat_id=grp_id ,text=f'{file.reply}',reply_markup = reply_markup)
+                    elif file.type == 'Photo':
+                        await client.send_photo(chat_id=grp_id,
+                            photo = file.file,
+                            caption = file.reply or '',
+                            reply_markup=reply_markup
+                        )
+                    elif file.file :
+                        await client.send_cached_media(
+                            chat_id=grp_id,
+                            file_id = file.file ,
+                            caption = file.reply or "",
+                            reply_markup=reply_markup
+                        )
+                    await asyncio.sleep(2)
+            except Exception as e :
+                #hjkl1 = f'{group_id}##{message.chat.id}'
+                #await User.collection.update_one({'_id':hjkl1})
+                print(e)
+                    
+@Bot0.on_message(filters.group & filters.incoming)
 async def group(client, message):
     await handle_admin_status(client,message)
     botusername=await client.get_me()
     nyva=botusername.username
     user_id3= await db.is_bot_exist(nyva)
     gd=await db.get_db_status(int(user_id3))
-    if not await  is_subscribed(client, message, message.chat.id):
-        gh=await is_user_exist(message.from_user.id,nyva)
-        if not gh:
-            await client.restrict_chat_member(message.chat.id, message.from_user.id,
-                ChatPermissions(can_send_messages=False)) 
-            url=f"https://t.me/{nyva}?start=mwongozo##{message.chat.id}"
-            text=f"Ndugu **{message.from_user.mention}**\n\nSamahani kwa kukuzuia kufanya chochote ila tunapenda usome muongozo na jinsi ya kupakua huduma zetu ndio tutakuruhusu kutuma ujumbe utakao.\n\n**[GUSA HAPA]({url})** kisha bonyeza  neno START ili kuweza kupata muongozo na maelekezo ya huduma zetu.."
-            await message.reply_text(f"{text}")
-            return 
-
+    group_id = int(user_id3)
+    if not message.text:
+        return 
+    try:
+        if message.from_user.id:
+            hjkl = f'{user_id3}##{message.from_user.id}'
+            if not await is_user_exist(hjkl,nyva):
+                await add_user(hjkl,nyva)
+            hjkl1 = f'{user_id3}##{message.chat.id}'
+            if not await is_user_exist(hjkl1,nyva):
+                await add_user(hjkl1,nyva)
+                await User.collection.update_one({'_id':hjkl1},{'$set':{'email':"group"}})         
+    except Exception as e :
+        print(e)
     user_id4 = gd['user_link']
     if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
         return
@@ -45,7 +191,7 @@ async def group(client, message):
                 id3 = document.id
                 reply_text = document.reply
                 button = document.btn
-                alert = document.alert
+                alert = document.price
                 file_status = document.grp
                 fileid = document.file
                 keyword = document.text.split('.dd#.',1)[0]
@@ -62,34 +208,33 @@ async def group(client, message):
                     if fileid == 'None':
                         await message.reply_text(text=f'{reply_text}',reply_markup = reply_markup)
                
-                elif msg_type == 'Photo' and file_status != 'normal':
-                    await message.reply_photo(
-                        photo_file_id = fileid,
-                        caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua',
-                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != query.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
-                    )
+                    elif msg_type == 'Photo' and not(file_status.startswith('normal')):
+                        await message.reply_photo(
+                            photo = fileid,
+                            caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua',
+                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != message.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
+                        )
+                 
+                    elif msg_type == 'Photo':
+                        await message.reply_photo(
+                            photo = fileid,
+                            caption = reply_text or '',
+                            reply_markup=reply_markup
+                        )
                 
-                elif msg_type == 'Photo':
-                    await message.reply_photo(
-                        photo_file_id = fileid,
-                        caption = reply_text or '',
-                        reply_markup=reply_markup
-                    )
+                    elif fileid and not(file_status.startswith('normal')):
+                        await message.reply_cached_media(
+                            file_id = fileid,
+                            caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",
+                            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != message.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
+                        )
                 
-                elif fileid and file_status != 'normal':
-                    await message.reply_cached_media(
-                        file_id = fileid,
-                        caption = reply_text+'\nBonyeza **DOWNLOAD** kuipakua' or "",
-                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")]])if group_id != query.from_user.id else InlineKeyboardMarkup([[InlineKeyboardButton('📤 Download', url=f"https://t.me/{nyva}?start=subinps_-_-_-_{id3}")],[InlineKeyboardButton(' Edit', url=f"https://t.me/{nyva}?start=xsubinps_-_-_-_{id3}")]])
-                    )
-                
-                elif fileid:
-                   await message.reply_cached_media(
-                        file_id = fileid,
-                        caption = reply_text or "",
-                        reply_markup=reply_markup
-                    )
-                
+                    elif fileid:
+                        await message.reply_cached_media(
+                            file_id = fileid,
+                            caption = reply_text or "",
+                            reply_markup=reply_markup
+                        )  
         elif files:
             await message.reply_text(f"<b>Bonyeza kitufe <b>(🔍 Majibu ya Database : {len(files)})</b> Kisha chagua unachokipenda kwa kushusha chini\n\n💥Kwa urahisi zaidi kutafta chochote anza na aina kama ni  movie, series ,(audio ,video) kwa music , vichekesho kisha acha nafasi tuma jina la  kitu unachotaka mfano video jeje au audio jeje au movie extraction au series soz­</b>", reply_markup=get_reply_makup(searchi,len(files)))
         elif searchi.startswith('movie') or searchi.startswith('series') or searchi.startswith('dj'):
@@ -99,40 +244,55 @@ async def group(client, message):
             return
         if not btn:
             return
-@Bot1.on_message(filters.regex('@gmail.com') & filters.incoming)
+            
+@Bot0.on_message(filters.regex('@gmail.com') & filters.incoming)
 async def groupprv(client, message): 
+    botusername=await client.get_me()
+    nyva=botusername.username
+    user_id3= await db.is_bot_exist(nyva)
+    gd=await db.get_db_status(int(user_id3))
+    group_id = int(user_id3)
+    hjkl = f'{user_id3}##{message.from_user.id}'
     text=message.text
+    if not message.from_user.id:
+        return 
     if " " not in text.strip() and "@gmail.com" in text.lower():
-        group_status = await is_user_exist(message.from_user.id)
+        group_status = await is_user_exist(hjkl,nyva)
         user_id3='hrm45'
         if group_status:
-            for user in group_status:
-                user_id3 = user.email
-            text1='TAFADHALI MPE ACCESS YA MOVIE HIZI'
-            botusername=await client.get_me()
-            nyva=botusername.username
-            async for dtls in await db.get_acc(message.from_user.id ):
-                if dtls.db_name == nyva:
-                    if dtls.fileid.startswith("g_"):
-                        text1+='gh'
-                    else:
-                        text1+='gh'
+            for user1 in group_status:
+                user_id3 = user1.email
+            text1='TAFADHALI MPE ACCESS YA SERIES/MOVIE/VIFURUSHI HIVI\n'
+            async for user in await db.get_acc(message.from_user.id ):
+                if user['file_id'].startswith('g_') and user["db_name"]==group_id:
+                    sd= await db.get_db_status(user['db_name'])
+                    g2 = user['file_id'] 
+                    sd = sd[g2].split('#@')[0]
+                    text+=f"{sd}\n"
+                elif user["db_name"]==group_id:
+                    sd = await get_file_details(user['file_id'])
+                    for sd1 in sd:
+                        text+=f"{sd1.text.split('.dd#.')[0]}\n"
             if user_id3 == text.lower():
                 await message.reply_text('Hii email tayar Tulishaihifadhi kama unataka kuibadisha ntumie nyingene')
-            elif text1!='TAFADHALI MPE ACCESS YA MOVIE HIZI':
+            elif text1!='TAFADHALI MPE ACCESS YA SERIES/MOVIE/VIFURUSHI HIVI\n':
                 await message.reply_text('Tumeibadilisha kikamilifu')
                 await User.collection.update_one({'_id':message.from_user.id},{'$set':{'email':text.lower()}})
                 if await db.is_email_exist(message.from_user.id):
                     await message.reply_text(f'Tafadhali subir kidogo tutakupa taarifa tutakaipo iwezesha')
-                    await client.send_message(chat_id=message.from_user.id,text=f'Tafadhal iwezeshe email hii **{message.text.strip()}** \n kisha ondoa uwezo kwenye email hii **{user_id3}** Kisha baada ya kumaliza kumuwekea access bonyeza done',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Done',callbackquery=f'done {message.from_user.id}')]]))
+                    await client.send_message(chat_id=group_id,text=f'Tafadhal iwezeshe email hii **{message.text.strip()}** \n kisha ondoa uwezo kwenye email hii **{user_id3}** Kisha baada ya kumaliza kumuwekea access bonyeza done..\n{text1}done',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Done', callback_data =f'done {message.from_user.id}')]]))
             else:
                 await message.reply_text('Tafadhali hujajiunga na kifurushi chochote cha kwetu jiunge kwanza ndio tutawezesha email yako')
-            
         else:
-            await message.reply_text('Tafadhali jiunge kwanza na kikund chetu kisha ndio tutaadd email yako')         
+            await message.reply_text(f'Tafadhali jiunge kwanza na kikund chetu {gd["group"].split("##")[1]}\nkisha ndio tutaadd email yako')         
     else:
         await message.reply_text('Tafadhal ujumbe huu uliontumia sjauelewa Tafadhali kama n email:ntumie email tu bila neno jingine \nMfano  mohamed@gmail.com \n\nZingatia\n1.usiruke nafasi kwenye email yako  \n2.hakisha n gmail (hrmr5@gmail.com)\n3.hakikisha huongez neno lingine zaid ya email \n\nKwa salio lako tuma neno Salio \nZingatia lianze na herufi kubwa S na hizo nyingine ndogo\n\n Maelekezo mengine mchek hrm45')
         return
+@Bot0.on_callback_query(filters.regex('^3z.*'))
+async def grouppprv(client, message): 
+    await query.edit_message_text("tumetaarifu kikamilifu asante kwa kuonyesha uaminifu kwa wateja wako")
+    gd=await db.get_db_status(query.from_user.id)
+    await client.send_message(chat_id=int(query.data.split(" ")[1]),text=f'Shukrani kwa subra yako sasa unaeza pata huduma zote ulizolipia kifurushi chamgamoto yoyote tuulize kwenye kikundi\n\n{gd["group"].split("##")[1]}')
 def get_reply_makup(query,totol):
     buttons = [
         [
