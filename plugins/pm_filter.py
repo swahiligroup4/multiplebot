@@ -12,6 +12,8 @@ async def addchannel(client, message):
     nyva=botusername.username  
     nyva=str(nyva)
     chat_type =f"{ message.chat.type}" 
+    await message.reply_text(
+            f"{len(message.command)}")
     if len(message.command) != 2:
         await message.reply_text(
             f"{len(message.command)}Tafadhali anza na neno /ongeza kisha neno mfano \n/ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
