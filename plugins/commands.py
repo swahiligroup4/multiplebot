@@ -357,20 +357,23 @@ async def new_filtervip(client, message):
                     )
     try:
         if fileid:
-            data1=await is_group_exist(message.from_user.id)
-            if msg_type == 'Photo':
-                
+            data1=await is_group_exist("channel",nyva)
+            abz=[]
+            for dta1 in dta1.id:
+                for data2 in ["haijatafsiriwa","imetafsiriwa","movie","series"]:
+                    if data2 in dta1 and int(dta1.split("##")[0]) not in abz:
+                        abz.append(dta1.split("##")[0])
+            if msg_type == 'Photo':  
                 await client.send_photo(
                     chat_id = CHANNELS,
                     photo = fileid,
                     caption = f'{reply_text}\n{message.from_user.mention}',
                     reply_markup = InlineKeyboardMarkup(btn) if len(btn) != 0 else None
-                )
-                
-                for data2 in data1:
+                ) 
+                for data2 in abz:
                     try:
                         await client.send_photo(
-                            chat_id=int(data2.id),
+                            chat_id=data2,
                             photo = fileid,
                             caption = reply_text,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
@@ -385,10 +388,10 @@ async def new_filtervip(client, message):
                     caption = f'{reply_text}{message.from_user.mention}',
                     reply_markup = InlineKeyboardMarkup(btn) if len(btn) != 0 else None
                 )
-                for data2 in data1:
+                for data2 in abz:
                     try:
                         await client.send_cached_media(
-                            chat_id=int(data2.id),
+                            chat_id=data2,
                             file_id = fileid,
                             caption = reply_text,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
