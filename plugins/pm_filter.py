@@ -260,18 +260,22 @@ async def groupprv(client, message):
         group_status = await is_user_exist(hjkl,nyva)
         user_id3='hrm45'
         if group_status:
-            for user in group_status:
-                user_id3 = user.email
-            text1='TAFADHALI MPE ACCESS YA MOVIE/VIFURUSHI HIVI'
-            async for dtls in await db.get_acc(message.from_user.id ):
-                if dtls["user_id"] == message.from_user.id:
-                    if dtls["file_id"].startswith("g_") and dtls["db_name"]==group_id:
-                        text1+=f"gh\n"
-                    else:
-                        text1+='gh\n'
+            for user1 in group_status:
+                user_id3 = user1.email
+            text1='TAFADHALI MPE ACCESS YA SERIES/MOVIE/VIFURUSHI HIVI\n'
+            async for user in await db.get_acc(message.from_user.id ):
+                if user['file_id'].startswith('g_') and user["db_name"]==group_id:
+                    sd= await db.get_db_status(user['db_name'])
+                    g2 = user['file_id'] 
+                    sd = sd[g2].split('#@')[0]
+                    text+=f"{sd}\n"
+                elif user["db_name"]==group_id:
+                    sd = await get_file_details(user['file_id'])
+                    for sd1 in sd:
+                        text+=f"{sd1.text.split('.dd#.')[0]}\n"
             if user_id3 == text.lower():
                 await message.reply_text('Hii email tayar Tulishaihifadhi kama unataka kuibadisha ntumie nyingene')
-            elif text1!='TAFADHALI MPE ACCESS YA MOVIE/VIFURUSHI HIVI\n':
+            elif text1!='TAFADHALI MPE ACCESS YA SERIES/MOVIE/VIFURUSHI HIVI\n':
                 await message.reply_text('Tumeibadilisha kikamilifu')
                 await User.collection.update_one({'_id':message.from_user.id},{'$set':{'email':text.lower()}})
                 if await db.is_email_exist(message.from_user.id):
@@ -284,6 +288,7 @@ async def groupprv(client, message):
     else:
         await message.reply_text('Tafadhal ujumbe huu uliontumia sjauelewa Tafadhali kama n email:ntumie email tu bila neno jingine \nMfano  mohamed@gmail.com \n\nZingatia\n1.usiruke nafasi kwenye email yako  \n2.hakisha n gmail (hrmr5@gmail.com)\n3.hakikisha huongez neno lingine zaid ya email \n\nKwa salio lako tuma neno Salio \nZingatia lianze na herufi kubwa S na hizo nyingine ndogo\n\n Maelekezo mengine mchek hrm45')
         return
+
 def get_reply_makup(query,totol):
     buttons = [
         [
