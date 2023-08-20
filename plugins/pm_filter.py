@@ -90,7 +90,7 @@ async def rrecussive(client, message):
     await message.reply_text("olready implemented")
     while a==False:
         await asyncio.sleep(10800)
-        for grp in await is_group_exist(nyva):
+        for grp in await is_group_exist("group",nyva):
             try:
                 grp_id = int(grp.id.split("##")[1])
                 url=f"https://t.me/{nyva}?start=mwongozohrm{grp_id}"
@@ -126,7 +126,7 @@ async def rrecussive(client, message):
                 #await User.collection.update_one({'_id':hjkl1})
                 print(e)
         await asyncio.sleep(10800)
-        for grp in await is_group_exist(nyva):
+        for grp in await is_group_exist("group",nyva):
             try:
                 grp_id = grp.id.split("##")[1]
                 for file in await get_random_details("normalrsv2",group_id):
