@@ -362,7 +362,7 @@ async def new_filtervip(client, message):
             for dta1 in data1:
                 for data2 in ["haijatafsiriwa","imetafsiriwa","movie","series"]:
                     if data2 in dta1.id and int(dta1.id.split("##")[0]) not in abz:
-                        abz.append(dta1.split("##")[0])
+                        abz.append(dta1.id.split("##")[0])
             if msg_type == 'Photo':  
                 await client.send_photo(
                     chat_id = CHANNELS,
@@ -406,7 +406,7 @@ async def new_filtervip(client, message):
             )
     except Exception as a:
         try:
-            await message.reply(text = f"<b>❌ Error</b>\n\n{str(a)}\n\n<i>Join @CodeXBotzSupport for Support</i>")
+            await message.reply(text = f"<b>❌ Error</b>\n\n{str(a)}")
         except:
             pass
         return
