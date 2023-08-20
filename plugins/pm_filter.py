@@ -16,7 +16,7 @@ async def addchannel(client, message):
         await message.reply_text(
             f"{len(message.command)}Tafadhali anza na neno /ongeza kisha neno mfano \n/ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
             quote=True
-        )
+        ) 
         return
     if chat_type == "ChatType.CHANNEL":
         await message.reply_text(
