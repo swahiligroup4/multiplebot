@@ -65,6 +65,7 @@ async def addchannel(client, message):
                 hjkl1 = f'{group_id}##{message.command[1]}'
                 if not await is_user_exist(hjkl1,nyva):
                     await add_user(hjkl1,nyva)
+                    await User.collection.update_one({'_id':hjkl1},{'$set':{'email':"channel"}})
                     await message.reply_text("kikundi tumekiongeza kikamilifu", quote=True)
                 else:
                     await message.reply_text("Samahani hich kikundi tumeshakiadd", quote=True)
