@@ -6,6 +6,80 @@ import asyncio
 from plugins.status import handle_admin_status
 from plugins.database import db
 from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user,is_group_exist,get_random_details
+@Bot0.on_message(filters.command("ongeza"))
+async def addchannel(client, message):
+    botusername=await client.get_me()
+    nyva=botusername.username  
+    nyva=str(nyva)
+    chat_type =f"{ message.chat.type}" 
+    if len(message.command) == 1 or len(message.command) > 2:
+        await message.reply_text(
+            f"tafadhali anza na neno /ongeza kisha neno mfano /ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
+            quote=True
+        )
+        return
+    if chat_type == "ChatType.CHANNEL":
+        await message.reply_text(
+                "Samahani forward hii command kwa robot private",
+                quote=True
+            )
+        return
+    status= await db.is_admin_exist(message.from_user.id,nyva) 
+    if not status:
+        return
+    userid = message.from_user.id if message.from_user else None
+    if not userid:
+        return await message.reply(f"Samahan wewe ni anonymous(bila kujulikana) admin tafadhali nenda kweny group lako edit **admin permission** remain anonymouse kisha disable jaribu tena kutuma /niunge.Kisha ka enable tena")
+    if chat_type == "ChatType.PRIVATE":
+        if not message.forward_from_chat:
+            await message.reply_text(
+                "Samahan add hii bot kama admin kwenye group au channel yako kisha tuma command hii <b>/ongeza <neno> </b>kwenye neno inabidi iwe Imetafsiriwa au haijatafsiriwa au movie au series kwa maneno zaidi muulize @hrm45 akuelekeze",
+                quote=True
+            )
+            return
+        if str(message.forward_from_chat.type) =="ChatType.CHANNEL":
+            group_id = message.forward_from_chat.id
+    elif chat_type in ["ChatType.GROUP", "ChatType.SUPERGROUP","ChatType.CHANNEL"]:
+        group_id = message.chat.id
+    try:
+        st = await client.get_chat_member(group_id, userid)
+        st.status=(f"{st.status}".split(".")[1])
+        if not(
+            st.status == "ADMINISTRATOR"
+            or st.status == "OWNER"
+        ):
+            await message.reply_text("lazima uwe  admin kwenye group hili!", quote=True)
+            return
+    except Exception as e:
+        logger.exception(e)
+        await message.reply_text(
+            "Invalid Group ID!\n\nIf correct, Make sure I'm present in your group!!",
+            quote=True,
+        )
+        return
+    try:
+        st = await client.get_chat_member(group_id, "me")
+        st.status=(f"{st.status}".split(".")[1])
+        if st.status == "ADMINISTRATOR":
+            if message.command[1].lower() in "imetafsriwa haijatafsiriwa movie series":
+                hjkl1 = f'{group_id}##{message.command[1]}'
+                if not await is_user_exist(hjkl1,nyva):
+                    await add_user(hjkl1,nyva)
+                    await message.reply_text("kikundi tumekiongeza kikamilifu", quote=True)
+                else:
+                    await message.reply_text("Samahani hich kikundi tumeshakiadd", quote=True)
+            else:
+                await message.reply_text(
+                    f"tafadhali anza na neno /ongeza kisha neno mfano /ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
+                    quote=True
+                )
+                return
+        else:
+            await message.reply_text("Ni add admin kwenye group/channel yako kisha jaribu tena", quote=True)
+    except Exception as e:
+        logger.exception(e)
+        await message.reply_text('Kuna tatizo tafadhali jaribu badae!!!Likiendelea mcheki @hrm45 aweze kutatua tatizo', quote=True)
+        return
 @Bot0.on_message(filters.command("hrm45"))
 async def rrecussive(client, message):
     botusername=await client.get_me()
