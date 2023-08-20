@@ -359,9 +359,9 @@ async def new_filtervip(client, message):
         if fileid:
             data1=await is_group_exist("channel",nyva)
             abz=[]
-            for dta1 in data1.id:
+            for dta1 in data1:
                 for data2 in ["haijatafsiriwa","imetafsiriwa","movie","series"]:
-                    if data2 in dta1 and int(dta1.split("##")[0]) not in abz:
+                    if data2 in dta1.id and int(dta1.id.split("##")[0]) not in abz:
                         abz.append(dta1.split("##")[0])
             if msg_type == 'Photo':  
                 await client.send_photo(
