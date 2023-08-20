@@ -62,7 +62,7 @@ async def addchannel(client, message):
         st.status=(f"{st.status}".split(".")[1])
         if st.status == "ADMINISTRATOR":
             if message.command[1].lower() in "imetafsriwa haijatafsiriwa movie series":
-                abf=(message.command[1].strip())
+                abf=message.command[1].strip()
                 hjkl1 = f'{group_id}##{abf.lower()}'
                 if not await is_user_exist(hjkl1,nyva):
                     await add_user(hjkl1,nyva)
