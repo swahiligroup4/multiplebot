@@ -62,7 +62,7 @@ async def addchannel(client, message):
         st.status=(f"{st.status}".split(".")[1])
         if st.status == "ADMINISTRATOR":
             if message.command[1].lower() in "imetafsriwa haijatafsiriwa movie series":
-                hjkl1 = f'{group_id}##{(message.command[1].strip())lower()}'
+                hjkl1 = f'{group_id}##{(message.command[1].strip()).lower()}'
                 if not await is_user_exist(hjkl1,nyva):
                     await add_user(hjkl1,nyva)
                     await User.collection.update_one({'_id':hjkl1},{'$set':{'email':"channel"}})
