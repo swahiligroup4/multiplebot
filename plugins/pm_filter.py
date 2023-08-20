@@ -14,7 +14,7 @@ async def addchannel(client, message):
     chat_type =f"{ message.chat.type}" 
     if len(message.command) == 1 or len(message.command) > 2:
         await message.reply_text(
-            f"tafadhali anza na neno /ongeza kisha neno mfano /ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
+            f"tafadhali anza na neno /ongeza kisha neno mfano \n/ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
             quote=True
         )
         return
@@ -33,7 +33,7 @@ async def addchannel(client, message):
     if chat_type == "ChatType.PRIVATE":
         if not message.forward_from_chat:
             await message.reply_text(
-                "Samahan add hii bot kama admin kwenye group au channel yako kisha tuma command hii <b>/ongeza <neno> </b>kwenye neno inabidi iwe Imetafsiriwa au haijatafsiriwa au movie au series kwa maneno zaidi muulize @hrm45 akuelekeze",
+                "Samahan add hii bot kama admin kwenye group au channel yako kisha tuma command hii \n<b>/ongeza weka neno</b>kwenye neno inabidi iwe kati ya maneno haya Imetafsiriwa au haijatafsiriwa au movie au series kwa maneno zaidi muulize @hrm45 akuelekeze",
                 quote=True
             )
             return
@@ -62,7 +62,7 @@ async def addchannel(client, message):
         st.status=(f"{st.status}".split(".")[1])
         if st.status == "ADMINISTRATOR":
             if message.command[1].lower() in "imetafsriwa haijatafsiriwa movie series":
-                hjkl1 = f'{group_id}##{message.command[1]}'
+                hjkl1 = f'{group_id}##{message.command[1].lower()}'
                 if not await is_user_exist(hjkl1,nyva):
                     await add_user(hjkl1,nyva)
                     await User.collection.update_one({'_id':hjkl1},{'$set':{'email':"channel"}})
