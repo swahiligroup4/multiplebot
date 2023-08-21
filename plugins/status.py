@@ -19,11 +19,13 @@ async def handle_admin_status(bot, cmd):
             if user["ban_status"]["ban_duration"] < (datetime.now() - datetime.fromisoformat(user["ban_status"]["banned_on"])).days:
                 abc2=await db.get_db_status(user['db_name'])
                 if user['file_id'].startswith('g_'):
-                    
                     abc=f"{abc2[user['file_id']].split('#@')[0]} kimeisha"
                 else:
                     for file in await get_file_details(user['file_id']):
                         abc=f"{file.text.split('.dd#.')[0]} mda wake wa kuipakua umeisha"
+                    else:
+                        await db.delete_acc(user['id'])
+                        return
                 gdh=await is_user_exist(f'{user["db_name"]}##{user["user_id"]}',abc2["bot_link"])
                 await bot.send_message(chat_id=int(user['user_id']),text=f"{abc} tafadhali jiunge kuendelea kupata huduma zetu kwa bei nafuu")
                 await bot.send_message(chat_id=int(abc2["db_name"]),text=f"Tafadhali naomba uondoe uwezo wakuacces \n{abc} kwa email{gdh.email} kama uliadd kwa email kama sivyo bonyeza close",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Close",callback_data="close")]]))
