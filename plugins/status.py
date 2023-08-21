@@ -3,7 +3,7 @@ from datetime import datetime
 import time
 from plugins.database import db
 from utils import is_user_exist ,add_user,User,get_file_details
-
+from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton
 async def handle_admin_status(bot, cmd):
         all_user =await db.get_all_users()
         async for user in all_user:
