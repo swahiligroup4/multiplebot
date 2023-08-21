@@ -651,6 +651,9 @@ async def cb_handler(client, query):
                         reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yed {msg1} {data3}")]])
                     )
         elif query.data.startswith("ndf"):
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
             msg,msg1,data3 = query.data.split(" ")         
             fileid,msg2,prc1,tme = data3.split("@#")[0].split(".")
             filedetails = await get_file_details(fileid)
