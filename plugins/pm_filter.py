@@ -251,7 +251,7 @@ async def groupprv(client, message):
     nyva=botusername.username
     group_id = await db.is_bot_exist(nyva)
     gd=await db.get_db_status(int(group_id))
-    hjkl = f'{user_id3}##{message.from_user.id}'
+    hjkl = f'{group_id}##{message.from_user.id}'
     text=message.text
     if not message.from_user.id:
         return 
