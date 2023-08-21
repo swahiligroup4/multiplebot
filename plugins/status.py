@@ -26,6 +26,8 @@ async def handle_admin_status(bot, cmd):
                         abc=f"{file.text.split('.dd#.')[0]} mda wake wa kuipakua umeisha"
                     
                 gdh=await is_user_exist(f'{user["db_name"]}##{user["user_id"]}',abc2["bot_link"])
+                for gvb in gdh:
+                    gdhz=gvb.email
                 await bot.send_message(chat_id=int(user['user_id']),text=f"{abc} tafadhali jiunge kuendelea kupata huduma zetu kwa bei nafuu")
-                await bot.send_message(chat_id=int( user['db_name'] ),text=f"Tafadhali naomba uondoe uwezo wakuacces \n{abc} kwa email{gdh.email} kama uliadd kwa email kama sivyo bonyeza close",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Close",callback_data="close")]]))
+                await bot.send_message(chat_id=int( user['db_name'] ),text=f"Tafadhali naomba uondoe uwezo wakuacces \n{abc} kwa email{gdhz} kama uliadd kwa email kama sivyo bonyeza close",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Close",callback_data="close")]]))
                 await db.delete_acc(user['id'])
