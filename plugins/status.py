@@ -21,7 +21,8 @@ async def handle_admin_status(bot, cmd):
                 if user['file_id'].startswith('g_'):
                     abc=f"{abc2[user['file_id']].split('#@')[0]} kimeisha"
                 else:
-                    for file in await get_file_details(user['file_id']):
+                    abn=await get_file_details(user['file_id'])
+                    for file in abn:
                         abc=f"{file.text.split('.dd#.')[0]} mda wake wa kuipakua umeisha"
                     else:
                         await db.delete_acc(user['id'])
