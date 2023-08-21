@@ -375,6 +375,7 @@ async def new_filtervip(client, message):
                         await client.send_photo(
                             chat_id=int(data2),
                             photo = fileid,
+                            disable_notification=True,
                             caption = reply_text,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
                         )
@@ -393,6 +394,7 @@ async def new_filtervip(client, message):
                         await client.send_cached_media(
                             chat_id=int(data2),
                             file_id = fileid,
+                            disable_notification=True,
                             caption = reply_text,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
                         )
