@@ -249,9 +249,8 @@ async def group(client, message):
 async def groupprv(client, message): 
     botusername=await client.get_me()
     nyva=botusername.username
-    user_id3= await db.is_bot_exist(nyva)
+    group_id = await db.is_bot_exist(nyva)
     gd=await db.get_db_status(int(user_id3))
-    group_id = int(user_id3)
     hjkl = f'{user_id3}##{message.from_user.id}'
     text=message.text
     if not message.from_user.id:
@@ -265,17 +264,16 @@ async def groupprv(client, message):
             text1='TAFADHALI MPE ACCESS YA SERIES/MOVIE/VIFURUSHI HIVI\n'
             async for user in await db.get_acc(message.from_user.id ):
                 if user['file_id'].startswith('g_') and user["db_name"]==group_id:
-                    sd= await db.get_db_status(user['db_name'])
                     g2 = user['file_id'] 
-                    sd = sd[g2].split('#@')[0]
-                    text+=f"{sd}\n"
+                    sd = gd[g2].split('#@')[0]
+                    text1+=f"{sd}\n"
                 elif user["db_name"]==group_id:
                     sd = await get_file_details(user['file_id'])
                     for sd1 in sd:
-                        text+=f"{sd1.text.split('.dd#.')[0]}\n"
+                        text1+=f"{sd1.text.split('.dd#.')[0]}\n"
             if user_id3 == text.lower():
                 await message.reply_text('Hii email tayar Tulishaihifadhi kama unataka kuibadisha ntumie nyingene')
-            elif text1!='TAFADHALI MPE ACCESS YA SERIES/MOVIE/VIFURUSHI HIVI\n':
+            elif text1 !='TAFADHALI MPE ACCESS YA SERIES/MOVIE/VIFURUSHI HIVI\n':
                 await message.reply_text('Tumeibadilisha kikamilifu')
                 await User.collection.update_one({'_id':message.from_user.id},{'$set':{'email':text.lower()}})
                 if await db.is_email_exist(message.from_user.id):
