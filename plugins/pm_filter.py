@@ -160,7 +160,7 @@ async def rrecussive(client, message):
                     
 @Bot0.on_message(filters.group & filters.incoming)
 async def group(client, message):
-    await handle_admin_status(client,message)
+    
     botusername=await client.get_me()
     nyva=botusername.username
     user_id3= await db.is_bot_exist(nyva)
@@ -244,7 +244,7 @@ async def group(client, message):
             return
         if not btn:
             return
-            
+    await handle_admin_status(client,message)       
 @Bot0.on_message(filters.regex('@gmail.com') & filters.incoming)
 async def groupprv(client, message): 
     botusername=await client.get_me()
