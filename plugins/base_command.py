@@ -990,7 +990,10 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             
                     except Exception as e :
                         await client.send_message(query.from_user.id,text=f'error{e}')         
-                    
+        elif query.data.startswith("3hdone"):
+            await query.edit_message_text("tumetaarifu kikamilifu asante kwa kuonyesha uaminifu kwa wateja wako")
+            gd=await db.get_db_status(query.from_user.id)
+            await client.send_message(chat_id=int(query.data.split(" ")[1]),text=f'Shukrani kwa subra yako sasa unaeza pata huduma zote ulizolipia kifurushi chamgamoto yoyote tuulize kwenye kikundi\n\n{gd["group"].split("##")[1]}')           
         elif query.data.startswith("3hydelte"):
             id1=query.data.split(" ")[1]                                                              
             await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'3hdelte {id1}')] ,[InlineKeyboardButton(text='Close',callback_data=f'close')]]))                                                                        
