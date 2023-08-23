@@ -17,9 +17,6 @@ import logging
 logger = logging.getLogger(__name__)
 BOT ={}
 
-@Bot0.on_message(filters.private & filters.incoming)
-async def totaal(bot, message):
-    await bot.send_message(chat_id=message.from_user.id,text="Sjakuelewa ulichotuma tafadhali hakiki kisha tuma tena kama huelewi rudi kwenye kikundi kisha uliza usaidiwe")
 @Bot0.on_message(filters.command('total') & filters.owner)
 async def total(bot, message):
     """Show total files in database"""
