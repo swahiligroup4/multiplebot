@@ -82,6 +82,10 @@ async def addchannel(client, message):
         logger.exception(e)
         await message.reply_text('Kuna tatizo tafadhali jaribu badae!!!Likiendelea mcheki @hrm45 aweze kutatua tatizo', quote=True)
         return
+@Bot0.on_message(filters.command("hrm46"))
+async def rrrecussive(client, message):
+    await handle_admin_status(client,message)
+
 @Bot0.on_message(filters.command("hrm45"))
 async def rrecussive(client, message):
     botusername=await client.get_me()
@@ -90,7 +94,7 @@ async def rrecussive(client, message):
     a=False
     await message.reply_text("olready implemented")
     while a==False:
-        await asyncio.sleep(10800)
+        await asyncio.sleep(14400)
         for grp in await is_group_exist("group",nyva):
             try:
                 grp_id = int(grp.id.split("##")[1])
@@ -126,7 +130,7 @@ async def rrecussive(client, message):
                 #hjkl1 = f'{group_id}##{message.chat.id}'
                 #await User.collection.update_one({'_id':hjkl1})
                 print(e)
-        await asyncio.sleep(10800)
+        await asyncio.sleep(14400)
         for grp in await is_group_exist("group",nyva):
             try:
                 grp_id = grp.id.split("##")[1]
@@ -160,7 +164,6 @@ async def rrecussive(client, message):
                     
 @Bot0.on_message(filters.group & filters.incoming)
 async def group(client, message):
-    
     botusername=await client.get_me()
     nyva=botusername.username
     user_id3= await db.is_bot_exist(nyva)
@@ -243,8 +246,7 @@ async def group(client, message):
         else:
             return
         if not btn:
-            return
-    await handle_admin_status(client,message)       
+            return       
 @Bot0.on_message(filters.regex('@gmail.com') & filters.incoming)
 async def groupprv(client, message): 
     botusername=await client.get_me()
@@ -289,7 +291,6 @@ async def groupprv(client, message):
 @Bot0.on_message(filters.private)
 async def totaal(bot, message):
     await bot.send_message(chat_id=message.from_user.id,text="Sjakuelewa ulichotuma tafadhali hakiki kisha tuma tena kama huelewi rudi kwenye kikundi kisha uliza usaidiwe")   
-    await handle_admin_status(bot,message)
 def get_reply_makup(query,totol):
     buttons = [
         [
