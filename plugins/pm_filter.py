@@ -286,7 +286,9 @@ async def groupprv(client, message):
     else:
         await message.reply_text('Tafadhal ujumbe huu uliontumia sjauelewa Tafadhali kama n email:ntumie email tu bila neno jingine \nMfano  mohamed@gmail.com \n\nZingatia\n1.usiruke nafasi kwenye email yako  \n2.hakisha n gmail (hrmr5@gmail.com)\n3.hakikisha huongez neno lingine zaid ya email \n\nKwa salio lako tuma neno Salio \nZingatia lianze na herufi kubwa S na hizo nyingine ndogo\n\n Maelekezo mengine mchek hrm45')
         return
-    
+@Bot0.on_message(filters.private & filters.incoming)
+async def totaal(bot, message):
+    await bot.send_message(chat_id=message.from_user.id,text="Sjakuelewa ulichotuma tafadhali hakiki kisha tuma tena kama huelewi rudi kwenye kikundi kisha uliza usaidiwe")   
 def get_reply_makup(query,totol):
     buttons = [
         [
