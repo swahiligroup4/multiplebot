@@ -84,6 +84,7 @@ async def addchannel(client, message):
         return
 @Bot0.on_message(filters.command("hrm46"))
 async def rrrecussive(client, message):
+    await message.reply_text("olready implemented")
     await handle_admin_status(client,message)
 
 @Bot0.on_message(filters.command("hrm45"))
