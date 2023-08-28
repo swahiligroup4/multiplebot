@@ -5,6 +5,7 @@ from plugins.database import db
 from pyrogram.types import (
     InlineQuery,
     CallbackQuery,
+    InputTextMessageContent,
     InlineKeyboardMarkup,
     InlineQueryResultArticle,
     InlineKeyboardButton,
