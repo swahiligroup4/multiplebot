@@ -1,6 +1,6 @@
 from botii import Bot0
 import re
-from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton,ChatPermissions
+from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton
 from info import filters
 import asyncio
 from plugins.status import handle_admin_status
