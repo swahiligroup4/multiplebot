@@ -45,7 +45,7 @@ class Bot1(Client):
 class Bot2(Client):
     def __init__(self):
         super().__init__(
-            name=SESSION ,
+            name= 'SESSION2' ,
             api_id=API_ID,
             api_hash=API_HASH,
             bot_token="2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE",
@@ -62,7 +62,7 @@ class Bot2(Client):
 class Bot3(Client):
     def __init__(self):
         super().__init__(
-            name=SESSION ,
+            name='SESSION3' ,
             api_id=API_ID,
             api_hash=API_HASH,
             bot_token="2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE",
@@ -75,7 +75,102 @@ class Bot3(Client):
         await Media.ensure_indexes()    
     async def stop(self, *args):
         await super().stop()
-
+class Bot4(Client):
+    def __init__(self):
+        super().__init__(
+            name= 'SESSION4' ,
+            api_id=API_ID,
+            api_hash=API_HASH,
+            bot_token="2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE",
+            workers=50,
+            plugins={"root": "plugins"},
+            sleep_threshold=4,
+        )
+    async def start(self):
+        await super().start()
+        await Media.ensure_indexes()    
+    async def stop(self, *args):
+        await super().stop()
+class Bot5(Client):
+    def __init__(self):
+        super().__init__(
+            name= 'SESSION5' ,
+            api_id=API_ID,
+            api_hash=API_HASH,
+            bot_token="2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE",
+            workers=50,
+            plugins={"root": "plugins"},
+            sleep_threshold=4,
+        )
+    async def start(self):
+        await super().start()
+        await Media.ensure_indexes()    
+    async def stop(self, *args):
+        await super().stop()
+class Bot6(Client):
+    def __init__(self):
+        super().__init__(
+            name= 'SESSION6' ,
+            api_id=API_ID,
+            api_hash=API_HASH,
+            bot_token="2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE",
+            workers=50,
+            plugins={"root": "plugins"},
+            sleep_threshold=4,
+        )
+    async def start(self):
+        await super().start()
+        await Media.ensure_indexes()    
+    async def stop(self, *args):
+        await super().stop()
+class Bot7(Client):
+    def __init__(self):
+        super().__init__(
+            name= 'SESSION7' ,
+            api_id=API_ID,
+            api_hash=API_HASH,
+            bot_token="2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE",
+            workers=50,
+            plugins={"root": "plugins"},
+            sleep_threshold=4,
+        )
+    async def start(self):
+        await super().start()
+        await Media.ensure_indexes()    
+    async def stop(self, *args):
+        await super().stop()
+class Bot8(Client):
+    def __init__(self):
+        super().__init__(
+            name= 'SESSION8' ,
+            api_id=API_ID,
+            api_hash=API_HASH,
+            bot_token="2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE",
+            workers=50,
+            plugins={"root": "plugins"},
+            sleep_threshold=4,
+        )
+    async def start(self):
+        await super().start()
+        await Media.ensure_indexes()    
+    async def stop(self, *args):
+        await super().stop()
+class Bot9(Client):
+    def __init__(self):
+        super().__init__(
+            name= 'SESSION9' ,
+            api_id=API_ID,
+            api_hash=API_HASH,
+            bot_token="2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE",
+            workers=50,
+            plugins={"root": "plugins"},
+            sleep_threshold=4,
+        )
+    async def start(self):
+        await super().start()
+        await Media.ensure_indexes()    
+    async def stop(self, *args):
+        await super().stop()
 BOT0=None
 for i in [Bot,Bot1]:
     Bot0=i
