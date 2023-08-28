@@ -240,7 +240,7 @@ async def group(client, message):
                             reply_markup=reply_markup
                         )  
         elif files:
-            await message.reply_text(f"<b>Bonyeza kitufe <b>(🔍 Majibu ya Database : {len(files)})</b> Kisha chagua unachokipenda kwa kushusha chini kama haitak subir kidogo ilreload **mwisho kabisa itabidi ukutane na ujumbe kuwa ndio mwisho wa matokeo kutoka kwenye database.**\n\n💥Kwa urahisi zaidi kupata orodha tuma neno movie ukifuata ya muanzo ya jina la movie yako mfano\n movie a</b>", reply_markup=get_reply_makup(searchi,len(files)))
+            await message.reply_text(f"<b>Bonyeza kitufe <b>(🔍 Majibu ya Database : {len(files)})</b> Kisha chagua unachokipenda kwa kushusha chini kama haitak subir kidogo ilreload **mwisho kabisa itabidi ukutane na ujumbe kuwa ndio mwisho wa matokeo kutoka kwenye database.**\n\nKama haipo kabisa bonyeza huo ujumbe ili uweze kututumia jina la movie yako tuweze iadd</b>", reply_markup=get_reply_makup(searchi,len(files)))
         elif searchi.startswith('movie') or searchi.startswith('series') or searchi.startswith('dj'):
             await message.reply_text(text=f'Samahani **{searchi}** uliyotafta haipo kwenye database zetu.\n\nTafadhali bonyeza Button kisha ukurasa unaofuata ntumie jina la movie au series ntakupa jibu kwa haraka iwezekanavyo ili nii tafte',reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text='ADMIN',url=f'{user_id4}')]]))
             return
