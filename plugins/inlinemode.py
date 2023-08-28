@@ -34,7 +34,7 @@ async def give_filter(client, query):
             switch_pm_parameter="start")
         return
     ban = await db.get_ban_status(group_id) 
-    gd1=ban['user_link']
+    gd1 = db_sts['user_link']
     offset = int(query.offset or 0)
     documents, next_offset = await get_search_results(text,
                                               group_id = group_id,
