@@ -10,8 +10,8 @@ from pyrogram.types import (
     InlineQueryResultPhoto,
     InlineQueryResultCachedDocument
 )
-from utils import is_user_exist,get_search_results,Media,is_group_exist,add_user,is_subscribed
-from info import filters,OWNER_ID,CHANNELS,AUTH_CHANNEL
+from utils import is_user_exist,get_search_results,Media,is_subscribed
+from info import filters,OWNER_ID,CHANNELS
 @Bot0.on_inline_query(filters.inline)
 async def give_filter(client, query):
     botusername=await client.get_me()
