@@ -6,7 +6,7 @@ from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,User,is_subscribed,is_group_exist,save_file,add_user
 from botii  import Bot0
 from plugins.database import db
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from plugins.strings import START_MESSAGE, HELP_MESSAGE, ABOUT_MESSAGE, MARKDOWN_HELP
 start_keyboard = [
     [
@@ -851,8 +851,6 @@ async def cb_handler(client, query):
             nyva=str(nyva)
             user_details = await db.is_bot_exist(nyva)
             ban_status = await db.get_db_status(user_details)   
-            #await client.restrict_chat_member(int(query.data.split(" ")[1]), query.from_user.id,
-                #ChatPermissions(can_send_messages=True,can_send_media_messages=True,can_send_other_messages=True,can_send_polls=True,can_invite_users=True,can_add_web_page_previews=True)) 
             hjkl = f'{user_details}##{query.from_user.id}'
             existt=await is_user_exist(hjkl,nyva)
             if not existt: 
