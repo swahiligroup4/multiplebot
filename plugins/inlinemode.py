@@ -8,9 +8,6 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
     InlineKeyboardButton,
     InlineQueryResultPhoto,
-    InputTextMessageContent,
-    InlineQueryResultArticle,
-    InlineQueryResultCachedPhoto,
     InlineQueryResultCachedDocument
 )
 from utils import is_user_exist,get_search_results,Media,is_group_exist,add_user,is_subscribed
@@ -37,6 +34,7 @@ async def give_filter(client, query):
             switch_pm_parameter="start")
         return
     ban = await db.get_ban_status(group_id) 
+    gd1=ban['user_link']
     offset = int(query.offset or 0)
     documents, next_offset = await get_search_results(text,
                                               group_id = group_id,
@@ -127,37 +125,13 @@ async def give_filter(client, query):
         switch_pm_text = f"Total {len(results)} Matches"
     else:
         switch_pm_text = "No matches"
-    if not ban['is_banned'] and group_id !=query.from_user.id:
-        result=[]
-        ttl=await client.get_users(group_id)
-        ttl2 = await client.get_chat(grp_id)
-       
-        title = f"🎁🎁 Mpendwa {query.from_user.first_name} 🎁🎁"
-        st = await client.get_chat_member(grp_id, "me")
-        if (st.status == "administrator"):
-            text1= f"Kifurush cha group kimeisha\n Yaan ada ya admin anayotakiwa kulipia ili kuendelea kumtumia Swahili robot kwenye group \n 👨‍👨‍👧‍👧 Group name:**{ttl2.title}**\n\n🙍🙍‍♀ Admin name:***[{ttl.first_name.upper()}](tg://user?id={group_id})***\n\nBonyeza jina la admin kisha mkumbushe alipie kifurush ili muweze kuendelee kumtumia robot"
-        else:
-            text1= f"Kifurush cha group kimeisha\n Yaan ada ya admin anayotakiwa kulipia ili kuendelea kumtumia Swahili robot kwenye group \n 👨‍👨‍👧‍👧 Group name:**{ttl2.title}**\n\n🙍🙍‍♀ Admin name:***[{ttl.first_name.upper()}](tg://user?id={group_id})***\n\nBonyeza jina la  ADMIN kisha mkumbushe alipie kifurush kisha aniadd kama admin kwenye group hili ili muweze kuendelee kumtumia robot"
-        result.append(InlineQueryResultArticle(
-                title=title,
-                input_message_content=InputTextMessageContent(message_text = text1, disable_web_page_preview = True),
-                description=f'Gusa hapa kupata melezo zaid na maelekezo '
-                 
-            ))
-        await query.answer(
-            results = result,
-            is_personal = True,
-            switch_pm_text = 'Admin wako hajalipia kifurushi',
-            switch_pm_parameter = 'start'
-        )
-        return
     if next_offset == '':
         title =f"Mpendwa {query.from_user.first_name}"
         results.append(InlineQueryResultArticle(
             title=title,
             input_message_content=InputTextMessageContent(message_text = f"Mpendwa [{query. from_user.first_name}](tg://user?id={query.from_user.id})\nKama movie yako haipo ntumie Mara moja jina lake kisha subir ntakujibu nkishaiadd kwenye database bonyeza kitufe hapo chini kutuma kisha ukurasa unaofuata bonyeza start kisha ntumie jina LA muv au series au nyimbo unayotafta", disable_web_page_preview = True),
             description=f'Hapa ndiyo mwisho wa  matokeo yetu kutoka kwenye database\nBonyeza hapa kama haipo kupata maelezo zaidi',
-            #reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Bonyeza hapa kutuma', url=f"{db_sts['ms_link']}")]]))
+            #reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Bonyeza hapa kutuma', url=f"{gd1}")]]))
         ))
     try:
         await query.answer(results=results,
