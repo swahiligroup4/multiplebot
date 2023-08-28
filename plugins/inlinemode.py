@@ -6,6 +6,7 @@ from pyrogram.types import (
     InlineQuery,
     CallbackQuery,
     InlineKeyboardMarkup,
+    InlineQueryResultArticle,
     InlineKeyboardButton,
     InlineQueryResultPhoto,
     InlineQueryResultCachedDocument
