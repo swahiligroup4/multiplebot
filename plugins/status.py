@@ -28,14 +28,13 @@ async def handle_admin_status(bot, cmd):
                         abn=await get_file_details(user['file_id'])
                         for file in abn:
                             abc=f"{file.text.split('.dd#.')[0]} mda wake wa kuipakua umeisha"  
-                    gdh=await is_user_exist(f'{user["db_name"]}##{user["user_id"]}',abc2["bot_link"])
+                    gdh=await is_user_exist(f'{user["db_name"]}##{user["user_id"]}', abc2["bot_link"] )
                     for gvb in gdh:
                         gdhz=gvb.email
                     botusername=await client.get_me()
                     nyva=botusername.username  
                     nyva=str(nyva)
-                    user_details = await db.is_bot_exist(nyva)
-                    if int( user_details)==int(user['db_name']):
+                    if nyva ==abc2["bot_link"]:
                         await bot.send_message(chat_id=int(user['user_id']),text=f"{abc} tafadhali jiunge kuendelea kupata huduma zetu kwa bei nafuu")
                         await bot.send_message(chat_id=int( user['db_name'] ),text=f"Tafadhali naomba uondoe uwezo wakuacces mda wake umeisha kutumia \n{abc}\nkwa email\n**{gdhz}**\n kama uliadd kwa email kama sivyo bonyeza close",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Close",callback_data="close")]]))
                         await db.delete_acc(user['id'])
