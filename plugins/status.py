@@ -20,7 +20,6 @@ async def handle_admin_status(bot, cmd):
                         await db.remove_ban(user['id'])
             all_users =await db.get_all_acc()
             async for user in all_users:  
-                await bot.send_message(chat_id=int( user['db_name'] ),text=f"{datetime.now()}")
                 if user["ban_status"]["ban_duration"] < (datetime.now() - datetime.fromisoformat(user["ban_status"]["banned_on"])).days:
                     abc2=await db.get_db_status( user['db_name'] )
                     if user['file_id'].startswith('g_'):
