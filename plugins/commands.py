@@ -1031,6 +1031,9 @@ Salio lako:Litaisha tarehe {salio} ::Kumbuka kufanya malipo mapema wateja wako w
     async for user in users:
         a=2
         tme9=(str(datetime.fromisoformat(user['ban_status']['banned_on'])+ timedelta(days=user['ban_status']['ban_duration'])+ timedelta(hours=3))).split(".")[0]
+        tme91,tme92=tme9.split(" ")
+        t1,t2,t3=tme91.split("-")
+        tme9=f"{t1}/{t2}/{t3} Saa:{tme92}"
         if user['file_id'].startswith('g_') and user["db_name"]==group_id:
             sd= await db.get_db_status(user['db_name'])
             g2 = user['file_id']
