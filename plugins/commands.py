@@ -967,7 +967,7 @@ async def get_statuss(bot,message):
     botusername=await bot.get_me()
     nyva=botusername.username  
     nyva=str(nyva)
-    group_id= await db.is_bot_exist(nyva)
+    group_id = await db.is_bot_exist(nyva)
     status= await db.is_admin_exist(message.from_user.id,nyva)
     if status:
         async for user in await db.get_user(message.from_user.id):
@@ -1030,15 +1030,16 @@ Salio lako:Litaisha tarehe {salio} ::Kumbuka kufanya malipo mapema wateja wako w
     a=1
     async for user in users:
         a=2
+        tme9=(str(datetime.fromisoformat(user['ban_status']['banned_on'])+ timedelta(days=user['ban_status']['ban_duration'])+ timedelta(hours=3))).split(".")[1]
         if user['file_id'].startswith('g_') and user["db_name"]==group_id:
             sd= await db.get_db_status(user['db_name'])
             g2 = user['file_id']
             sd = sd[g2].split('#@')[0]
-            salio+=f"{sd}:Kitaisha tarehe :{datetime.fromisoformat(user['ban_status']['banned_on'])+ timedelta(days=user['ban_status']['ban_duration'])+ timedelta(hours=3) }\n\n"
+            salio+=f"{sd}:Kitaisha tarehe : {tme9}\n\n"
         elif user["db_name"]==group_id:
             sd = await get_file_details(user['file_id'])
             for sd1 in sd:
-                salio+=f"{sd1.text.split('.dd#.')[0]}:Kitaisha tarehe :{datetime.fromisoformat(user['ban_status']['banned_on'])+timedelta(days=user['ban_status']['ban_duration'])+ timedelta(hours=3)}\n\n"
+                salio+=f"{sd1.text.split('.dd#.')[0]}:Kitaisha tarehe :{tme9}\n\n"
     if a==1:
         await message.reply_text('Vifurushi Vyako ulivyojiunga kupata huduma za movies,series, tamthilia n.k : \n\nHamna kifurushi ulichojiunga nacho,Tafadhali kuwa huru kununua kifurushi vyetu kwa bei rahisi')
     else:
