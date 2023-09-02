@@ -31,7 +31,7 @@ async def handle_admin_status(bot, cmd):
                     gdh=await is_user_exist(f'{user["db_name"]}##{user["user_id"]}', abc2["bot_link"] )
                     for gvb in gdh:
                         gdhz=gvb.email
-                    botusername=await client.get_me()
+                    botusername=await bot.get_me()
                     nyva=botusername.username  
                     nyva=str(nyva)
                     if nyva ==abc2["bot_link"]:
