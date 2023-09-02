@@ -972,7 +972,7 @@ async def get_statuss(bot,message):
     if status:
         async for user in await db.get_user(message.from_user.id):
             salio =user['ban_status']
-            salio = datetime.fromisoformat(salio['banned_on'])+timedelta(days=salio['ban_duration'])
+            salio = datetime.fromisoformat(salio['banned_on'])+timedelta(days=salio['ban_duration'])+timedelta(hours=3)
         filters = await get_filter_results('',message.from_user.id)
         filters_no = 0
         text = 0
@@ -1034,7 +1034,7 @@ Salio lako:Litaisha tarehe {salio} ::Kumbuka kufanya malipo mapema wateja wako w
             sd= await db.get_db_status(user['db_name'])
             g2 = user['file_id']
             sd = sd[g2].split('#@')[0]
-            salio+=f"{sd}:Kitaisha tarehe :{datetime.fromisoformat(user['ban_status']['banned_on'])+timedelta(days=user['ban_status']['ban_duration'])}\n\n"
+            salio+=f"{sd}:Kitaisha tarehe :{datetime.fromisoformat(user['ban_status']['banned_on'])+timedelta(days=user['ban_status']['ban_duration'])+timedelta(hours=3)}\n\n"
         elif user["db_name"]==group_id:
             sd = await get_file_details(user['file_id'])
             for sd1 in sd:
