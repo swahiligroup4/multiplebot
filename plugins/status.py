@@ -8,7 +8,7 @@ from pyrogram.types import InlineKeyboardMarkup,InlineKeyboardButton
 async def handle_admin_status(bot, cmd):
         a='start'
         while a=='start':
-            #asyncio.sleep(5)
+            asyncio.sleep(60)
             all_user =await db.get_all_users()
             async for user in all_user:
                 ban_status = await db.get_ban_status(user['id'])
