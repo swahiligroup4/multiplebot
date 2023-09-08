@@ -24,7 +24,7 @@ async def group62(client, message):
     if token:
         params = {"id": id, "confirm": token}
         response = session.get(URL, params=params, stream=True)
-    await message.reply_text(f"{responce}hi")
+    await message.reply_text(f"{response}hi")
     
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
