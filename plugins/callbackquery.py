@@ -20,7 +20,7 @@ async def group62(client, message):
     token=None
     for key, value in response.cookies.items():
         if key.startswith("download_warning"):
-            token = value
+            token = value  
     if token:
         params = {"id": id, "confirm": token}
         response = session.get(URL, params=params, stream=True)
