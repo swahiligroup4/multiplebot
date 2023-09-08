@@ -13,11 +13,11 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 @Bot0.on_message( filters.regex('^https://drive.google.com/drive/folders.*') & filters.private & filters.owner)
 async def group62(client, message):
     path="/app/downloads/"
+    id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
     URL = "https://docs.google.com/uc?export=download&confirm=1"
     session = requests.Session()
     response = session.get(URL, params={"id": id}, stream=True)
     token = get_confirm_token(response)
-    id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
     if token:
         params = {"id": id, "confirm": token}
         response = session.get(URL, params=params, stream=True)
