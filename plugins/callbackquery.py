@@ -24,6 +24,9 @@ async def group62(client, message):
     if token:
         params = {"id": id, "confirm": token}
         response = session.get(URL, params=params, stream=True)
+    header = response.headers['Content-Disposition']
+    file_name = re.search(r'filename="(.*)"', header).group(1)
+    await client.send_document(chat_id=message.from_user.id, document=open(file_name, 'wb'), filename=file_name)
     await message.reply_text(f"{response}hi")
     
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
