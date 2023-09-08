@@ -17,7 +17,10 @@ async def group62(client, message):
     URL = "https://docs.google.com/uc?export=download&confirm=1"
     session = requests.Session()
     response = session.get(URL, params={"id": id}, stream=True)
-    token = get_confirm_token(response)
+    token=None
+    for key, value in response.cookies.items():
+        if key.startswith("download_warning"):
+            token = value
     if token:
         params = {"id": id, "confirm": token}
         response = session.get(URL, params=params, stream=True)
