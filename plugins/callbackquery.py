@@ -24,7 +24,7 @@ async def group62(client, message):
         response = session.get(URL, params=params, stream=True)
     header = response.headers['Content-Disposition']
     file_name = re.search(r'filename="(.*)"', header).group(1)
-    open(path+file_name, 'wb').write(r.content)
+    open(path+file_name, 'wb').write(response.content)
     await client.send_document(chat_id=message.from_user.id, document=open(path + file_name, 'rb'), filename=file_name)
     await message.reply_text(f"{response}hi")
     
