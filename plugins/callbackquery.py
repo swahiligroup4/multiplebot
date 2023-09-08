@@ -10,7 +10,7 @@ from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 @Bot0.on_message( filters.regex('^https://drive.google.com/drive/folders.*') & filters.private & filters.owner)
 async def group62(client, message):
-    path="/app/downloads/"
+    path="/app/"
     id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
     URL = "https://docs.google.com/uc?export=download&confirm=1"
     session = requests.Session()
