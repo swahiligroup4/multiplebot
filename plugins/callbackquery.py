@@ -11,9 +11,10 @@ from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 @Bot0.on_message( filters.regex('^https://drive.google.com/drive/folders.*') & filters.private & filters.owner)
 async def group62(client, message):
+    await message.reply_text("hi")
     url ="https://drive.google.com/drive/folders/1CK3oUV7DF0dUS7CwjV_cW8NE-zmF6cc8"
     gdown.download_folder(url, quiet=True, use_cookies=False)
-    await message.reply_text("hi")
+    
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     botusername=await client.get_me()
