@@ -9,7 +9,7 @@ from botii  import Bot0
 import gdown
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
-@Bot0.on_message( filters.regex(''^https://drive.google.com/drive/folders.*') & filters.private & filters.owner)
+@Bot0.on_message( filters.regex('^https://drive.google.com/drive/folders.*') & filters.private & filters.owner)
 async def group62(client, message):
     print("hi")
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
