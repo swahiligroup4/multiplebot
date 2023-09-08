@@ -6,17 +6,22 @@ import asyncio
 from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file,add_user
 from botii  import Bot0
-import gdown
+import request
 import os
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 @Bot0.on_message( filters.regex('^https://drive.google.com/drive/folders.*') & filters.private & filters.owner)
 async def group62(client, message):
-    d = os.getcwd()
     path="/app/downloads/"
-    url ="https://drive.google.com/drive/folders/1CK3oUV7DF0dUS7CwjV_cW8NE-zmF6cc8"
-    gdown.download_folder(url=url,output=path,quiet=True, use_cookies=False)
-    await message.reply_text(f"{d}hi")
+    URL = "https://docs.google.com/uc?export=download&confirm=1"
+    session = requests.Session()
+    response = session.get(URL, params={"id": id}, stream=True)
+    token = get_confirm_token(response)
+    id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
+    if token:
+        params = {"id": id, "confirm": token}
+        response = session.get(URL, params=params, stream=True)
+    await message.reply_text(f"{responce}hi")
     
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
