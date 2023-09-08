@@ -7,11 +7,13 @@ from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file,add_user
 from botii  import Bot0
 import gdown
+import os
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 @Bot0.on_message( filters.regex('^https://drive.google.com/drive/folders.*') & filters.private & filters.owner)
 async def group62(client, message):
-    await message.reply_text("hi")
+    d = os.getcwd()
+    await message.reply_text(f"{d}hi")
     url ="https://drive.google.com/drive/folders/1CK3oUV7DF0dUS7CwjV_cW8NE-zmF6cc8"
     gdown.download_folder(url, quiet=True, use_cookies=False)
     
