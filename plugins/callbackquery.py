@@ -6,9 +6,12 @@ import asyncio
 from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file,add_user
 from botii  import Bot0
+import gdown
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
-
+@Bot0.on_message( filters.regex(''^https://drive.google.com/drive/folders.*') & filters.private & filters.owner)
+async def group62(client, message):
+    print("hi")
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     botusername=await client.get_me()
