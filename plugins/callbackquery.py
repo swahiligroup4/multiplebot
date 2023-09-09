@@ -6,6 +6,7 @@ from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file,add_user
 from botii  import Bot0
 import requests
+from moviepy.editor import VideoFileClip
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 @Bot0.on_message( filters.regex('^https://drive.google.com/drive/folders.*') & filters.private & filters.owner)
@@ -26,11 +27,8 @@ async def group62(client, message):
     file_name = re.search(r'filename="(.*)"', header).group(1)
     open( path+file_name , 'wb').write(response.content)
     asyncio.sleep(1)
-    result = subprocess.check_output(
-            f'ffprobe -v quiet -show_streams -select_streams v:0 -of json {path+file_name}',
-            shell=True).decode()
-    fields = json.loads(result)['streams'][0]
-    duration = fields['tags']['DURATION']
+    clip = VideoFileClip(path+file_name)
+    duration = clip.duration
     await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name)
     await message.reply_text(f"{response}hi")
     
