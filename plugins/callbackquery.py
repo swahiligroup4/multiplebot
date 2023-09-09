@@ -1,6 +1,6 @@
 from info import filters,CHANNELS,OWNER_ID
 import uuid    
-import time,re,os,asyncio
+import time,re,os,asyncio,subprocess, json
 from plugins.base_command import btn22
 from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file,add_user
@@ -24,8 +24,14 @@ async def group62(client, message):
         response = session.get(URL, params=params, stream=True)
     header = response.headers['Content-Disposition']
     file_name = re.search(r'filename="(.*)"', header).group(1)
-    open(path+file_name, 'wb').write(response.content)
-    await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'), file_name=file_name)
+    open( path+file_name , 'wb').write(response.content)
+    asyncio.sleep(1)
+    result = subprocess.check_output(
+            f'ffprobe -v quiet -show_streams -select_streams v:0 -of json "{path+file_name}"',
+            shell=True).decode()
+    fields = json.loads(result)['streams'][0]
+    duration = fields['tags']['DURATION']
+    await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name)
     await message.reply_text(f"{response}hi")
     
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
