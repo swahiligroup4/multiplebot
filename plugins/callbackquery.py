@@ -28,7 +28,6 @@ async def group62(client, message):
     open( path+file_name , 'wb').write(response.content)
     asyncio.sleep(1)
     clip = VideoFileClip(path+file_name)
-    clip.write_videofile("/app/abc.mp4")
     duration = clip.duration
     await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name)
     await message.reply_text(f"{response}hi")
