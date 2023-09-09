@@ -25,9 +25,10 @@ async def group62(client, message):
         response = session.get(URL, params=params, stream=True)
     header = response.headers['Content-Disposition']
     file_name = re.search(r'filename="(.*)"', header).group(1)
-    open( path+file_name , 'wb').write(response.content)
+    #open( path+file_name , 'wb').write(response.content)
     asyncio.sleep(1)
-    clip = VideoFileClip(path+file_name)
+    clip = VideoFileClip(response.content)
+    clip.write_videofile("/app/{file_name}")
     duration = clip.duration
     await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name)
     await message.reply_text(f"{response}hi")
