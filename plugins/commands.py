@@ -340,7 +340,7 @@ async def new_filtervip(client, message):
                         caption = reply_text+"\n\n**Tafadhali chagua formate unayotaka kuanza nayo ili uanze kuongeza movie hii**",
                         reply_markup = reply_markup 
                     )
-                  
+            reply_text1=reply_text    
             elif ab33=="ms":
                 reply_markup=btn22("season","series",f"3hsss##{strid}")
                 if msg_type == 'Photo':
@@ -367,7 +367,7 @@ async def new_filtervip(client, message):
                 await client.send_photo(
                     chat_id = CHANNELS,
                     photo = fileid,
-                    caption = f'{reply_text}\n{message.from_user.mention}',
+                    caption = f'{reply_text1}\n{message.from_user.mention}',
                     reply_markup = InlineKeyboardMarkup(btn) if len(btn) != 0 else None
                 ) 
                 for data2 in abz:
@@ -376,7 +376,7 @@ async def new_filtervip(client, message):
                             chat_id=int(data2),
                             photo = fileid,
                             disable_notification=True,
-                            caption = reply_text,
+                            caption = reply_text1,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
                         )
                     except Exception as err:
@@ -386,7 +386,7 @@ async def new_filtervip(client, message):
                 await client.send_cached_media(
                     chat_id = CHANNELS,
                     file_id = fileid,
-                    caption = f'{reply_text}{message.from_user.mention}',
+                    caption = f'{reply_text1}{message.from_user.mention}',
                     reply_markup = InlineKeyboardMarkup(btn) if len(btn) != 0 else None
                 )
                 for data2 in abz:
@@ -395,7 +395,7 @@ async def new_filtervip(client, message):
                             chat_id=int(data2),
                             file_id = fileid,
                             disable_notification=True,
-                            caption = reply_text,
+                            caption = reply_text1,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
                         )
                     except:
