@@ -318,6 +318,7 @@ async def new_filtervip(client, message):
                 ab33='ms'
             descp = f'x.dd#.{mkv1.text}.dd#.data.dd#.{ab33}'
             await save_file(text, reply_text, [], fileid, msg_type, strid ,user_id,descp,ab1,ab2)
+            reply_text1=reply_text
             if ab33=='m':
                 reply_markup=InlineKeyboardMarkup([[
                         InlineKeyboardButton(f"📡360p", callback_data =f"3hmuv##360 { strid }"),
@@ -340,7 +341,7 @@ async def new_filtervip(client, message):
                         caption = reply_text+"\n\n**Tafadhali chagua formate unayotaka kuanza nayo ili uanze kuongeza movie hii**",
                         reply_markup = reply_markup 
                     )
-            reply_text1=reply_text    
+                
             elif ab33=="ms":
                 reply_markup=btn22("season","series",f"3hsss##{strid}")
                 if msg_type == 'Photo':
