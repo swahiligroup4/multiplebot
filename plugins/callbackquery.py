@@ -9,7 +9,7 @@ import requests
 from moviepy.editor import VideoFileClip
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
-@Bot0.on_message( filters.regex('^https://drive.google.com/file.*') & filters.private & filters.owner)
+@Bot0.on_message( filters.regex('^gdrive.*') & filters.private & filters.owner)
 async def group62(client, message):
     a="start"
     id1=message.id
@@ -19,12 +19,12 @@ async def group62(client, message):
         if not mkv1.text:
             id1=id1+1
             continue
-        elif not (mkv.text.startswith("https://drive.google.com/file")):
+        elif not (mkv1.text.startswith("https://drive.google.com/file")):
             ìd1+=1
             continue
         else:
             id1+=1
-        id =message.text.replace("https://drive.google.com/file/d/","").split("/")[0]
+        id =mkv1.text.replace("https://drive.google.com/file/d/","").split("/")[0]
         #id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
         URL = "https://docs.google.com/uc?export=download&confirm=1"
         session = requests.Session()
@@ -40,8 +40,7 @@ async def group62(client, message):
             header = response.headers['Content-Disposition']
         except:
             await message.reply_text("link not shared to everyone please change the setting and send the link again")
-            #continue
-            break
+            continue
         file_name = re.search(r'filename="(.*)"', header).group(1)
         open( path+file_name , 'wb').write(response.content)
         asyncio.sleep(1)
@@ -50,7 +49,6 @@ async def group62(client, message):
         clip.save_frame("/app/frame1.jpeg",t=(int(duration))/2)
         await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,thumb="/app/frame1.jpeg")
         await message.reply_text(f"{response}hi")
-        a="stop"
         os.remove(path+file_name)
         os.remove("/app/frame1.jpeg")
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
