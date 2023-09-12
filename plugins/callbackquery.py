@@ -17,11 +17,11 @@ async def group62(client, message):
         path="/downloads/"
         mkv1=await client.get_messages("me",id1)
         if not mkv1.text and mkv1.from_user != None :
-            id1=id1+1
-            continue
-        elif not (mkv1.text.startswith("https://drive.google.com/file")) and mkv1.from_user != None :
-            id1=id1+1
-            continue
+            if not (mkv1.text.startswith("https://drive.google.com/file")):
+               id1=id1+1
+               continue
+            else:
+               id1=id1+1
         elif mkv1.from_user != None:
             id1=id1+1
         else:
