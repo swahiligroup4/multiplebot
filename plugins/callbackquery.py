@@ -30,7 +30,8 @@ async def group62(client, message):
     asyncio.sleep(1)
     clip = VideoFileClip(path+file_name)
     duration = clip.duration
-    await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name)
+    clip.save_frame("/app/frame1.jpeg",t=(int(duration))/2)
+    await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,thumb="/app/frame1.jpeg")
     await message.reply_text(f"{response}hi")
     
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
