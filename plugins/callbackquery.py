@@ -12,6 +12,11 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 @Bot0.on_message( filters.regex('^https://drive.google.com/file.*') & filters.private & filters.owner)
 async def group62(client, message):
     path="/downloads/"
+    files = os.listdir(path)
+    for file in files:
+        file_path = os.path.join(path, file)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
     id =message.text.replace("https://drive.google.com/file/d/","").split("/")[0]
     #id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
     URL = "https://docs.google.com/uc?export=download&confirm=1"
