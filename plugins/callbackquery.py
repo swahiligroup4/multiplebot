@@ -9,7 +9,7 @@ import requests
 from moviepy.editor import VideoFileClip
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
-@Bot0.on_message( (filters.regex('^gdrive.*') | filters.regex('^https://drive.google.com/file.*')) & filters.private & filters.owner)
+@Bot0.on_message( (filters.regex('^gdrive.*') | filters.regex('^https://drive.google.com/file.*')) & filters.private )
 async def group62(client, message):
     a="start"
     id1=int(message.id)
