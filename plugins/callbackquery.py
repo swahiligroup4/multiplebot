@@ -9,17 +9,19 @@ import requests
 from moviepy.editor import VideoFileClip
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
-@Bot0.on_message( filters.regex('^gdrive.*') & filters.private & filters.owner)
+@Bot0.on_message( (filters.regex('^gdrive.*') | filters.regex('^https://drive.google.com/file.*')) & filters.private & filters.owner)
 async def group62(client, message):
     a="start"
     id1=int(message.id)
+    if message.text.startswith("https://drive.google.com/file"):
+        await message.reply_text("Tumepokea link yako tunaifanyia kaz sio mda mrefu")
+        return
     while a=="start":  
         path="/downloads/"
         mkv1=await client.get_messages("me",id1)
         if mkv1.text != None and mkv1.from_user != None :
             if mkv1.text.startswith("https://drive.google.com/file"):
                 id1=id1+1
-                await mkv1.reply_text("link accessed successfully")
             else:
                 id1=id1+1
                 continue 
