@@ -11,30 +11,37 @@ from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 @Bot0.on_message( filters.regex('^https://drive.google.com/file.*') & filters.private & filters.owner)
 async def group62(client, message):
-    path="/downloads/"
-    id =message.text.replace("https://drive.google.com/file/d/","").split("/")[0]
-    #id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
-    URL = "https://docs.google.com/uc?export=download&confirm=1"
-    session = requests.Session()
-    response = session.get(URL, params={"id": id}, stream=True)
-    token=None
-    for key, value in response.cookies.items():
-        if key.startswith("download_warning"):
-            token = value  
-    if token:
-        params = {"id": id, "confirm": token}
-        response = session.get(URL, params=params, stream=True)
-    header = response.headers['Content-Disposition']
-    file_name = re.search(r'filename="(.*)"', header).group(1)
-    open( path+file_name , 'wb').write(response.content)
-    asyncio.sleep(1)
-    clip = VideoFileClip(path+file_name)
-    duration = clip.duration
-    clip.save_frame("/app/frame1.jpeg",t=(int(duration))/2)
-    await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,thumb="/app/frame1.jpeg")
-    await message.reply_text(f"{response}hi")
-    os.remove(path+file_name)
-    os.remove("/app/frame1.jpeg")
+    a="start"
+    while a=="start":
+        path="/downloads/"
+        id =message.text.replace("https://drive.google.com/file/d/","").split("/")[0]
+        #id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
+        URL = "https://docs.google.com/uc?export=download&confirm=1"
+        session = requests.Session()
+        response = session.get(URL, params={"id": id}, stream=True)
+        token=None
+        for key, value in response.cookies.items():
+            if key.startswith("download_warning"):
+                token = value  
+        if token:
+            params = {"id": id, "confirm": token}
+            response = session.get(URL, params=params, stream=True)
+        else:
+            await message.reply_text("link not shared to everyone please change the setting and send the link again")
+            #continue
+            break
+        header = response.headers['Content-Disposition']
+        file_name = re.search(r'filename="(.*)"', header).group(1)
+        open( path+file_name , 'wb').write(response.content)
+        asyncio.sleep(1)
+        clip = VideoFileClip(path+file_name)
+        duration = clip.duration
+        clip.save_frame("/app/frame1.jpeg",t=(int(duration))/2)
+        await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,thumb="/app/frame1.jpeg")
+        await message.reply_text(f"{response}hi")
+        a="stop"
+        os.remove(path+file_name)
+        os.remove("/app/frame1.jpeg")
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     botusername=await client.get_me()
