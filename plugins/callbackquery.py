@@ -29,6 +29,7 @@ async def group62(client, message):
             id1=id1+1
             continue
         else:
+            asyncio.sleep(5)
             continue
         id =mkv1.text.replace("https://drive.google.com/file/d/","").split("/")[0]
         #id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
@@ -49,9 +50,12 @@ async def group62(client, message):
             continue
         file_name = re.search(r'filename="(.*)"', header).group(1)
         open( path+file_name , 'wb').write(response.content)
-        asyncio.sleep(1)
+        asyncio.sleep(2)
         clip = VideoFileClip(path+file_name)
-        duration = clip.duration
+        try:
+            duration = clip.duration
+        except:
+            pass
         clip.save_frame("/app/frame1.jpeg",t=(int(duration))/2)
         await client.send_video(chat_id=mkv1.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,caption=file_name,thumb="/app/frame1.jpeg")
         #await message.reply_text(f"{response}hi")
