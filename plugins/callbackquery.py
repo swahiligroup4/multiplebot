@@ -55,7 +55,7 @@ async def group62(client, message):
         try:
             duration = clip.duration
         except:
-            pass
+            duration = 0
         clip.save_frame("/app/frame1.jpeg",t=(int(duration))/2)
         await client.send_video(chat_id=mkv1.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,caption=file_name,thumb="/app/frame1.jpeg")
         #await message.reply_text(f"{response}hi")
