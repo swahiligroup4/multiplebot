@@ -13,14 +13,17 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 async def group62(client, message):
     a="start"
     id1=int(message.id)
-    while a=="start":
-        id1=id1+1
+    while a=="start":  
         path="/downloads/"
         mkv1=await client.get_messages("me",id1)
         if not mkv1.text:
+            id1=id1+1
             continue
         elif not (mkv1.text.startswith("https://drive.google.com/file")):
+            id1=id1+1
             continue
+        else:
+            id1=id1+1
         id =mkv1.text.replace("https://drive.google.com/file/d/","").split("/")[0]
         #id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
         URL = "https://docs.google.com/uc?export=download&confirm=1"
