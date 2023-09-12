@@ -17,14 +17,15 @@ async def group62(client, message):
         path="/downloads/"
         mkv1=await client.get_messages("me",id1)
         if mkv1.text != None and mkv1.from_user != None :
-            await message.reply_text("link accessed successfully")
             if mkv1.text.startswith("https://drive.google.com/file"):
                 id1=id1+1
                 await message.reply_text("link accessed successfully")
             else:
+                id1=id1+1
                 continue 
         elif mkv1.from_user != None:
             id1=id1+1
+            continue
         else:
             continue
         id =mkv1.text.replace("https://drive.google.com/file/d/","").split("/")[0]
