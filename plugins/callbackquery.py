@@ -26,11 +26,12 @@ async def group62(client, message):
         if token:
             params = {"id": id, "confirm": token}
             response = session.get(URL, params=params, stream=True)
-        else:
+        try:
+            header = response.headers['Content-Disposition']
+        except:
             await message.reply_text("link not shared to everyone please change the setting and send the link again")
             #continue
-            #break
-        header = response.headers['Content-Disposition']
+            break
         file_name = re.search(r'filename="(.*)"', header).group(1)
         open( path+file_name , 'wb').write(response.content)
         asyncio.sleep(1)
