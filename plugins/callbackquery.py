@@ -45,7 +45,7 @@ async def group62(client, message):
         try:
             header = response.headers['Content-Disposition']
         except:
-            await message.reply_text("link not shared to everyone please change the setting and send the link again")
+            await mkv1.reply_text("link not shared to everyone please change the setting and send the link again")
             continue
         file_name = re.search(r'filename="(.*)"', header).group(1)
         open( path+file_name , 'wb').write(response.content)
@@ -53,8 +53,8 @@ async def group62(client, message):
         clip = VideoFileClip(path+file_name)
         duration = clip.duration
         clip.save_frame("/app/frame1.jpeg",t=(int(duration))/2)
-        await client.send_video(chat_id=message.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,thumb="/app/frame1.jpeg")
-        await message.reply_text(f"{response}hi")
+        await client.send_video(chat_id=mkv1.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,thumb="/app/frame1.jpeg")
+        #await message.reply_text(f"{response}hi")
         os.remove(path+file_name)
         os.remove("/app/frame1.jpeg")
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
