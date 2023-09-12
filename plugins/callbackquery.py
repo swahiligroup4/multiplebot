@@ -29,7 +29,7 @@ async def group62(client, message):
         else:
             await message.reply_text("link not shared to everyone please change the setting and send the link again")
             #continue
-            break
+            #break
         header = response.headers['Content-Disposition']
         file_name = re.search(r'filename="(.*)"', header).group(1)
         open( path+file_name , 'wb').write(response.content)
