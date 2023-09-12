@@ -12,7 +12,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 @Bot0.on_message( filters.regex('^gdrive.*') & filters.private & filters.owner)
 async def group62(client, message):
     a="start"
-    id1=message.id
+    id1=int(message.id)
     while a=="start":
         path="/downloads/"
         mkv1=await client.get_messages("me",id1)
