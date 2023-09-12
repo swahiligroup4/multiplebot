@@ -21,7 +21,7 @@ async def group62(client, message):
             continue
         elif not (mkv1.text.startswith("https://drive.google.com/file")):
             id1=id1+1
-            continue
+            #continue
         else:
             id1=id1+1
         id =mkv1.text.replace("https://drive.google.com/file/d/","").split("/")[0]
