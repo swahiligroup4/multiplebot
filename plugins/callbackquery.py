@@ -12,8 +12,18 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 @Bot0.on_message( filters.regex('^https://drive.google.com/file.*') & filters.private & filters.owner)
 async def group62(client, message):
     a="start"
+    id1=message.id
     while a=="start":
         path="/downloads/"
+        mkv1=await client.get_messages("me",id1)
+        if not mkv1.text:
+            id1=id1+1
+            continue
+        elif not (mkv.text.startswith("https://drive.google.com/file")):
+            ìd1+=1
+            continue
+        else:
+            id1+=1
         id =message.text.replace("https://drive.google.com/file/d/","").split("/")[0]
         #id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
         URL = "https://docs.google.com/uc?export=download&confirm=1"
