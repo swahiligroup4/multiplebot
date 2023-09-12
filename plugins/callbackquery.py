@@ -19,7 +19,7 @@ async def group62(client, message):
         if mkv1.text != None and mkv1.from_user != None :
             if mkv1.text.startswith("https://drive.google.com/file"):
                 id1=id1+1
-                await message.reply_text("link accessed successfully")
+                await mkv1.reply_text("link accessed successfully")
             else:
                 id1=id1+1
                 continue 
