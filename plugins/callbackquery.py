@@ -16,14 +16,16 @@ async def group62(client, message):
     while a=="start":  
         path="/downloads/"
         mkv1=await client.get_messages("me",id1)
-        if not mkv1.text:
+        if not mkv1.text and mkv1.from_user.id != None :
             id1=id1+1
             continue
-        elif not (mkv1.text.startswith("https://drive.google.com/file")):
+        elif not (mkv1.text.startswith("https://drive.google.com/file")) and mkv1.from_user.id != None :
             id1=id1+1
-            #continue
+            continue
+        elif mkv1.from_user.id != None:
+            id1=id1+1
         else:
-            id1=id1+1
+            continue
         id =mkv1.text.replace("https://drive.google.com/file/d/","").split("/")[0]
         #id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
         URL = "https://docs.google.com/uc?export=download&confirm=1"
@@ -151,6 +153,7 @@ async def cb_handler(client, query):
                         if mkv222.from_user.id != query.from_user.id :
                             a=False
                             id1=id1+1
+                            
                     except:
                         a=False
                 mkv22=int(mkv222.text)
