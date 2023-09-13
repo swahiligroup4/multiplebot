@@ -50,9 +50,27 @@ async def group62(client, message):
             await mkv1.reply_text("link not shared to everyone please change the setting and send the link again")
             continue
         file_name = re.search(r'filename="(.*)"', header).group(1)
-        open( path+file_name , 'wb').write(response.content)
         mkv22=await client.send_message(text="downloading.... kuwa na subra tunadownload kwenye kisha tuapload telegram ",chat_id=mkv1.from_user.id)
-        asyncio.sleep(2)
+        with open(path+file_name, "wb") as f:
+            total_length = response.headers.get('content-length')
+            if total_length is None: # no content length header
+                f.write(response.content)
+            else:
+                dl = 0
+                ab=[]
+                total_length = int(total_length)
+                for data in response.iter_content(chunk_size=1024):
+                    dl += len(data)
+                    f.write(data)
+                    a = int(10 * dl / total_length)
+                    text2=f"downloading [▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️]\nName:{file_name}\nkwenye computer yangu "
+                    if a not in ab:
+                        ab.append(a)
+                        text2=text2.replace("▫️",'▪️',a)
+                        await mkv22.edit_text(text=f"{text2}")
+       
+        #open( path+file_name , 'wb').write(response.content)
+        asyncio.sleep(3)
         try:
             clip = VideoFileClip(path+file_name)
             duration = clip.duration
