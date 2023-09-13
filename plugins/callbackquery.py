@@ -64,8 +64,9 @@ async def group62(client, message):
         os.remove(path+file_name)
         try:
             os.remove("/app/frame1.jpeg")
-        except;
+        except:
             pass
+        asyncio.sleep(3)
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     botusername=await client.get_me()
