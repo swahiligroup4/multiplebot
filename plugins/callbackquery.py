@@ -51,6 +51,7 @@ async def group62(client, message):
             continue
         file_name = re.search(r'filename="(.*)"', header).group(1)
         open( path+file_name , 'wb').write(response.content)
+        mkv22=await client.send_message(text="downloading",chat_id=mkv1.from_user.id)
         asyncio.sleep(2)
         try:
             clip = VideoFileClip(path+file_name)
@@ -61,7 +62,9 @@ async def group62(client, message):
             duration = 0
             thumb = None
         async def progress(current, total):
-            await mkv1.reply_text(f"{current * 100 / total:.1f}%")
+            #if 
+
+            await mkv22.edit_text(f"{int(current * 100 / total)}%")
         await client.send_video(chat_id=mkv1.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,caption=file_name,thumb=thumb,progress=progress)
         #await message.reply_text(f"{response}hi")
         os.remove(path+file_name)
