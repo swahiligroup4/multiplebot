@@ -64,11 +64,11 @@ async def group62(client, message):
         ab=[]
         async def progress(current, total):
             text2="Uploading [▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️]"
-            a = int(current * 100 / total)
+            a = int(current * 10 / total)
             if a not in ab:
                 ab.append(a)
                 text2=text2.replace("▫️",'▪️',a)
-                await mkv22.edit_text(text=f"{a}")
+                await mkv22.edit_text(text=f"{text2}")
         await client.send_video(chat_id=mkv1.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,caption=file_name,thumb=thumb,progress = progress)
         #await message.reply_text(f"{response}hi")
         os.remove(path+file_name)
