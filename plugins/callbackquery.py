@@ -9,6 +9,7 @@ import requests
 from moviepy.editor import VideoFileClip
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
+
 @Bot0.on_message( (filters.regex('^gdrive.*') | filters.regex('^https://drive.google.com/file.*')) & filters.private )
 async def group62(client, message):
     a="start"
@@ -59,7 +60,9 @@ async def group62(client, message):
         except:
             duration = 0
             thumb = None
-        await client.send_video(chat_id=mkv1.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,caption=file_name,thumb=thumb)
+        async def progress(current, total):
+            await mkv1.reply_text(f"{current * 100 / total:.1f}%")
+        await client.send_video(chat_id=mkv1.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,caption=file_name,thumb=thumb,progress=progress)
         #await message.reply_text(f"{response}hi")
         os.remove(path+file_name)
         try:
