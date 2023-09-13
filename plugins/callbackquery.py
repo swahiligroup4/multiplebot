@@ -54,13 +54,18 @@ async def group62(client, message):
         clip = VideoFileClip(path+file_name)
         try:
             duration = clip.duration
+            clip.save_frame("/app/frame1.jpeg",t=(int(duration))/2)
+            thumb="/app/frame1.jpeg"
         except:
-            continue
-        clip.save_frame("/app/frame1.jpeg",t=(int(duration))/2)
-        await client.send_video(chat_id=mkv1.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,caption=file_name,thumb="/app/frame1.jpeg")
+            duration = 0
+            thumb = None
+        await client.send_video(chat_id=mkv1.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,caption=file_name,thumb=thumb)
         #await message.reply_text(f"{response}hi")
         os.remove(path+file_name)
-        os.remove("/app/frame1.jpeg")
+        try:
+            os.remove("/app/frame1.jpeg")
+        except;
+            pass
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     botusername=await client.get_me()
