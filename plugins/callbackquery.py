@@ -51,7 +51,7 @@ async def group62(client, message):
             continue
         file_name = re.search(r'filename="(.*)"', header).group(1)
         open( path+file_name , 'wb').write(response.content)
-        mkv22=await client.send_message(text="downloading",chat_id=mkv1.from_user.id)
+        mkv22=await client.send_message(text="downloading.... kuwa na subra tunadownload kwenye kisha tuapload telegram ",chat_id=mkv1.from_user.id)
         asyncio.sleep(2)
         try:
             clip = VideoFileClip(path+file_name)
@@ -63,7 +63,7 @@ async def group62(client, message):
             thumb = None
         ab=[]
         async def progress(current, total):
-            text2="Uploading [▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️]"
+            text2=f"Uploading [▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️]\nName:{file_name}\nTo Telegram"
             a = int(current * 10 / total)
             if a not in ab:
                 ab.append(a)
