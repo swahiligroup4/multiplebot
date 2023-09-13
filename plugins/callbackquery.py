@@ -62,13 +62,13 @@ async def group62(client, message):
                 for data in response.iter_content(chunk_size=1024):
                     dl += len(data)
                     f.write(data)
+                    f.flush()
                     a = int(10 * dl / total_length)
                     text2=f"downloading [▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️]\nName:{file_name}\nkwenye computer yangu "
                     if a not in ab:
                         ab.append(a)
                         text2=text2.replace("▫️",'▪️',a)
-                        await mkv22.edit_text(text=f"{text2}")
-       
+                        await mkv22.edit_text(text=f"{text2}")   
         #open( path+file_name , 'wb').write(response.content)
         asyncio.sleep(3)
         try:
