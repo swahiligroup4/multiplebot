@@ -95,6 +95,7 @@ async def group62(client, message):
         except:
             pass
         asyncio.sleep(3)
+        continue
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     botusername=await client.get_me()
