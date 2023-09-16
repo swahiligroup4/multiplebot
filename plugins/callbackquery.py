@@ -12,12 +12,12 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 
 @Bot0.on_message( (filters.regex('^gdrive.*') | filters.regex('^https://drive.google.com/file.*')) & filters.private )
 async def group62(client, message):
-    a="start"
+    azb="start"
     id1=int(message.id)
     if message.text.startswith("https://drive.google.com/file"):
         await message.reply_text("Tumepokea link yako tunaifanyia kaz sio mda mrefu")
         return
-    while a=="start":  
+    while azb=="start":  
         path="/downloads/"
         mkv1=await client.get_messages("me",id1)
         if mkv1.text != None and mkv1.from_user != None :
@@ -95,7 +95,6 @@ async def group62(client, message):
         except:
             pass
         asyncio.sleep(3)
-        continue
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     botusername=await client.get_me()
