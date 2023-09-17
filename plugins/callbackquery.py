@@ -64,13 +64,14 @@ async def group62(client, message):
                     f.write(data)
                     f.flush()
                     a = int(10 * dl / total_length)
+                    asyncio.sleep(0.5)
                     text2=f"downloading [▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️]\nName:{file_name}\nkwenye computer yangu "
                     if a not in ab:
                         ab.append(a)
                         text2=text2.replace("▫️",'▪️',a)
                         await mkv22.edit_text(text=f"{text2}")   
         #open( path+file_name , 'wb').write(response.content)
-        asyncio.sleep(3)
+        asyncio.sleep(1)
         try:
             clip = VideoFileClip(path+file_name)
             duration = clip.duration
@@ -94,7 +95,7 @@ async def group62(client, message):
             os.remove("/app/frame1.jpeg")
         except:
             pass
-        asyncio.sleep(3)
+        asyncio.sleep(1)
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     botusername=await client.get_me()
