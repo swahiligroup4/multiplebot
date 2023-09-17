@@ -17,6 +17,9 @@ async def group62(client, message):
     if message.text.startswith("https://drive.google.com/file"):
         await message.reply_text("Tumepokea link yako tunaifanyia kaz sio mda mrefu")
         return
+    dir = '/downloads/'
+    for f in os.listdir(dir):
+        os.remove(os.path.join(dir, f))
     while azb=="start":  
         path="/downloads/"
         mkv1=await client.get_messages("me",id1)
