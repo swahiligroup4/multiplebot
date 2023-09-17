@@ -18,7 +18,7 @@ async def group62(client, message):
         await message.reply_text("Tumepokea link yako tunaifanyia kaz sio mda mrefu")
         return
     dir = '/downloads/'
-    for f in os.listdir(dir):
+    for files in os.listdir(dir):
         path = os.path.join(dir, files)
         try:
             shutil.rmtree(path)
