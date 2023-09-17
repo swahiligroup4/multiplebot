@@ -163,7 +163,7 @@ async def rrecussive(client, message):
                 #await User.collection.update_one({'_id':hjkl1})
                 print(e)
                     
-@Bot0.on_message(filters.group & filters.incoming)
+@Bot0.on_message(fikters.text & filters.group & filters.incoming)
 async def group(client, message):
     botusername=await client.get_me()
     nyva=botusername.username
