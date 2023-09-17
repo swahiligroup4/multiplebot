@@ -1,6 +1,6 @@
 from info import filters,CHANNELS,OWNER_ID
 import uuid    
-import time,re,os,asyncio,subprocess, json
+import time,re,os,asyncio,subprocess, json,shutil
 from plugins.base_command import btn22
 from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file,add_user
@@ -19,7 +19,11 @@ async def group62(client, message):
         return
     dir = '/downloads/'
     for f in os.listdir(dir):
-        os.remove(os.path.join(dir, f))
+        path = os.path.join(dir, files)
+        try:
+            shutil.rmtree(path)
+        except OSError:
+            os.remove(path)
     while azb=="start":  
         path="/downloads/"
         mkv1=await client.get_messages("me",id1)
