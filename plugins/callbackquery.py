@@ -66,7 +66,7 @@ async def group62(client, message):
                 dl = 0
                 ab=[]
                 total_length = int(total_length)
-                for data in response.iter_content(chunk_size=5120):
+                for data in response.iter_content(chunk_size=4096):
                     dl += len(data)
                     f.write(data)
                     f.flush()
