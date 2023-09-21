@@ -897,12 +897,12 @@ async def ban(c,m):
     botusername=await c.get_me()
     nyva=botusername.username  
     nyva=str(nyva)
-    if len(m.command) != 3:
+    if len(m.command) != 4:
         await m.reply_text(
             f"Use this command to add access to any user from the bot.\n\n"
             f"Usage:\n\n"
-            f"`/add_admin admin_id duration_in days`\n\n"
-            f"Eg: `/add_admin 1234567 28 Umepata ofa ya Siku 3 zaidi.`\n"
+            f"`/add_admin admin_id duration_in days jina_la_bot`\n\n"
+            f"Eg: `/add_admin 1234567 28 bandolako2021bot.`\n"
             f"This will add user with id `1234567` for `28` days for the reason `ofa siku 3 zaidi`.",
             quote=True
         )
