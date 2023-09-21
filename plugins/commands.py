@@ -897,7 +897,7 @@ async def ban(c,m):
     botusername=await c.get_me()
     nyva=botusername.username  
     nyva=str(nyva)
-    if len(m.command) == 1:
+    if len(m.command) != 3:
         await m.reply_text(
             f"Use this command to add access to any user from the bot.\n\n"
             f"Usage:\n\n"
@@ -911,6 +911,7 @@ async def ban(c,m):
     if nyva=="Bandolako2021bot":
         user_id = int(m.command[1])
         ban_duration = int(m.command[2])
+        username1 = m.command[3]
         ban_reason = 'Kwa ajili ya kumtumia swahili robot kuuzia movie na series '
         ban_log_text = f"Adding user {user_id} for {ban_duration} days for the reason {ban_reason} ."
         try:
@@ -923,7 +924,7 @@ async def ban(c,m):
         except:
             
             ban_log_text += f"\n\nNmeshindwa kumtaarifu tafadhali jaribu tena! \n\n`{traceback.format_exc()}`"
-        adminexist=await db.is_admin_exist(user_id,nyva)
+        adminexist=await db.is_admin_exist(user_id,username1)
         if not adminexist :
             abc = await c.send_message(chat_id = m.from_user.id,text="Naomba untumie username ya bot ya mteja huyu")      
             id1=abc.id+1                 
