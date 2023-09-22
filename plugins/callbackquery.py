@@ -16,7 +16,6 @@ async def group62(client, message):
     id1=int(message.id)
     if message.text.startswith("https://drive.google.com/file"):
         await message.reply_text("Tumepokea link yako tunaifanyia kaz sio mda mrefu")
-        await message.reply_text("/start")
         return
     dir = '/downloads/'
     for files in os.listdir(dir):
@@ -43,15 +42,18 @@ async def group62(client, message):
         id =mkv1.text.replace("https://drive.google.com/file/d/","").split("/")[0]
         #id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
         URL = "https://docs.google.com/uc?export=download&confirm=1"
-        session = requests.Session()
-        response = session.get(URL, params={"id": id}, stream=True)
-        token=None
-        for key, value in response.cookies.items():
-            if key.startswith("download_warning"):
-                token = value  
-        if token:
-            params = {"id": id, "confirm": token}
-            response = session.get(URL, params=params, stream=True)
+        def startp(URL,id):
+            session = requests.Session()
+            response = session.get(URL, params={"id": id}, stream=True)
+            token=None
+            for key, value in response.cookies.items():
+                if key.startswith("download_warning"):
+                    token = value  
+            if token:
+                params = {"id": id, "confirm": token}
+                response = session.get(URL, params=params, stream=True)
+            return response
+        response = startp(URL,id)
         try:
             header = response.headers['Content-Disposition']
         except:
