@@ -81,7 +81,7 @@ async def group62(client, message):
                             ab.append(a)
                             text2=text2.replace("▫️",'▪️',a)
                             await mkv22.edit_text(text=f"{text2}")   
-        startr()
+        await startr()
         asyncio.sleep(1)
         try:
             clip = VideoFileClip(path+file_name)
