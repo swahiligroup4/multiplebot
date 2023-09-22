@@ -91,7 +91,6 @@ async def start_msg_admins(client, message):
     usr_cmdall1 = message.text
     cmd=message
     try:
-        aby = await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) )
         aby = await  is_subscribed(client, message, int(ban_status['group'].split('##')[0]) )
         
     except :
@@ -105,28 +104,7 @@ async def start_msg_admins(client, message):
             text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kumtumia robot huyu mwambie admin wako add update channel na main movie group bonyeza **@{ts.username}** kumfuata inbox",
         )
         return
-    if not await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
-        try:
-           invite_link = ban_status['channels'].split('##')[1]    
-           invite_link1 = ban_status['group'].split('##')[1]
-        except ChatAdminRequired:
-            logger.error("Make sure Bot is admin in Forcesub channel")
-            return
-        btn = [
-            [
-                InlineKeyboardButton(
-                    "🤖 Join Updates Channel", url=invite_link
-                )],
-                [InlineKeyboardButton(
-                    "🤖MAIN Movie group", url=invite_link1
-                )
-            ]
-        ]
-        await client.send_message(
-            chat_id=message.from_user.id,
-            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kupata maelekezo robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya **movie group** kurudi kwenye ili kuendelea kupata huduma zetu",
-            reply_markup=InlineKeyboardMarkup(btn),
-            )
+    
     if usr_cmdall1.startswith("/start mwongozo"):
         abx=await client.send_message(
                 chat_id=cmd.from_user.id,
