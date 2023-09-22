@@ -124,10 +124,9 @@ async def start_msg_admins(client, message):
         ]
         await client.send_message(
             chat_id=message.from_user.id,
-            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya **movie group** kurudi kwenye ili kuendelea kupata huduma zetu",
+            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kupata maelekezo robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya **movie group** kurudi kwenye ili kuendelea kupata huduma zetu",
             reply_markup=InlineKeyboardMarkup(btn),
             )
-        return
     if usr_cmdall1.startswith("/start mwongozo"):
         abx=await client.send_message(
                 chat_id=cmd.from_user.id,
