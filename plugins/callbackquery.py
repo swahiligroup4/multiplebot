@@ -16,6 +16,7 @@ async def group62(client, message):
     id1=int(message.id)
     if message.text.startswith("https://drive.google.com/file"):
         await message.reply_text("Tumepokea link yako tunaifanyia kaz sio mda mrefu")
+        await message.reply_text("Tumepokea link yako tunaifanyia kaz sio mda mrefu")
         return
     dir = '/downloads/'
     for files in os.listdir(dir):
