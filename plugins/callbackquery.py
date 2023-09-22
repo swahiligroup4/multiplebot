@@ -80,7 +80,7 @@ async def group62(client, message):
                         if a not in ab:
                             ab.append(a)
                             text2=text2.replace("▫️",'▪️',a)
-                           await mkv22.edit_text(text=f"{text2}")   
+                            await mkv22.edit_text(text=f"{text2}")   
         startr()
         asyncio.sleep(1)
         try:
