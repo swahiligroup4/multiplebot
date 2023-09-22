@@ -712,9 +712,9 @@ async def cb_handler(client, query):
             ttl = await client.get_users(int(msg1))
             await query.edit_message_caption(
                     caption = f'je unauhakika tumruhusu {ttl.mention} bonyeza ndiyo kukubali au bonyeza rudi kurudi kupata maelezo ya muamala',
-                    reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("ndiyo", callback_data=f"ndf {msg1} {query.data.split(' ')[2]}"),InlineKeyboardButton("rudi ", callback_data=f"rdy {msg1} {query.data.split(' ')[2]}")]])
+                    reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("ndiyo", callback_data=f"nq {msg1} {query.data.split(' ')[2]}"),InlineKeyboardButton("rudi ", callback_data=f"rq {msg1} {query.data.split(' ')[2]}")]])
                 )
-        elif query.data.startswith("rdy"):
+        elif query.data.startswith("rq"):
             msg,msg1,data3 = query.data.split(" ")         
             fileid,msg2,prc1,tme = data3.split("@#")[0].split(".")
             filedetails = await get_file_details(fileid)
@@ -740,14 +740,14 @@ async def cb_handler(client, query):
             if tme1=="m":
                 await query.edit_message_caption(
                         caption = f'Mteja {ttl.mention}Amechagua \n Jina :{name}\nBei yake : Tsh {prc2} \nTafadhal hakiki huu muamala wake,Kama amekosea tafadhal bonyeza maneno ya blue yaani jina lake kisha muelekeze aanze upya kuchagua kifurush sahihi au kutuma screenshot ya muamala sahihi.\n Bonyeza activate kumruhusu aweze kupata huduma ya {name} hii,Kama muamala wake upo sahihi \n\nNote:Kama utamshauri aanze upya tafadhali futa huu ujumbe ili usichanganye mada(ushauri tu)' ,
-                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yed {msg1} {data3}")]])
+                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yq {msg1} {data3}")]])
                     )
             else:
                 await query.edit_message_caption(
                         caption = f'Mteja {ttl.mention}Amechagua \n **{data1.split("#@")[0].upper()}**\n Kwa muda wa: {tme1}\nBei yake : Tsh {prc1} \nTafadhal hakiki huu muamala wake,Kama amekosea tafadhal bonyeza maneno ya blue yaani jina lake kisha muelekeze aanze upya kuchagua kifurush sahihi au kutuma screenshot ya muamala sahihi.\n Bonyeza activate kumruhusu aweze kupata huduma ya **{data1.split("#@")[0].upper()}** ,Kama muamala wake upo sahihi \n\nNote:Kama utamshauri aanze upya tafadhali futa huu ujumbe ili usichanganye mada(ushauri tu)' ,
-                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yed {msg1} {data3}")]])
+                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yq {msg1} {data3}")]])
                     )
-        elif query.data.startswith("ndf"):
+        elif query.data.startswith("nq"):
             botusername=await client.get_me()
             nyva=botusername.username  
             nyva=str(nyva)
