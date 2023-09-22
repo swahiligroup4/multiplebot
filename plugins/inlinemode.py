@@ -23,18 +23,6 @@ async def give_filter(client, query):
     userdetails1= await is_user_exist(hjkl,nyva)
     text = query.query.strip()
     db_sts =await db.get_db_status(group_id)
-    if not await is_subscribed(client, query,int(db_sts['channels'].split('##')[0])):
-        await query.answer(results=[],
-                           cache_time=0,
-                           switch_pm_text='👉 Bonyeza hapa kujoin channel kupata updates zake',
-                           switch_pm_parameter="subscribe")
-        return
-    if not userdetails1:
-        await query.answer(results=[],
-            cache_time=0,
-            switch_pm_text='👉 Tafadhali bonyeza hapa kupata muongozo',
-            switch_pm_parameter="start")
-        return
     ban = await db.get_ban_status(group_id) 
     gd1 = db_sts['user_link']
     offset = int(query.offset or 0)
