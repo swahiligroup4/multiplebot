@@ -61,26 +61,27 @@ async def group62(client, message):
             continue
         file_name = re.search(r'filename="(.*)"', header).group(1)
         mkv22=await client.send_message(text="downloading.... kuwa na subra tunadownload kwenye kisha tuapload telegram ",chat_id=mkv1.from_user.id)
-        with open(path+file_name, "wb") as f:
-            total_length = response.headers.get('content-length')
-            if total_length is None: # no content length header
-                f.write(response.content)
-            else:
-                dl = 0
-                ab=[]
-                total_length = int(total_length)
-                for data in response.iter_content(chunk_size=1024):
-                    dl += len(data)
-                    f.write(data)
-                    f.flush()
-                    a = int(10 * dl / total_length)
-                    asyncio.sleep(0.5)
-                    text2=f"downloading [▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️]\nName:{file_name}\nkwenye computer yangu "
-                    if a not in ab:
-                        ab.append(a)
-                        text2=text2.replace("▫️",'▪️',a)
-                        await mkv22.edit_text(text=f"{text2}")   
-        #open( path+file_name , 'wb').write(response.content)
+        async def startr():
+            with open(path+file_name, "wb") as f:
+                total_length = response.headers.get('content-length')
+                if total_length is None: # no content length header
+                    f.write(response.content)
+                else:
+                    dl = 0
+                    ab=[]
+                    total_length = int(total_length)
+                    for data in response.iter_content(chunk_size=4096):
+                        dl += len(data)
+                        f.write(data)
+                        f.flush()
+                        a = int(10 * dl / total_length)
+                        asyncio.sleep(1)
+                        text2=f"downloading [▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️]\nName:{file_name}\nkwenye computer yangu "
+                        if a not in ab:
+                            ab.append(a)
+                            text2=text2.replace("▫️",'▪️',a)
+                           await mkv22.edit_text(text=f"{text2}")   
+        startr()
         asyncio.sleep(1)
         try:
             clip = VideoFileClip(path+file_name)
