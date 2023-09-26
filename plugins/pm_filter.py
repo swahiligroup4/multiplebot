@@ -285,7 +285,8 @@ async def groupprv(client, message):
             else:
                 await message.reply_text('Tafadhali hujajiunga na kifurushi chochote cha kwetu jiunge kwanza ndio tutawezesha email yako')
         else:
-            await message.reply_text(f'Tafadhali jiunge kwanza na kikund chetu {gd["group"].split("##")[1]}\nkisha ndio tutaadd email yako')         
+            await add_user(hjkl,nyva)
+            await message.reply_text(f'Tafadhali Tuma tena email yako kwa changamoto yyte join kikundi chetu {gd["group"].split("##")[1]}')         
     else:
         await message.reply_text('Tafadhal ujumbe huu uliontumia sjauelewa Tafadhali kama n email:ntumie email tu bila neno jingine \nMfano  mohamed@gmail.com \n\nZingatia\n1.usiruke nafasi kwenye email yako  \n2.hakisha n gmail (hrmr5@gmail.com)\n3.hakikisha huongez neno lingine zaid ya email \n\nKwa salio lako tuma neno Salio \nZingatia lianze na herufi kubwa S na hizo nyingine ndogo\n\n Maelekezo mengine mchek hrm45')
         return
