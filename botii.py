@@ -65,7 +65,7 @@ class Bot3(Client):
             name='SESSION3' ,
             api_id= 20670303,
             api_hash= "826ddb9f18248500206bb77675798229" ,
-            bot_token="6690109080:AAHHnesMBFbaf1YfnVZw1QJB5tm3fNvocYk",
+            bot_token="6342593456:AAHwzyc0H9pOBe9dgnG2HTz5UGRvpht98qY",
             workers=50,
             plugins={"root": "plugins"},
             sleep_threshold=4,
