@@ -1,113 +1,14 @@
 from info import filters,CHANNELS,OWNER_ID
 import uuid    
-import time,re,os,asyncio,subprocess, json,shutil
+import time,re,os,asyncio
 from plugins.base_command import btn22
 from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file,add_user
 from botii  import Bot0
 import requests
-from moviepy.editor import VideoFileClip
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 
-@Bot0.on_message( (filters.regex('^gdrive.*') | filters.regex('^https://drive.google.com/file.*')) & filters.private )
-async def group62(client, message):
-    azb="start"
-    id1=int(message.id)
-    if message.text.startswith("https://drive.google.com/file"):
-        await message.reply_text("Tumepokea link yako tunaifanyia kaz sio mda mrefu")
-        return
-    dir = '/downloads/'
-    for files in os.listdir(dir):
-        path = os.path.join(dir, files)
-        try:
-            shutil.rmtree(path)
-        except OSError:
-            os.remove(path)
-    while azb=="start":  
-        path="/downloads/"
-        mkv1=await client.get_messages("me",id1)
-        if mkv1.text != None and mkv1.from_user != None :
-            if mkv1.text.startswith("https://drive.google.com/file"):
-                id1=id1+1
-            else:
-                id1=id1+1
-                continue 
-        elif mkv1.from_user != None:
-            id1=id1+1
-            continue
-        else:
-            asyncio.sleep(5)
-            continue
-        id =mkv1.text.replace("https://drive.google.com/file/d/","").split("/")[0]
-        #id ="11FGje-ft9guEbUThRxqZ1KHCYtdS7fPP"
-        URL = "https://docs.google.com/uc?export=download&confirm=1"
-        def startp(URL,id):
-            session = requests.Session()
-            response = session.get(URL, params={"id": id}, stream=True)
-            token=None
-            for key, value in response.cookies.items():
-                if key.startswith("download_warning"):
-                    token = value  
-            if token:
-                params = {"id": id, "confirm": token}
-                response = session.get(URL, params=params, stream=True)
-            return response
-        response = startp(URL,id)
-        try:
-            header = response.headers['Content-Disposition']
-        except:
-            await mkv1.reply_text("link not shared to everyone please change the setting and send the link again")
-            continue
-        file_name = re.search(r'filename="(.*)"', header).group(1)
-        mkv22=await client.send_message(text="downloading.... kuwa na subra tunadownload kwenye kisha tuapload telegram ",chat_id=mkv1.from_user.id)
-        async def startr():
-            with open(path+file_name, "wb") as f:
-                total_length = response.headers.get('content-length')
-                if total_length is None: # no content length header
-                    f.write(response.content)
-                else:
-                    dl = 0
-                    ab=[]
-                    total_length = int(total_length)
-                    for data in response.iter_content(chunk_size=4096):
-                        dl += len(data)
-                        f.write(data)
-                        f.flush()
-                        a = int(10 * dl / total_length)
-                        asyncio.sleep(1)
-                        text2=f"downloading [▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️]\nName:{file_name}\nkwenye computer yangu "
-                        if a not in ab:
-                            ab.append(a)
-                            text2=text2.replace("▫️",'▪️',a)
-                            await mkv22.edit_text(text=f"{text2}")   
-        await startr()
-        asyncio.sleep(1)
-        try:
-            clip = VideoFileClip(path+file_name)
-            duration = clip.duration
-            clip.save_frame("/app/frame1.jpeg",t=(int(duration))/2)
-            thumb="/app/frame1.jpeg"
-        except:
-            duration = 0
-            thumb = None
-        ab=[]
-        async def progress(current, total):
-            text2=f"Uploading [▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️]\nName:{file_name}\nTo Telegram"
-            a = int(current * 10 / total)
-            if a not in ab:
-                ab.append(a)
-                text2=text2.replace("▫️",'▪️',a)
-                await mkv22.edit_text(text=f"{text2}")
-        await client.send_video(chat_id=mkv1.from_user.id, video=open(path + file_name, 'rb'),duration=int(duration),file_name=file_name,caption=file_name,thumb=thumb,progress = progress)
-        mkv22.delete()
-        #await message.reply_text(f"{response}hi")
-        os.remove(path+file_name)
-        try:
-            os.remove("/app/frame1.jpeg")
-        except:
-            pass
-        asyncio.sleep(1)
 @Bot0.on_message( filters.command('edit_admin') & filters.private)
 async def group2(client, message):
     botusername=await client.get_me()
