@@ -81,7 +81,7 @@ class Bot4(Client):
             name= 'SESSION4' ,
             api_id=API_ID,
             api_hash=API_HASH,
-            bot_token="2136703772:AAH7YT8ngkmRmsSgU8BUX1zjQT8hw8JVdyE",
+            bot_token="6658819313:AAFdl4m3NsB5oYHvGpneldXc1duA0N-q_zs",
             workers=50,
             plugins={"root": "plugins"},
             sleep_threshold=4,
