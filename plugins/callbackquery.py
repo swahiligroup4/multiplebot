@@ -228,12 +228,13 @@ async def cb_handler(client, query):
                 return
             try:
                 int(mkv.text)
+            if mkv.text==0:
+                await mkv.reply(text='Movie hii umeset iwe bure kwa wateja wako endelea kujaza maelezo mengine')
             except:
-                await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali tuma namba tu!!!!!!Anza upya")
-
+                await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi')
                 return
-            ghi=f'{mkv.text.lower()}.dd#.{query.from_user.id}'
-            await Media.collection.update_one({'_id':query.data.split(" ",1)[1]},{'$set':{'text':ghi}})
+            ghi=f'{mkv.text}'
+            await Media.collection.update_one({'_id':query.data.split(" ",1)[1]},{'$set':{'price':ghi}})
             await mkv.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
         
         elif query.data.startswith("xtext"):
