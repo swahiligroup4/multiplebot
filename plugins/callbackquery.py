@@ -228,8 +228,8 @@ async def cb_handler(client, query):
                 return
             try:
                 int(mkv.text)
-            if mkv.text==0:
-                await mkv.reply(text='Movie hii umeset iwe bure kwa wateja wako endelea kujaza maelezo mengine')
+                if mkv.text==0:
+                    await mkv.reply(text='Movie hii umeset iwe bure kwa wateja wako endelea kujaza maelezo mengine')
             except:
                 await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi')
                 return
