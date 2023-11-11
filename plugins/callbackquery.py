@@ -203,7 +203,7 @@ async def cb_handler(client, query):
             ghi=f"{ghi1} {mkv1.text}#@{mkv77},{mkv22},{mkv33},{mkv44},{mkv55}#@{mkv6.text}"
             await db.update_db(query.from_user.id,ghi,ab)
             await mkv1.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'kundii')]]))
-        elif query.data.startswith("cprice"):
+        elif query.data.startswith("xprice"):
             await query.answer('wait please')
             a=False
             b=time.time()
