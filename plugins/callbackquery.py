@@ -203,6 +203,39 @@ async def cb_handler(client, query):
             ghi=f"{ghi1} {mkv1.text}#@{mkv77},{mkv22},{mkv33},{mkv44},{mkv55}#@{mkv6.text}"
             await db.update_db(query.from_user.id,ghi,ab)
             await mkv1.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'kundii')]]))
+        elif query.data.startswith("cprice"):
+            await query.answer('wait please')
+            a=False
+            b=time.time()
+            mkv1 = await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie Bei mpya ya movie/series  hii')
+            id1=mkv1.id+1
+            while a==False:
+                try:
+                    mkv = await client.get_messages("me",id1)
+                    if mkv.text!=None:
+                        a=True
+                    
+                    if (time.time()-b)>100:
+                        mkv2 = await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 1 iliniweze kuhudumia na wengine")
+                        return
+                    if mkv.from_user.id != query.from_user.id :
+                        a=False
+                        id1=id1+1
+                except:
+                    a=False
+            if mkv.text==None:
+                await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali tuna maneno sio picha wala kingine")
+                return
+            try:
+                int(mkv.text)
+            except:
+                await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali tuma namba tu!!!!!!Anza upya")
+
+                return
+            ghi=f'{mkv.text.lower()}.dd#.{query.from_user.id}'
+            await Media.collection.update_one({'_id':query.data.split(" ",1)[1]},{'$set':{'text':ghi}})
+            await mkv.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
+        
         elif query.data.startswith("xtext"):
             await query.answer('wait please')
             a=False
