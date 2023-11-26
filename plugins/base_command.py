@@ -752,6 +752,8 @@ async def cb_handler(client, query):
                                 await abk.edit_text(text=f"Sasa unaweza kutuma ombi lingine")
                                 break
                         return 
+                    else:
+                        await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"} ,{'$set':{'tme':0}})             
                     ab1,ab2,ab4,ab3=query.data.split('##')
                     abdata = ""
                     ab1=ab1.split(" ")[1]
