@@ -32,7 +32,7 @@ class Bot1(Client):
             name='Mediasiearch',
             api_id=API_ID,
             api_hash=API_HASH,
-            bot_token='6332194321:AAE2pkCDZzeYkNfM_jd5gFt3wc-QyD6QfDY',
+            bot_token='6760040835:AAHiD_6npgM8SurQnX11rwAjJ8DITQzVY60',
             workers=50,
             plugins={"root": "plugins"},
             sleep_threshold=5,
@@ -172,7 +172,7 @@ class Bot9(Client):
     async def stop(self, *args):
         await super().stop()
 BOT0=None
-for i in [Bot,Bot1,Bot2,Bot3]:
+for i in [Bot,Bot1,Bot2]:
     Bot0=i
 async def main():
     app=[Bot(),Bot1(),Bot2(),Bot3()]
