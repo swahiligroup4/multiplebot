@@ -31,7 +31,8 @@ async def grouop2(client, message):
     cursor = Media.find(filter)
     cursor.sort('text', 1)
     for file in await cursor.to_list(length=int(total_results)):
-        await Media.collection.update_one({'_id':file.id},{'$set':{'group_id':int(message.command[2])}})
+        reply=file.reply.replace("@hrm45","@Mrlovebite_Tz")
+        await Media.collection.update_one({'_id':file.id},{'$set':{'reply':reply}})
             
 @Bot0.on_callback_query()
 async def cb_handler(client, query):
