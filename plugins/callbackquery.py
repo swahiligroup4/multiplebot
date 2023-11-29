@@ -22,8 +22,8 @@ async def group2(client, message):
         ) 
 @Bot0.on_message( filters.command('rename') & filters.private)
 async def grouop2(client, message):
-    if len(m.command) != 3:
-        await m.reply_text(
+    if len(message.command) != 3:
+        await message.reply_text(
             f"tuma /rename 1234 1234")
         return 
     filter = {'group_id': int(message.command[1])}
