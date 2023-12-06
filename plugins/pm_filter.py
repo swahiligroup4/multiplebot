@@ -136,7 +136,11 @@ async def rrecussive(client, message):
         ict=0
         user_id3= await db.is_bot_exist(nyva)
         documents=await get_filter_results(f"user_id3",user_id3)
-        for document in random.shuffle(documents):
+        try:
+            random.shuffle(documents)
+        except:
+            pass
+        for document in documents:
             file_status = document.grp
             acs = document.descp.split('.dd#.')[0]
             strid = document.id
