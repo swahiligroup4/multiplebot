@@ -131,6 +131,52 @@ async def rrecussive(client, message):
                 #hjkl1 = f'{group_id}##{message.chat.id}'
                 #await User.collection.update_one({'_id':hjkl1})
                 print(e)
+        await asyncio.sleep(3600)
+        data1=await is_group_exist("channel",nyva)
+        ict=0
+        user_id3= await db.is_bot_exist(nyva)
+        documents=await get_filter_results(f"user_id3",user_id3)
+        for document in documents:
+            file_status = document.grp
+            acs = document.descp.split('.dd#.')[0]
+            strid = document.id
+            reply_text = document.reply
+            fileid = document.file
+            msg_type = document.type
+            abz=[]
+            for dta1 in data1:
+                for data2 in ["auto"]:
+                    if data2 in dta1.id and dta1.id.split("##")[0] not in abz:
+                        abz.append(dta1.id.split("##")[0])
+            if file_status.startswith('normal') and acs=="x":
+                continue
+            elif acs!= "x":
+                continue
+            if msg_type == 'Photo':   
+                for data2 in abz:
+                    try:
+                        await client.send_photo(
+                            chat_id=int(data2),
+                            photo = fileid,
+                            disable_notification=True,
+                            caption = reply_text,
+                            reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
+                        )
+                    except Exception as err:
+                        await message.reply_text(f"Something went wrong!\n\n**Error:** `{err}`")                    
+            else:
+                for data2 in abz:
+                    try:
+                        await client.send_cached_media(
+                            chat_id=int(data2),
+                            file_id = fileid,
+                            disable_notification=True,
+                            caption = reply_text,
+                            reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
+                        )
+                    except:
+                        pass
+                
         await asyncio.sleep(14400)
         for grp in await is_group_exist("group",nyva):
             try:
