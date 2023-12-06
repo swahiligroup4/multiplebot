@@ -14,13 +14,13 @@ async def addchannel(client, message):
     chat_type =f"{ message.chat.type}" 
     if len(message.command) != 2:
         await message.reply_text(
-            f"Tafadhali anza na neno /ongeza kisha neno mfano \n/ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
+            f"Tafadhali anza na neno /ongeza kisha neno mfano \n/ongeza Imetafsiriwa \n\nManeno yapo aina 5 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \n5.auto \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
             quote=True
         ) 
         return
     if chat_type == "ChatType.CHANNEL":
         await message.reply_text(
-                "Samahani forward hii command nlioreply kwa robot private",
+                "Samahani forward hiyo command hapo juu nlioreply kwa robot private",
                 quote=True
             )
         return
@@ -61,7 +61,7 @@ async def addchannel(client, message):
         st = await client.get_chat_member(group_id, "me")
         st.status=(f"{st.status}".split(".")[1])
         if st.status == "ADMINISTRATOR":
-            if message.command[1].lower() in "imetafsiriwa haijatafsiriwa movie series":
+            if message.command[1].lower() in "imetafsiriwa haijatafsiriwa movie series auto":
                 abf=message.command[1].strip()
                 hjkl1 = f'{group_id}##{abf.lower()}'
                 if not await is_user_exist(hjkl1,nyva):
@@ -72,7 +72,7 @@ async def addchannel(client, message):
                     await message.reply_text("Samahani hich kikundi tumeshakiadd", quote=True)
             else:
                 await message.reply_text(
-                    f"tafadhali anza na neno /ongeza kisha neno mfano /ongeza Imetafsiriwa \n\nManeno yapo aina 4 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nkwa maelekezo zaid mchek @hrm45 akuelekeze",
+                    f"tafadhali anza na neno /ongeza kisha neno mfano /ongeza Imetafsiriwa \n\nManeno yapo aina 5 tu.\n 1.Imetafsiriwa\n2.haijatafsiriwa \n3.movie\n4.series \nauto\nkwa maelekezo zaid mchek @hrm45 akuelekeze",
                     quote=True
                 )
                 return
