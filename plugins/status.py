@@ -32,7 +32,7 @@ async def handle_admin_status(bot, cmd):
                     nyva = abc2["bot_link"] 
                     if not await is_user_exist(hjkl,nyva):
                         await add_user(hjkl,nyva)
-                    gdh = await is_user_exist(hjkl,nyva):
+                    gdh = await is_user_exist(hjkl,nyva)
                     for gvb in gdh:
                         gdhz=gvb.email
                     botusername=await bot.get_me()
