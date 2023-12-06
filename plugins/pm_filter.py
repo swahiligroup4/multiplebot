@@ -152,6 +152,7 @@ async def rrecussive(client, message):
                 continue
             elif acs!= "x":
                 continue
+            ict+=1
             if msg_type == 'Photo':   
                 for data2 in abz:
                     try:
@@ -176,7 +177,8 @@ async def rrecussive(client, message):
                         )
                     except:
                         pass
-                
+                if ict==2:
+                    break
         await asyncio.sleep(14400)
         for grp in await is_group_exist("group",nyva):
             try:
