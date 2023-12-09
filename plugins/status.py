@@ -39,9 +39,12 @@ async def handle_admin_status(bot, cmd):
                     nyva=botusername.username  
                     nyva=str(nyva)
                     if nyva ==abc2["bot_link"]:
-                        await bot.send_message(chat_id=int(user['user_id']),text=f"{abc} tafadhali jiunge kuendelea kupata huduma zetu kwa bei nafuu")
-                        await bot.send_message(chat_id=int( user['db_name'] ),text=f"Tafadhali naomba uondoe uwezo wakuacces mda wake umeisha kutumia \n{abc}\nkwa email\n**{gdhz}**\n kama uliadd kwa email kama sivyo bonyeza close",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Close",callback_data="close")]]))
-                        await db.delete_acc(user['id'])
+                        try:
+                            await db.delete_acc(user['id'])
+                            await bot.send_message(chat_id=int(user['user_id']),text=f"{abc} tafadhali jiunge kuendelea kupata huduma zetu kwa bei nafuu")
+                            await bot.send_message(chat_id=int( user['db_name'] ),text=f"Tafadhali naomba uondoe uwezo wakuacces mda wake umeisha kutumia \n{abc}\nkwa email\n**{gdhz}**\n kama uliadd kwa email kama sivyo bonyeza close",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Close",callback_data="close")]]))
+                        except Exception as e:
+                            await bot.send_message(chat_id=int( user['db_name'] ),text=f"Tafadhali tuma huu kwa msimamizi wangu aweze rekebisha hili tatizo {e}"
                     asyncio.sleep(10) 
                 
                     
