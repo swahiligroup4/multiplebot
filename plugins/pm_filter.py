@@ -5,7 +5,7 @@ from info import filters
 import asyncio
 from plugins.status import handle_admin_status
 from plugins.database import db
-from utils import get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user,is_group_exist,get_random_details
+from utils import getget_filter_result,get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user,is_group_exist,get_random_details
 @Bot0.on_message(filters.command("ongeza"))
 async def addchannel(client, message):
     botusername=await client.get_me()
@@ -135,7 +135,7 @@ async def rrecussive(client, message):
         data1=await is_group_exist("channel",nyva)
         ict=0
         user_id3= await db.is_bot_exist(nyva)
-        documents=await get_filter_results(f"user_id3",user_id3)
+        documents=await get_filter_result(int(user_id3))
         try:
             random.shuffle(documents)
         except:
