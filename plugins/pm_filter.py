@@ -95,7 +95,7 @@ async def rrecussive(client, message):
     a=False
     await message.reply_text("olready implemented")
     while a==False:
-        await asyncio.sleep(120)
+        await asyncio.sleep(14400)
         for grp in await is_group_exist("group",nyva):
             try:
                 grp_id = int(grp.id.split("##")[1])
@@ -131,7 +131,7 @@ async def rrecussive(client, message):
                 #hjkl1 = f'{group_id}##{message.chat.id}'
                 #await User.collection.update_one({'_id':hjkl1})
                 print(e)
-        await asyncio.sleep(60)
+        await asyncio.sleep(3600)
         data1=await is_group_exist("channel",nyva)
         ict=0
         user_id3= await db.is_bot_exist(nyva)
@@ -183,7 +183,7 @@ async def rrecussive(client, message):
                         pass
                 if ict==2:
                     break
-        await asyncio.sleep(180)
+        await asyncio.sleep(14400)
         for grp in await is_group_exist("group",nyva):
             try:
                 grp_id = grp.id.split("##")[1]
