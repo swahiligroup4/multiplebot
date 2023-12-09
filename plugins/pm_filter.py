@@ -5,7 +5,7 @@ from info import filters
 import asyncio
 from plugins.status import handle_admin_status
 from plugins.database import db
-from utils import getget_filter_result,get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user,is_group_exist,get_random_details
+from utils import get_filter_result,get_filter_results, is_user_exist,User ,get_file_details,is_subscribed,add_user,is_group_exist,get_random_details
 @Bot0.on_message(filters.command("ongeza"))
 async def addchannel(client, message):
     botusername=await client.get_me()
