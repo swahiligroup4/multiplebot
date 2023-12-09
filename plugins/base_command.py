@@ -71,9 +71,6 @@ async def start_msg_admins(client, message):
     hjkl = f'{user_details}##{message.from_user.id}'
     if not await is_user_exist(hjkl,nyva):
         await add_user(hjkl,nyva)
-    if not user_details:
-        return
-    
     hjkl = f'{user_details}##{message.from_user.id}'
     user_details1 = await is_user_exist(hjkl,nyva)
     ban_status = await db.get_db_status(user_details)   
