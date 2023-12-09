@@ -748,8 +748,8 @@ async def del_filter(client, message):
         for a in range(1,3):
             #for ad in await  get_filter_results(dt.id,message.from_user.id):
             for i in range(1,46):
-                await Media.collection.delete_one({'group_id':message.from.id})
-            await Media.collection.delete_one(filter)
+                await Media.collection.delete_one({'group_id':message.from_user.id})
+            #await Media.collection.delete_one(filter)
             await message.reply_text(
                 f"<code>{text.split('.dd#.')[0]}</code>  deleted successful.",
                 quote=True
