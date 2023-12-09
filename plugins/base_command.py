@@ -68,7 +68,9 @@ async def start_msg_admins(client, message):
         reply_markup = InlineKeyboardMarkup(start_keyboard_c)
     
     user_details = await db.is_bot_exist(nyva)
-    
+    hjkl = f'{user_details}##{message.from_user.id}'
+    if not await is_user_exist(hjkl,nyva):
+        await add_user(hjkl,nyva)
     if not user_details:
         return
     
