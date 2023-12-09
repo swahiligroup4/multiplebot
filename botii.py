@@ -32,7 +32,7 @@ class Bot1(Client):
             name='Mediasiearch',
             api_id=API_ID,
             api_hash=API_HASH,
-            bot_token='6760040835:AAHiD_6npgM8SurQnX11rwAjJ8DITQzVY60',
+            bot_token='6703433962:AAElJmoIXJZ2sIAv5Hd9rnF-vEnp788OFjc',
             workers=50,
             plugins={"root": "plugins"},
             sleep_threshold=5,
