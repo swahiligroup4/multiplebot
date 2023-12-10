@@ -30,6 +30,7 @@ async def handle_admin_status(bot, cmd):
                             abc=f"{file.text.split('.dd#.')[0]} mda wake wa kuipakua umeisha"  
                     hjkl=f'{user["db_name"]}##{user["user_id"]}'
                     nyva = abc2["bot_link"] 
+                    
                     if not await is_user_exist(hjkl,nyva):
                         await add_user(hjkl,nyva)
                     gdh = await is_user_exist(hjkl,nyva)
@@ -38,6 +39,7 @@ async def handle_admin_status(bot, cmd):
                     botusername=await bot.get_me()
                     nyva=botusername.username  
                     nyva=str(nyva)
+                    await db.delete_acc(user['id'])
                     if nyva ==abc2["bot_link"]:
                         try:
                             await db.delete_acc(user['id'])
