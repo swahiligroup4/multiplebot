@@ -86,8 +86,4 @@ MARKDOWN_HELP = """<b><u>Markdown Formatting</u></b>
     <u>Alert Button</u>:
     <code>[Button Text](buttonalert:Alert Text)</code>
     <u>In Sameline</u>:
-    <code>[Button Text](buttonurl:https://t.me/CodeXBotz:same)</code></i>
-○ <b>Notes:</b>
-    <i>Keep every Buttons in Seperate line when formating</i>
-    <i>Your alert message text must be less than 200 characters, otherwise bot will ignore that button</i>
-○ <b>Tip:</b> <i>You can add buttons for sticker and video note in /add command</i>"""
+    <code>[Button Text](buttonurl:https://t.me/CodeXBotz:same)</code></i>"""
