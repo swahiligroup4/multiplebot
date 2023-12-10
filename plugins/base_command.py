@@ -1,12 +1,12 @@
 from info import filters,CHANNELS,OWNER_ID
 import uuid    
-import time  
+import time      
 import asyncio
 from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,User,is_subscribed,is_group_exist,save_file,add_user
 from botii  import Bot0
 from plugins.database import db
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from plugins.strings import START_MESSAGE, HELP_MESSAGE, ABOUT_MESSAGE, MARKDOWN_HELP
 start_keyboard = [
     [
@@ -68,10 +68,9 @@ async def start_msg_admins(client, message):
         reply_markup = InlineKeyboardMarkup(start_keyboard_c)
     
     user_details = await db.is_bot_exist(nyva)
-    
-    if not user_details:
-        return
-    
+    hjkl = f'{user_details}##{message.from_user.id}'
+    if not await is_user_exist(hjkl,nyva):
+        await add_user(hjkl,nyva)
     hjkl = f'{user_details}##{message.from_user.id}'
     user_details1 = await is_user_exist(hjkl,nyva)
     ban_status = await db.get_db_status(user_details)   
@@ -91,7 +90,6 @@ async def start_msg_admins(client, message):
     usr_cmdall1 = message.text
     cmd=message
     try:
-        aby = await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) )
         aby = await  is_subscribed(client, message, int(ban_status['group'].split('##')[0]) )
         
     except :
@@ -105,29 +103,7 @@ async def start_msg_admins(client, message):
             text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kumtumia robot huyu mwambie admin wako add update channel na main movie group bonyeza **@{ts.username}** kumfuata inbox",
         )
         return
-    if not await  is_subscribed(client, message, int(ban_status['channels'].split('##')[0]) ):
-        try:
-           invite_link = ban_status['channels'].split('##')[1]    
-           invite_link1 = ban_status['group'].split('##')[1]
-        except ChatAdminRequired:
-            logger.error("Make sure Bot is admin in Forcesub channel")
-            return
-        btn = [
-            [
-                InlineKeyboardButton(
-                    "🤖 Join Updates Channel", url=invite_link
-                )],
-                [InlineKeyboardButton(
-                    "🤖MAIN Movie group", url=invite_link1
-                )
-            ]
-        ]
-        await client.send_message(
-            chat_id=message.from_user.id,
-            text=f"Samahani Mpendwa **{message.from_user.mention}**\n\nTafadhali ili kumtumia robot huyu join channel yetu ya updates zake!!!\n\nkisha bonyeza button ya **movie group** kurudi kwenye ili kuendelea kupata huduma zetu",
-            reply_markup=InlineKeyboardMarkup(btn),
-            )
-        return
+    
     if usr_cmdall1.startswith("/start mwongozo"):
         abx=await client.send_message(
                 chat_id=cmd.from_user.id,
@@ -167,19 +143,19 @@ async def start_msg_admins(client, message):
                         chat_id=cmd.from_user.id,
                         photo=files.file,
                         caption=f_caption,
-                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔗 DOWNLOAD",url= f'https://t.me/{nyva}?start=subinps_-_-_-_{file_id}')]])
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 DOWNLOAD",url= f'https://t.me/{nyva}?start=subinps_-_-_-_{file_id}')]])
                     )     
                 else:
                     await client.send_cached_media(
                         chat_id=cmd.from_user.id,
                         file_id=files.file,
                         caption=f_caption,
-                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔗 DOWNLOAD",url= f'https://t.me/{nyva}?start=subinps_-_-_-_{file_id}')]])
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📤 DOWNLOAD",url= f'https://t.me/{nyva}?start=subinps_-_-_-_{file_id}')]])
                     )
                              
                 await client.send_message(
                     chat_id=cmd.from_user.id,
-                    text=f"Samahani **{cmd.from_user.first_name}** nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n Tafadhal chagua nchi uliopo kuweza kulipia uweze kuitazama \n\n**Kisha baada ya kufanya malipo na kuthibitishiwa malipo yako na admin utabonyeza download hapo juu kuipata movie yako kama utalipia kifurushi utazipakua nyingine zaid kwenye kikundi....\n** [BONYEZA HAPA](https://t.me/{lk.username})** kwa msaada/maelekezo zaidi ",
+                    text=f"Samahani **{cmd.from_user.first_name}**\n🚫nmeshindwa kukuruhusu kendelea kwa sababu muv au sizon uliochagua ni za kulipia\n🏘Tafadhal chagua nchi uliopo kuweza kulipia uweze kuitazama \n\n✅**Kisha baada ya kufanya malipo na kuthibitishiwa malipo yako na admin utabonyeza download hapo juu kuipata movie yako kama utalipia kifurushi utazipakua nyingine zaid kwenye kikundi....\n\n🙇🙇‍♂** [BONYEZA HAPA](https://t.me/{lk.username})** kwa msaada/maelekezo zaidi ",
                     disable_web_page_preview = True,
                     reply_markup=InlineKeyboardMarkup(
                         [
@@ -359,7 +335,7 @@ async def start_msg_admins(client, message):
                 if filedetails:  
                     link = files.descp.split('.dd#.')[2]
                     if link == 'data':
-                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha text', callback_data = f"xtext {file_id}")],[InlineKeyboardButton('Rekebisha caption', callback_data = f"xcaption {id2}")],[InlineKeyboardButton('Rekebisha video/file',callback_data = f"xfile {id2}")],[InlineKeyboardButton('Rekebisha kundi', callback_data = "xba")],[InlineKeyboardButton('Rekebisha Maelezo ya media', callback_data = f"xdescp {id2}")]])
+                        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha text', callback_data = f"xtext {file_id}")],[InlineKeyboardButton('Rekebisha caption', callback_data = f"xcaption {id2}")],[InlineKeyboardButton('Rekebisha video/file',callback_data = f"xfile {id2}")],[InlineKeyboardButton('Rekebisha kundi', callback_data = "xba")],[InlineKeyboardButton('Rekebisha bei', callback_data = f"xprice {id2}")],[InlineKeyboardButton('Rekebisha Maelezo ya media', callback_data = f"xdescp {id2}")]])
             
                     else:
                         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha text', callback_data = f"xtext {file_id}")],[InlineKeyboardButton('Rekebisha caption', callback_data = f"xcaption {id2}")],[InlineKeyboardButton('Rekebisha link', callback_data = f"xfile {id2}")],[InlineKeyboardButton('Rekebisha kundi', callback_data = "xba")],[InlineKeyboardButton('Rekebisha Maelezo ya media', callback_data = f"xdescp {id2}")]])
@@ -756,7 +732,8 @@ async def cb_handler(client, query):
                     for usr1 in user_dts:
                         tme1=usr1.tme
                         tme1=tme1
-                    if tme1 != 0 :
+            
+                    if tme1 > 0:
                         abk=await client.send_message(chat_id=query.from_user.id,text=f'tafadhal subiri kwa sekunde {tme1} kabla ya kutuma ombi jengine')
                         for i in range(0,tme1,10):
                             await asyncio.sleep(10)
@@ -774,6 +751,8 @@ async def cb_handler(client, query):
                                 await abk.edit_text(text=f"Sasa unaweza kutuma ombi lingine")
                                 break
                         return 
+                    else:
+                        await User.collection.update_one({'_id':f"{user_details}##{query.from_user.id}"} ,{'$set':{'tme':0}})             
                     ab1,ab2,ab4,ab3=query.data.split('##')
                     abdata = ""
                     ab1=ab1.split(" ")[1]
@@ -851,8 +830,6 @@ async def cb_handler(client, query):
             nyva=str(nyva)
             user_details = await db.is_bot_exist(nyva)
             ban_status = await db.get_db_status(user_details)   
-            #await client.restrict_chat_member(int(query.data.split(" ")[1]), query.from_user.id,
-                #ChatPermissions(can_send_messages=True,can_send_media_messages=True,can_send_other_messages=True,can_send_polls=True,can_invite_users=True,can_add_web_page_previews=True)) 
             hjkl = f'{user_details}##{query.from_user.id}'
             existt=await is_user_exist(hjkl,nyva)
             if not existt: 
@@ -990,7 +967,10 @@ Bonyeza button hapo chini kusoma hitimisho la huduma zetu """
             
                     except Exception as e :
                         await client.send_message(query.from_user.id,text=f'error{e}')         
-                    
+        elif query.data.startswith("3hdone"):
+            await query.edit_message_text("tumetaarifu kikamilifu asante kwa kuonyesha uaminifu kwa wateja wako")
+            gd=await db.get_db_status(query.from_user.id)
+            await client.send_message(chat_id=int(query.data.split(" ")[1]),text=f'Shukrani kwa subra yako sasa unaeza pata huduma zote ulizolipia kifurushi chamgamoto yoyote tuulize kwenye kikundi\n\n{gd["group"].split("##")[1]}')           
         elif query.data.startswith("3hydelte"):
             id1=query.data.split(" ")[1]                                                              
             await query.edit_message_caption(caption="je unauhakika unataka tufute",reply_markup= InlineKeyboardMarkup([[InlineKeyboardButton(text='yes',callback_data=f'3hdelte {id1}')] ,[InlineKeyboardButton(text='Close',callback_data=f'close')]]))                                                                        

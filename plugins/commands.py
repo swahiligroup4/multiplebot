@@ -340,29 +340,14 @@ async def new_filtervip(client, message):
                         caption = reply_text+"\n\n**Tafadhali chagua formate unayotaka kuanza nayo ili uanze kuongeza movie hii**",
                         reply_markup = reply_markup 
                     )
-                  
-            elif ab33=="ms":
-                reply_markup=btn22("season","series",f"3hsss##{strid}")
-                if msg_type == 'Photo':
-                    await message.reply_photo(
-                        photo = fileid,
-                        caption = reply_text+"\n\n**Tafadhali chagua season unayotaka kuanza nayo ili uanze kuongeza vipande kwenye season husika**",
-                        reply_markup = reply_markup 
-                    )
-                else:
-                    await message.reply_cached_media(
-                        file_id = fileid,
-                        caption = reply_text+"\n\n**Tafadhali chagua season unayotaka kuanza nayo ili uanze kuongeza vipande kwenye season husika**",
-                        reply_markup = reply_markup 
-                    )
     try:
         if fileid:
             data1=await is_group_exist("channel",nyva)
             abz=[]
-            for dta1 in dta1.id:
+            for dta1 in data1:
                 for data2 in ["haijatafsiriwa","imetafsiriwa","movie","series"]:
-                    if data2 in dta1 and int(dta1.split("##")[0]) not in abz:
-                        abz.append(dta1.split("##")[0])
+                    if data2 in dta1.id and dta1.id.split("##")[0] not in abz:
+                        abz.append(dta1.id.split("##")[0])
             if msg_type == 'Photo':  
                 await client.send_photo(
                     chat_id = CHANNELS,
@@ -373,8 +358,9 @@ async def new_filtervip(client, message):
                 for data2 in abz:
                     try:
                         await client.send_photo(
-                            chat_id=data2,
+                            chat_id=int(data2),
                             photo = fileid,
+                            disable_notification=True,
                             caption = reply_text,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
                         )
@@ -391,8 +377,9 @@ async def new_filtervip(client, message):
                 for data2 in abz:
                     try:
                         await client.send_cached_media(
-                            chat_id=data2,
+                            chat_id=int(data2),
                             file_id = fileid,
+                            disable_notification=True,
                             caption = reply_text,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(text='📥 Download',url=f"https://t.me/{nyva}?start=subinps_-_-_-_{strid}")]])
                         )
@@ -406,11 +393,25 @@ async def new_filtervip(client, message):
             )
     except Exception as a:
         try:
-            await message.reply(text = f"<b>❌ Error</b>\n\n{str(a)}\n\n<i>Join @CodeXBotzSupport for Support</i>")
+            await message.reply(text = f"<b>❌ Error</b>\n\n{str(a)}")
         except:
             pass
         return
-
+    if mkv.text.lower()=='h':      
+        if ab33=="ms":
+            reply_markup=btn22("season","series",f"3hsss##{strid}")
+            if msg_type == 'Photo':
+                await message.reply_photo(
+                    photo = fileid,
+                    caption = reply_text+"\n\n**Tafadhali chagua season unayotaka kuanza nayo ili uanze kuongeza vipande kwenye season husika**",
+                    reply_markup = reply_markup 
+                )
+            else:
+                await message.reply_cached_media(
+                    file_id = fileid,
+                    caption = reply_text+"\n\n**Tafadhali chagua season unayotaka kuanza nayo ili uanze kuongeza vipande kwenye season husika**",
+                    reply_markup = reply_markup 
+                )
     text = text.split('.dd#.',1)[0]
     reply_markup = InlineKeyboardMarkup(
         [
@@ -742,11 +743,10 @@ async def del_filter(client, message):
     details = await  get_filter_results(query,message.from_user.id)
     filter['group_id'] = message.from_user.id
     found =await Media.count_documents(filter)
-    if int(found) >=1:
-        for dt in details:   
+    if int(found) ==1:
+        for dt in details:
             for ad in await  get_filter_results(dt.id,message.from_user.id):
-               await client.send_message(chat_id=message.from_user.id,text="hi")
-               await Media.collection.delete_one({'_id':ad.id})
+                await Media.collection.delete_one({'_id':ad.id})
             await Media.collection.delete_one(filter)
             await message.reply_text(
                 f"<code>{text.split('.dd#.')[0]}</code>  deleted successful.",
@@ -896,12 +896,12 @@ async def ban(c,m):
     botusername=await c.get_me()
     nyva=botusername.username  
     nyva=str(nyva)
-    if len(m.command) == 1:
+    if len(m.command) != 4:
         await m.reply_text(
             f"Use this command to add access to any user from the bot.\n\n"
             f"Usage:\n\n"
-            f"`/add_admin admin_id duration_in days`\n\n"
-            f"Eg: `/add_admin 1234567 28 Umepata ofa ya Siku 3 zaidi.`\n"
+            f"`/add_admin admin_id duration_in days jina_la_bot`\n\n"
+            f"Eg: `/add_admin 1234567 28 bandolako2021bot.`\n"
             f"This will add user with id `1234567` for `28` days for the reason `ofa siku 3 zaidi`.",
             quote=True
         )
@@ -910,6 +910,7 @@ async def ban(c,m):
     if nyva=="Bandolako2021bot":
         user_id = int(m.command[1])
         ban_duration = int(m.command[2])
+        username1 = m.command[3]
         ban_reason = 'Kwa ajili ya kumtumia swahili robot kuuzia movie na series '
         ban_log_text = f"Adding user {user_id} for {ban_duration} days for the reason {ban_reason} ."
         try:
@@ -922,7 +923,7 @@ async def ban(c,m):
         except:
             
             ban_log_text += f"\n\nNmeshindwa kumtaarifu tafadhali jaribu tena! \n\n`{traceback.format_exc()}`"
-        adminexist=await db.is_admin_exist(user_id,nyva)
+        adminexist=await db.is_admin_exist(user_id,username1)
         if not adminexist :
             abc = await c.send_message(chat_id = m.from_user.id,text="Naomba untumie username ya bot ya mteja huyu")      
             id1=abc.id+1                 
@@ -965,12 +966,12 @@ async def get_statuss(bot,message):
     botusername=await bot.get_me()
     nyva=botusername.username  
     nyva=str(nyva)
-    group_id= await db.is_bot_exist(nyva)
+    group_id = await db.is_bot_exist(nyva)
     status= await db.is_admin_exist(message.from_user.id,nyva)
     if status:
         async for user in await db.get_user(message.from_user.id):
             salio =user['ban_status']
-            salio = datetime.fromisoformat(salio['banned_on'])+timedelta(days=salio['ban_duration'])
+            salio = datetime.fromisoformat(salio['banned_on'])+timedelta(days=salio['ban_duration'])+timedelta(hours=3)
         filters = await get_filter_results('',message.from_user.id)
         filters_no = 0
         text = 0
@@ -1028,15 +1029,19 @@ Salio lako:Litaisha tarehe {salio} ::Kumbuka kufanya malipo mapema wateja wako w
     a=1
     async for user in users:
         a=2
+        tme9=(str(datetime.fromisoformat(user['ban_status']['banned_on'])+ timedelta(days=user['ban_status']['ban_duration'])+ timedelta(hours=3))).split(".")[0]
+        tme91,tme92=tme9.split(" ")
+        t1,t2,t3=tme91.split("-")
+        tme9=f"{t3}/{t2}/{t1} Saa:{tme92}"
         if user['file_id'].startswith('g_') and user["db_name"]==group_id:
             sd= await db.get_db_status(user['db_name'])
             g2 = user['file_id']
             sd = sd[g2].split('#@')[0]
-            salio+=f"{sd}:Kitaisha tarehe :{datetime.fromisoformat(user['ban_status']['banned_on'])+timedelta(days=user['ban_status']['ban_duration'])}\n\n"
+            salio+=f"{sd}:Kitaisha tarehe : {tme9}\n\n"
         elif user["db_name"]==group_id:
             sd = await get_file_details(user['file_id'])
             for sd1 in sd:
-                salio+=f"{sd1.text.split('.dd#.')[0]}:Kitaisha tarehe :{datetime.fromisoformat(user['ban_status']['banned_on'])+timedelta(days=user['ban_status']['ban_duration'])}\n\n"
+                salio+=f"{sd1.text.split('.dd#.')[0]}:Kitaisha tarehe :{tme9}\n\n"
     if a==1:
         await message.reply_text('Vifurushi Vyako ulivyojiunga kupata huduma za movies,series, tamthilia n.k : \n\nHamna kifurushi ulichojiunga nacho,Tafadhali kuwa huru kununua kifurushi vyetu kwa bei rahisi')
     else:

@@ -1,5 +1,5 @@
 import re  
-import base64
+import base64   
 import logging
 from struct import pack
 from pyrogram.errors import UserNotParticipant
@@ -169,7 +169,13 @@ async def get_search_results(query, group_id, max_results=10, offset=0):
     files = await cursor.to_list(length=max_results)
 
     return files, next_offset
-
+async def get_filter_result(group_id):
+    filter = {"group_id": group_id}
+    total_results = await Media.count_documents(filter)
+    cursor = Media.find(filter)
+    cursor.sort('text', 1)
+    files = await cursor.to_list(length=int(total_results))
+    return files
 async def get_filter_results(query,group_id):
     query = query.strip()
     query = query.lower()

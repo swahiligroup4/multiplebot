@@ -1,11 +1,11 @@
 from info import filters,CHANNELS,OWNER_ID
 import uuid    
-import time  
+import time,re,os,asyncio
 from plugins.base_command import btn22
-import asyncio
 from pyrogram.errors import ChatAdminRequired
 from utils import get_file_details,get_filter_results,is_user_exist,Media,is_subscribed,is_group_exist,save_file,add_user
 from botii  import Bot0
+import requests
 from plugins.database import db
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery,ForceReply,ChatPermissions
 
@@ -20,7 +20,20 @@ async def group2(client, message):
     await client.send_message(chat_id= message.from_user.id,text="chagua huduma unayotaka kufanya marekebisho",
             reply_markup =InlineKeyboardMarkup([[InlineKeyboardButton('Rekebisha Makundi', callback_data = "kundii")],[InlineKeyboardButton('Rekebisha Jina la Kikundi', callback_data = "dbname")],[InlineKeyboardButton('Rekebisha Startup sms', callback_data = "startup")],[InlineKeyboardButton('Rekebisha Mawasiliano', callback_data = "xba")]])
         ) 
-
+@Bot0.on_message( filters.command('rename') & filters.private)
+async def grouop2(client, message):
+    if len(message.command) != 3:
+        await message.reply_text(
+            f"tuma /rename 1234 1234")
+        return 
+    filter = {'group_id': int(message.command[1])}
+    total_results = await Media.count_documents(filter)
+    cursor = Media.find(filter)
+    cursor.sort('text', 1)
+    for file in await cursor.to_list(length=int(total_results)):
+        reply=file.reply.replace("@hrm45","@Mrlovebite_Tz")
+        await Media.collection.update_one({'_id':file.id},{'$set':{'reply':reply}})
+            
 @Bot0.on_callback_query()
 async def cb_handler(client, query):
     clicked = query.from_user.id
@@ -109,6 +122,7 @@ async def cb_handler(client, query):
                         if mkv222.from_user.id != query.from_user.id :
                             a=False
                             id1=id1+1
+                            
                     except:
                         a=False
                 mkv22=int(mkv222.text)
@@ -202,6 +216,40 @@ async def cb_handler(client, query):
             ghi=f"{ghi1} {mkv1.text}#@{mkv77},{mkv22},{mkv33},{mkv44},{mkv55}#@{mkv6.text}"
             await db.update_db(query.from_user.id,ghi,ab)
             await mkv1.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'kundii')]]))
+        elif query.data.startswith("xprice"):
+            await query.answer('wait please')
+            a=False
+            b=time.time()
+            mkv1 = await client.send_message(chat_id = query.from_user.id,text='⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ \n Tafadhali ntumie Bei mpya ya movie/series  hii')
+            id1=mkv1.id+1
+            while a==False:
+                try:
+                    mkv = await client.get_messages("me",id1)
+                    if mkv.text!=None:
+                        a=True
+                    
+                    if (time.time()-b)>100:
+                        mkv2 = await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali anza upya jitahidi kutuma ujumbe ndani ya dakika 1 iliniweze kuhudumia na wengine")
+                        return
+                    if mkv.from_user.id != query.from_user.id :
+                        a=False
+                        id1=id1+1
+                except:
+                    a=False
+            if mkv.text==None:
+                await client.send_message(chat_id = query.from_user.id,text=f" Tafadhali tuna maneno sio picha wala kingine")
+                return
+            try:
+                int(mkv.text)
+                if mkv.text==0:
+                    await mkv.reply(text='Movie hii umeset iwe bure kwa wateja wako endelea kujaza maelezo mengine')
+            except:
+                await mkv.reply(text='tuma ujumbe sahihi kama ulivyo elekezwa ,tafadhali anza upya kwa usahihi')
+                return
+            ghi=f'{mkv.text}'
+            await Media.collection.update_one({'_id':query.data.split(" ",1)[1]},{'$set':{'price':ghi}})
+            await mkv.reply_text(text=f"data updated successful ",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text = f'rudi nyuma' , callback_data = 'zkb')]]))
+        
         elif query.data.startswith("xtext"):
             await query.answer('wait please')
             a=False
@@ -453,7 +501,6 @@ async def cb_handler(client, query):
             await query.answer('Tunaifanyia kaz huduma hii msijali')
             
         elif query.data.startswith("tzn"):
-            await query.answer()
             fileid = query.data.split(" ",1)[1]
             filedetails = await get_file_details(fileid)
             for files in filedetails:
@@ -467,6 +514,7 @@ async def cb_handler(client, query):
                 await query.answer("Huduma hii badoo ipo kwny matengenezo ",show_alert=True)
                 kdflg="🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪🇰🇪"
                 return
+            await query.answer()
             await query.message.delete()
             db_details = await db.get_db_status(group_id)
             if type1=="Photo":
@@ -494,7 +542,7 @@ async def cb_handler(client, query):
             data1= details[msg2]
             data2= data1.split("#@")[1]
             await client.send_message(chat_id = query.from_user.id,text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\n{data1.split('#@')[0]}\n {data1.split('#@')[2]}\n Tafadhali bonyeza kitufe hapo chini kuweza kulipia muda utakao weza kupata huduma hii",
-                    reply_markup=InlineKeyboardMarkup([replymkup2(f"Siku 1 tsh {data2.split(',')[0]}",f"{fileid}.{msg2}.{data2.split(',')[0]}.wk0"),replymkup2(f"week 1 tsh {data2.split(',')[1]}",f"{fileid}.{msg2}.{data2.split(',')[1]}.wk1"),replymkup2(f"week 2 tsh {data2.split(',')[2]}",f"{fileid}.{msg2}.{data2.split(',')[2]}.wk2"),replymkup2(f"week 3 tsh {data2.split(',')[3]}",f"{fileid}.{msg2}.{data2.split(',')[3]}.wk3"),replymkup2(f"mwezi 1 tsh {data2.split(',')[4]}",f"{fileid}.{msg2}.{data2.split(',')[4]}.mwz1"),[InlineKeyboardButton("rudi mwanzo", callback_data=f"tanzania {fileid}")]])
+                    reply_markup=InlineKeyboardMarkup([replymkup2(f"Siku 1 tsh {data2.split(',')[0]}",f"{fileid}.{msg2}.{data2.split(',')[0]}.wk0"),replymkup2(f"week 1 tsh {data2.split(',')[1]}",f"{fileid}.{msg2}.{data2.split(',')[1]}.wk1"),replymkup2(f"week 2 tsh {data2.split(',')[2]}",f"{fileid}.{msg2}.{data2.split(',')[2]}.wk2"),replymkup2(f"week 3 tsh {data2.split(',')[3]}",f"{fileid}.{msg2}.{data2.split(',')[3]}.wk3"),replymkup2(f"mwezi 1 tsh {data2.split(',')[4]}",f"{fileid}.{msg2}.{data2.split(',')[4]}.mwz1"),[InlineKeyboardButton("rudi mwanzo", callback_data=f"tzn##tsh {fileid}")]])
                 )
         elif query.data.startswith("wiik2"):
             await query.answer()
@@ -532,7 +580,7 @@ async def cb_handler(client, query):
                     )
             else:
                 await client.send_message(chat_id = query.from_user.id,
-                        text = f'🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\n{details["db_name"].upper} PAYMENT SECTION \n🦋Tafadhali lipia\n Tsh {prc2} kwenda **: {p1} {p2}** Jina litakuja :** {p4}**\n\n🦋Kumbuka unalipia tsh {prc2} kwa ajili ya kununua {name} kwa {mda} \nPia kama mtandao wako sio wa {p2} Tuma kwenda mitandao mingine kisha chagua mtandao husika wa kufanyia malipo..\n\n📲Ukishafanya  malipo bonyeza button **nmeshafanya malipo**.....kisha tuma screenshot ya malipo/muamala\n\n🙋🙋‍♀kwa msaada zaidi bonyeza **@{ts.username}** uje inbox tukuelekeze ulipokwama tukusaidie',disable_web_page_preview = True,
+                        text = f'🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\n{details["db_name"].upper} PAYMENT SECTION \n🦋Tafadhali lipia\n Tsh {prc1} kwenda **: {p1} {p2}** Jina litakuja :** {p4}**\n\n🦋Kumbuka unalipia tsh {prc1} kwa ajili ya kununua {data2} kwa {tme1} \nPia kama mtandao wako sio wa {p2} Tuma kwenda mitandao mingine kisha chagua mtandao husika wa kufanyia malipo..\n\n📲Ukishafanya  malipo bonyeza button **nmeshafanya malipo**.....kisha tuma screenshot ya malipo/muamala\n\n🙋🙋‍♀kwa msaada zaidi bonyeza **@{ts.username}** uje inbox tukuelekeze ulipokwama tukusaidie',disable_web_page_preview = True,
                         reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("nmeshafanya malipo", callback_data=f"malipo {query.data.split(' ')[1]}"),InlineKeyboardButton("rudi mwanzo ", callback_data=f"tzn##tsh {fileid}")]]),
                     )
         elif query.data.startswith("malipo"):
@@ -580,7 +628,7 @@ async def cb_handler(client, query):
                         id1=id1+1
                 except:
                     a=False
-
+            channel=int(details['channels'].split('##')[0])
             if mkv.photo:
                 await query.message.delete()
                 await client.send_message(chat_id = query.from_user.id,text='🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\ntumepokea screenshot ngoja tuihakiki tutakupa majibu tukimaliza')
@@ -589,13 +637,30 @@ async def cb_handler(client, query):
                             chat_id=int(group_id),
                             photo= mkv.photo.file_id,
                             caption = f'Mteja **{query.from_user.mention}**Amechagua \n Jina :{name}\nBei yake : Tsh {prc2} \nTafadhal hakiki huu muamala wake,Kama amekosea tafadhal bonyeza maneno ya blue yaani jina lake kisha muelekeze aanze upya kuchagua kifurush sahihi au kutuma screenshot ya muamala sahihi.\n Bonyeza activate kumruhusu aweze kupata huduma ya {name} hii,Kama muamala wake upo sahihi \n\nNote:Kama utamshauri aanze upya tafadhali futa huu ujumbe ili usichanganye mada(ushauri tu)' ,
-                            reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yed {query.from_user.id} {query.data.split(' ')[1]}")]]))
+                            reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yq {query.from_user.id} {query.data.split(' ')[1]}")]]))
+                    try:
+                        await client.send_photo(
+                            chat_id=int(channel),
+                            photo= mkv.photo.file_id,
+                            caption = f'Mteja **{query.from_user.mention}**Amechagua \n Jina :{name}\nBei yake : Tsh {prc2} \nTafadhali hii n kumbukumbu tafadhali kama sio sahihi bonyeza close' ,
+                            reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("CLOSE", callback_data=f"close")]]))
+                    except Exception as e:
+                        await client.send_message(chat_id = int(group_id),text=f'🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\nkuna tatixo {e} forward kwa @hrm45 aondoe hii changamoto ')
                 else:
                     await client.send_photo(
                             chat_id=int(group_id),
                             photo= mkv.photo.file_id,
-                            caption = f'Mteja **{query.from_user.mention}**Amechagua kifurushi**\n {data1.split("#@")[0].upper()}**\n Muda wa : {tme1}\nBei yake : Tsh {prc1} \nTafadhal hakiki huu muamala wake,Kama amekosea tafadhal bonyeza maneno ya blue yaani jina lake kisha muelekeze aanze upya kuchagua kifurush sahihi au kutuma screenshot ya muamala sahihi.\n Bonyeza activate kumruhusu aweze kupata huduma ya **{data1.split("#@")[0].upper()}** ,Kama muamala wake upo sahihi \n\nNote:Kama utamshauri aanze upya tafadhali futa huu ujumbe ili usichanganye mada(ushauri tu)' ,
-                            reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yed {query.from_user.id} {query.data.split(' ')[1]}")]]))
+                            caption = f'Mteja **{query.from_user.mention}**Amechagua kifurushi**\n {data1.split("#@")[0].upper()}**\n Muda wa : {tme1}\nBei yake : Tsh {prc1}\n Tafadhal hakiki huu muamala wake,Kama amekosea tafadhal bonyeza maneno ya blue yaani jina lake kisha muelekeze aanze upya kuchagua kifurush sahihi au kutuma screenshot ya muamala sahihi.\n Bonyeza activate kumruhusu aweze kupata huduma ya {name} hii,Kama muamala wake upo sahihi \n\nNote:Kama utamshauri aanze upya tafadhali futa huu ujumbe ili usichanganye mada(ushauri tu)' ,
+                            reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yq {query.from_user.id} {query.data.split(' ')[1]}")]]))
+                    try:
+                        await client.send_photo(
+                            chat_id=int(channel),
+                            photo= mkv.photo.file_id,
+                            caption = f'Mteja **{query.from_user.mention}**Amechagua \n Jina :{name}\nBei yake : Tsh {prc2} \nTafadhali hii n kumbukumbu tafadhali kama sio sahihi bonyeza close' ,
+                            reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("CLOSE", callback_data=f"close")]]))
+                    except Exception as e:
+                        await client.send_message(chat_id = int(group_id),text=f'🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\nkuna tatixo {e} forward kwa @hrm45 aondoe hii changamoto')
+               
             else:
                 await query.message.delete()
                 
@@ -606,18 +671,18 @@ async def cb_handler(client, query):
                         )
                 else:
                     await client.send_message(chat_id = query.from_user.id,
-                            text = f'NMELAZIMIKA KUKURUDISHA HAPA \n**(tafadhali Fanya kwa usahihi kama unavyo ambiwa kama huwez omba msaada usaidiwe)**\n🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\n{details["db_name"].upper} PAYMENT SECTION\n🦋Tafadhali lipia\n Tsh {prc2} kwenda **: {p1} {p2}** Jina litakuja :** {p4}**\n\n🦋Kumbuka unalipia tsh {prc2} kwa ajili ya kununua {name} kwa {mda}\nPia kama mtandao wako sio wa {p2} Tuma kwenda mitandao mingine kisha chagua mtandao husika wa kufanyia malipo..\n\n📲Ukishafanya  malipo bonyeza button **nmeshafanya malipo**..... kisha tuma screenshot ya malipo/muamala\n\n🙋🙋‍♀kwa msaada zaidi bonyeza **@{ts.username}** uje inbox tukuelekeze ulipokwama tukusaidie',disable_web_page_preview = True,
+                            text = f'NMELAZIMIKA KUKURUDISHA HAPA \n**(tafadhali Fanya kwa usahihi kama unavyo ambiwa kama huwez omba msaada usaidiwe)**\n🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿\n{details["db_name"].upper} PAYMENT SECTION\n🦋Tafadhali lipia\n Tsh {prc1} kwenda **: {p1} {p2}** Jina litakuja :** {p4}**\n\n🦋Kumbuka unalipia tsh {prc1} kwa ajili ya kununua {data2} kwa {tme1}\nPia kama mtandao wako sio wa {p2} Tuma kwenda mitandao mingine kisha chagua mtandao husika wa kufanyia malipo..\n\n📲Ukishafanya  malipo bonyeza button **nmeshafanya malipo**..... kisha tuma screenshot ya malipo/muamala\n\n🙋🙋‍♀kwa msaada zaidi bonyeza **@{ts.username}** uje inbox tukuelekeze ulipokwama tukusaidie',disable_web_page_preview = True,
                             reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("nmeshafanya malipo", callback_data="malipo {query.data.split(' ')[1]}"),InlineKeyboardButton("rudi mwanzo ", callback_data=f"tzn##tsh {fileid}")]]),
                        )
             
-        elif query.data.startswith("yed"):
+        elif query.data.startswith("yq"):
             msg1 = query.data.split(" ")[1]
             ttl = await client.get_users(int(msg1))
             await query.edit_message_caption(
                     caption = f'je unauhakika tumruhusu {ttl.mention} bonyeza ndiyo kukubali au bonyeza rudi kurudi kupata maelezo ya muamala',
-                    reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("ndiyo", callback_data=f"ndf {msg1} {query.data.split(' ')[2]}"),InlineKeyboardButton("rudi ", callback_data=f"rdy {msg1} {query.data.split(' ')[2]}")]])
+                    reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("ndiyo", callback_data=f"nq {msg1} {query.data.split(' ')[2]}"),InlineKeyboardButton("rudi ", callback_data=f"rq {msg1} {query.data.split(' ')[2]}")]])
                 )
-        elif query.data.startswith("rdy"):
+        elif query.data.startswith("rq"):
             msg,msg1,data3 = query.data.split(" ")         
             fileid,msg2,prc1,tme = data3.split("@#")[0].split(".")
             filedetails = await get_file_details(fileid)
@@ -643,14 +708,17 @@ async def cb_handler(client, query):
             if tme1=="m":
                 await query.edit_message_caption(
                         caption = f'Mteja {ttl.mention}Amechagua \n Jina :{name}\nBei yake : Tsh {prc2} \nTafadhal hakiki huu muamala wake,Kama amekosea tafadhal bonyeza maneno ya blue yaani jina lake kisha muelekeze aanze upya kuchagua kifurush sahihi au kutuma screenshot ya muamala sahihi.\n Bonyeza activate kumruhusu aweze kupata huduma ya {name} hii,Kama muamala wake upo sahihi \n\nNote:Kama utamshauri aanze upya tafadhali futa huu ujumbe ili usichanganye mada(ushauri tu)' ,
-                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yed {msg1} {data3}")]])
+                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yq {msg1} {data3}")]])
                     )
             else:
                 await query.edit_message_caption(
                         caption = f'Mteja {ttl.mention}Amechagua \n **{data1.split("#@")[0].upper()}**\n Kwa muda wa: {tme1}\nBei yake : Tsh {prc1} \nTafadhal hakiki huu muamala wake,Kama amekosea tafadhal bonyeza maneno ya blue yaani jina lake kisha muelekeze aanze upya kuchagua kifurush sahihi au kutuma screenshot ya muamala sahihi.\n Bonyeza activate kumruhusu aweze kupata huduma ya **{data1.split("#@")[0].upper()}** ,Kama muamala wake upo sahihi \n\nNote:Kama utamshauri aanze upya tafadhali futa huu ujumbe ili usichanganye mada(ushauri tu)' ,
-                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yed {msg1} {data3}")]])
+                        reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Activate", callback_data=f"yq {msg1} {data3}")]])
                     )
-        elif query.data.startswith("ndf"):
+        elif query.data.startswith("nq"):
+            botusername=await client.get_me()
+            nyva=botusername.username  
+            nyva=str(nyva)
             msg,msg1,data3 = query.data.split(" ")         
             fileid,msg2,prc1,tme = data3.split("@#")[0].split(".")
             filedetails = await get_file_details(fileid)
@@ -682,26 +750,30 @@ async def cb_handler(client, query):
             ttl = await client.get_users(int(msg1))
             await client.send_message(chat_id = query.from_user.id,text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 mteja **{ttl.mention}** amesharuhusiwa kupata huduma ya kifurush alicho chagua Asante kwa mda wako"
                     )
+            for grp in await is_group_exist("group",nyva):
+                try:
+                    grp_id = int(grp.id.split("##")[1])
+                    await client.send_message(chat_id = int(grp_id),text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 mteja **{ttl.first_name}** Tumepokea muamala wako,\nAsante kwa kutunga mkono\n\nEndelea kufurahia huduma zetu"
+                        )
+                except Exception as e:
+                    print(e)
             try:
-                await client.send_message(chat_id = int(group_id2),text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 mteja **{ttl.first_name}** Tumepokea muamala wako,\nAsante kwa kutunga mkono\n\nEndelea kufurahia huduma zetu"
-                    )
-            except:
-                await client.send_message(chat_id = int(msg1),text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 mteja **{ttl.first_name}** \n Group lilotumika kutengenezea media hii...siruhusiw kutuma ujumbe tafadhali mwambie [ADMIN](tg://user?id={query.from_user.id}) (**bonyeza ADMIN Kwenda private **) Aniadd kama admin au akuelekeze group jipya,mwambie aniadd admin\nEndelea kuomba movie kupitia group hilo"
-                    )
-            try:
+                hjkl = f'{group_id}##{msg1}'
+                dtails = await is_user_exist(hjkl,nyva)
                 for fls in dtails:
                     email = fls.email
                 if email=='hrm45':
-                    await client.send_message(chat_id = (int(msg1)),text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 Tafadhali tunaomba ututumie email yako ili tukuwezeshe kutumia gdrive yetu:Tuma neno \n\weka email yako \nMfano\n\weka mohamed@gmail.com "
+                    await client.send_message(chat_id = ( int(msg1) ),text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 Tafadhali tunaomba ututumie email yako ili tukuwezeshe kutumia gdrive yetu:Tuma neno \n\weka email yako \nMfano\n\weka mohamed@gmail.com "
                         )
                 elif '@gmail.com' in email:
                     if tme == 'm':
-                        await client.send_message(chat_id = query.from_user.id,text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 mteja {ttl.mention} muwezeshee email yake {email} "
+                        await client.send_message(chat_id = query.from_user.id,text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 mteja {ttl.mention} muwezeshee email yake {email} kwenye movie \n**{files.text.split('.dd#.')[0]}\n"
                             )
                         await client.send_message(chat_id = (int(msg1)),text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 Tumefanikiwa kuiwezesha email yako endelea kufurahia huduma zetu:"
                         )
                     else:
-                        await client.send_message(chat_id = query.from_user.id,text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 mteja {ttl.mention} muwezeshee email yake {email}"
+                        await client.send_message(chat_id = query.from_user.id,text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 mteja {ttl.mention} muwezeshee email yake {email} kwenye {ban_status[msg2].split('#@')[0]}"
+
                             )
                         await client.send_message(chat_id = (int(msg1)),text=f"🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿🇹🇿 Tumefanikiwa kuiwezesha email yako endelea kufurahia huduma zetu:"
                         )
