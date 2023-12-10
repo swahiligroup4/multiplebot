@@ -42,10 +42,10 @@ ABOUT_MESSAGE = f"""💥💥💥💥💥💥💥💥💥💥💥
 Bot hii imetngenezwa na
 <b>○ Imetengenezwa na: <a href='tg://user?id={OWNER_ID}'>HASSAN RANADHANI</a>
 
-Ilikuweza kutumia huyu robot kwenye group lako bonyeza maneno Hassan Ramadhan hapo juu kisha tuma jina lako.
+Ilikuweza kutumia huyu robot kwenye group lako bonyeza maneno Hassan Ramadhan hapo juu kisha tuma njoo tuma nshtuwe nkupe muongozo.
 
     🌸🌸Gharama🌸🌸
-wiki ya kwanza ni ofa  ili kujifunza jinsi ya kumtumia lakini baada ya hapo ni sh 1000 kila wiki.
+wiki ya kwanza ni ofa  ili kujifunza jinsi ya kumtumia lakini baada ya hapo ni sh 5000 kila mwezi.
 gharama hizi ni kwa ajili ya kulipia utumiaji Wa robot telegram
 
     🤷‍♂🤷‍♂Jinsi ya kumuunga
