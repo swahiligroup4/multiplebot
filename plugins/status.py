@@ -39,7 +39,6 @@ async def handle_admin_status(bot, cmd):
                     botusername=await bot.get_me()
                     nyva=botusername.username  
                     nyva=str(nyva)
-                    await db.delete_acc(user['id'])
                     if nyva ==abc2["bot_link"]:
                         try:
                             await db.delete_acc(user['id'])
